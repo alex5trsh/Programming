@@ -1,5 +1,4 @@
-﻿//using Programming.View;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,9 +19,9 @@ namespace Programming
             object[] enums = new object[] { typeof(Colors),typeof(EducationForm), typeof(Genre),typeof(Manufactures), typeof(Season),typeof(Weekday) };
             EnumsListBox.Items.AddRange(enums);
             var seasons = Enum.GetValues(typeof(Season));
-            foreach(var Value in seasons)
+            foreach(var value in seasons)
             {
-                SeasonsComboBox.Items.Add(Value);
+                SeasonsComboBox.Items.Add(value);
             }
         }
 
@@ -33,21 +32,26 @@ namespace Programming
             ValueListBox.Items.Clear();
             IntValueTextBox.Clear();
             foreach (var enumValue in enumValues)
-            { ValueListBox.Items.Add(enumValue); }
+            { 
+                ValueListBox.Items.Add(enumValue); 
+            }
         }
 
         private void ValueListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IntValueTextBox.Text = Convert.ToString((int)ValueListBox.SelectedItem+1);
+            IntValueTextBox.Text = Convert.ToString((int)ValueListBox.SelectedItem);
         }
 
         private void ParseButton_Click(object sender, EventArgs e)
-        {   var WrittingValue = TypeValueTextBox.Text;
-            if (Enum.TryParse(WrittingValue, out Weekday GettingValue))
-                //!!!
-                { WriteTextBox.Text = ($"Это день недели ({ GettingValue}={ (int)GettingValue + 1})"); }
+        {   var writtingValue = TypeValueTextBox.Text;
+            if (Enum.TryParse(writtingValue, out Weekday gettingValue))
+            { 
+                WriteTextBox.Text = ($"Это день недели ({ gettingValue}={ (int)gettingValue +1})"); 
+            }
             else
-                { WriteTextBox.Text = "Нет такого дня недели"; }
+            {
+                WriteTextBox.Text = "Нет такого дня недели"; 
+            }
 
         }
 
@@ -63,8 +67,8 @@ namespace Programming
             IntValueTextBox.BackColor = Color.White;
             TypeValueTextBox.BackColor = Color.White;
             SeasonsComboBox.BackColor = Color.White;
-            var SelectedSeason = SeasonsComboBox.SelectedItem;
-            switch (SelectedSeason)
+            var selectedSeason = SeasonsComboBox.SelectedItem;
+            switch (selectedSeason)
             {
                 case Season.Winter:
                     MessageBox.Show(
@@ -77,16 +81,16 @@ namespace Programming
                         );
                     break;
                 case Season.Spring:
-                    //Фон
-                    this.BackColor = ColorTranslator.FromHtml("#47A76A") ;
-                    EnumsTabPage.BackColor = ColorTranslator.FromHtml("#47A76A");
-                    WriteTextBox.BackColor = ColorTranslator.FromHtml("#47A76A");
-                    //
-                    EnumsListBox.BackColor = ColorTranslator.FromHtml("#A8E4A0");
-                    ValueListBox.BackColor = ColorTranslator.FromHtml("#A8E4A0");
-                    IntValueTextBox.BackColor = ColorTranslator.FromHtml("#A8E4A0");
-                    TypeValueTextBox.BackColor = ColorTranslator.FromHtml("#A8E4A0");
-                    SeasonsComboBox.BackColor = ColorTranslator.FromHtml("#A8E4A0");
+                    //Основной фон
+                    this.BackColor = Color.FromArgb(71,167,106);
+                    EnumsTabPage.BackColor = Color.FromArgb(71, 167, 106);
+                    WriteTextBox.BackColor = Color.FromArgb(71, 167, 106);
+                    //Фон боксов
+                    EnumsListBox.BackColor = Color.FromArgb(168, 228, 160);
+                    ValueListBox.BackColor = Color.FromArgb(168, 228, 160);
+                    IntValueTextBox.BackColor = Color.FromArgb(168, 228, 160);
+                    TypeValueTextBox.BackColor = Color.FromArgb(168, 228, 160);
+                    SeasonsComboBox.BackColor = Color.FromArgb(168, 228, 160);
                     break;
                 case Season.Summer:
                     MessageBox.Show(
@@ -99,11 +103,11 @@ namespace Programming
                         );
                     break;
                 case Season.Autumn:
-                    //Фон
+                    //Основной фон
                     this.BackColor = Color.FromArgb(237,118,14);
                     EnumsTabPage.BackColor = Color.FromArgb(237, 118, 14);
                     WriteTextBox.BackColor = Color.FromArgb(237, 118, 14);
-                    //
+                    //Фон боксов
                     EnumsListBox.BackColor = Color.FromArgb(255, 204, 153);
                     ValueListBox.BackColor = Color.FromArgb(255, 204, 153);
                     IntValueTextBox.BackColor = Color.FromArgb(255, 204, 153);

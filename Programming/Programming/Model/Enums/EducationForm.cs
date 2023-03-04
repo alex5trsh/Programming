@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 
     public enum EducationForm
-    {   Full_Time,
-        Part_Time,
+    {   FullTime,
+        PartTime,
         Evening,
         Remote
     }

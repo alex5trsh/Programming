@@ -12,8 +12,5 @@ using System.Threading.Tasks;
         Xiaomi,
         Huawei,
         Nokia
-
-
-
     }
 

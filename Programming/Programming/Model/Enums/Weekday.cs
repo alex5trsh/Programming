@@ -13,6 +13,5 @@ using System.Threading.Tasks;
         Friday,
         Saturday,
         Sunday
-
     }
 

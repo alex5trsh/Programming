@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
     public enum Colors
-    {   Red,
+    {   Red=6,
         Green,
         Blue,
         Black,

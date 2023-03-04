@@ -9,7 +9,7 @@ using System.Threading.Tasks;
     {   Comedy,
         Drama,
         Thriller,
-        Action_Movie, 
+        ActionMovie, 
         Horror,
         Blockbuster
 
