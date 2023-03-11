@@ -8,32 +8,45 @@ namespace Programming.Model.Classes
 {
     class Rectangle
     {
+        private double _length;
+
         private double Length
         {
+            get => _length;
             set
             {
-                if (value < 0)
-                { }
-                else
-                { 
-                    Length = value; 
+                if (value < 0.0)
+                {
+                    throw new ArgumentException();
                 }
+                _length = value;
             }
-            get { return Length; }
+            
         }
+
+        private double _width;
+
         private double Width
         {
+            get => _width;
             set
             {
                 if (value < 0)
-                { }
-                else
                 {
-                    Width = value;
+                    throw new ArgumentException();
                 }
+                _width = value;
             }
-            get { return Width; }
+            
         }
+
         private string Color { get; set; }
+
+        public Rectangle(double length, int width, string color)
+        {
+            Length = length;
+            Width = width;
+            Color = color;
+        }
     }
 }

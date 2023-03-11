@@ -9,31 +9,59 @@ namespace Programming.Model.Classes
     class Movies
     {
         private string Name { get; set; }
-        private int DurationInMinutes
+
+        private int _duration;
+        private int Duration
         { 
-            //get { }
+            get => _duration;
             set {
                 if (value < 0)
-                { 
-                    //ArgumentException
-                 }
+                {
+                    throw new ArgumentException();
+                }
+                _duration = value;
             } 
         }
+        private int _yearOfRelease;
+
         private int YearOfRelease
         {
-            set {
+            get =>_yearOfRelease;
+            set
+            {
                 if (value < 1900 || value > 2023)
-                { }  
+                {
+                    throw new ArgumentException();
+                }
+                _yearOfRelease = value;
             }
-            //get { }
+            
         }
+
         private string Genre { get; set; }
+
+        private double _rating;
+
         private double Rating
         {
-            //get { }
-            set {
-                if (value<0.0||value>10.0)
-                { } }
+            get => _rating;
+            set
+            {
+                if (value<0.0||value>10.1)
+                {
+                    throw new ArgumentException();
+                }
+                _rating = value;
+            }
+        }
+
+        public Movies(string name, int duration, int yearOfRelease,string genre, double rating)
+        {
+            Name = name;
+            Duration = duration;
+            YearOfRelease = yearOfRelease;
+            Genre = genre;
+            Rating = rating;
         }
         // Строковое поле Название
         // Целочисленное поле Продолжительность в минутах

@@ -9,15 +9,28 @@ namespace Programming.Model.Classes
     class Flight
     {
         private string DeparturePoint { get; set; }
+
         private string DestinationPoint { get; set; }
-        private int TimeOfFlightInMinutes
+
+        private int _timeOfFlight;
+
+        private int TimeOfFlight
         {
-            //get { }
+            get => _timeOfFlight;
             set
             {
                 if (value < 0)
-                { }
+                {
+                    throw new ArgumentException();
+                }
+                _timeOfFlight=value;
             }
+        }
+        public Flight(string departurePoint, string destinationPoint, int timeOfFlight)
+        {
+            DeparturePoint= departurePoint;
+            DestinationPoint= destinationPoint;
+            TimeOfFlight= timeOfFlight;
         }
     }
 }

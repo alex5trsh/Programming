@@ -9,15 +9,27 @@ namespace Programming.Model.Classes
     class Song
     {
         private string NameOfSong { get; set; }
+
         private string NameOfSinger{ get; set; }
-        private int TimeOfSongInSeconds
+
+        private int _timeOfSong;
+        private int TimeOfSong
         {
-            //get { }
+            get => _timeOfSong;
             set
             {
                 if (value < 0)
-                { }
+                {
+                    throw new ArgumentException();
+                }
+                _timeOfSong = value;
             }
+        }
+        public Song(string nameOfSong, string nameOfSinger, int timeOfSong)
+        {
+            NameOfSong = nameOfSong;
+            NameOfSinger = nameOfSinger;
+            TimeOfSong = timeOfSong;
         }
     }
 }
