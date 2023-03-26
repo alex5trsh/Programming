@@ -8,20 +8,20 @@ namespace Programming.Model.Classes
 {
     class Discipline
     {
-        private string NameOfDiscipline { get; set; }
-
-        private string SurnameOfTeacher { get; set; }
-
         private int _mark;
 
-        private int Mark
+        public string NameOfDiscipline { get; set; }
+
+        public string SurnameOfTeacher { get; set; }
+
+        public int Mark
         {
             get => _mark;
             set
             {
                 if (value < 0||value>6)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Оценка находится в диапазоне от 1 до 5 ");
                 }
                 _mark = value;
             }
@@ -31,6 +31,11 @@ namespace Programming.Model.Classes
             NameOfDiscipline=nameOfDiscipline;
             SurnameOfTeacher=surnameOfTeacher;
             Mark=mark;
+        }
+
+        public Discipline()
+        {
+           
         }
     }
 }

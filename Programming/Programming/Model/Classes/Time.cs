@@ -10,44 +10,44 @@ namespace Programming.Model.Classes
     {   
         private int _hours;
 
-        private int Hours
+        private int _minutes;
+
+        private int _seconds;
+
+        public int Hours
         {
           get => _hours;
           set
             {
                 if (value < 0 || value > 23)
                 { 
-                    throw new ArgumentException(); 
+                    throw new ArgumentException("Часы находятся в диапазоне от 0 до 23"); 
                 }
                 _hours = value;
             }
         }
 
-        private int _minutes;
-
-        private int Minutes
+        public int Minutes
         {
             get => _minutes;
             set
             {
                 if (value < 0|| value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Минуты находятся в диапазоне от 0 до 59");
                 }
                 _minutes = value;
             }
         }
 
-        private int _seconds;
-
-        private int Seconds
+        public int Seconds
         {
             get => _seconds;
             set
             {
                 if (value < 0 || value > 59)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Секунды находятся в диапазоне от 0 до 59");
                 }
 
                 _seconds = value;
@@ -60,14 +60,11 @@ namespace Programming.Model.Classes
             Minutes = minutes;
             Seconds = seconds;
         }
+
         public Time()
         {
-             //Hours=;
-            //Minutes =;
-            //Seconds =;
+
         }
-        // Целочисленное поле Часы (от 0 до 23)
-        // Целочисленное поле Минуты (от 0 до 60)
-        // Целочисленное поле Секунды (от 0 до 60)
+        
     }
 }

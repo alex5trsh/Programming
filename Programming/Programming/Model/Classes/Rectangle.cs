@@ -10,43 +10,47 @@ namespace Programming.Model.Classes
     {
         private double _length;
 
-        private double Length
+        private double _width;
+
+        public double Length
         {
             get => _length;
             set
             {
                 if (value < 0.0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Длина не может быть отрицательной");
                 }
                 _length = value;
             }
             
         }
 
-        private double _width;
-
-        private double Width
+        public double Width
         {
             get => _width;
             set
             {
-                if (value < 0)
+                if (value < 0.0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Ширина не может быть отрицательной");
                 }
                 _width = value;
             }
             
         }
 
-        private string Color { get; set; }
+        public string Color { get; set; }
 
-        public Rectangle(double length, int width, string color)
+        public Rectangle(double length, double width, string color)
         {
             Length = length;
             Width = width;
             Color = color;
+        }
+        public Rectangle()
+        {
+            
         }
     }
 }

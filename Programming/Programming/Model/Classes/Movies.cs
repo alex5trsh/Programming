@@ -6,68 +6,70 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
-    class Movies
-    {
-        private string Name { get; set; }
-
+    class Movie
+    {        
         private int _duration;
-        private int Duration
+
+        private int _yearOfRelease;
+
+        private double _rating;
+
+        public string Name { get; set; }
+
+        public int DurationInMinutes
         { 
             get => _duration;
             set {
                 if (value < 0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Продолжительность не может быть отрицательной");
                 }
                 _duration = value;
             } 
         }
-        private int _yearOfRelease;
 
-        private int YearOfRelease
+        public int YearOfRelease
         {
             get =>_yearOfRelease;
             set
             {
                 if (value < 1900 || value > 2023)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Год выхода определяется в диапазоне от 1900 до 2023");
                 }
                 _yearOfRelease = value;
             }
             
         }
 
-        private string Genre { get; set; }
+        public string Genre { get; set; }
 
-        private double _rating;
-
-        private double Rating
+        public double Rating
         {
             get => _rating;
             set
             {
                 if (value<0.0||value>10.1)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Рейтинг определяется в диапазоне от 1 до 10");
                 }
                 _rating = value;
             }
         }
 
-        public Movies(string name, int duration, int yearOfRelease,string genre, double rating)
+        public Movie(string name, int duration, int yearOfRelease,string genre, double rating)
         {
             Name = name;
-            Duration = duration;
+            DurationInMinutes = duration;
             YearOfRelease = yearOfRelease;
             Genre = genre;
             Rating = rating;
         }
-        // Строковое поле Название
-        // Целочисленное поле Продолжительность в минутах
-        // Целочисленное поле Год выпуска (от 1900 до текущего года)
-        // Строковое поле Жанр
-        // Вещественное поле Рейтинг (от 0 до 10)
+
+        public Movie()
+        {
+
+        }
 
     }
 }

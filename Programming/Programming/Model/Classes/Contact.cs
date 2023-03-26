@@ -8,20 +8,20 @@ namespace Programming.Model.Classes
 {
     class Contact
     {
-        private string Name { get; set; }
-
-        private string Surname { get; set; }
-
         private string _numberPhone;
 
-        private string NumberPhone
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
+
+        public string NumberPhone
         {
             get => _numberPhone;
             set
             {
                 if (value.Length>11)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Номер не больше 11 знаков");
                 }
                 _numberPhone = value;
             }
@@ -32,6 +32,11 @@ namespace Programming.Model.Classes
             Name =name;
             Surname =surname;
             NumberPhone =numberPhone;
+        }
+
+        public Contact()
+        {
+            
         }
     }
 }

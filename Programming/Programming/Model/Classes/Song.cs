@@ -8,19 +8,20 @@ namespace Programming.Model.Classes
 {
     class Song
     {
-        private string NameOfSong { get; set; }
-
-        private string NameOfSinger{ get; set; }
-
         private int _timeOfSong;
-        private int TimeOfSong
+
+        public string NameOfSong { get; set; }
+
+        public string NameOfSinger{ get; set; }
+
+        public int TimeOfSong
         {
             get => _timeOfSong;
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Время не может быть отрицательным");
                 }
                 _timeOfSong = value;
             }
@@ -30,6 +31,11 @@ namespace Programming.Model.Classes
             NameOfSong = nameOfSong;
             NameOfSinger = nameOfSinger;
             TimeOfSong = timeOfSong;
+        }
+
+        public Song()
+        {
+            
         }
     }
 }

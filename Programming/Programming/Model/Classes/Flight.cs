@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 namespace Programming.Model.Classes
 {
     class Flight
-    {
-        private string DeparturePoint { get; set; }
-
-        private string DestinationPoint { get; set; }
-
+    {        
         private int _timeOfFlight;
 
-        private int TimeOfFlight
+        public string DeparturePoint { get; set; }
+
+        public string DestinationPoint { get; set; }
+
+        public int TimeOfFlight
         {
             get => _timeOfFlight;
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Время полета не может быть отрицательным");
                 }
                 _timeOfFlight=value;
             }
@@ -31,6 +31,11 @@ namespace Programming.Model.Classes
             DeparturePoint= departurePoint;
             DestinationPoint= destinationPoint;
             TimeOfFlight= timeOfFlight;
+        }
+
+        public Flight()
+        {
+            
         }
     }
 }
