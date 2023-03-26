@@ -19,11 +19,12 @@ namespace Programming.Model.Classes
             get => _mark;
             set
             {
-                if (value < 0||value>6)
-                {
-                    throw new ArgumentException("Оценка находится в диапазоне от 1 до 5 ");
-                }
-                _mark = value;
+	            if (value < 0 || value > 6)
+	            {
+		            throw new ArgumentException("Оценка находится в диапазоне от 1 до 5 ");
+	            }
+
+	            _mark = value;
             }
         }
         public Discipline(string nameOfDiscipline, string surnameOfTeacher,int mark)

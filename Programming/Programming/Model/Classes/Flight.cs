@@ -23,6 +23,7 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Время полета не может быть отрицательным");
                 }
+
                 _timeOfFlight=value;
             }
         }

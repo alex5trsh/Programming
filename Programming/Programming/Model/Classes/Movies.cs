@@ -24,6 +24,7 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Продолжительность не может быть отрицательной");
                 }
+                // TODO: RSDN
                 _duration = value;
             } 
         }
@@ -36,8 +37,9 @@ namespace Programming.Model.Classes
                 if (value < 1900 || value > 2023)
                 {
                     throw new ArgumentException("Год выхода определяется в диапазоне от 1900 до 2023");
-                }
-                _yearOfRelease = value;
+				}
+				// TODO: RSDN
+				_yearOfRelease = value;
             }
             
         }
@@ -52,8 +54,9 @@ namespace Programming.Model.Classes
                 if (value<0.0||value>10.1)
                 {
                     throw new ArgumentException("Рейтинг определяется в диапазоне от 1 до 10");
-                }
-                _rating = value;
+				}
+				// TODO: RSDN
+				_rating = value;
             }
         }
 

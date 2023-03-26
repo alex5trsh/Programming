@@ -22,8 +22,9 @@ namespace Programming.Model.Classes
                 if (value < 0)
                 {
                     throw new ArgumentException("Время не может быть отрицательным");
-                }
-                _timeOfSong = value;
+				}
+				// TODO: RSDN
+				_timeOfSong = value;
             }
         }
         public Song(string nameOfSong, string nameOfSinger, int timeOfSong)

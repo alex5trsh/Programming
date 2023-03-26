@@ -20,8 +20,9 @@ namespace Programming.Model.Classes
                 if (value < 0.0)
                 {
                     throw new ArgumentException("Длина не может быть отрицательной");
-                }
-                _length = value;
+				}
+				// TODO: RSDN
+				_length = value;
             }
             
         }
@@ -34,8 +35,9 @@ namespace Programming.Model.Classes
                 if (value < 0.0)
                 {
                     throw new ArgumentException("Ширина не может быть отрицательной");
-                }
-                _width = value;
+				}
+				// TODO: RSDN
+				_width = value;
             }
             
         }

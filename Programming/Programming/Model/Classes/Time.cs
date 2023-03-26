@@ -21,9 +21,10 @@ namespace Programming.Model.Classes
             {
                 if (value < 0 || value > 23)
                 { 
-                    throw new ArgumentException("Часы находятся в диапазоне от 0 до 23"); 
-                }
-                _hours = value;
+                    throw new ArgumentException("Часы находятся в диапазоне от 0 до 23");
+				}
+				// TODO: RSDN
+				_hours = value;
             }
         }
 
@@ -35,8 +36,9 @@ namespace Programming.Model.Classes
                 if (value < 0|| value > 59)
                 {
                     throw new ArgumentException("Минуты находятся в диапазоне от 0 до 59");
-                }
-                _minutes = value;
+				}
+				// TODO: RSDN
+				_minutes = value;
             }
         }
 
