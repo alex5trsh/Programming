@@ -23,7 +23,8 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Время не может быть отрицательным");
 				}
-				// TODO: RSDN
+				// TODO: RSDN (+)
+
 				_timeOfSong = value;
             }
         }

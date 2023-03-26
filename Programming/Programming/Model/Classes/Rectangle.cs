@@ -21,7 +21,8 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Длина не может быть отрицательной");
 				}
-				// TODO: RSDN
+				// TODO: RSDN (+)
+
 				_length = value;
             }
             
@@ -36,7 +37,8 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Ширина не может быть отрицательной");
 				}
-				// TODO: RSDN
+				// TODO: RSDN (+)
+
 				_width = value;
             }
             

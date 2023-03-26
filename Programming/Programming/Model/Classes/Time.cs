@@ -23,7 +23,8 @@ namespace Programming.Model.Classes
                 { 
                     throw new ArgumentException("Часы находятся в диапазоне от 0 до 23");
 				}
-				// TODO: RSDN
+				// TODO: RSDN (+)
+
 				_hours = value;
             }
         }
@@ -37,7 +38,8 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Минуты находятся в диапазоне от 0 до 59");
 				}
-				// TODO: RSDN
+				// TODO: RSDN (+)
+
 				_minutes = value;
             }
         }

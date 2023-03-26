@@ -11,50 +11,23 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Classes.Rectangle;
 
-// TODO: Все TextBox, Label и кнопки сделать ближе к ListBox
+// TODO: Все TextBox, Label и кнопки сделать ближе к ListBox (+)
 // TODO: Сделать верстку адаптивной к размеру окна 
-// TODO: Убрать GroupBox. Вместо него сделать Label над ListBox (см. макет)
+// TODO: Убрать GroupBox. Вместо него сделать Label над ListBox (см. макет) (+)
 namespace Programming
 {
     public partial class MainForm : Form
     {
-	    // TODO: Порядок элементов класса: константы, приватные поля, свойства, конструктор, публичные методы, приватные методы
+	    // TODO: Порядок элементов класса: константы, приватные поля, свойства, конструктор, публичные методы, приватные методы (+)
 		private Rectangle[] _rectangles = new Rectangle[5];
 
-        private Rectangle _currentRectangle= new Rectangle();
-
-        private int FindRectangleWithMaxWidth(Rectangle[] arrayRectangles)
-        {
-            int indexRectangle = 0;
-            double maxNumber = 0.0;
-            for (int i = 0; i < arrayRectangles.Length - 1; i++)
-            {
-                if (arrayRectangles[i].Width > maxNumber)
-                {
-                    indexRectangle = i;
-                    maxNumber = arrayRectangles[i].Width;
-                }
-			}
-			// TODO: RSDN
-			return indexRectangle;
-        }
+        private Rectangle _currentRectangle= new Rectangle();        
+        
         private Movie[] _movies = new Movie[5];
+
         private Movie _currentMovie = new Movie();
-        private int FindMovieWithMaxRating(Movie[] arrayMovies)
-        {
-            int indexMovie = 0;
-            double maxNumber = 0.0;
-            for (int i = 0; i < arrayMovies.Length - 1; i++)
-            {
-                if (arrayMovies[i].Rating > maxNumber)
-                {
-                    indexMovie = i;
-                    maxNumber = arrayMovies[i].Rating;
-                }
-			}
-			// TODO: RSDN
-			return indexMovie;
-        }
+
+        
         public MainForm()
         {
             InitializeComponent();
@@ -214,21 +187,14 @@ namespace Programming
         {
             try
             {
-				// TODO: Поменять Double на double
-                // TODO: Проверки тут не нужны. Значение проверяется в set свойства.
-				if (Double.TryParse(LengthTextBox.Text, out Double newLength) & newLength>0)
-                {
-                    _currentRectangle.Length = newLength;
-                }
-                // TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства
-                else
-                {
-                    throw new ArgumentException();
-				}
-				// TODO: RSDN
-				LengthTextBox.BackColor = Color.White;
+				// TODO: Поменять Double на double (+)
+                // TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+                _currentRectangle.Length = Convert.ToDouble(LengthTextBox.Text);
+                // TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
+				// TODO: RSDN (+)
+                LengthTextBox.BackColor = Color.White;
             }
-            catch (ArgumentException)
+            catch 
             {
                 LengthTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
@@ -238,21 +204,14 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Double на double
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства.
-				if (Double.TryParse(WidthTextBox.Text, out Double newWidth) & newWidth > 0)
-                {
-                    _currentRectangle.Width = newWidth;
-				}
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства
-				else
-				{
-                    throw new ArgumentException();
-				}
-				// TODO: RSDN
-				WidthTextBox.BackColor = Color.White;
+                // TODO: Поменять Double на double (+)
+                // TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+                _currentRectangle.Width = Convert.ToDouble(WidthTextBox.Text);
+                // TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
+				// TODO: RSDN (+)
+                WidthTextBox.BackColor = Color.White;
             }
-            catch (ArgumentException)
+            catch 
             {
                 WidthTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
@@ -263,6 +222,22 @@ namespace Programming
 	        _currentRectangle.Color = ColorTextBox.Text;
         }
 
+        private int FindRectangleWithMaxWidth(Rectangle[] arrayRectangles)
+        {
+            int indexRectangle = 0;
+            double maxNumber = 0.0;
+            for (int i = 0; i < arrayRectangles.Length - 1; i++)
+            {
+                if (arrayRectangles[i].Width > maxNumber)
+                {
+                    indexRectangle = i;
+                    maxNumber = arrayRectangles[i].Width;
+                }
+            }
+            // TODO: RSDN (+)
+
+            return indexRectangle;
+        }
         private void FindButton_Click(object sender, EventArgs e)
         {
             RectanglesListBox.SelectedIndex = FindRectangleWithMaxWidth(_rectangles);
@@ -282,21 +257,14 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Int32 на int
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства.
-				if (Int32.TryParse(DurationTextBox.Text, out Int32 newDuration) & newDuration > 0)
-                {
-                    _currentMovie.DurationInMinutes = newDuration;
-				}
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства
-				else
-				{
-                    throw new ArgumentException();
-				}
-				// TODO: RSDN
-				DurationTextBox.BackColor = Color.White;
+				// TODO: Поменять Int32 на int (+)
+				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+                _currentMovie.DurationInMinutes = Convert.ToInt32(DurationTextBox.Text);
+				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
+				// TODO: RSDN (+)
+                DurationTextBox.BackColor = Color.White;
             }
-            catch (ArgumentException)
+            catch 
             {
                 DurationTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
@@ -306,21 +274,14 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Int32 на int
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства.
-				if (Int32.TryParse(YearOfReleaseTextBox.Text, out Int32 newYear) & newYear > 1900 & newYear<2023)
-                {
-                    _currentMovie.YearOfRelease = newYear;
-				}
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства
-				else
-				{
-                    throw new ArgumentException();
-				}
-				// TODO: RSDN
-				YearOfReleaseTextBox.BackColor = Color.White;
+				// TODO: Поменять Int32 на int (+)
+				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+                _currentMovie.YearOfRelease = Convert.ToInt32(YearOfReleaseTextBox);
+				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
+				// TODO: RSDN (+)
+                YearOfReleaseTextBox.BackColor = Color.White;
             }
-            catch (ArgumentException)
+            catch 
             {
                 YearOfReleaseTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
@@ -335,19 +296,12 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Double на double
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства.
-				if (Double.TryParse(RatingTextBox.Text, out Double newRating) & newRating > 0.0 & newRating < 10.1)
-                {
-                    _currentMovie.Rating = newRating;
-				}
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства
-				else
-				{
-                    throw new ArgumentException();
-				}
-				// TODO: RSDN
-				RatingTextBox.BackColor = Color.White;
+				// TODO: Поменять Double на double (+)
+				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+				_currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text);
+				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
+				// TODO: RSDN (+)
+                RatingTextBox.BackColor = Color.White;
             }
             catch (ArgumentException)
             {
@@ -355,6 +309,22 @@ namespace Programming
             }
         }
 
+        private int FindMovieWithMaxRating(Movie[] arrayMovies)
+        {
+            int indexMovie = 0;
+            double maxNumber = 0.0;
+            for (int i = 0; i < arrayMovies.Length - 1; i++)
+            {
+                if (arrayMovies[i].Rating > maxNumber)
+                {
+                    indexMovie = i;
+                    maxNumber = arrayMovies[i].Rating;
+                }
+            }
+            // TODO: RSDN (+)
+
+            return indexMovie;
+        }
         private void FindMaxRatingButton_Click(object sender, EventArgs e)
         {
             MoviesListBox.SelectedIndex = FindMovieWithMaxRating(_movies);
