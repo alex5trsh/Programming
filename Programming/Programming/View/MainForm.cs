@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Classes.Rectangle;
 
-// TODO: Все TextBox, Label и кнопки сделать ближе к ListBox (+)
 // TODO: Сделать верстку адаптивной к размеру окна 
-// TODO: Убрать GroupBox. Вместо него сделать Label над ListBox (см. макет) (+)
+// TODO: Над фильмами тоже добавить Label "Movies"
+// TODO: падает программа при вводе текста в поле рейтинга
+// TODO: Movies при поле года всегда красным подсвечивается
 namespace Programming
 {
     public partial class MainForm : Form
     {
-	    // TODO: Порядок элементов класса: константы, приватные поля, свойства, конструктор, публичные методы, приватные методы (+)
 		private Rectangle[] _rectangles = new Rectangle[5];
 
         private Rectangle _currentRectangle= new Rectangle();        
@@ -187,11 +187,7 @@ namespace Programming
         {
             try
             {
-				// TODO: Поменять Double на double (+)
-                // TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
                 _currentRectangle.Length = Convert.ToDouble(LengthTextBox.Text);
-                // TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
-				// TODO: RSDN (+)
                 LengthTextBox.BackColor = Color.White;
             }
             catch 
@@ -204,11 +200,7 @@ namespace Programming
         {
             try
 			{
-                // TODO: Поменять Double на double (+)
-                // TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
                 _currentRectangle.Width = Convert.ToDouble(WidthTextBox.Text);
-                // TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
-				// TODO: RSDN (+)
                 WidthTextBox.BackColor = Color.White;
             }
             catch 
@@ -234,7 +226,6 @@ namespace Programming
                     maxNumber = arrayRectangles[i].Width;
                 }
             }
-            // TODO: RSDN (+)
 
             return indexRectangle;
         }
@@ -257,11 +248,7 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Int32 на int (+)
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
                 _currentMovie.DurationInMinutes = Convert.ToInt32(DurationTextBox.Text);
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
-				// TODO: RSDN (+)
                 DurationTextBox.BackColor = Color.White;
             }
             catch 
@@ -274,11 +261,7 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Int32 на int (+)
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
                 _currentMovie.YearOfRelease = Convert.ToInt32(YearOfReleaseTextBox);
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
-				// TODO: RSDN (+)
                 YearOfReleaseTextBox.BackColor = Color.White;
             }
             catch 
@@ -296,12 +279,9 @@ namespace Programming
         {
             try
 			{
-				// TODO: Поменять Double на double (+)
-				// TODO: Проверки тут не нужны. Значение проверяется в set свойства. (+)
+                // TODO: падает программа при вводе текста в поле рейтинга
 				_currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text);
-				// TODO: else не нужен, так как исключение, в случае ошибки, будет вызываться в set свойства (+)
-				// TODO: RSDN (+)
-                RatingTextBox.BackColor = Color.White;
+				RatingTextBox.BackColor = Color.White;
             }
             catch (ArgumentException)
             {
@@ -321,7 +301,6 @@ namespace Programming
                     maxNumber = arrayMovies[i].Rating;
                 }
             }
-            // TODO: RSDN (+)
 
             return indexMovie;
         }

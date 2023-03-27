@@ -24,7 +24,6 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Продолжительность не может быть отрицательной");
                 }
-                // TODO: RSDN (+)
 
                 _duration = value;
             } 
@@ -39,7 +38,6 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Год выхода определяется в диапазоне от 1900 до 2023");
 				}
-				// TODO: RSDN (+)
 
 				_yearOfRelease = value;
             }
@@ -57,7 +55,6 @@ namespace Programming.Model.Classes
                 {
                     throw new ArgumentException("Рейтинг определяется в диапазоне от 1 до 10");
 				}
-				// TODO: RSDN (+)
 
 				_rating = value;
             }
