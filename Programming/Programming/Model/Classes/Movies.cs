@@ -51,7 +51,7 @@ namespace Programming.Model.Classes
             get => _rating;
             set
             {
-                if (value<0.0||value>10.1)
+                if (value < 1.0||value > 10.1)
                 {
                     throw new ArgumentException("Рейтинг определяется в диапазоне от 1 до 10");
 				}

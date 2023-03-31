@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Classes.Rectangle;
 
-// TODO: Сделать верстку адаптивной к размеру окна 
-// TODO: Над фильмами тоже добавить Label "Movies"
-// TODO: падает программа при вводе текста в поле рейтинга
-// TODO: Movies при поле года всегда красным подсвечивается
+// TODO: Сделать верстку адаптивной к размеру окна (+)
+// TODO: Над фильмами тоже добавить Label "Movies" (+)
+// TODO: падает программа при вводе текста в поле рейтинга (+)
+// TODO: Movies при поле года всегда красным подсвечивается (+)
 namespace Programming
 {
     public partial class MainForm : Form
@@ -218,7 +218,7 @@ namespace Programming
         {
             int indexRectangle = 0;
             double maxNumber = 0.0;
-            for (int i = 0; i < arrayRectangles.Length - 1; i++)
+            for (int i = 0; i < arrayRectangles.Length; i++)
             {
                 if (arrayRectangles[i].Width > maxNumber)
                 {
@@ -261,13 +261,14 @@ namespace Programming
         {
             try
 			{
-                _currentMovie.YearOfRelease = Convert.ToInt32(YearOfReleaseTextBox);
+                _currentMovie.YearOfRelease = Convert.ToInt32(YearOfReleaseTextBox.Text);
                 YearOfReleaseTextBox.BackColor = Color.White;
             }
             catch 
             {
                 YearOfReleaseTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
+
         }
 
         private void GenreTextBox_TextChanged(object sender, EventArgs e)
@@ -279,11 +280,11 @@ namespace Programming
         {
             try
 			{
-                // TODO: падает программа при вводе текста в поле рейтинга
-				_currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text);
-				RatingTextBox.BackColor = Color.White;
+                // TODO: падает программа при вводе текста в поле рейтинга (+)
+				_currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text); 
+                RatingTextBox.BackColor = Color.White;
             }
-            catch (ArgumentException)
+            catch
             {
                 RatingTextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
@@ -293,7 +294,7 @@ namespace Programming
         {
             int indexMovie = 0;
             double maxNumber = 0.0;
-            for (int i = 0; i < arrayMovies.Length - 1; i++)
+            for (int i = 0; i < arrayMovies.Length; i++)
             {
                 if (arrayMovies[i].Rating > maxNumber)
                 {
