@@ -11,10 +11,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Classes.Rectangle;
 
-// TODO: Сделать верстку адаптивной к размеру окна (+)
-// TODO: Над фильмами тоже добавить Label "Movies" (+)
-// TODO: падает программа при вводе текста в поле рейтинга (+)
-// TODO: Movies при поле года всегда красным подсвечивается (+)
 namespace Programming
 {
     public partial class MainForm : Form
@@ -280,7 +276,6 @@ namespace Programming
         {
             try
 			{
-                // TODO: падает программа при вводе текста в поле рейтинга (+)
 				_currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text); 
                 RatingTextBox.BackColor = Color.White;
             }
