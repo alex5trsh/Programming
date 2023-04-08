@@ -23,7 +23,10 @@ namespace Programming
 
         private Movie _currentMovie = new Movie();
 
-        
+        List<Rectangle> _rectangles5=new List<Rectangle>();
+
+        Rectangle _currentRectnagle5;
+
         public MainForm()
         {
             InitializeComponent();
@@ -76,6 +79,9 @@ namespace Programming
             YearOfReleaseTextBox.TextChanged += YearOfReleaseTextBox_TextChanged;
             GenreTextBox.TextChanged += GenreTextBox_TextChanged;
             RatingTextBox.TextChanged += RatingTextBox_TextChanged;
+
+           
+
 
         }
 
@@ -310,5 +316,18 @@ namespace Programming
             MoviesListBox.SelectedIndex = FindMovieWithMaxRating(_movies);
         }
 
+        private void AddRectangleButton_Click(object sender, EventArgs e)
+        {
+            Random run = new Random();
+            Rectangle newRectangle = new Rectangle();
+            newRectangle.Length = Math.Round(1 + run.NextDouble() * 99);
+            newRectangle.Width = Math.Round(1 + run.NextDouble() * 99);
+            int x = run.Next(100);
+            int y = run.Next(100);
+            newRectangle.Center = new Point2D(x, y);
+            _rectangles5.Add(newRectangle);
+            Rectangles5ListBox.Items.Add(newRectangle.Id + ": (X= " + newRectangle.Center.X + "; Y= " + newRectangle.Center.Y
+                    + "; W= " + newRectangle.Width + "; H= " + newRectangle.Length+" )");
+        }
     }
 }
