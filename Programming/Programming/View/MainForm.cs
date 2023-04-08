@@ -17,7 +17,7 @@ namespace Programming
     {
 		private Rectangle[] _rectangles = new Rectangle[5];
 
-        private Rectangle _currentRectangle= new Rectangle();        
+        private Rectangle _currentRectangle;        
         
         private Movie[] _movies = new Movie[5];
 
@@ -44,7 +44,9 @@ namespace Programming
                 _rectangles[i].Width = 1 + run.NextDouble() * 99;
                 int numbercolor = run.Next(1, colors.Length);
                 _rectangles[i].Color = colors[numbercolor];
-
+                int x = run.Next(100); 
+                int y = run.Next(100); 
+                _rectangles[i].Center = new Point2D(x, y);
             }
             var namesRectangles = new List<string>() {"Rectangle 1", "Rectangle 2", "Rectangle 3" , "Rectangle 4" , "Rectangle 5" };
             foreach (var item in namesRectangles)
@@ -177,6 +179,9 @@ namespace Programming
             LengthTextBox.Text = Convert.ToString(_currentRectangle.Length);
             WidthTextBox.Text = Convert.ToString(_currentRectangle.Width);
             ColorTextBox.Text = Convert.ToString(_currentRectangle.Color);
+            XTextBox.Text = Convert.ToString(_currentRectangle.Center.X);
+            YTextBox.Text = Convert.ToString(_currentRectangle.Center.Y);
+            IdTextBox.Text = Convert.ToString(_currentRectangle.Id);
         }
 
         private void LengthTextBox_TextChanged(object sender, EventArgs e)
@@ -304,5 +309,6 @@ namespace Programming
         {
             MoviesListBox.SelectedIndex = FindMovieWithMaxRating(_movies);
         }
+
     }
 }

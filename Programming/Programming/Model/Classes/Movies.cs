@@ -19,11 +19,9 @@ namespace Programming.Model.Classes
         public int DurationInMinutes
         { 
             get => _duration;
-            set {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Продолжительность не может быть отрицательной");
-                }
+            set 
+            {
+                Validator.AssertOnPositiveValue(value, "DurationInMinutes");
 
                 _duration = value;
             } 
@@ -34,12 +32,9 @@ namespace Programming.Model.Classes
             get =>_yearOfRelease;
             set
             {
-                if (value < 1900 || value > 2023)
-                {
-                    throw new ArgumentException("Год выхода определяется в диапазоне от 1900 до 2023");
-				}
+               Validator.AssertValueInRange(value, 1900, 2023, "YearOfRealease");
 
-				_yearOfRelease = value;
+                _yearOfRelease = value;
             }
             
         }
@@ -51,12 +46,9 @@ namespace Programming.Model.Classes
             get => _rating;
             set
             {
-                if (value < 1.0||value > 10.1)
-                {
-                    throw new ArgumentException("Рейтинг определяется в диапазоне от 1 до 10");
-				}
+                Validator.AssertValueInRange(value, 1, 10, "Rating");
 
-				_rating = value;
+                _rating = value;
             }
         }
 

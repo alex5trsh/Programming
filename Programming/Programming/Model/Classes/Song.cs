@@ -19,12 +19,9 @@ namespace Programming.Model.Classes
             get => _timeOfSong;
             set
             {
-                if (value < 0)
-                {
-                    throw new ArgumentException("Время не может быть отрицательным");
-				}
+                Validator.AssertOnPositiveValue(value, "TimeOfSong");
 
-				_timeOfSong = value;
+                _timeOfSong = value;
             }
         }
         public Song(string nameOfSong, string nameOfSinger, int timeOfSong)

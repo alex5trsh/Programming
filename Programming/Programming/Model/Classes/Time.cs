@@ -19,12 +19,9 @@ namespace Programming.Model.Classes
           get => _hours;
           set
             {
-                if (value < 0 || value > 23)
-                { 
-                    throw new ArgumentException("Часы находятся в диапазоне от 0 до 23");
-				}
+                Validator.AssertValueInRange(value, 0, 23, "Hours");
 
-				_hours = value;
+                _hours = value;
             }
         }
 
@@ -33,12 +30,9 @@ namespace Programming.Model.Classes
             get => _minutes;
             set
             {
-                if (value < 0|| value > 59)
-                {
-                    throw new ArgumentException("Минуты находятся в диапазоне от 0 до 59");
-				}
+                Validator.AssertValueInRange(value, 0, 59, "Minutes");
 
-				_minutes = value;
+                _minutes = value;
             }
         }
 
@@ -47,10 +41,7 @@ namespace Programming.Model.Classes
             get => _seconds;
             set
             {
-                if (value < 0 || value > 59)
-                {
-                    throw new ArgumentException("Секунды находятся в диапазоне от 0 до 59");
-                }
+                Validator.AssertValueInRange(value, 0, 59, "Seconds");
 
                 _seconds = value;
             }

@@ -12,17 +12,16 @@ namespace Programming.Model.Classes
 
         private double _width;
 
+        private static int _allRectanglesCount;
+
         public double Length
         {
             get => _length;
             set
             {
-                if (value < 0.0)
-                {
-                    throw new ArgumentException("Длина не может быть отрицательной");
-				}
+                Validator.AssertOnPositiveValue(value, "Length");
 
-				_length = value;
+                _length = value;
             }
             
         }
@@ -32,27 +31,44 @@ namespace Programming.Model.Classes
             get => _width;
             set
             {
-                if (value < 0.0)
-                {
-                    throw new ArgumentException("Ширина не может быть отрицательной");
-				}
+                Validator.AssertOnPositiveValue(value, "Width");
 
-				_width = value;
+                _width = value;
             }
             
         }
 
         public string Color { get; set; }
 
-        public Rectangle(double length, double width, string color)
+        public Point2D Center { get; set; }
+
+        public static int AllRectanglesCount
+        {
+            get => _allRectanglesCount;
+            private set
+            {
+                _allRectanglesCount = value;
+            }
+
+        }
+        
+        public int Id { get; }
+
+        public Rectangle(double length, double width, string color, Point2D center)
         {
             Length = length;
             Width = width;
             Color = color;
+            Center = center;
+            AllRectanglesCount++;
+            Id = AllRectanglesCount; 
         }
         public Rectangle()
         {
-            
+            AllRectanglesCount++;
+            Id = AllRectanglesCount; 
         }
+
+        
     }
 }

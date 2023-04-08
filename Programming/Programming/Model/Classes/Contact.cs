@@ -10,19 +10,43 @@ namespace Programming.Model.Classes
     {
         private string _numberPhone;
 
-        public string Name { get; set; }
+        private string _name;
 
-        public string Surname { get; set; }
+        private string _surname;
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                AssertStringContainsOnlyLetters(value, "Name");
+
+                _name = value;
+            }
+        }
+
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                AssertStringContainsOnlyLetters(value, "SurName");
+
+                _surname = value;
+
+            }
+        }
 
         public string NumberPhone
         {
             get => _numberPhone;
             set
             {
-                if (value.Length>11)
+                if (value.Length != 11)
                 {
                     throw new ArgumentException("Номер не больше 11 знаков");
                 }
+
                 _numberPhone = value;
             }
         }
@@ -37,6 +61,18 @@ namespace Programming.Model.Classes
         public Contact()
         {
             
+        }
+
+        private void AssertStringContainsOnlyLetters(string value, string nameOfFeature)
+        {
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (((value[i] >= 'a' && value[i] <= 'z') || (value[i] >= 'A' && value[i] <= 'Z')) == false)
+                {
+                    throw new ArgumentException("Переменная свойства" + nameOfFeature + "содержит только символы английского языка");
+                }
+            }
+
         }
     }
 }
