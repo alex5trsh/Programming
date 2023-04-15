@@ -27,6 +27,8 @@ namespace Programming
 
         Rectangle _currentRectnagle5;
 
+        List<Panel> _rectanglePanels =new List<Panel>();
+
         public MainForm()
         {
             InitializeComponent();
@@ -80,9 +82,10 @@ namespace Programming
             GenreTextBox.TextChanged += GenreTextBox_TextChanged;
             RatingTextBox.TextChanged += RatingTextBox_TextChanged;
 
-           
-
-
+            X5TextBox.TextChanged += X5TextBox_TextChanged;
+            Y5TextBox.TextChanged += Y5TextBox_TextChanged;
+            Width5TextBox.TextChanged += Width5TextBox_TextChanged;
+            Height5TextBox.TextChanged += Height5TextBox_TextChanged;
         }
 
         private void EnumsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -322,12 +325,128 @@ namespace Programming
             Rectangle newRectangle = new Rectangle();
             newRectangle.Length = Math.Round(1 + run.NextDouble() * 99);
             newRectangle.Width = Math.Round(1 + run.NextDouble() * 99);
-            int x = run.Next(100);
-            int y = run.Next(100);
+            int x = run.Next(1,300);
+            int y = run.Next(1,300);
             newRectangle.Center = new Point2D(x, y);
             _rectangles5.Add(newRectangle);
             Rectangles5ListBox.Items.Add(newRectangle.Id + ": (X= " + newRectangle.Center.X + "; Y= " + newRectangle.Center.Y
                     + "; W= " + newRectangle.Width + "; H= " + newRectangle.Length+" )");
+            Panel _newPanel= new Panel()
+            {
+                Width = Convert.ToInt32(newRectangle.Width),
+                Height = Convert.ToInt32(newRectangle.Length),
+                Location = new Point(newRectangle.Center.X - Convert.ToInt32(newRectangle.Width * 0.5), newRectangle.Center.Y - Convert.ToInt32(newRectangle.Length * 0.5))   // y-1/2 высоты x-1/2ширины
+            };
+            _newPanel.BackColor = Color.FromArgb(127, 127, 255, 127);
+            _rectanglePanels.Add(_newPanel);
+            RectanglesPanel.Controls.Add(_newPanel);
+        }
+
+        private void DeleteRectangleButton_Click(object sender, EventArgs e) 
+        {
+            if(Rectangles5ListBox.SelectedIndex>0 & Rectangles5ListBox != null) //. Если в ListBox ничего не выбрано или список пуст 
+            {
+                int selectedIndex = Rectangles5ListBox.SelectedIndex;
+                Rectangles5ListBox.Items.RemoveAt(selectedIndex);
+                _rectangles5.RemoveAt(selectedIndex);
+                RectanglesPanel.Controls.RemoveAt(selectedIndex);
+                _rectanglePanels.RemoveAt(selectedIndex);
+            }
+        }
+
+        private void Rectangles5ListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Rectangles5ListBox.SelectedIndex > 0)
+            {
+                int chosenIndex = Rectangles5ListBox.SelectedIndex;
+                _currentRectnagle5 = _rectangles5[chosenIndex];
+                Id5TextBox.Text = Convert.ToString(_currentRectnagle5.Id);
+                X5TextBox.Text = Convert.ToString(_currentRectnagle5.Center.X);
+                Y5TextBox.Text = Convert.ToString(_currentRectnagle5.Center.Y);
+                Width5TextBox.Text = Convert.ToString(_currentRectnagle5.Width);
+                Height5TextBox.Text = Convert.ToString(_currentRectnagle5.Length);
+            }
+        }
+
+        private void X5TextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int _currentX= Convert.ToInt32(X5TextBox.Text);
+                int _currentY = _currentRectnagle5.Center.Y;
+                _currentRectnagle5.Center = new Point2D(_currentX, _currentY);
+                X5TextBox.BackColor = Color.White;
+            }
+            catch
+            {
+   
+                X5TextBox.BackColor = Color.FromArgb(255, 182, 193);
+            }
+        }
+
+        private void Y5TextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int _currentY = Convert.ToInt32(Y5TextBox.Text);
+                int _currentX = _currentRectnagle5.Center.X;
+                _currentRectnagle5.Center = new Point2D(_currentX, _currentY);
+                Y5TextBox.BackColor = Color.White;
+                //Rectangles5ListBox.Items.Insert(Rectangles5ListBox.SelectedIndex, _currentRectnagle5.Id + ": (X= " +
+                //    _currentRectnagle5.Center.X + "; Y= " + _currentRectnagle5.Center.Y
+                //    + "; W= " + _currentRectnagle5.Width + "; H= " + _currentRectnagle5.Length + " )");
+            }
+            catch
+            {
+                Y5TextBox.BackColor = Color.FromArgb(255, 182, 193);
+            }
+        }
+
+        private void Width5TextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentRectnagle5.Width = Convert.ToDouble(Width5TextBox.Text);
+                Width5TextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                Width5TextBox.BackColor = Color.FromArgb(255, 182, 193);
+            }
+        }
+
+        private void Height5TextBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _currentRectnagle5.Length = Convert.ToDouble(Height5TextBox.Text);
+                Height5TextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                Height5TextBox.BackColor = Color.FromArgb(255, 182, 193);
+            }
+        }
+
+        private void FindCollisions(List<Rectangle> _rectangles)
+        {
+            _rectanglePanels.BackColor= Color.FromArgb(127, 127, 255, 127);
+            //перекрасить в зеленый цвет все прямоугольники
+            for (int i=0; i< _rectangles.Count; i++)
+            {
+                for(int j=0; j<_rectangles.Count; j++)
+                {
+                    if (CollisionManager.IsCollision(_rectangles[i], _rectangles[j]) == true & i!=j)
+                    {
+                        _rectanglePanels[i].BackColor = Color.FromArgb(127, 255,127, 127);
+                        _rectanglePanels[j].BackColor= Color.FromArgb(127, 255, 127, 127);
+
+                        //_newPanel.BackColor = Color.FromArgb(127, 127, 255, 127);
+                        //_rectanglePanels.Add(_newPanel);
+                        //RectanglesPanel.Controls.Add(_newPanel);
+                    }
+                }
+            }
         }
     }
 }

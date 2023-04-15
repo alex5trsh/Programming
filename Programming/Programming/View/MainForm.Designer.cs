@@ -75,22 +75,22 @@
             this.GenreLabel = new System.Windows.Forms.Label();
             this.GenreTextBox = new System.Windows.Forms.TextBox();
             this.RectanglesTabPage = new System.Windows.Forms.TabPage();
-            this.RectanglesPanel = new System.Windows.Forms.Panel();
-            this.AddRectangleButton = new System.Windows.Forms.Button();
-            this.DeleteRectangleButton = new System.Windows.Forms.Button();
-            this.Rectangles5ListBox = new System.Windows.Forms.ListBox();
-            this.Rectangles5Label = new System.Windows.Forms.Label();
-            this.SelectedRectangleLabel = new System.Windows.Forms.Label();
-            this.Id5Label = new System.Windows.Forms.Label();
-            this.X5Label = new System.Windows.Forms.Label();
-            this.Y5Label = new System.Windows.Forms.Label();
-            this.Width5Label = new System.Windows.Forms.Label();
-            this.Height5Label = new System.Windows.Forms.Label();
-            this.Id5TextBox = new System.Windows.Forms.TextBox();
-            this.Height5TextBox = new System.Windows.Forms.TextBox();
-            this.Width5TextBox = new System.Windows.Forms.TextBox();
-            this.Y5TextBox = new System.Windows.Forms.TextBox();
             this.X5TextBox = new System.Windows.Forms.TextBox();
+            this.Y5TextBox = new System.Windows.Forms.TextBox();
+            this.Width5TextBox = new System.Windows.Forms.TextBox();
+            this.Height5TextBox = new System.Windows.Forms.TextBox();
+            this.Id5TextBox = new System.Windows.Forms.TextBox();
+            this.Height5Label = new System.Windows.Forms.Label();
+            this.Width5Label = new System.Windows.Forms.Label();
+            this.Y5Label = new System.Windows.Forms.Label();
+            this.X5Label = new System.Windows.Forms.Label();
+            this.Id5Label = new System.Windows.Forms.Label();
+            this.SelectedRectangleLabel = new System.Windows.Forms.Label();
+            this.Rectangles5Label = new System.Windows.Forms.Label();
+            this.Rectangles5ListBox = new System.Windows.Forms.ListBox();
+            this.DeleteRectangleButton = new System.Windows.Forms.Button();
+            this.AddRectangleButton = new System.Windows.Forms.Button();
+            this.RectanglesPanel = new System.Windows.Forms.Panel();
             this.EnumsTabControl.SuspendLayout();
             this.EnumsTabPage.SuspendLayout();
             this.SeasonHandleGroupBox.SuspendLayout();
@@ -123,7 +123,7 @@
             this.EnumsTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnumsTabPage.Name = "EnumsTabPage";
             this.EnumsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EnumsTabPage.Size = new System.Drawing.Size(694, 365);
+            this.EnumsTabPage.Size = new System.Drawing.Size(766, 409);
             this.EnumsTabPage.TabIndex = 0;
             this.EnumsTabPage.Text = "Enums";
             this.EnumsTabPage.UseVisualStyleBackColor = true;
@@ -312,7 +312,7 @@
             this.ClassesTableLayoutPanel.Name = "ClassesTableLayoutPanel";
             this.ClassesTableLayoutPanel.RowCount = 1;
             this.ClassesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ClassesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.ClassesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 403F));
             this.ClassesTableLayoutPanel.Size = new System.Drawing.Size(760, 403);
             this.ClassesTableLayoutPanel.TabIndex = 20;
             // 
@@ -594,13 +594,127 @@
             this.RectanglesTabPage.Text = "Rectangles";
             this.RectanglesTabPage.UseVisualStyleBackColor = true;
             // 
-            // RectanglesPanel
+            // X5TextBox
             // 
-            this.RectanglesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RectanglesPanel.Location = new System.Drawing.Point(332, 6);
-            this.RectanglesPanel.Name = "RectanglesPanel";
-            this.RectanglesPanel.Size = new System.Drawing.Size(426, 395);
-            this.RectanglesPanel.TabIndex = 0;
+            this.X5TextBox.Location = new System.Drawing.Point(57, 269);
+            this.X5TextBox.Name = "X5TextBox";
+            this.X5TextBox.Size = new System.Drawing.Size(100, 20);
+            this.X5TextBox.TabIndex = 15;
+            this.X5TextBox.TextChanged += new System.EventHandler(this.X5TextBox_TextChanged);
+            // 
+            // Y5TextBox
+            // 
+            this.Y5TextBox.Location = new System.Drawing.Point(57, 295);
+            this.Y5TextBox.Name = "Y5TextBox";
+            this.Y5TextBox.Size = new System.Drawing.Size(100, 20);
+            this.Y5TextBox.TabIndex = 14;
+            this.Y5TextBox.TextChanged += new System.EventHandler(this.Y5TextBox_TextChanged);
+            // 
+            // Width5TextBox
+            // 
+            this.Width5TextBox.Location = new System.Drawing.Point(57, 321);
+            this.Width5TextBox.Name = "Width5TextBox";
+            this.Width5TextBox.Size = new System.Drawing.Size(100, 20);
+            this.Width5TextBox.TabIndex = 13;
+            this.Width5TextBox.TextChanged += new System.EventHandler(this.Width5TextBox_TextChanged);
+            // 
+            // Height5TextBox
+            // 
+            this.Height5TextBox.Location = new System.Drawing.Point(57, 347);
+            this.Height5TextBox.Name = "Height5TextBox";
+            this.Height5TextBox.Size = new System.Drawing.Size(100, 20);
+            this.Height5TextBox.TabIndex = 12;
+            this.Height5TextBox.TextChanged += new System.EventHandler(this.Height5TextBox_TextChanged);
+            // 
+            // Id5TextBox
+            // 
+            this.Id5TextBox.Location = new System.Drawing.Point(57, 243);
+            this.Id5TextBox.Name = "Id5TextBox";
+            this.Id5TextBox.ReadOnly = true;
+            this.Id5TextBox.Size = new System.Drawing.Size(100, 20);
+            this.Id5TextBox.TabIndex = 11;
+            // 
+            // Height5Label
+            // 
+            this.Height5Label.AutoSize = true;
+            this.Height5Label.Location = new System.Drawing.Point(16, 350);
+            this.Height5Label.Name = "Height5Label";
+            this.Height5Label.Size = new System.Drawing.Size(41, 13);
+            this.Height5Label.TabIndex = 10;
+            this.Height5Label.Text = "Height:";
+            // 
+            // Width5Label
+            // 
+            this.Width5Label.AutoSize = true;
+            this.Width5Label.Location = new System.Drawing.Point(16, 324);
+            this.Width5Label.Name = "Width5Label";
+            this.Width5Label.Size = new System.Drawing.Size(38, 13);
+            this.Width5Label.TabIndex = 9;
+            this.Width5Label.Text = "Width:";
+            // 
+            // Y5Label
+            // 
+            this.Y5Label.AutoSize = true;
+            this.Y5Label.Location = new System.Drawing.Point(32, 298);
+            this.Y5Label.Name = "Y5Label";
+            this.Y5Label.Size = new System.Drawing.Size(17, 13);
+            this.Y5Label.TabIndex = 8;
+            this.Y5Label.Text = "Y:";
+            // 
+            // X5Label
+            // 
+            this.X5Label.AutoSize = true;
+            this.X5Label.Location = new System.Drawing.Point(32, 272);
+            this.X5Label.Name = "X5Label";
+            this.X5Label.Size = new System.Drawing.Size(17, 13);
+            this.X5Label.TabIndex = 7;
+            this.X5Label.Text = "X:";
+            // 
+            // Id5Label
+            // 
+            this.Id5Label.AutoSize = true;
+            this.Id5Label.Location = new System.Drawing.Point(32, 246);
+            this.Id5Label.Name = "Id5Label";
+            this.Id5Label.Size = new System.Drawing.Size(19, 13);
+            this.Id5Label.TabIndex = 6;
+            this.Id5Label.Text = "Id:";
+            // 
+            // SelectedRectangleLabel
+            // 
+            this.SelectedRectangleLabel.AutoSize = true;
+            this.SelectedRectangleLabel.Location = new System.Drawing.Point(6, 229);
+            this.SelectedRectangleLabel.Name = "SelectedRectangleLabel";
+            this.SelectedRectangleLabel.Size = new System.Drawing.Size(104, 13);
+            this.SelectedRectangleLabel.TabIndex = 5;
+            this.SelectedRectangleLabel.Text = "Selected Rectangle:";
+            // 
+            // Rectangles5Label
+            // 
+            this.Rectangles5Label.AutoSize = true;
+            this.Rectangles5Label.Location = new System.Drawing.Point(6, 12);
+            this.Rectangles5Label.Name = "Rectangles5Label";
+            this.Rectangles5Label.Size = new System.Drawing.Size(64, 13);
+            this.Rectangles5Label.TabIndex = 4;
+            this.Rectangles5Label.Text = "Rectangles:";
+            // 
+            // Rectangles5ListBox
+            // 
+            this.Rectangles5ListBox.FormattingEnabled = true;
+            this.Rectangles5ListBox.Location = new System.Drawing.Point(3, 28);
+            this.Rectangles5ListBox.Name = "Rectangles5ListBox";
+            this.Rectangles5ListBox.Size = new System.Drawing.Size(304, 134);
+            this.Rectangles5ListBox.TabIndex = 3;
+            this.Rectangles5ListBox.SelectedIndexChanged += new System.EventHandler(this.Rectangles5ListBox_SelectedIndexChanged);
+            // 
+            // DeleteRectangleButton
+            // 
+            this.DeleteRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteRectangleButton.Location = new System.Drawing.Point(106, 168);
+            this.DeleteRectangleButton.Name = "DeleteRectangleButton";
+            this.DeleteRectangleButton.Size = new System.Drawing.Size(61, 41);
+            this.DeleteRectangleButton.TabIndex = 2;
+            this.DeleteRectangleButton.UseVisualStyleBackColor = true;
+            this.DeleteRectangleButton.Click += new System.EventHandler(this.DeleteRectangleButton_Click);
             // 
             // AddRectangleButton
             // 
@@ -612,120 +726,13 @@
             this.AddRectangleButton.UseVisualStyleBackColor = true;
             this.AddRectangleButton.Click += new System.EventHandler(this.AddRectangleButton_Click);
             // 
-            // DeleteRectangleButton
+            // RectanglesPanel
             // 
-            this.DeleteRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteRectangleButton.Location = new System.Drawing.Point(106, 168);
-            this.DeleteRectangleButton.Name = "DeleteRectangleButton";
-            this.DeleteRectangleButton.Size = new System.Drawing.Size(61, 41);
-            this.DeleteRectangleButton.TabIndex = 2;
-            this.DeleteRectangleButton.UseVisualStyleBackColor = true;
-            // 
-            // Rectangles5ListBox
-            // 
-            this.Rectangles5ListBox.FormattingEnabled = true;
-            this.Rectangles5ListBox.Location = new System.Drawing.Point(3, 28);
-            this.Rectangles5ListBox.Name = "Rectangles5ListBox";
-            this.Rectangles5ListBox.Size = new System.Drawing.Size(304, 134);
-            this.Rectangles5ListBox.TabIndex = 3;
-            // 
-            // Rectangles5Label
-            // 
-            this.Rectangles5Label.AutoSize = true;
-            this.Rectangles5Label.Location = new System.Drawing.Point(6, 12);
-            this.Rectangles5Label.Name = "Rectangles5Label";
-            this.Rectangles5Label.Size = new System.Drawing.Size(64, 13);
-            this.Rectangles5Label.TabIndex = 4;
-            this.Rectangles5Label.Text = "Rectangles:";
-            // 
-            // SelectedRectangleLabel
-            // 
-            this.SelectedRectangleLabel.AutoSize = true;
-            this.SelectedRectangleLabel.Location = new System.Drawing.Point(6, 229);
-            this.SelectedRectangleLabel.Name = "SelectedRectangleLabel";
-            this.SelectedRectangleLabel.Size = new System.Drawing.Size(104, 13);
-            this.SelectedRectangleLabel.TabIndex = 5;
-            this.SelectedRectangleLabel.Text = "Selected Rectangle:";
-            // 
-            // Id5Label
-            // 
-            this.Id5Label.AutoSize = true;
-            this.Id5Label.Location = new System.Drawing.Point(32, 246);
-            this.Id5Label.Name = "Id5Label";
-            this.Id5Label.Size = new System.Drawing.Size(19, 13);
-            this.Id5Label.TabIndex = 6;
-            this.Id5Label.Text = "Id:";
-            // 
-            // X5Label
-            // 
-            this.X5Label.AutoSize = true;
-            this.X5Label.Location = new System.Drawing.Point(32, 272);
-            this.X5Label.Name = "X5Label";
-            this.X5Label.Size = new System.Drawing.Size(17, 13);
-            this.X5Label.TabIndex = 7;
-            this.X5Label.Text = "X:";
-            // 
-            // Y5Label
-            // 
-            this.Y5Label.AutoSize = true;
-            this.Y5Label.Location = new System.Drawing.Point(32, 298);
-            this.Y5Label.Name = "Y5Label";
-            this.Y5Label.Size = new System.Drawing.Size(17, 13);
-            this.Y5Label.TabIndex = 8;
-            this.Y5Label.Text = "Y:";
-            // 
-            // Width5Label
-            // 
-            this.Width5Label.AutoSize = true;
-            this.Width5Label.Location = new System.Drawing.Point(16, 324);
-            this.Width5Label.Name = "Width5Label";
-            this.Width5Label.Size = new System.Drawing.Size(38, 13);
-            this.Width5Label.TabIndex = 9;
-            this.Width5Label.Text = "Width:";
-            // 
-            // Height5Label
-            // 
-            this.Height5Label.AutoSize = true;
-            this.Height5Label.Location = new System.Drawing.Point(16, 350);
-            this.Height5Label.Name = "Height5Label";
-            this.Height5Label.Size = new System.Drawing.Size(41, 13);
-            this.Height5Label.TabIndex = 10;
-            this.Height5Label.Text = "Height:";
-            // 
-            // Id5TextBox
-            // 
-            this.Id5TextBox.Location = new System.Drawing.Point(57, 243);
-            this.Id5TextBox.Name = "Id5TextBox";
-            this.Id5TextBox.Size = new System.Drawing.Size(100, 20);
-            this.Id5TextBox.TabIndex = 11;
-            // 
-            // Height5TextBox
-            // 
-            this.Height5TextBox.Location = new System.Drawing.Point(57, 347);
-            this.Height5TextBox.Name = "Height5TextBox";
-            this.Height5TextBox.Size = new System.Drawing.Size(100, 20);
-            this.Height5TextBox.TabIndex = 12;
-            // 
-            // Width5TextBox
-            // 
-            this.Width5TextBox.Location = new System.Drawing.Point(57, 321);
-            this.Width5TextBox.Name = "Width5TextBox";
-            this.Width5TextBox.Size = new System.Drawing.Size(100, 20);
-            this.Width5TextBox.TabIndex = 13;
-            // 
-            // Y5TextBox
-            // 
-            this.Y5TextBox.Location = new System.Drawing.Point(57, 295);
-            this.Y5TextBox.Name = "Y5TextBox";
-            this.Y5TextBox.Size = new System.Drawing.Size(100, 20);
-            this.Y5TextBox.TabIndex = 14;
-            // 
-            // X5TextBox
-            // 
-            this.X5TextBox.Location = new System.Drawing.Point(57, 269);
-            this.X5TextBox.Name = "X5TextBox";
-            this.X5TextBox.Size = new System.Drawing.Size(100, 20);
-            this.X5TextBox.TabIndex = 15;
+            this.RectanglesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RectanglesPanel.Location = new System.Drawing.Point(332, 6);
+            this.RectanglesPanel.Name = "RectanglesPanel";
+            this.RectanglesPanel.Size = new System.Drawing.Size(426, 395);
+            this.RectanglesPanel.TabIndex = 0;
             // 
             // MainForm
             // 

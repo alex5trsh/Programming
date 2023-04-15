@@ -8,7 +8,7 @@ namespace Programming.Model.Classes
 {
     class CollisionManager
     {
-        public bool IsCollision(Rectangle rectangle1, Rectangle rectangle2)
+        public static bool IsCollision(Rectangle rectangle1, Rectangle rectangle2)
         {
             double sumWidth=(rectangle1.Width+rectangle2.Width)/2;
             double sumLength=(rectangle1.Length + rectangle2.Length) / 2;
@@ -18,7 +18,7 @@ namespace Programming.Model.Classes
             return dx < sumWidth && dy < sumLength;
         }
 
-        public bool IsCollision(Ring ring1, Ring ring2)
+        public static bool IsCollision(Ring ring1, Ring ring2)
         {
             double sumRadius = ring1.OuterRadius + ring2.OuterRadius;
             int dx =Math.Abs(ring1.CenterOfRing.X- ring2.CenterOfRing.X);
