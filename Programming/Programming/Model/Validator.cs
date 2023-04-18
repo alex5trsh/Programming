@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model.Classes
+namespace Programming.Model
 {
     class Validator
     {
         public static void AssertOnPositiveValue(int value, string nameOfFeature)
         { 
-            if ( value<1 )
+            if ( value<0 )
             { 
-                throw new ArgumentException("Переменная свойства"+nameOfFeature+"должна быть положительной");
+                throw new ArgumentException("Переменная свойства "+nameOfFeature+" должна быть положительной");
             }
         }
 
@@ -20,7 +20,7 @@ namespace Programming.Model.Classes
         {
             if (value < 1)
             {
-                throw new ArgumentException("Переменная свойства" + nameOfFeature + "должна быть положительной");
+                throw new ArgumentException("Переменная свойства " + nameOfFeature + " должна быть положительной");
             }
         }
         public static void AssertValueInRange( int value,  int min, int max, string nameOfFeature )
