@@ -321,16 +321,11 @@ namespace Programming
 
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
-            Random run = new Random();
-            Rectangle newRectangle = new Rectangle();
-            newRectangle.Length = Math.Round(1 + run.NextDouble() * 99);
-            newRectangle.Width = Math.Round(1 + run.NextDouble() * 99);
-            int x = run.Next(1,300);
-            int y = run.Next(1,300);
-            newRectangle.Center = new Model.Geometry.Point2D(x, y);
+            Rectangle newRectangle = Model.Geometry.RectangleFactory.Randomize();
             _rectangles5.Add(newRectangle);
-            Rectangles5ListBox.Items.Add(newRectangle.Id + ": (X= " + newRectangle.Center.X + "; Y= " + newRectangle.Center.Y
-                    + "; W= " + newRectangle.Width + "; H= " + newRectangle.Length+" )");
+            Rectangles5ListBox.Items.Add(newRectangle.Id + ": (X= " + newRectangle.Center.X + 
+                "; Y= " + newRectangle.Center.Y + "; W= " + newRectangle.Width + "; H= " 
+                + newRectangle.Length+" )");
             Panel _newPanel= new Panel()
             {
                 Width = Convert.ToInt32(newRectangle.Width),
@@ -345,28 +340,26 @@ namespace Programming
 
         private void DeleteRectangleButton_Click(object sender, EventArgs e) 
         {
-            if(Rectangles5ListBox.SelectedIndex>0 & Rectangles5ListBox != null) 
+            if(Rectangles5ListBox.SelectedIndex>=0 && Rectangles5ListBox != null) 
             {
                 int selectedIndex = Rectangles5ListBox.SelectedIndex;
                 Rectangles5ListBox.Items.RemoveAt(selectedIndex);
                 _rectangles5.RemoveAt(selectedIndex);
                 RectanglesPanel.Controls.RemoveAt(selectedIndex);
                 _rectanglePanels.RemoveAt(selectedIndex);
+                ClearRectangleInfo();
             }
+
             FindCollisions(_rectangles5);
         }
 
         private void Rectangles5ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Rectangles5ListBox.SelectedIndex > 0)
+            if (Rectangles5ListBox.SelectedIndex >= 0)
             {
                 int chosenIndex = Rectangles5ListBox.SelectedIndex;
                 _currentRectnagle5 = _rectangles5[chosenIndex];
-                Id5TextBox.Text = Convert.ToString(_currentRectnagle5.Id);
-                X5TextBox.Text = Convert.ToString(_currentRectnagle5.Center.X);
-                Y5TextBox.Text = Convert.ToString(_currentRectnagle5.Center.Y);
-                Width5TextBox.Text = Convert.ToString(_currentRectnagle5.Width);
-                Height5TextBox.Text = Convert.ToString(_currentRectnagle5.Length);
+                UpdateRectangleInfo(_currentRectnagle5);
             }
         }
 
@@ -374,16 +367,22 @@ namespace Programming
         {
             try
             {
-                int _currentX= Convert.ToInt32(X5TextBox.Text);
-                int _currentY = _currentRectnagle5.Center.Y;
-                _currentRectnagle5.Center = new Model.Geometry.Point2D(_currentX, _currentY);
-                ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
-                FindCollisions(_rectangles5);
+                if (_currentRectnagle5.Center.X != (int)Convert.ToInt32(X5TextBox.Text ))
+                {
+                    int _currentX = Convert.ToInt32(X5TextBox.Text);
+                    int _currentY = _currentRectnagle5.Center.Y;
+                    _currentRectnagle5.Center = new Model.Geometry.Point2D(_currentX, _currentY);
+                    ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
+                    Rectangles5ListBox.Items[Rectangles5ListBox.SelectedIndex] = (_currentRectnagle5.Id
+                        + ": (X= " + _currentRectnagle5.Center.X +
+                        "; Y= " + _currentRectnagle5.Center.Y + "; W= " + _currentRectnagle5.Width + "; H= "
+                        + _currentRectnagle5.Length + " )");
+                }
+
                 X5TextBox.BackColor = Color.White;
             }
             catch
             {
-   
                 X5TextBox.BackColor = Color.FromArgb(255, 182, 193);
             }
         }
@@ -392,11 +391,19 @@ namespace Programming
         {
             try
             {
-                int _currentY = Convert.ToInt32(Y5TextBox.Text);
-                int _currentX = _currentRectnagle5.Center.X;
-                _currentRectnagle5.Center = new Model.Geometry.Point2D(_currentX, _currentY);
-                ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
-                FindCollisions(_rectangles5);
+                if(_currentRectnagle5.Center.Y != (int)Convert.ToInt32(Y5TextBox.Text))
+                {
+                    int _currentY = Convert.ToInt32(Y5TextBox.Text);
+                    int _currentX = _currentRectnagle5.Center.X;
+                    _currentRectnagle5.Center = new Model.Geometry.Point2D(_currentX, _currentY);
+                    ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
+                    FindCollisions(_rectangles5);
+                    Rectangles5ListBox.Items[Rectangles5ListBox.SelectedIndex] = (_currentRectnagle5.Id
+                        + ": (X= " + _currentRectnagle5.Center.X +
+                        "; Y= " + _currentRectnagle5.Center.Y + "; W= " + _currentRectnagle5.Width + "; H= "
+                        + _currentRectnagle5.Length + " )");
+                }
+
                 Y5TextBox.BackColor = Color.White;
             }
             catch
@@ -409,9 +416,17 @@ namespace Programming
         {
             try
             {
-                _currentRectnagle5.Width = Convert.ToDouble(Width5TextBox.Text);
-                ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
-                FindCollisions(_rectangles5);
+                if(_currentRectnagle5.Width != (double)Convert.ToDouble(Width5TextBox.Text))
+                {
+                    _currentRectnagle5.Width = Convert.ToDouble(Width5TextBox.Text);
+                    ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
+                    FindCollisions(_rectangles5);
+                    Rectangles5ListBox.Items[Rectangles5ListBox.SelectedIndex] = (_currentRectnagle5.Id
+                        + ": (X= " + _currentRectnagle5.Center.X +
+                        "; Y= " + _currentRectnagle5.Center.Y + "; W= " + _currentRectnagle5.Width + "; H= "
+                        + _currentRectnagle5.Length + " )");
+                }
+
                 Width5TextBox.BackColor = Color.White;
             }
             catch
@@ -424,9 +439,17 @@ namespace Programming
         {
             try
             {
-                _currentRectnagle5.Length = Convert.ToDouble(Height5TextBox.Text);
-                ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex);
-                FindCollisions(_rectangles5);
+                 if (_currentRectnagle5.Length != (double)Convert.ToDouble(Height5TextBox.Text))
+                {
+                     _currentRectnagle5.Length = Convert.ToDouble(Height5TextBox.Text);
+                    ChangeRectangleOnPanel(Rectangles5ListBox.SelectedIndex); 
+                    FindCollisions(_rectangles5);
+                    Rectangles5ListBox.Items[Rectangles5ListBox.SelectedIndex] = (_currentRectnagle5.Id
+                        + ": (X= " + _currentRectnagle5.Center.X +
+                        "; Y= " + _currentRectnagle5.Center.Y + "; W= " + _currentRectnagle5.Width + "; H= "
+                        + _currentRectnagle5.Length + " )");
+                }
+
                 Height5TextBox.BackColor = Color.White;
             }
             catch
@@ -441,11 +464,12 @@ namespace Programming
             {
                 _rectanglePanels[i].BackColor = Color.FromArgb(127, 127, 255, 127); 
             }
+
             for (int i=0; i< rectangles.Count; i++)
             {
                 for(int j=i; j<rectangles.Count; j++)
                 {
-                    if (Model.Geometry.CollisionManager.IsCollision(rectangles[i], rectangles[j]) == true & i!=j)
+                    if (Model.Geometry.CollisionManager.IsCollision(rectangles[i], rectangles[j]) && i!=j)
                     {
                         _rectanglePanels[i].BackColor = Color.FromArgb(127, 255,127, 127);
                         _rectanglePanels[j].BackColor= Color.FromArgb(127, 255, 127, 127);
@@ -457,19 +481,14 @@ namespace Programming
 
         private void ChangeRectangleOnPanel(int index)
         {
-            Panel _newPanel = new Panel()
-            {
-                Width = Convert.ToInt32(_currentRectnagle5.Width),
-                Height = Convert.ToInt32(_currentRectnagle5.Length),
-                Location = new Point(_currentRectnagle5.Center.X - Convert.ToInt32(_currentRectnagle5.Width * 0.5),
-                _currentRectnagle5.Center.Y - Convert.ToInt32(_currentRectnagle5.Length * 0.5))  
-            };
-            
-            _newPanel.BackColor = Color.FromArgb(127, 127, 255, 127);
-            RectanglesPanel.Controls.Remove(_rectanglePanels[index]);
-            _rectanglePanels.Insert(index, _newPanel); 
-            RectanglesPanel.Controls.Add(_rectanglePanels[index]);
+            int width = Convert.ToInt32(_currentRectnagle5.Width);
+            int height = Convert.ToInt32(_currentRectnagle5.Length);
+            Point location = new Point(_currentRectnagle5.Center.X - Convert.ToInt32(_currentRectnagle5.Width * 0.5),
+                _currentRectnagle5.Center.Y - Convert.ToInt32(_currentRectnagle5.Length * 0.5));
+            RectanglesPanel.Controls[index].Location = location;
+            RectanglesPanel.Controls[index].Size = new Size(width,height);
         }
+
         private void UpdateRectangleInfo(Rectangle rectangle)
         {
             Id5TextBox.Text = Convert.ToString(rectangle.Id);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Geometry
 {
-    class Point2D
+    public class Point2D
     {
         private int _x;
 

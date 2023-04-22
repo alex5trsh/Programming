@@ -640,13 +640,14 @@
             // 
             // AddRectangleButton
             // 
+            this.AddRectangleButton.BackgroundImage = global::Programming.Properties.Resources.rectangle_add_button_png;
             this.AddRectangleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AddRectangleButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.AddRectangleButton.FlatAppearance.BorderSize = 0;
             this.AddRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddRectangleButton.Location = new System.Drawing.Point(21, 172);
             this.AddRectangleButton.Name = "AddRectangleButton";
-            this.AddRectangleButton.Size = new System.Drawing.Size(51, 50);
+            this.AddRectangleButton.Size = new System.Drawing.Size(50, 50);
             this.AddRectangleButton.TabIndex = 1;
             this.AddRectangleButton.UseVisualStyleBackColor = true;
             this.AddRectangleButton.Click += new System.EventHandler(this.AddRectangleButton_Click);
@@ -670,11 +671,14 @@
             // 
             // DeleteRectangleButton
             // 
-            this.DeleteRectangleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DeleteRectangleButton.BackgroundImage = global::Programming.Properties.Resources.rectangle_delete_button_png;
+            this.DeleteRectangleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.DeleteRectangleButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.DeleteRectangleButton.FlatAppearance.BorderSize = 0;
             this.DeleteRectangleButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeleteRectangleButton.Location = new System.Drawing.Point(136, 172);
             this.DeleteRectangleButton.Name = "DeleteRectangleButton";
-            this.DeleteRectangleButton.Size = new System.Drawing.Size(84, 62);
+            this.DeleteRectangleButton.Size = new System.Drawing.Size(50, 50);
             this.DeleteRectangleButton.TabIndex = 2;
             this.DeleteRectangleButton.UseVisualStyleBackColor = true;
             this.DeleteRectangleButton.Click += new System.EventHandler(this.DeleteRectangleButton_Click);
