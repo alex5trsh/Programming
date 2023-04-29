@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Movie = Programming.Model.Classes.Movie;
-
+using Programming.Model.Classes;
+//TODO:XML-комментарии
 namespace Programming.View.Panels
 {
     public partial class MoviesValuePanel : UserControl
@@ -59,11 +60,11 @@ namespace Programming.View.Panels
             try
             {
                 _currentMovie.DurationInMinutes = Convert.ToInt32(DurationTextBox.Text);
-                DurationTextBox.BackColor = Color.White;
+                DurationTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                DurationTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                DurationTextBox.BackColor = AppColors.Red;
             }
         }
 
@@ -72,11 +73,11 @@ namespace Programming.View.Panels
             try
             {
                 _currentMovie.YearOfRelease = Convert.ToInt32(YearOfReleaseTextBox.Text);
-                YearOfReleaseTextBox.BackColor = Color.White;
+                YearOfReleaseTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                YearOfReleaseTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                YearOfReleaseTextBox.BackColor = AppColors.Red;
             }
 
         }
@@ -91,11 +92,11 @@ namespace Programming.View.Panels
             try
             {
                 _currentMovie.Rating = Convert.ToDouble(RatingTextBox.Text);
-                RatingTextBox.BackColor = Color.White;
+                RatingTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                RatingTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                RatingTextBox.BackColor = AppColors.Red;
             }
         }
 

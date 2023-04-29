@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-    public enum Weekday
+//TODO:XML-комментарии
+public enum Weekday
     {   Monday, 
         Tuesday,
         Wednesday,

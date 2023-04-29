@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Geometry.Rectangle;
-
+using Programming.Model.Classes;
+//TODO:XML-комментарии
 namespace Programming.View.Panels
 {
     public partial class RectanglesCollisionControl : UserControl
@@ -46,7 +47,7 @@ namespace Programming.View.Panels
                 Height = Convert.ToInt32(newRectangle.Length),
                 Location = new Point(newRectangle.Center.X - Convert.ToInt32(newRectangle.Width * 0.5), newRectangle.Center.Y - Convert.ToInt32(newRectangle.Length * 0.5))   // y-1/2 высоты x-1/2ширины
             };
-            _newPanel.BackColor = Color.FromArgb(127, 127, 255, 127);
+            _newPanel.BackColor = AppColors.Green;
             _rectanglePanels.Add(_newPanel);
             RectanglesPanel.Controls.Add(_newPanel);
             FindCollisions(_rectangles);
@@ -92,12 +93,12 @@ namespace Programming.View.Panels
                         "; Y= " + _currentRectnagle.Center.Y + "; W= " + _currentRectnagle.Width + "; H= "
                         + _currentRectnagle.Length + " )");
                 }
-
-                XTextBox.BackColor = Color.White;
+               
+                XTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                XTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                XTextBox.BackColor =AppColors.Red;
             }
         }
 
@@ -117,12 +118,12 @@ namespace Programming.View.Panels
                         "; Y= " + _currentRectnagle.Center.Y + "; W= " + _currentRectnagle.Width + "; H= "
                         + _currentRectnagle.Length + " )");
                 }
-
-                YTextBox.BackColor = Color.White;
+                
+                YTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                YTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                YTextBox.BackColor = AppColors.Red;
             }
         }
 
@@ -140,12 +141,12 @@ namespace Programming.View.Panels
                         "; Y= " + _currentRectnagle.Center.Y + "; W= " + _currentRectnagle.Width + "; H= "
                         + _currentRectnagle.Length + " )");
                 }
-
-                WidthTextBox.BackColor = Color.White;
+                
+                WidthTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                WidthTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                WidthTextBox.BackColor = AppColors.Red;
             }
         }
 
@@ -163,12 +164,12 @@ namespace Programming.View.Panels
                         "; Y= " + _currentRectnagle.Center.Y + "; W= " + _currentRectnagle.Width + "; H= "
                         + _currentRectnagle.Length + " )");
                 }
-
-                HeightTextBox.BackColor = Color.White;
+                
+                HeightTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                HeightTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                HeightTextBox.BackColor = AppColors.Red;
             }
         }
 
@@ -176,7 +177,7 @@ namespace Programming.View.Panels
         {
             for (int i = 0; i < rectangles.Count; i++)
             {
-                _rectanglePanels[i].BackColor = Color.FromArgb(127, 127, 255, 127);
+                _rectanglePanels[i].BackColor = AppColors.Green;
             }
 
             for (int i = 0; i < rectangles.Count; i++)
@@ -185,9 +186,8 @@ namespace Programming.View.Panels
                 {
                     if (Model.Geometry.CollisionManager.IsCollision(rectangles[i], rectangles[j]) && i != j)
                     {
-                        _rectanglePanels[i].BackColor = Color.FromArgb(127, 255, 127, 127);
-                        _rectanglePanels[j].BackColor = Color.FromArgb(127, 255, 127, 127);
-
+                        _rectanglePanels[i].BackColor = AppColors.Red;
+                        _rectanglePanels[j].BackColor = AppColors.Red;
                     }
                 }
             }

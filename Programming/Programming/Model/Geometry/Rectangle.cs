@@ -6,14 +6,29 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Geometry
 {
-    public class Rectangle
+   /// <summary>
+   /// Хранит данные о прямоугольниках.
+   /// </summary>
+   public class Rectangle
     {
+        /// <summary>
+        /// Длина.
+        /// </summary>
         private double _length;
 
+        /// <summary>
+        /// Ширина.
+        /// </summary>
         private double _width;
 
+        /// <summary>
+        /// Счетчик прямоугольников.
+        /// </summary>
         private static int _allRectanglesCount;
 
+        /// <summary>
+        /// Возвращает и задает длину. Должна состоять только из положительных чисел.
+        /// </summary>
         public double Length
         {
             get => _length;
@@ -26,6 +41,9 @@ namespace Programming.Model.Geometry
             
         }
 
+        /// <summary>
+        ///  Возвращает и задает ширину. Должна состоять только из положительных чисел.
+        /// </summary>
         public double Width
         {
             get => _width;
@@ -38,10 +56,19 @@ namespace Programming.Model.Geometry
             
         }
 
+        /// <summary>
+        ///  Возвращает и задает цвет.
+        /// </summary>
         public string Color { get; set; }
 
+        /// <summary>
+        ///  Возвращает и задает центр.
+        /// </summary>
         public Point2D Center { get; set; }
 
+        /// <summary>
+        ///  Возвращает и задает счетчик.
+        /// </summary>
         public static int AllRectanglesCount
         {
             get => _allRectanglesCount;
@@ -51,9 +78,19 @@ namespace Programming.Model.Geometry
             }
 
         }
-        
+
+        /// <summary>
+        ///  Возвращает идентификатор.
+        /// </summary>
         public int Id { get; }
 
+        /// <summary>
+        /// Создает экземпляр класса <see cref="Rectangle"/>.
+        /// </summary>
+        /// <param name="length">Длина.Должна состоять только из положительных чисел.</param>
+        /// <param name="width">Ширина.Должна состоять только из положительных чисел.</param>
+        /// <param name="color">Цвет.</param>
+        /// <param name="center">Центр.</param>
         public Rectangle(double length, double width, string color, Point2D center)
         {
             Length = length;
@@ -63,6 +100,9 @@ namespace Programming.Model.Geometry
             AllRectanglesCount++;
             Id = AllRectanglesCount; 
         }
+        /// <summary>
+        /// Создает пустой экземпляр класса <see cref="Rectangle"/>.
+        /// </summary>
         public Rectangle()
         {
             AllRectanglesCount++;

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-    public enum Season
+//TODO:XML-комментарии
+public enum Season
     {   Winter,
         Spring,
         Summer, 

@@ -56,9 +56,9 @@ namespace Programming.View.Panels
             // 
             this.RectanglesPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RectanglesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RectanglesPanel.Location = new System.Drawing.Point(401, 3);
+            this.RectanglesPanel.Location = new System.Drawing.Point(353, 3);
             this.RectanglesPanel.Name = "RectanglesPanel";
-            this.RectanglesPanel.Size = new System.Drawing.Size(392, 467);
+            this.RectanglesPanel.Size = new System.Drawing.Size(440, 467);
             this.RectanglesPanel.TabIndex = 33;
             // 
             // RectanglesListBox
@@ -201,8 +201,8 @@ namespace Programming.View.Panels
             // RectanglesTableLayoutPanel
             // 
             this.RectanglesTableLayoutPanel.ColumnCount = 2;
-            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
+            this.RectanglesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.RectanglesTableLayoutPanel.Controls.Add(this.RectanglesPanel, 1, 0);
             this.RectanglesTableLayoutPanel.Controls.Add(this.RectanglesGroupBox, 0, 0);
             this.RectanglesTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -210,7 +210,6 @@ namespace Programming.View.Panels
             this.RectanglesTableLayoutPanel.Name = "RectanglesTableLayoutPanel";
             this.RectanglesTableLayoutPanel.RowCount = 1;
             this.RectanglesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.RectanglesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.RectanglesTableLayoutPanel.Size = new System.Drawing.Size(796, 473);
             this.RectanglesTableLayoutPanel.TabIndex = 34;
             // 
@@ -234,7 +233,7 @@ namespace Programming.View.Panels
             this.RectanglesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RectanglesGroupBox.Location = new System.Drawing.Point(3, 3);
             this.RectanglesGroupBox.Name = "RectanglesGroupBox";
-            this.RectanglesGroupBox.Size = new System.Drawing.Size(392, 467);
+            this.RectanglesGroupBox.Size = new System.Drawing.Size(344, 467);
             this.RectanglesGroupBox.TabIndex = 34;
             this.RectanglesGroupBox.TabStop = false;
             // 

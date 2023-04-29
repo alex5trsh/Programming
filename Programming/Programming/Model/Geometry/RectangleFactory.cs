@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//TODO:XML-комментарии
 namespace Programming.Model.Geometry
 {
     public static class RectangleFactory

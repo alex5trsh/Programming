@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-    public enum EducationForm
-    {   FullTime,
+/// <summary>
+/// Предоставляет шаблоны форм обучения. 
+/// </summary>
+public enum EducationForm
+    {   
+        FullTime,
         PartTime,
         Evening,
         Remote

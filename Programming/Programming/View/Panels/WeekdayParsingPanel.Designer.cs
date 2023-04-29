@@ -38,16 +38,16 @@ namespace Programming.View.Panels
             // WriteTextBox
             // 
             this.WriteTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.WriteTextBox.Location = new System.Drawing.Point(6, 51);
+            this.WriteTextBox.Location = new System.Drawing.Point(6, 42);
             this.WriteTextBox.Name = "WriteTextBox";
             this.WriteTextBox.Size = new System.Drawing.Size(194, 13);
             this.WriteTextBox.TabIndex = 7;
             // 
             // ParseButton
             // 
-            this.ParseButton.Location = new System.Drawing.Point(204, 25);
+            this.ParseButton.Location = new System.Drawing.Point(204, 15);
             this.ParseButton.Name = "ParseButton";
-            this.ParseButton.Size = new System.Drawing.Size(77, 23);
+            this.ParseButton.Size = new System.Drawing.Size(82, 21);
             this.ParseButton.TabIndex = 6;
             this.ParseButton.Text = "Parse";
             this.ParseButton.UseVisualStyleBackColor = true;
@@ -55,7 +55,7 @@ namespace Programming.View.Panels
             // 
             // TypeValueTextBox
             // 
-            this.TypeValueTextBox.Location = new System.Drawing.Point(6, 25);
+            this.TypeValueTextBox.Location = new System.Drawing.Point(6, 16);
             this.TypeValueTextBox.Name = "TypeValueTextBox";
             this.TypeValueTextBox.Size = new System.Drawing.Size(192, 20);
             this.TypeValueTextBox.TabIndex = 5;
@@ -63,13 +63,13 @@ namespace Programming.View.Panels
             // TypeValueLabel
             // 
             this.TypeValueLabel.AutoSize = true;
-            this.TypeValueLabel.Location = new System.Drawing.Point(3, 9);
+            this.TypeValueLabel.Location = new System.Drawing.Point(3, 0);
             this.TypeValueLabel.Name = "TypeValueLabel";
             this.TypeValueLabel.Size = new System.Drawing.Size(115, 13);
             this.TypeValueLabel.TabIndex = 4;
             this.TypeValueLabel.Text = "Type value for parsing:";
             // 
-            // WeekdayParsing
+            // WeekdayParsingPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -77,7 +77,7 @@ namespace Programming.View.Panels
             this.Controls.Add(this.ParseButton);
             this.Controls.Add(this.TypeValueTextBox);
             this.Controls.Add(this.TypeValueLabel);
-            this.Name = "WeekdayParsing";
+            this.Name = "WeekdayParsingPanel";
             this.Size = new System.Drawing.Size(350, 101);
             this.ResumeLayout(false);
             this.PerformLayout();

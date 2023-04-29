@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-    public enum Genre
+//TODO:XML-комментарии
+public enum Genre
     {   Comedy,
         Drama,
         Thriller,

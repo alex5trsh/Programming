@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Geometry
 {
+    /// <summary>
+    /// Хранит методы по проверке на пересечение.
+    /// </summary>
     class CollisionManager
     {
+        /// <summary>
+        /// Проверяет, что прямоугольники пересекаются.
+        /// </summary>
+        /// <param name="rectangle1">Первый проверяемый прямоугольник.</param>
+        /// <param name="rectangle2">Второй проверяемый прямоугольник.</param>
+        /// <returns>Возвращает true, если прямоугольники пересекаются. И false, если не пересекаются.</returns>
         public static bool IsCollision(Rectangle rectangle1, Rectangle rectangle2)
         {
             double sumWidth = (rectangle1.Width + rectangle2.Width) / 2;
@@ -16,9 +25,14 @@ namespace Programming.Model.Geometry
             int dy = Math.Abs(rectangle1.Center.Y - rectangle2.Center.Y);
 
             return dx < sumWidth && dy < sumLength;
-
         }
 
+        /// <summary>
+        /// Проверяет, что кольца пересекаются.
+        /// </summary>
+        /// <param name="ring1">Первое проверяемое кольцо.</param>
+        /// <param name="ring2">Второе проверяемое кольцо.</param>
+        /// <returns>Возвращает true, если кольца пересекаются. И false, если кольца не пересекаются.</returns>
         public static bool IsCollision(Ring ring1, Ring ring2)
         {
             double sumRadius = ring1.OuterRadius + ring2.OuterRadius;
@@ -27,7 +41,6 @@ namespace Programming.Model.Geometry
             double C = Math.Sqrt(dx * dx + dy * dy);
 
             return C < sumRadius;
-
         }
     }
 }

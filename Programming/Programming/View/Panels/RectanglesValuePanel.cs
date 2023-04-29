@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Geometry.Rectangle;
-
+using Programming.Model.Classes;
+//TODO:XML-комментарии
 namespace Programming.View.Panels
 {
     public partial class RectanglesValuePanel : UserControl
@@ -62,11 +63,11 @@ namespace Programming.View.Panels
             try
             {
                 _currentRectangle.Length = Convert.ToDouble(LengthTextBox.Text);
-                LengthTextBox.BackColor = Color.White;
+                LengthTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                LengthTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                LengthTextBox.BackColor = AppColors.Red;
             }
         }
 
@@ -75,11 +76,11 @@ namespace Programming.View.Panels
             try
             {
                 _currentRectangle.Width = Convert.ToDouble(WidthTextBox.Text);
-                WidthTextBox.BackColor = Color.White;
+                WidthTextBox.BackColor = AppColors.White;
             }
             catch
             {
-                WidthTextBox.BackColor = Color.FromArgb(255, 182, 193);
+                WidthTextBox.BackColor = AppColors.Red;
             }
         }
 

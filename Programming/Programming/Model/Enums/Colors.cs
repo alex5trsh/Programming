@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-    public enum Colors
+//TODO:XML-комментарии
+/// <summary>
+/// Предоставляет набор цветов.
+/// </summary>
+public enum Colors
     {   Red=6,
         Green,
         Blue,

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+//TODO:XML-комментарии
 namespace Programming.View.Panels
 {
     public partial class SeasonHandlePanel : UserControl
@@ -25,15 +25,6 @@ namespace Programming.View.Panels
 
         private void GoButton_Click(object sender, EventArgs e)
         {
-            this.BackColor = Color.White;
-            //EnumsTabPage.BackColor = Color.White;
-            //WriteTextBox.BackColor = Color.White;
-            //
-            //EnumsListBox.BackColor = Color.White;
-            //ValueListBox.BackColor = Color.White;
-            //IntValueTextBox.BackColor = Color.White;
-            //TypeValueTextBox.BackColor = Color.White;
-            SeasonsComboBox.BackColor = Color.White;
             var selectedSeason = SeasonsComboBox.SelectedItem;
             switch (selectedSeason)
             {
@@ -56,17 +47,6 @@ namespace Programming.View.Panels
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.RightAlign
                         );
-
-                    //Основной фон
-                    //this.BackColor = Color.FromArgb(71, 167, 106);
-                    //EnumsTabPage.BackColor = Color.FromArgb(71, 167, 106);
-                    //WriteTextBox.BackColor = Color.FromArgb(71, 167, 106);
-                    //Фон боксов
-                    //EnumsListBox.BackColor = Color.FromArgb(168, 228, 160);
-                    //ValueListBox.BackColor = Color.FromArgb(168, 228, 160);
-                    //IntValueTextBox.BackColor = Color.FromArgb(168, 228, 160);
-                    //TypeValueTextBox.BackColor = Color.FromArgb(168, 228, 160);
-                    //SeasonsComboBox.BackColor = Color.FromArgb(168, 228, 160);
                     break;
                 case Season.Summer:
                     MessageBox.Show(
@@ -87,20 +67,8 @@ namespace Programming.View.Panels
                         MessageBoxDefaultButton.Button1,
                         MessageBoxOptions.RightAlign
                         );
-
-                    //Основной фон
-                    //this.BackColor = Color.FromArgb(237, 118, 14);
-                    //EnumsTabPage.BackColor = Color.FromArgb(237, 118, 14);
-                    //WriteTextBox.BackColor = Color.FromArgb(237, 118, 14);
-                    //Фон боксов
-                    //EnumsListBox.BackColor = Color.FromArgb(255, 204, 153);
-                    //ValueListBox.BackColor = Color.FromArgb(255, 204, 153);
-                    //IntValueTextBox.BackColor = Color.FromArgb(255, 204, 153);
-                    //TypeValueTextBox.BackColor = Color.FromArgb(255, 204, 153);
-                    //SeasonsComboBox.BackColor = Color.FromArgb(255, 204, 153);
                     break;
             }
-
         }
     }
 }

@@ -12,22 +12,22 @@ namespace Programming.Model.Classes
     class Contact
     {
        /// <summary>
-       /// Номер телефона человека.
+       /// Номер телефона.
        /// </summary>
         private string _numberPhone;
 
         /// <summary>
-        /// Имя человека.
+        /// Имя.
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// Фамилия человека.
+        /// Фамилия.
         /// </summary>
         private string _surname;
 
         /// <summary>
-        /// Возвращает и задает имя человека. Должно состоять только из букв.
+        /// Возвращает и задает имя. Должно состоять только из букв.
         /// </summary>
         public string Name
         {
@@ -41,7 +41,7 @@ namespace Programming.Model.Classes
         }
 
         /// <summary>
-        /// Возвращает и задает фамилию человека. Должна состоять только из букв.
+        /// Возвращает и задает фамилию. Должна состоять только из букв.
         /// </summary>
         public string Surname
         {
@@ -56,7 +56,7 @@ namespace Programming.Model.Classes
         }
 
         /// <summary>
-        /// Возвращает и задает номер человека. Должен состоять только из чисел в количестве 11 штук.
+        /// Возвращает и задает номер. Должен состоять только из 11 чисел.
         /// </summary>
         public string NumberPhone
         {
@@ -77,7 +77,7 @@ namespace Programming.Model.Classes
         /// </summary>
         /// <param name="name"> Имя. Должно состоять только из букв.</param>
         /// <param name="surname">Фамилия. Должна состоять только из букв.</param>
-        /// <param name="numberPhone">Номер. Должен состоять только из цифр в количестве 11 штук.</param>
+        /// <param name="numberPhone">Номер. Должен состоять только из 11 чисел.</param>
         public Contact(string name, string surname, string numberPhone)
         {
             Name =name;

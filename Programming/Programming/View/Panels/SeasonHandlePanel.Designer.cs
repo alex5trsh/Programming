@@ -44,7 +44,7 @@ namespace Programming.View.Panels
             // 
             // GoButton
             // 
-            this.GoButton.Location = new System.Drawing.Point(225, 16);
+            this.GoButton.Location = new System.Drawing.Point(225, 14);
             this.GoButton.Name = "GoButton";
             this.GoButton.Size = new System.Drawing.Size(82, 23);
             this.GoButton.TabIndex = 4;
@@ -61,14 +61,14 @@ namespace Programming.View.Panels
             this.ChooseSeasonLabel.TabIndex = 3;
             this.ChooseSeasonLabel.Text = "Choose season:";
             // 
-            // SeasonHandle
+            // SeasonHandlePanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.SeasonsComboBox);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.ChooseSeasonLabel);
-            this.Name = "SeasonHandle";
+            this.Name = "SeasonHandlePanel";
             this.Size = new System.Drawing.Size(326, 77);
             this.ResumeLayout(false);
             this.PerformLayout();

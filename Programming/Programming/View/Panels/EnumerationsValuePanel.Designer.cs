@@ -73,6 +73,8 @@ namespace Programming.View.Panels
             // 
             // ValueListBox
             // 
+            this.ValueListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ValueListBox.FormattingEnabled = true;
             this.ValueListBox.Location = new System.Drawing.Point(199, 25);
             this.ValueListBox.Name = "ValueListBox";
@@ -83,6 +85,8 @@ namespace Programming.View.Panels
             // 
             // EnumsListBox
             // 
+            this.EnumsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.EnumsListBox.FormattingEnabled = true;
             this.EnumsListBox.Location = new System.Drawing.Point(6, 25);
             this.EnumsListBox.Name = "EnumsListBox";
