@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Movie = Programming.Model.Classes.Movie;
 using Programming.Model.Classes;
-//TODO:XML-комментарии
+
 namespace Programming.View.Panels
 {
     public partial class MoviesValuePanel : UserControl
@@ -79,7 +79,6 @@ namespace Programming.View.Panels
             {
                 YearOfReleaseTextBox.BackColor = AppColors.Red;
             }
-
         }
 
         private void GenreTextBox_TextChanged(object sender, EventArgs e)
@@ -100,6 +99,11 @@ namespace Programming.View.Panels
             }
         }
 
+        /// <summary>
+        /// Ищет объект с максимальным рейтингом в массиве.
+        /// </summary>
+        /// <param name="arrayMovies">Имя массива, который подлежит проверке.</param>
+        /// <returns></returns>
         private int FindMovieWithMaxRating(Movie[] arrayMovies)
         {
             int indexMovie = 0;
@@ -115,6 +119,7 @@ namespace Programming.View.Panels
 
             return indexMovie;
         }
+
         private void FindMaxRatingButton_Click(object sender, EventArgs e)
         {
             MoviesListBox.SelectedIndex = FindMovieWithMaxRating(_movies);

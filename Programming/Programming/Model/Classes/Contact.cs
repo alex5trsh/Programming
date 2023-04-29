@@ -51,12 +51,11 @@ namespace Programming.Model.Classes
                 AssertStringContainsOnlyLetters(value, "SurName");
 
                 _surname = value;
-
             }
         }
 
         /// <summary>
-        /// Возвращает и задает номер. Должен состоять только из 11 чисел.
+        /// Возвращает и задает номер. Должен состоять только из 11 положительных чисел.
         /// </summary>
         public string NumberPhone
         {
@@ -77,7 +76,7 @@ namespace Programming.Model.Classes
         /// </summary>
         /// <param name="name"> Имя. Должно состоять только из букв.</param>
         /// <param name="surname">Фамилия. Должна состоять только из букв.</param>
-        /// <param name="numberPhone">Номер. Должен состоять только из 11 чисел.</param>
+        /// <param name="numberPhone">Номер. Должен состоять только из 11 положительных чисел.</param>
         public Contact(string name, string surname, string numberPhone)
         {
             Name =name;

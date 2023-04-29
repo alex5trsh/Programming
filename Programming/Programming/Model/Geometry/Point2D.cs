@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//TODO:XML-комментарии
+
 namespace Programming.Model.Geometry
 {
     /// <summary>
-    /// Хранит данные о точках.
+    /// Хранит координаты.
     /// </summary>
     public class Point2D
     {
         /// <summary>
-        /// 
+        /// Координта X.
         /// </summary>
         private int _x;
 
         /// <summary>
-        /// 
+        /// Координата Y.
         /// </summary>
         private int _y;
 
         /// <summary>
-        /// 
+        /// Возвращает и задает координату X. Должна состоять только из положительных чисел.
         /// </summary>
         public int X
         {
@@ -33,11 +33,10 @@ namespace Programming.Model.Geometry
 
                 _x = value;
             }
-            
         }
 
         /// <summary>
-        /// 
+        /// Возвращает и задает координату Y. Должна состоять только из положительных чисел.
         /// </summary>
         public int Y
         {
@@ -48,14 +47,13 @@ namespace Programming.Model.Geometry
 
                 _y = value;
             }
-
         }
 
         /// <summary>
-        /// 
+        /// Создает экземляр класса <see cref="Point2D"/>.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">Координата X. Должна состоять только из положительных чисел.</param>
+        /// <param name="y">Координата Y. Должна состоять только из положительных чисел.</param>
         public Point2D(int x, int y)
         {
             X = x;

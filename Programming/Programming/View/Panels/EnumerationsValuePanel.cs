@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//TODO:XML-комментарии
+
 namespace Programming.View.Panels
 {
     public partial class EnumerationsValuePanel : UserControl
     {
+       
         public EnumerationsValuePanel()
         {
             InitializeComponent();
@@ -37,5 +38,4 @@ namespace Programming.View.Panels
             IntValueTextBox.Text = Convert.ToString((int)ValueListBox.SelectedItem);
         }
     }
-
 }

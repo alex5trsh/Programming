@@ -244,7 +244,6 @@ namespace Programming.View.Panels
             this.Controls.Add(this.RectanglesTableLayoutPanel);
             this.Name = "RectanglesCollisionControl";
             this.Size = new System.Drawing.Size(796, 473);
-            this.Load += new System.EventHandler(this.RectanglesCollisionControl_Load);
             this.RectanglesTableLayoutPanel.ResumeLayout(false);
             this.RectanglesGroupBox.ResumeLayout(false);
             this.RectanglesGroupBox.PerformLayout();

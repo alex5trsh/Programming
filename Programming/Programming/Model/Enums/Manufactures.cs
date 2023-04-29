@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO:XML-комментарии
+    /// <summary>
+    /// Предоставляет шаблоны производителей смартфонов.
+    /// </summary>
     public enum Manufactures
-    {   LG,
+    {   
+        LG,
         Samsung,
         Apple,
         Xiaomi,

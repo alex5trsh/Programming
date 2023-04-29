@@ -87,7 +87,6 @@ namespace Programming.Model.Classes
         public Time()
         {
 
-        }
-        
+        }  
     }
 }

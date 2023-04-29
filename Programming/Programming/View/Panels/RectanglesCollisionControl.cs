@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Geometry.Rectangle;
 using Programming.Model.Classes;
-//TODO:XML-комментарии
+
 namespace Programming.View.Panels
 {
     public partial class RectanglesCollisionControl : UserControl
@@ -30,10 +30,6 @@ namespace Programming.View.Panels
             HeightTextBox.TextChanged += HeightTextBox_TextChanged;
         }
 
-        private void RectanglesCollisionControl_Load(object sender, EventArgs e)
-        {
-
-        }
         private void AddRectangleButton_Click(object sender, EventArgs e)
         {
             Rectangle newRectangle = Model.Geometry.RectangleFactory.Randomize();
@@ -173,6 +169,10 @@ namespace Programming.View.Panels
             }
         }
 
+        /// <summary>
+        /// Проверяет пересечения объектов и окрашивает их на панели.
+        /// </summary>
+        /// <param name="rectangles">Имя массива объектов, которое подлежит проверке. </param>
         private void FindCollisions(List<Rectangle> rectangles)
         {
             for (int i = 0; i < rectangles.Count; i++)
@@ -193,6 +193,10 @@ namespace Programming.View.Panels
             }
         }
 
+        /// <summary>
+        /// Меняет положение объекта на панели, при изменении данных в текстовых полях.
+        /// </summary>
+        /// <param name="index">Индекс измененного объекта.</param>
         private void ChangeRectangleOnPanel(int index)
         {
             int width = Convert.ToInt32(_currentRectnagle.Width);
@@ -203,6 +207,10 @@ namespace Programming.View.Panels
             RectanglesPanel.Controls[index].Size = new Size(width, height);
         }
 
+        /// <summary>
+        /// Обновляет данные по указанному объекту в текстовых полях.
+        /// </summary>
+        /// <param name="rectangle">Название объекта, данные которого необходимо обновить.</param>
         private void UpdateRectangleInfo(Rectangle rectangle)
         {
             IdTextBox.Text = Convert.ToString(rectangle.Id);
@@ -212,6 +220,9 @@ namespace Programming.View.Panels
             HeightTextBox.Text = Convert.ToString(rectangle.Length);
         }
 
+        /// <summary>
+        /// Очищает все текстовые поля со значениями объекта.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             IdTextBox.Clear();

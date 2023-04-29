@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//TODO:XML-комментарии
+
 namespace Programming.Model.Geometry
 {
+    /// <summary>
+    /// Хранит метод, создающий новый объект прямоугольника.
+    /// </summary>
     public static class RectangleFactory
     {
+        /// <summary>
+        /// Создает новый случайный объект прямоугольника.
+        /// </summary>
+        /// <returns>Возвращает новый случайный объект прямоугольника.</returns>
         public static Rectangle Randomize()
         {
             Random rand = new Random();

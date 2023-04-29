@@ -37,8 +37,7 @@ namespace Programming.Model.Geometry
                 Validator.AssertOnPositiveValue(value, "Length");
 
                 _length = value;
-            }
-            
+            }    
         }
 
         /// <summary>
@@ -52,8 +51,7 @@ namespace Programming.Model.Geometry
                 Validator.AssertOnPositiveValue(value, "Width");
 
                 _width = value;
-            }
-            
+            } 
         }
 
         /// <summary>
@@ -87,8 +85,8 @@ namespace Programming.Model.Geometry
         /// <summary>
         /// Создает экземпляр класса <see cref="Rectangle"/>.
         /// </summary>
-        /// <param name="length">Длина.Должна состоять только из положительных чисел.</param>
-        /// <param name="width">Ширина.Должна состоять только из положительных чисел.</param>
+        /// <param name="length">Длина. Должна состоять только из положительных чисел.</param>
+        /// <param name="width">Ширина. Должна состоять только из положительных чисел.</param>
         /// <param name="color">Цвет.</param>
         /// <param name="center">Центр.</param>
         public Rectangle(double length, double width, string color, Point2D center)
@@ -107,8 +105,6 @@ namespace Programming.Model.Geometry
         {
             AllRectanglesCount++;
             Id = AllRectanglesCount; 
-        }
-
-        
+        }  
     }
 }

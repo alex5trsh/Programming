@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//TODO:XML-комментарии
+
 namespace Programming.View.Panels
 {
     public partial class WeekdayParsingPanel : UserControl
@@ -28,7 +28,6 @@ namespace Programming.View.Panels
             {
                 WriteTextBox.Text = "Нет такого дня недели";
             }
-
         }
     }
 }

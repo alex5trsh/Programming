@@ -57,7 +57,6 @@ namespace Programming.Model.Classes
 
                 _yearOfRelease = value;
             }
-            
         }
 
         /// <summary>
@@ -103,6 +102,5 @@ namespace Programming.Model.Classes
         {
 
         }
-
     }
 }

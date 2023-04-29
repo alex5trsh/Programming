@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//TODO:XML-комментарии
+/// <summary>
+/// Предоставляет шаблоны времен года.
+/// </summary>
 public enum Season
-    {   Winter,
+    {   
+        Winter,
         Spring,
         Summer, 
         Autumn

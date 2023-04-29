@@ -39,6 +39,7 @@ namespace Programming.Model.Classes
                 _mark = value;
             }
         }
+
         /// <summary>
         /// Создает экземпляр класса <see cref="Discipline"/>.
         /// </summary>

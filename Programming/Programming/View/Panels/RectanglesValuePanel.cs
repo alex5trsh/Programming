@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Rectangle = Programming.Model.Geometry.Rectangle;
 using Programming.Model.Classes;
-//TODO:XML-комментарии
+
 namespace Programming.View.Panels
 {
     public partial class RectanglesValuePanel : UserControl

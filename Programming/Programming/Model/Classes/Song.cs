@@ -39,6 +39,7 @@ namespace Programming.Model.Classes
                 _timeOfSong = value;
             }
         }
+
         /// <summary>
         /// Создает экземпляр класса <see cref="Song"/>.
         /// </summary>
