@@ -4,15 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// TODO: namespace
-/// <summary>
-/// Предоставляет шаблоны времен года.
-/// </summary>
-public enum Season
+// TODO: namespace (+)
+namespace Programming.Model.Enums
 {
-    // TODO: XML для элементов перечисления 
-    Winter,
-    Spring,
-    Summer,
-    Autumn
+    /// <summary>
+    /// Предоставляет шаблоны времен года.
+    /// </summary>
+    public enum Season
+    {
+        // TODO: XML для элементов перечисления (+)
+        /// <summary>
+        /// Зима.
+        /// </summary>
+        Winter,
+        /// <summary>
+        /// Весна.
+        /// </summary>
+        Spring,
+        /// <summary>
+        /// Лето.
+        /// </summary>
+        Summer,
+        /// <summary>
+        /// Осень.
+        /// </summary>
+        Autumn
+    }
 }

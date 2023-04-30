@@ -7,10 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Programming.Model.Enums;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML
+    // TODO: XML (+)
+    /// <summary>
+    /// Предоставляет методы за определенные действия при выборе элемента из списка.
+    /// </summary>
     public partial class SeasonHandlePanel : UserControl
     {
         public SeasonHandlePanel()

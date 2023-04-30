@@ -12,13 +12,23 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML
+    // TODO: XML (+)
+    /// <summary>
+    /// Предоставляет методы за вывод данных выбранного элемента класса <see cref="Movie"/> и 
+    /// их изменения.
+    /// </summary>
     public partial class MoviesValuePanel : UserControl
     {
-        // TODO: XML
+        // TODO: XML (+)
+        /// <summary>
+        /// Массив, состоящий из 5 элементов, класса <see cref="Movie"/>.
+        /// </summary>
         private Movie[] _movies = new Movie[5];
 
-        // TODO: XML
+        // TODO: XML (+)
+        /// <summary>
+        /// Элемент класса <see cref="Movie"/>.
+        /// </summary>
         private Movie _currentMovie = new Movie();
 
         public MoviesValuePanel()
@@ -106,7 +116,7 @@ namespace Programming.View.Panels
         /// Ищет объект с максимальным рейтингом в массиве.
         /// </summary>
         /// <param name="arrayMovies">Имя массива, который подлежит проверке.</param>
-        /// <returns></returns>
+        /// <returns>Возвращает индекс элемента массива, у которого максимальный рейтинг.</returns>
         private int FindMovieWithMaxRating(Movie[] arrayMovies)
         {
             int indexMovie = 0;

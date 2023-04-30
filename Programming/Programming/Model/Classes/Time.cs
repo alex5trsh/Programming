@@ -17,8 +17,8 @@ namespace Programming.Model.Classes
         private int _hours;
 
         /// <summary>
-        /// TODO: грам.ошибка
-        /// Минтуты.
+        /// TODO: грам.ошибка (+)
+        /// Минуты.
         /// </summary>
         private int _minutes;
 

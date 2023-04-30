@@ -68,7 +68,7 @@ namespace Programming.View.Panels
             this.RectanglesListBox.Name = "RectanglesListBox";
             this.RectanglesListBox.Size = new System.Drawing.Size(304, 134);
             this.RectanglesListBox.TabIndex = 20;
-            this.RectanglesListBox.SelectedIndexChanged += new System.EventHandler(this.Rectangles5ListBox_SelectedIndexChanged);
+            this.RectanglesListBox.SelectedIndexChanged += new System.EventHandler(this.RectanglesListBox_SelectedIndexChanged);
             // 
             // RectanglesLabel
             // 

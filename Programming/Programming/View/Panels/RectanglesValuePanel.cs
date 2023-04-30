@@ -12,13 +12,23 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML
+    // TODO: XML (+)
+    /// <summary>
+    /// Предоставляет методы за вывод данных выбранного элемента класса <see cref="Rectangle"/> 
+    /// и их изменения.
+    /// </summary>
     public partial class RectanglesValuePanel : UserControl
     {
-        // TODO: XML
+        // TODO: XML (+)
+        /// <summary>
+        /// Массив, состоящий из 5 элементов, класса <see cref="Rectangle"/>.
+        /// </summary>
         private Rectangle[] _rectangles = new Rectangle[5];
 
-        // TODO: XML
+        // TODO: XML (+)
+        /// <summary>
+        /// Элемент класса <see cref="Rectangle"/>.
+        /// </summary>
         private Rectangle _currentRectangle;
 
         public RectanglesValuePanel()
@@ -92,7 +102,12 @@ namespace Programming.View.Panels
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
-        // TODO: XML
+        // TODO: XML (+)
+        /// <summary>
+        /// Ищет объект с максимальной шириной в массиве.
+        /// </summary>
+        /// <param name="arrayRectangles">Имя массива, который подлежит проверке.</param>
+        /// <returns>Возвращает индекс элемента массива, у которого максимальная ширина.</returns>
         private int FindRectangleWithMaxWidth(Rectangle[] arrayRectangles)
         {
             int indexRectangle = 0;

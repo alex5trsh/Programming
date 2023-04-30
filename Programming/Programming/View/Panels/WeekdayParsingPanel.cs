@@ -7,10 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Programming.Model.Enums;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML
+    // TODO: XML (+)
+    /// <summary>
+    /// Предоставляет методы за распознавание введенного текста как объекта 
+    /// перечисления <see cref="Weekday"/>.
+    /// </summary>
     public partial class WeekdayParsingPanel : UserControl
     {
         public WeekdayParsingPanel()

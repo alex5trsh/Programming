@@ -4,19 +4,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// TODO: namespace
-/// <summary>
-/// Предоставляет шаблоны дней недели.
-/// </summary>
-public enum Weekday
+// TODO: namespace (+)
+namespace Programming.Model.Enums
 {
-    // TODO: XML для элементов перечисления
-    Monday,
-    Tuesday,
-    Wednesday,
-    // TODO: грам.ошибка
-    Thurday,
-    Friday,
-    Saturday,
-    Sunday
+    /// <summary>
+    /// Предоставляет шаблоны дней недели.
+    /// </summary>
+    public enum Weekday
+    {
+        // TODO: XML для элементов перечисления (+)
+        /// <summary>
+        /// Понедельник.
+        /// </summary>
+        Monday,
+        /// <summary>
+        /// Вторник.
+        /// </summary>
+        Tuesday,
+        /// <summary>
+        /// Среда.
+        /// </summary>
+        Wednesday,
+        // TODO: грам.ошибка (+)
+        /// <summary>
+        /// Четверг.
+        /// </summary>
+        Thursday,
+        /// <summary>
+        /// Пятница.
+        /// </summary>
+        Friday,
+        /// <summary>
+        /// Суббота.
+        /// </summary>
+        Saturday,
+        /// <summary>
+        /// Воскресенье.
+        /// </summary>
+        Sunday
+    }
 }
