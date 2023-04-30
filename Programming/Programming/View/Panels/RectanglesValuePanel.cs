@@ -12,10 +12,13 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
+    // TODO: XML
     public partial class RectanglesValuePanel : UserControl
     {
+        // TODO: XML
         private Rectangle[] _rectangles = new Rectangle[5];
 
+        // TODO: XML
         private Rectangle _currentRectangle;
 
         public RectanglesValuePanel()
@@ -89,6 +92,7 @@ namespace Programming.View.Panels
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
+        // TODO: XML
         private int FindRectangleWithMaxWidth(Rectangle[] arrayRectangles)
         {
             int indexRectangle = 0;

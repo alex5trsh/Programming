@@ -12,10 +12,13 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
+    // TODO: XML
     public partial class MoviesValuePanel : UserControl
     {
+        // TODO: XML
         private Movie[] _movies = new Movie[5];
 
+        // TODO: XML
         private Movie _currentMovie = new Movie();
 
         public MoviesValuePanel()

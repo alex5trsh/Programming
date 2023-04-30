@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: namespace
 /// <summary>
 /// Предоставляет шаблоны форм обучения. 
 /// </summary>
 public enum EducationForm
-    {   
-        FullTime,
-        PartTime,
-        Evening,
-        Remote
-    }
-
+{
+    // TODO: XML для элементов перечисления
+    FullTime,
+    PartTime,
+    Evening,
+    Remote
+}

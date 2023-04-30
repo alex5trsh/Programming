@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Programming.View.Panels
 {
+    // TODO: XML
     public partial class WeekdayParsingPanel : UserControl
     {
         public WeekdayParsingPanel()

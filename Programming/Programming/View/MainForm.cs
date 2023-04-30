@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// TODO: другой namespace
 namespace Programming
 {
     public partial class MainForm : Form

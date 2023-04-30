@@ -72,6 +72,7 @@ namespace Programming.Model.Classes
         }
 
         /// <summary>
+        /// TODO: грам.ошибка "экземляр"
         /// Создает экземляр класса <see cref="Contact"/>.
         /// </summary>
         /// <param name="name"> Имя. Должно состоять только из букв.</param>
@@ -103,6 +104,7 @@ namespace Programming.Model.Classes
             {
                 if (((value[i] >= 'a' && value[i] <= 'z') || (value[i] >= 'A' && value[i] <= 'Z')) == false)
                 {
+                    // TODO: длинная строка
                     throw new ArgumentException("Переменная свойства" + nameOfFeature + "содержит только символы английского языка");
                 }
             }

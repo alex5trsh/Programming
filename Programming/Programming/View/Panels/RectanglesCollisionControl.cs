@@ -12,12 +12,16 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
+    // TODO: XML
     public partial class RectanglesCollisionControl : UserControl
     {
+        // TODO: XML
         List<Rectangle> _rectangles = new List<Rectangle>();
 
+        // TODO: XML
         Rectangle _currentRectnagle;
 
+        // TODO: XML
         List<Panel> _rectanglePanels= new List<Panel>();
 
         public RectanglesCollisionControl()
@@ -64,6 +68,7 @@ namespace Programming.View.Panels
             FindCollisions(_rectangles);
         }
 
+        // TODO: Теперь можно переименовать обработчик события
         private void Rectangles5ListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex >= 0)

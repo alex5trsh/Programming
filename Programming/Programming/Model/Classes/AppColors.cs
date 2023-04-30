@@ -15,16 +15,16 @@ namespace Programming.Model.Classes
         /// <summary>
         /// Красный цвет.
         /// </summary>
-        static public Color Red = Color.FromArgb(255, 182, 193);
+        public static Color Red = Color.FromArgb(255, 182, 193);
         
         /// <summary>
         /// Зеленый цвет.
         /// </summary>
-        static public Color Green= Color.FromArgb(189, 236, 182);
+        public static Color Green= Color.FromArgb(189, 236, 182);
 
         /// <summary>
         /// Белый цвет.
         /// </summary>
-        static public Color White = Color.FromArgb(255, 255, 255);
+        public static Color White = Color.FromArgb(255, 255, 255);
     }
 }

@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: namespace
 /// <summary>
 /// Предоставляет шаблоны жанров.
 /// </summary>
 public enum Genre
-    {   
-        Comedy,
-        Drama,
-        Thriller,
-        ActionMovie, 
-        Horror,
-        Blockbuster
-    }
-
+{
+    // TODO: XML для элементов перечисления
+    Comedy,
+    Drama,
+    Thriller,
+    ActionMovie,
+    Horror,
+    Blockbuster
+}

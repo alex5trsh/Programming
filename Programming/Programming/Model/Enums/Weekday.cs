@@ -4,17 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// TODO: namespace
 /// <summary>
 /// Предоставляет шаблоны дней недели.
 /// </summary>
 public enum Weekday
-    {   
-        Monday, 
-        Tuesday,
-        Wednesday,
-        Thurday,
-        Friday,
-        Saturday,
-        Sunday
-    }
-
+{
+    // TODO: XML для элементов перечисления
+    Monday,
+    Tuesday,
+    Wednesday,
+    // TODO: грам.ошибка
+    Thurday,
+    Friday,
+    Saturday,
+    Sunday
+}

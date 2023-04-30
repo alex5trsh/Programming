@@ -98,6 +98,7 @@ namespace Programming.Model.Geometry
             AllRectanglesCount++;
             Id = AllRectanglesCount; 
         }
+
         /// <summary>
         /// Создает пустой экземпляр класса <see cref="Rectangle"/>.
         /// </summary>
