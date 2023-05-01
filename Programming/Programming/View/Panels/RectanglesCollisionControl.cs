@@ -12,25 +12,21 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за вывод данных выбранного элемента и вывод на панели всех объектов.
     /// </summary>
     public partial class RectanglesCollisionControl : UserControl
     {
-        // TODO: XML (+)
         /// <summary>
         /// Коллекция элементов класса <see cref="Rectangle"/> .
         /// </summary>
         List<Rectangle> _rectangles = new List<Rectangle>();
 
-        // TODO: XML (+)
         /// <summary>
         /// Элемент класса <see cref="Rectangle"/> .
         /// </summary>
         Rectangle _currentRectnagle;
 
-        // TODO: XML (+)
         /// <summary>
         /// Коллекция элементов класса <see cref="Panel"/>.
         /// </summary>
@@ -80,7 +76,6 @@ namespace Programming.View.Panels
             FindCollisions(_rectangles);
         }
 
-        // TODO: Теперь можно переименовать обработчик события (+)
         private void RectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (RectanglesListBox.SelectedIndex >= 0)

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// TODO: namespace (+)
 namespace Programming.Model.Enums
 {   
     /// <summary>
@@ -12,7 +11,6 @@ namespace Programming.Model.Enums
     /// </summary>
     public enum Colors
     {
-        // TODO: XML для элементов перечисления (+)
         /// <summary>
         /// Красный. Индекс равен 6.
         /// </summary>

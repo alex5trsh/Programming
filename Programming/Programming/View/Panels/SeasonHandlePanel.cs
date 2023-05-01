@@ -11,7 +11,6 @@ using Programming.Model.Enums;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за определенные действия при выборе элемента из списка.
     /// </summary>

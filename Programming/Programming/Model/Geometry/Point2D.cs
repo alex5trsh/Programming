@@ -12,7 +12,6 @@ namespace Programming.Model.Geometry
     public class Point2D
     {
         /// <summary>
-        /// TODO: грам.ошибка (+)
         /// Координата X.
         /// </summary>
         private int _x;
@@ -51,7 +50,6 @@ namespace Programming.Model.Geometry
         }
 
         /// <summary>
-        /// TODO: грам.ошибка (+)
         /// Создает экземпляр класса <see cref="Point2D"/>.
         /// </summary>
         /// <param name="x">Координата X. Должна состоять только из положительных чисел.</param>
