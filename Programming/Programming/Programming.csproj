@@ -103,6 +103,12 @@
     <Compile Include="View\Panels\SeasonHandlePanel.Designer.cs">
       <DependentUpon>SeasonHandlePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Panels\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Panels\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Panels\WeekdayParsingPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Panels\SeasonHandlePanel.resx">
       <DependentUpon>SeasonHandlePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Panels\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Panels\WeekdayParsingPanel.resx">
       <DependentUpon>WeekdayParsingPanel.cs</DependentUpon>
