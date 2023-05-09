@@ -11,7 +11,6 @@ using Programming.Model.Enums;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за распознавание введенного текста как объекта 
     /// перечисления <see cref="Weekday"/>.

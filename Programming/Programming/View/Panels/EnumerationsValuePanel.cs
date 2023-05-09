@@ -11,7 +11,6 @@ using Programming.Model.Enums;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за вывод элементов перечисления и индекса выбранного элемента.
     /// </summary>

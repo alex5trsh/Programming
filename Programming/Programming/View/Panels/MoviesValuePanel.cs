@@ -12,20 +12,17 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за вывод данных выбранного элемента класса <see cref="Movie"/> и 
     /// их изменения.
     /// </summary>
     public partial class MoviesValuePanel : UserControl
     {
-        // TODO: XML (+)
         /// <summary>
         /// Массив, состоящий из 5 элементов, класса <see cref="Movie"/>.
         /// </summary>
         private Movie[] _movies = new Movie[5];
 
-        // TODO: XML (+)
         /// <summary>
         /// Элемент класса <see cref="Movie"/>.
         /// </summary>
@@ -35,11 +32,11 @@ namespace Programming.View.Panels
         {
             InitializeComponent();
 
-            string[] names = new string[] { "The Thing", "Arrival", "Mr&Mrs Smith", "Life in a year", "Fight club" };
-            int[] durations = new int[] { 103, 118, 126, 107, 139 };
-            int[] years = new int[] { 2011, 2016, 2005, 2020, 1999 };
-            string[] genres = new string[] { "Horror", "Science fiction", "Action movie", "Drama", "Thriller" };
-            double[] raitings = new double[] { 6.4, 7.6, 7.5, 6.9, 8.8 };
+            string[] names = new string[] {"The Thing", "Arrival", "Mr&Mrs Smith", "Life in a year", "Fight club"};
+            int[] durations = new int[] {103, 118, 126, 107, 139};
+            int[] years = new int[] {2011, 2016, 2005, 2020, 1999};
+            string[] genres = new string[] {"Horror", "Science fiction", "Action movie", "Drama", "Thriller"};
+            double[] raitings = new double[] {6.4, 7.6, 7.5, 6.9, 8.8};
             for (int i = 0; i < _movies.Length; i++)
             {
                 _movies[i] = new Movie();

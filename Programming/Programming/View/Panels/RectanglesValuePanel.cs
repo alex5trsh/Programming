@@ -12,20 +12,17 @@ using Programming.Model.Classes;
 
 namespace Programming.View.Panels
 {
-    // TODO: XML (+)
     /// <summary>
     /// Предоставляет методы за вывод данных выбранного элемента класса <see cref="Rectangle"/> 
     /// и их изменения.
     /// </summary>
     public partial class RectanglesValuePanel : UserControl
     {
-        // TODO: XML (+)
         /// <summary>
         /// Массив, состоящий из 5 элементов, класса <see cref="Rectangle"/>.
         /// </summary>
         private Rectangle[] _rectangles = new Rectangle[5];
 
-        // TODO: XML (+)
         /// <summary>
         /// Элемент класса <see cref="Rectangle"/>.
         /// </summary>
@@ -102,7 +99,6 @@ namespace Programming.View.Panels
             _currentRectangle.Color = ColorTextBox.Text;
         }
 
-        // TODO: XML (+)
         /// <summary>
         /// Ищет объект с максимальной шириной в массиве.
         /// </summary>
