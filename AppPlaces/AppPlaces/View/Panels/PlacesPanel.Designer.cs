@@ -36,12 +36,13 @@ namespace AppPlaces.View.Panels
             this.RatingLabel = new System.Windows.Forms.Label();
             this.AddressTextBox = new System.Windows.Forms.TextBox();
             this.SelectecPlaceGroupBox = new System.Windows.Forms.GroupBox();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.RatingTextBox = new System.Windows.Forms.TextBox();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.RatingTextBox = new System.Windows.Forms.TextBox();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
+            this.ApplyButton = new System.Windows.Forms.Button();
             this.SelectecPlaceGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@ namespace AppPlaces.View.Panels
             this.PlacesListBox.Name = "PlacesListBox";
             this.PlacesListBox.Size = new System.Drawing.Size(246, 394);
             this.PlacesListBox.TabIndex = 0;
+            this.PlacesListBox.SelectedIndexChanged += new System.EventHandler(this.PlacesListBox_SelectedIndexChanged);
             // 
             // NameLabel
             // 
@@ -117,14 +119,13 @@ namespace AppPlaces.View.Panels
             this.SelectecPlaceGroupBox.TabStop = false;
             this.SelectecPlaceGroupBox.Text = "Selected Place";
             // 
-            // NameTextBox
+            // CategoryComboBox
             // 
-            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTextBox.Location = new System.Drawing.Point(64, 19);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(424, 20);
-            this.NameTextBox.TabIndex = 12;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(64, 70);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(190, 21);
+            this.CategoryComboBox.TabIndex = 15;
             // 
             // RatingTextBox
             // 
@@ -133,13 +134,14 @@ namespace AppPlaces.View.Panels
             this.RatingTextBox.Size = new System.Drawing.Size(190, 20);
             this.RatingTextBox.TabIndex = 14;
             // 
-            // CategoryComboBox
+            // NameTextBox
             // 
-            this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(64, 70);
-            this.CategoryComboBox.Name = "CategoryComboBox";
-            this.CategoryComboBox.Size = new System.Drawing.Size(190, 21);
-            this.CategoryComboBox.TabIndex = 15;
+            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameTextBox.Location = new System.Drawing.Point(64, 19);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(424, 20);
+            this.NameTextBox.TabIndex = 12;
             // 
             // DeleteButton
             // 
@@ -153,6 +155,7 @@ namespace AppPlaces.View.Panels
             this.DeleteButton.Size = new System.Drawing.Size(49, 46);
             this.DeleteButton.TabIndex = 3;
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // EditButton
             // 
@@ -166,6 +169,7 @@ namespace AppPlaces.View.Panels
             this.EditButton.Size = new System.Drawing.Size(49, 46);
             this.EditButton.TabIndex = 2;
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // AddButton
             // 
@@ -179,11 +183,27 @@ namespace AppPlaces.View.Panels
             this.AddButton.Size = new System.Drawing.Size(49, 46);
             this.AddButton.TabIndex = 1;
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // ApplyButton
+            // 
+            this.ApplyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ApplyButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ApplyButton.FlatAppearance.BorderSize = 0;
+            this.ApplyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ApplyButton.Location = new System.Drawing.Point(168, 403);
+            this.ApplyButton.Name = "ApplyButton";
+            this.ApplyButton.Size = new System.Drawing.Size(49, 46);
+            this.ApplyButton.TabIndex = 13;
+            this.ApplyButton.Text = "Apply";
+            this.ApplyButton.UseVisualStyleBackColor = true;
+            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // PlacesPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ApplyButton);
             this.Controls.Add(this.SelectecPlaceGroupBox);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.EditButton);
@@ -212,5 +232,6 @@ namespace AppPlaces.View.Panels
         private System.Windows.Forms.TextBox RatingTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.ComboBox CategoryComboBox;
+        private System.Windows.Forms.Button ApplyButton;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppPlaces.PlaceModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace PlacesApp.PlaceModel
 {
     /// <summary>
-    /// 
+    /// Хранит данные о заведениях.
     /// </summary>
     class Place
     {
@@ -26,51 +27,48 @@ namespace PlacesApp.PlaceModel
         /// </summary>
         private double _rating;
 
-        //не более 200 символов
         /// <summary>
-        /// 
+        /// Возвращает и задает название. Длина должна быть не более 200 символов.
         /// </summary>
         public string Name
         {
             get => _name;
             set
             {
-                //Validator.AssertOnPositiveValue(value, "Length");
+                Validator.AssertLengthInRange(value.Length, 1, 200, "Name");
 
                 _name = value;
             }
         }
-        //не более 100 символов
+
         /// <summary>
-        /// 
+        /// Возвращает и задает адрес. Длина должна быть не более 100 символов.
         /// </summary>
         public string Address
         {
             get => _address;
             set
             {
-                //Validator.AssertOnPositiveValue(value, "Length");
+                Validator.AssertLengthInRange(value.Length, 1, 100, "Address");
 
                 _address = value;
             }
         }
 
-        //перечисления
         /// <summary>
-        /// 
+        /// Возвращает и задает категорию.
         /// </summary>
         public Category Category { get; set; }
 
-        //вещественное число от 0 до 5
         /// <summary>
-        /// 
+        /// Возвращает и задает рейтинг. Должен состоять только из чисел от 0 до 5.
         /// </summary>
         public double Rating
         {
             get => _rating;
             set
             {
-                //Validator.AssertOnPositiveValue(value, "Length");
+                Validator.AssertValueInRange(value, 0, 5, "Rating");
 
                 _rating = value;
             }
@@ -79,10 +77,10 @@ namespace PlacesApp.PlaceModel
         /// <summary>
         /// Создает экземпляр класса <see cref="Place"/>.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="address"></param>
-        /// <param name="category"></param>
-        /// <param name="rating"></param>
+        /// <param name="name">Название. Длина должна быть не более 200 символов.</param>
+        /// <param name="address">Адрес. Длина должна быть не более 100 символов.</param>
+        /// <param name="category">Категория.</param>
+        /// <param name="rating">Рейтинг. Должен состоять только из чисел от 0 до 5.</param>
         public Place(string name, string address, Category category, double rating)
         {
             Name = name;
