@@ -99,6 +99,7 @@ namespace AppPlaces.View.Panels
             this.AddressTextBox.Name = "AddressTextBox";
             this.AddressTextBox.Size = new System.Drawing.Size(424, 20);
             this.AddressTextBox.TabIndex = 8;
+            this.AddressTextBox.TextChanged += new System.EventHandler(this.AddressTextBox_TextChanged);
             // 
             // SelectecPlaceGroupBox
             // 
@@ -121,11 +122,13 @@ namespace AppPlaces.View.Panels
             // 
             // CategoryComboBox
             // 
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(64, 70);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(190, 21);
             this.CategoryComboBox.TabIndex = 15;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // RatingTextBox
             // 
@@ -133,6 +136,7 @@ namespace AppPlaces.View.Panels
             this.RatingTextBox.Name = "RatingTextBox";
             this.RatingTextBox.Size = new System.Drawing.Size(190, 20);
             this.RatingTextBox.TabIndex = 14;
+            this.RatingTextBox.TextChanged += new System.EventHandler(this.RatingTextBox_TextChanged);
             // 
             // NameTextBox
             // 
@@ -142,6 +146,7 @@ namespace AppPlaces.View.Panels
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(424, 20);
             this.NameTextBox.TabIndex = 12;
+            this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // DeleteButton
             // 
@@ -187,6 +192,7 @@ namespace AppPlaces.View.Panels
             // 
             // ApplyButton
             // 
+            this.ApplyButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_apply_button_100_png;
             this.ApplyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ApplyButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.ApplyButton.FlatAppearance.BorderSize = 0;
@@ -195,7 +201,6 @@ namespace AppPlaces.View.Panels
             this.ApplyButton.Name = "ApplyButton";
             this.ApplyButton.Size = new System.Drawing.Size(49, 46);
             this.ApplyButton.TabIndex = 13;
-            this.ApplyButton.Text = "Apply";
             this.ApplyButton.UseVisualStyleBackColor = true;
             this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 

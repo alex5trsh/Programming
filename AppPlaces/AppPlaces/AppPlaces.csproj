@@ -92,7 +92,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Places.txt" />
+    <None Include="Resources\place_apply_button_100.png.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\place_add_button_100.png.png" />
   </ItemGroup>
