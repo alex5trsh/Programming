@@ -6,38 +6,39 @@ using System.Threading.Tasks;
 
 namespace PlacesApp.PlaceModel
 {
+ 
     /// <summary>
     /// Предоставляет шаблоны категорий заведений.
     /// </summary>
-    enum Category
+    public enum Category
     {
         /// <summary>
         /// Муниципильное.
         /// </summary>
-        Муниципильное,
+        Municipal,
         /// <summary>
         /// Кафе.
         /// </summary>
-        Кафе,
+        Cafe,
         /// <summary>
         /// Клуб.
         /// </summary>
-        Клуб,
+        Club,
         /// <summary>
         /// Музей.
         /// </summary>
-        Музей,
+        Museum,
         /// <summary>
-        /// УчебноеЗаведение.
+        /// Учебное.
         /// </summary>
-        УчебноеЗаведение,
+        Еducational,
         /// <summary>
         /// Театр.
         /// </summary>
-        Театр,
+        Theatre,
         /// <summary>
         /// Библиотека.
         /// </summary>
-        Библиотека
+        Library
     }
 }

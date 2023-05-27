@@ -29,6 +29,7 @@ namespace AppPlaces.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PlacesPanel = new AppPlaces.View.Panels.PlacesPanel();
             this.SuspendLayout();
             // 
@@ -46,6 +47,7 @@ namespace AppPlaces.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(825, 459);
             this.Controls.Add(this.PlacesPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(841, 498);
             this.Name = "MainForm";
             this.Text = "AppPlaces";

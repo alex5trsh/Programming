@@ -9,41 +9,55 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.Json;
 
 namespace AppPlaces.View.Panels
 {
+    /// <summary>
+    /// Предоставляет методы вывода даных текущего элемента, его изменения, удаления, добавления,
+    /// а также сортировки всех элементов.
+    /// </summary>
     public partial class PlacesPanel : UserControl
     {
-        string path = "C:/Users/User/source/repos/Programming/AppPlaces/AppPlaces/Places.txt";
-
+        /// <summary>
+        /// Коллекция элементов класс <see cref="Place"/>.
+        /// </summary>
         List<Place> _places = new List<Place>();
 
+        /// <summary>
+        /// Текущий элемент класса <see cref="Place"/>.
+        /// </summary>
         Place _currentPlace= new Place();
 
+        /// <summary>
+        /// Индекс текущего элемента.
+        /// </summary>
         int _index;
 
+        /// <summary>
+        /// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>. 
+        /// Должен быть равен 1 или 0.
+        /// </summary>
         int _flagClickedButton=0;
+
+        /// <summary>
+        /// Файл, хранящий объекты класса <see cref="Place"/>.
+        /// </summary>
+        string filePlaces = "Places.json";
 
         public PlacesPanel()
         {
             InitializeComponent();
 
-
-            using (StreamReader reader = new StreamReader(path))
+            if (File.Exists(filePlaces))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] _splitLine = line.Split(' ');
-                    string _originalName = _splitLine[0];
-                    string _originalAddress = _splitLine[1];
-                    Category _originalCategory = (Category)Enum.Parse(typeof(Category), _splitLine[2]);
-                    double _originalRating = Convert.ToDouble(_splitLine[3]);
-                    Place _originalPlace = new Place(_originalName, _originalAddress,
-                        _originalCategory, _originalRating);
-                    _places.Add(_originalPlace);
-                    PlacesListBox.Items.Add(_originalPlace.Category + " - " + _originalPlace.Name);
-                }
+                    var _placesString = File.ReadAllText(filePlaces);
+                    _places = JsonSerializer.Deserialize<List<Place>>(_placesString);
+
+                    foreach (var value in _places)
+                    {
+                        PlacesListBox.Items.Add(value.Category + " - " + value.Name);
+                    } 
             }
 
             var categories = Enum.GetValues(typeof(Category));
@@ -69,7 +83,7 @@ namespace AppPlaces.View.Panels
         private void EditButton_Click(object sender, EventArgs e)
         {
             Place _copyPlace = new Place(_currentPlace.Name, _currentPlace.Address,
-            _currentPlace.Category,_currentPlace.Rating);
+            _currentPlace.Category, _currentPlace.Rating);
             _currentPlace.Name = _copyPlace.Name;
             _currentPlace.Address = _copyPlace.Address;
             _currentPlace.Category = _copyPlace.Category;
@@ -82,31 +96,32 @@ namespace AppPlaces.View.Panels
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-           
-            //    using (StreamWriter writer = new StreamWriter(path, true))
-            //    {
-            //        writer.WriteLine(_newPlace.Name + " " + _newPlace.Address + " " + _newPlace.Category
-            //            + " " + _newPlace.Rating);
-            //    }
             if(_index==-1)
             {
                 _places.Add(_currentPlace);
                 PlacesListBox.Items.Add(_currentPlace.Category + " - " + _currentPlace.Name);
+                string _placesString = JsonSerializer.Serialize(_places);
+                File.WriteAllText(filePlaces, _placesString);
 
                 ApplyButton.Visible = false;
                 _flagClickedButton = 0;
 
             }
+
             if (_index>=0)
             {
                 _places[_index] = _currentPlace;
                 PlacesListBox.Items[_index] = (_currentPlace.Category + " - "
                 + _currentPlace.Name);
-                
+                string _placesString = JsonSerializer.Serialize(_places);
+                File.WriteAllText(filePlaces, _placesString);
+
 
                 ApplyButton.Visible = false;
                 _flagClickedButton = 0;
             }
+
+            SortedPlaces(_places);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -117,6 +132,8 @@ namespace AppPlaces.View.Panels
                 PlacesListBox.Items.RemoveAt(choosenIndex);
                 _places.RemoveAt(choosenIndex);
                 ClearPlacesInfo();
+                string _placesString = JsonSerializer.Serialize(_places);
+                File.WriteAllText(filePlaces, _placesString);
             }
         }
 
@@ -151,7 +168,6 @@ namespace AppPlaces.View.Panels
             }
 
         }
-        //может быть так что текстбоксы изменяют без нажатия кнопки edit или add
 
         private void AddressTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -232,10 +248,58 @@ namespace AppPlaces.View.Panels
         {
             NameTextBox.Clear();
             AddressTextBox.Clear();
-            CategoryComboBox.Text = null;
+            CategoryComboBox.Text=null;
             RatingTextBox.Clear();
         }
 
+        /// <summary>
+        /// Сортирует все объекты в <see cref="PlacesListBox"/> по <see cref="Place.Category"/>,
+        /// а внутри <see cref="Place.Category"/> сортирует по <see cref="Place.Name"/>.
+        /// </summary>
+        /// <param name="places">Коллекция, содержащая объекты, которые необходимо 
+        /// отсортировать. </param>
+        private void SortedPlaces(List<Place> places)
+        { 
+            for (int i = 0; i < places.Count; i++)
+            {
+                for (int j = i+1; j < places.Count; j++)
+                {
+                    string _firstCategory = Convert.ToString(places[i].Category);
+                    string _secondCategory = Convert.ToString(places[j].Category);
+                    if (String.Compare(_firstCategory, _secondCategory) > 0)
+                    {
+                        Place temp = places[j];
+                        places[j] = places[i];
+                        places[i] = temp;
+                        PlacesListBox.Items[i] = (places[i].Category + " - "
+                         + places[i].Name);
+                        PlacesListBox.Items[j] = (places[j].Category + " - "
+                         + places[j].Name);
+                    }
+                    else
+                    {
+                        if (String.Compare(_firstCategory, _secondCategory) == 0)
+                        {
+                            string _firstName =places[i].Name;
+                            string _secondName = places[j].Name;
+                            if (String.Compare(_firstName, _secondName) > 0)
+                            {
+                                Place temp = places[j];
+                                places[j] = places[i];
+                                places[i] = temp;
+                                PlacesListBox.Items[i] = (places[i].Category + " - "
+                                 + places[i].Name);
+                                PlacesListBox.Items[j] = (places[j].Category + " - "
+                                 + places[j].Name);
+                            }
+                        }
+                    }
+                }
+            }
+                    
+            
+        }
+        //
         
     }
 }

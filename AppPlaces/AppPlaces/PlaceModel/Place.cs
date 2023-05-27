@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PlacesApp.PlaceModel
@@ -10,7 +11,7 @@ namespace PlacesApp.PlaceModel
     /// <summary>
     /// Хранит данные о заведениях.
     /// </summary>
-    class Place
+     class Place
     {
         /// <summary>
         /// Название.
@@ -55,6 +56,7 @@ namespace PlacesApp.PlaceModel
             }
         }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         /// <summary>
         /// Возвращает и задает категорию.
         /// </summary>
@@ -85,7 +87,7 @@ namespace PlacesApp.PlaceModel
         {
             Name = name;
             Address = address;
-            Category = category;
+            Category =category;
             Rating = rating;
         }
 

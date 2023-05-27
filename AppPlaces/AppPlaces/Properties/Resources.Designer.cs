@@ -63,6 +63,16 @@ namespace AppPlaces.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AppPlaces_icon_100_png {
+            get {
+                object obj = ResourceManager.GetObject("AppPlaces_icon_100.png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap place_add_button_100_png {
             get {
                 object obj = ResourceManager.GetObject("place_add_button_100.png", resourceCulture);
