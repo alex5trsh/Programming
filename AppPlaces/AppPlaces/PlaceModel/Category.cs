@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlacesApp.PlaceModel
+namespace AppPlaces.PlaceModel
 {
  
     /// <summary>
@@ -12,10 +12,6 @@ namespace PlacesApp.PlaceModel
     /// </summary>
     public enum Category
     {
-        /// <summary>
-        /// Муниципильное.
-        /// </summary>
-        Municipal,
         /// <summary>
         /// Кафе.
         /// </summary>
@@ -29,16 +25,72 @@ namespace PlacesApp.PlaceModel
         /// </summary>
         Museum,
         /// <summary>
-        /// Учебное.
-        /// </summary>
-        Еducational,
-        /// <summary>
         /// Театр.
         /// </summary>
         Theatre,
         /// <summary>
         /// Библиотека.
         /// </summary>
-        Library
+        Library,
+        /// <summary>
+        /// Супермаркет
+        /// </summary>
+        Supermarket,
+        /// <summary>
+        /// Бар
+        /// </summary>
+        Bar,
+        /// <summary>
+        /// Аптека
+        /// </summary>
+        Pharmacy,
+        /// <summary>
+        /// Ресторан
+        /// </summary>
+        Restaurant,
+        /// <summary>
+        /// Парикмахерская
+        /// </summary>
+        Barbershop,
+        /// <summary>
+        /// Университет
+        /// </summary>
+        University,
+        /// <summary>
+        /// Школа
+        /// </summary>
+        School,
+        /// <summary>
+        /// Колледж
+        /// </summary>
+        College,
+        /// <summary>
+        /// Стадион
+        /// </summary>
+        Stadium,
+        /// <summary>
+        /// Парк
+        /// </summary>
+        Park,
+        /// <summary>
+        /// Аэропорт
+        /// </summary>
+        Airport,
+        /// <summary>
+        /// Заповедник
+        /// </summary>
+        Reserve,
+        /// <summary>
+        ///Банк 
+        /// </summary>
+        Bank,
+        /// <summary>
+        /// Зоопарк
+        /// </summary>
+        Zoo,
+        /// <summary>
+        /// Гостиница
+        /// </summary>
+        Hotel
     }
 }

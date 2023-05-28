@@ -17,9 +17,5 @@ namespace AppPlaces.View
             InitializeComponent();
         }
 
-        private void PlacesPanel_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

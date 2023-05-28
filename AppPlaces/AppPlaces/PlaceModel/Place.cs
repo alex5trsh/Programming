@@ -6,12 +6,12 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace PlacesApp.PlaceModel
+namespace AppPlaces.PlaceModel
 {
     /// <summary>
     /// Хранит данные о заведениях.
     /// </summary>
-     class Place
+     public class Place
     {
         /// <summary>
         /// Название.

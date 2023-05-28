@@ -1,5 +1,4 @@
-﻿using PlacesApp.PlaceModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Text.Json;
+using AppPlaces.PlaceModel;
 
 namespace AppPlaces.View.Panels
 {
@@ -41,24 +41,25 @@ namespace AppPlaces.View.Panels
         int _flagClickedButton=0;
 
         /// <summary>
+        /// Путь к файлу <see cref="_fileName"/>.
+        /// </summary>
+        private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
+            ApplicationData)+ "AppPlaces";
+
+        /// <summary>
         /// Файл, хранящий объекты класса <see cref="Place"/>.
         /// </summary>
-        string filePlaces = "Places.json";
+        private string _fileName = "Places.json";
 
         public PlacesPanel()
         {
             InitializeComponent();
 
-            if (File.Exists(filePlaces))
+            _places=ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
+            foreach (var value in _places)
             {
-                    var _placesString = File.ReadAllText(filePlaces);
-                    _places = JsonSerializer.Deserialize<List<Place>>(_placesString);
-
-                    foreach (var value in _places)
-                    {
-                        PlacesListBox.Items.Add(value.Category + " - " + value.Name);
-                    } 
-            }
+                PlacesListBox.Items.Add(value.Category + " - " + value.Name);
+            } 
 
             var categories = Enum.GetValues(typeof(Category));
             foreach (var value in categories)
@@ -100,8 +101,7 @@ namespace AppPlaces.View.Panels
             {
                 _places.Add(_currentPlace);
                 PlacesListBox.Items.Add(_currentPlace.Category + " - " + _currentPlace.Name);
-                string _placesString = JsonSerializer.Serialize(_places);
-                File.WriteAllText(filePlaces, _placesString);
+                ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
 
                 ApplyButton.Visible = false;
                 _flagClickedButton = 0;
@@ -113,15 +113,13 @@ namespace AppPlaces.View.Panels
                 _places[_index] = _currentPlace;
                 PlacesListBox.Items[_index] = (_currentPlace.Category + " - "
                 + _currentPlace.Name);
-                string _placesString = JsonSerializer.Serialize(_places);
-                File.WriteAllText(filePlaces, _placesString);
-
+                ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
 
                 ApplyButton.Visible = false;
                 _flagClickedButton = 0;
             }
 
-            SortedPlaces(_places);
+            SortPlaces(_places);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -132,8 +130,7 @@ namespace AppPlaces.View.Panels
                 PlacesListBox.Items.RemoveAt(choosenIndex);
                 _places.RemoveAt(choosenIndex);
                 ClearPlacesInfo();
-                string _placesString = JsonSerializer.Serialize(_places);
-                File.WriteAllText(filePlaces, _placesString);
+                ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
             }
         }
 
@@ -163,10 +160,9 @@ namespace AppPlaces.View.Panels
                 }
                 catch
                 {
-                    NameTextBox.BackColor = Color.Red;
+                    NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                 }
             }
-
         }
 
         private void AddressTextBox_TextChanged(object sender, EventArgs e)
@@ -184,7 +180,7 @@ namespace AppPlaces.View.Panels
                 }
                 catch
                 {
-                    AddressTextBox.BackColor = Color.Red;
+                    AddressTextBox.BackColor = Color.FromArgb(205, 92, 92);
                 }
             }
         }
@@ -195,16 +191,18 @@ namespace AppPlaces.View.Panels
             {
                 try
                 {
-                    if (_currentPlace.Category != (Category)Enum.Parse(typeof(Category), CategoryComboBox.Text))
+                    if (_currentPlace.Category != (Category)Enum.Parse(typeof(Category),
+                            CategoryComboBox.Text))
                     {
-                        _currentPlace.Category = (Category)Enum.Parse(typeof(Category), CategoryComboBox.Text);
+                        _currentPlace.Category = (Category)Enum.Parse(typeof(Category), 
+                            CategoryComboBox.Text);
                     }
 
                     CategoryComboBox.BackColor = Color.White;
                 }
                 catch
                 {
-                    CategoryComboBox.BackColor = Color.Red;
+                    CategoryComboBox.BackColor = Color.FromArgb(205, 92, 92);
                 }
             }
         }
@@ -224,7 +222,7 @@ namespace AppPlaces.View.Panels
                 }
                 catch
                 {
-                    RatingTextBox.BackColor = Color.Red;
+                    RatingTextBox.BackColor = Color.FromArgb(205, 92, 92);
                 }
             }
         }
@@ -232,7 +230,7 @@ namespace AppPlaces.View.Panels
         /// <summary>
         /// Обновляет данные по указанному объекту в текстовых полях.
         /// </summary>
-        /// <param name="rectangle">Название объекта, данные которого необходимо обновить.</param>
+        /// <param name="place">Название объекта, данные которого необходимо обновить.</param>
         private void UpdatePlaceInfo(Place place)
         {
             NameTextBox.Text = place.Name;
@@ -258,7 +256,7 @@ namespace AppPlaces.View.Panels
         /// </summary>
         /// <param name="places">Коллекция, содержащая объекты, которые необходимо 
         /// отсортировать. </param>
-        private void SortedPlaces(List<Place> places)
+        private void SortPlaces(List<Place> places)
         { 
             for (int i = 0; i < places.Count; i++)
             {
@@ -266,6 +264,7 @@ namespace AppPlaces.View.Panels
                 {
                     string _firstCategory = Convert.ToString(places[i].Category);
                     string _secondCategory = Convert.ToString(places[j].Category);
+
                     if (String.Compare(_firstCategory, _secondCategory) > 0)
                     {
                         Place temp = places[j];
@@ -295,11 +294,7 @@ namespace AppPlaces.View.Panels
                         }
                     }
                 }
-            }
-                    
-            
+            }   
         }
-        //
-        
     }
 }
