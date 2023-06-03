@@ -30,6 +30,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\AppPlaces\AppPlaces\bin\Debug\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\AppPlaces\AppPlaces\bin\Debug\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\AppPlaces\AppPlaces\bin\Debug\*.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
