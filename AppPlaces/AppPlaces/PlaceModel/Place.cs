@@ -56,10 +56,10 @@ namespace AppPlaces.PlaceModel
             }
         }
 
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         /// <summary>
         /// Возвращает и задает категорию.
         /// </summary>
+		[JsonConverter(typeof(JsonStringEnumConverter))]
         public Category Category { get; set; }
 
         /// <summary>

@@ -19,6 +19,7 @@ namespace AppPlaces.View.Panels
     /// </summary>
     public partial class PlacesPanel : UserControl
     {
+	    // TODO: модификаторы доступа
         /// <summary>
         /// Коллекция элементов класс <see cref="Place"/>.
         /// </summary>
@@ -29,16 +30,18 @@ namespace AppPlaces.View.Panels
         /// </summary>
         Place _currentPlace= new Place();
 
-        /// <summary>
-        /// Индекс текущего элемента.
-        /// </summary>
-        int _index;
+		// TODO: _currentIndex
+		/// <summary>
+		/// Индекс текущего элемента.
+		/// </summary>
+		int _index;
 
-        /// <summary>
-        /// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>. 
-        /// Должен быть равен 1 или 0.
-        /// </summary>
-        int _flagClickedButton=0;
+		// TODO: сделать bool
+		/// <summary>
+		/// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>. 
+		/// Должен быть равен 1 или 0.
+		/// </summary>
+		int _flagClickedButton =0;
 
         /// <summary>
         /// Путь к файлу <see cref="_fileName"/>.
@@ -126,6 +129,7 @@ namespace AppPlaces.View.Panels
         {
             if (PlacesListBox.SelectedIndex >= 0 && PlacesListBox != null)
             {
+                // TODO: грамматическая ошибка
                 int choosenIndex = PlacesListBox.SelectedIndex;
                 PlacesListBox.Items.RemoveAt(choosenIndex);
                 _places.RemoveAt(choosenIndex);
@@ -275,8 +279,9 @@ namespace AppPlaces.View.Panels
                         PlacesListBox.Items[j] = (places[j].Category + " - "
                          + places[j].Name);
                     }
-                    else
-                    {
+					// TODO: else if {ваш код}
+					else
+					{
                         if (String.Compare(_firstCategory, _secondCategory) == 0)
                         {
                             string _firstName =places[i].Name;
