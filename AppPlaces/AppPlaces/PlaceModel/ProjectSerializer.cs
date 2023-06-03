@@ -25,11 +25,10 @@ namespace AppPlaces.PlaceModel
             {
                 Directory.CreateDirectory(directoryPath);
             }
-            else
-            {
+
                 string _placesString = JsonSerializer.Serialize(places);
                 File.WriteAllText($"{directoryPath}/{fileName}", _placesString);
-            }
+
         }
 
         /// <summary>

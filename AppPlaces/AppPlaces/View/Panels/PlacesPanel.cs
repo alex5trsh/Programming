@@ -44,7 +44,7 @@ namespace AppPlaces.View.Panels
         /// Путь к файлу <see cref="_fileName"/>.
         /// </summary>
         private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
-            ApplicationData)+ "AppPlaces";
+            ApplicationData)+"\\AppPlaces";
 
         /// <summary>
         /// Файл, хранящий объекты класса <see cref="Place"/>.
