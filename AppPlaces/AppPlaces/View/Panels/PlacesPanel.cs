@@ -35,10 +35,11 @@ namespace AppPlaces.View.Panels
         int _index;
 
         /// <summary>
-        /// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>. 
-        /// Должен быть равен 1 или 0.
+        /// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>.
+        /// True если одна из кнопок нажата, false если ни одна из кнопок не нажата.
         /// </summary>
-        int _flagClickedButton=0;
+        bool _isButtonClicked = false;
+
 
         /// <summary>
         /// Путь к файлу <see cref="_fileName"/>.
@@ -51,11 +52,17 @@ namespace AppPlaces.View.Panels
         /// </summary>
         private string _fileName = "Places.json";
 
+        /// <summary>
+        /// Копия текущего элемента класса <see cref="Place"/>.
+        /// </summary>
+        Place _copyPlace = new Place();
+
+
         public PlacesPanel()
         {
             InitializeComponent();
 
-            _places=ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
+            _places =ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
             foreach (var value in _places)
             {
                 PlacesListBox.Items.Add(value.Category + " - " + value.Name);
@@ -68,58 +75,80 @@ namespace AppPlaces.View.Panels
             }
 
             ApplyButton.Visible = false;
-        }
+            CancelButton.Visible = false;
+            NameErrorLabel.Visible = false;
+            AddressErrorLabel.Visible = false;
+            CategoryErrorLabel.Visible = false;
+            RatingErrorLabel.Visible = false;
 
+            AccessTextBox(false);
+        }
+        
         private void AddButton_Click(object sender, EventArgs e)
         {
-            ClearPlacesInfo();
+            NameTextBox.Text = "New Name";
+            AddressTextBox.Text = "New Address";
+            CategoryComboBox.SelectedIndex = 0;
+            RatingTextBox.Text = "0";
             _index = -1;
-            _currentPlace = new Place();
+            _isButtonClicked = true;
 
-            ApplyButton.Visible = true;
-            _flagClickedButton = 1;
-
+            PlacesListBox.Enabled = false;
+            AccessTextBox(true);
+            UnhideButtons(false);
         }
+
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            Place _copyPlace = new Place(_currentPlace.Name, _currentPlace.Address,
-            _currentPlace.Category, _currentPlace.Rating);
-            _currentPlace.Name = _copyPlace.Name;
-            _currentPlace.Address = _copyPlace.Address;
-            _currentPlace.Category = _copyPlace.Category;
-            _currentPlace.Rating = _copyPlace.Rating;
+            if (PlacesListBox.Items.Count!=0 && PlacesListBox.SelectedIndex>=0)
+            {
+                _copyPlace.Name=_currentPlace.Name;
+                _copyPlace.Address = _currentPlace.Address;
+                _copyPlace.Category = _currentPlace.Category;
+                _copyPlace.Rating = _currentPlace.Rating;
 
-            ApplyButton.Visible = true;
-            _flagClickedButton = 1;
+                _isButtonClicked = true;
+                PlacesListBox.Enabled = false;
+                AccessTextBox(true);
+                UnhideButtons(false);
+            }
 
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            if(_index==-1)
+            if (_index == -1)
             {
                 _places.Add(_currentPlace);
                 PlacesListBox.Items.Add(_currentPlace.Category + " - " + _currentPlace.Name);
-                ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
-
-                ApplyButton.Visible = false;
-                _flagClickedButton = 0;
-
             }
 
-            if (_index>=0)
+            if (_index >= 0 && _currentPlace != _copyPlace)
             {
                 _places[_index] = _currentPlace;
                 PlacesListBox.Items[_index] = (_currentPlace.Category + " - "
                 + _currentPlace.Name);
-                ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
-
-                ApplyButton.Visible = false;
-                _flagClickedButton = 0;
             }
+            _copyPlace.Name = _currentPlace.Name;
+            _copyPlace.Address = _currentPlace.Address;
+            _copyPlace.Category = _currentPlace.Category;
+            _copyPlace.Rating = _currentPlace.Rating;
 
             SortPlaces(_places);
+            //TODO: в листбоксе должен выделяться созданный/измененный объект
+            for (int i = 0; i < _places.Count; i++)
+            {
+                if (_places[i] == _copyPlace)
+                {
+                    PlacesListBox.SelectedIndex = i;
+                }
+            }
+            ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
+            _isButtonClicked = false;
+            PlacesListBox.Enabled = true;
+            AccessTextBox(false);
+            UnhideButtons(true);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -134,6 +163,35 @@ namespace AppPlaces.View.Panels
             }
         }
 
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            _isButtonClicked = false;
+            PlacesListBox.Enabled = true;
+            UnhideButtons(true);
+            AccessTextBox(false);
+            if (_index>=0)
+            {
+                _currentPlace.Name = _copyPlace.Name;
+                _currentPlace.Address = _copyPlace.Address;
+                _currentPlace.Category = _copyPlace.Category;
+                _currentPlace.Rating = _copyPlace.Rating;
+                PlacesListBox.SelectedIndex = _places.IndexOf(_currentPlace);
+                UpdatePlaceInfo(_currentPlace);
+            }
+            else
+            {
+                ClearPlacesInfo();
+                NameTextBox.BackColor = Color.White;
+                AddressTextBox.BackColor = Color.White;
+                CategoryComboBox.BackColor = Color.White;
+                RatingTextBox.BackColor = Color.White;
+                NameErrorLabel.Visible = false;
+                AddressErrorLabel.Visible = false;
+                CategoryErrorLabel.Visible = false;
+                RatingErrorLabel.Visible = false;
+            } 
+        }
+
 
         private void PlacesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -146,84 +204,117 @@ namespace AppPlaces.View.Panels
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (_flagClickedButton == 1)
+        { 
+            try
             {
-                try
+                if (_currentPlace.Name != NameTextBox.Text)
                 {
-                    if (_currentPlace.Name != NameTextBox.Text)
-                    {
-                        _currentPlace.Name = NameTextBox.Text;
-                    }
-
-                    NameTextBox.BackColor = Color.White;
+                    _currentPlace.Name = NameTextBox.Text;
                 }
-                catch
+
+                if (_isButtonClicked == true)
                 {
+                    ApplyButton.Visible = true;
+                }
+                
+                NameTextBox.BackColor = Color.White;
+                NameErrorLabel.Visible = false;
+                
+            }
+            catch
+            {
+                ApplyButton.Visible = false;
+                if (NameTextBox.Enabled == true)
+                { 
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
+                    NameErrorLabel.Visible = true;
                 }
             }
         }
 
         private void AddressTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (_flagClickedButton == 1)
+            try
             {
-                try
+                if (_currentPlace.Address != AddressTextBox.Text)
                 {
-                    if (_currentPlace.Address != AddressTextBox.Text)
-                    {
-                        _currentPlace.Address = AddressTextBox.Text;
-                    }
-
-                    AddressTextBox.BackColor = Color.White;
+                    _currentPlace.Address = AddressTextBox.Text;
                 }
-                catch
+
+                if (_isButtonClicked == true)
+                {
+                    ApplyButton.Visible = true;
+                }
+
+                AddressTextBox.BackColor = Color.White;
+                AddressErrorLabel.Visible = false;
+            }
+            catch
+            {
+                ApplyButton.Visible = false;
+                if (AddressTextBox.Enabled == true)
                 {
                     AddressTextBox.BackColor = Color.FromArgb(205, 92, 92);
+                    AddressErrorLabel.Visible = true;
                 }
             }
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (_flagClickedButton == 1)
+            try
             {
-                try
+                if (_currentPlace.Category != (Category)Enum.Parse(typeof(Category),
+                        CategoryComboBox.Text))
                 {
-                    if (_currentPlace.Category != (Category)Enum.Parse(typeof(Category),
-                            CategoryComboBox.Text))
-                    {
-                        _currentPlace.Category = (Category)Enum.Parse(typeof(Category), 
-                            CategoryComboBox.Text);
-                    }
-
-                    CategoryComboBox.BackColor = Color.White;
+                    _currentPlace.Category = (Category)Enum.Parse(typeof(Category),
+                        CategoryComboBox.Text);
                 }
-                catch
+
+                if (_isButtonClicked == true)
+                {
+                    ApplyButton.Visible = true;
+                }
+                CategoryComboBox.BackColor = Color.White;
+                CategoryErrorLabel.Visible = false;
+            }
+            catch
+            {
+                ApplyButton.Visible = false;
+                if (CategoryComboBox.Enabled == true)
                 {
                     CategoryComboBox.BackColor = Color.FromArgb(205, 92, 92);
+                    CategoryErrorLabel.Visible = true;
                 }
             }
         }
 
         private void RatingTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (_flagClickedButton == 1)
+       {
+            try
             {
-                try
+                if (_currentPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
                 {
-                    if (_currentPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
-                    {
-                        _currentPlace.Rating = Convert.ToDouble(RatingTextBox.Text);
-                    }
-
-                    RatingTextBox.BackColor = Color.White;
+                    _currentPlace.Rating = Convert.ToDouble(RatingTextBox.Text);
                 }
-                catch
+
+                if (_isButtonClicked == true)
+                {
+                    ApplyButton.Visible = true;
+                }
+
+                RatingTextBox.BackColor = Color.White;
+                RatingErrorLabel.Visible = false;
+            }
+            catch
+            {
+                ApplyButton.Visible = false;
+                if (RatingTextBox.Enabled == true)
                 {
                     RatingTextBox.BackColor = Color.FromArgb(205, 92, 92);
+                    RatingErrorLabel.Visible = true;
                 }
+                
             }
         }
 
@@ -268,8 +359,10 @@ namespace AppPlaces.View.Panels
                     if (String.Compare(_firstCategory, _secondCategory) > 0)
                     {
                         Place temp = places[j];
-                        places[j] = places[i];
-                        places[i] = temp;
+                        places.RemoveAt(j);
+                        places.Insert(j, places[i]);
+                        places.RemoveAt(i);
+                        places.Insert(i, temp);
                         PlacesListBox.Items[i] = (places[i].Category + " - "
                          + places[i].Name);
                         PlacesListBox.Items[j] = (places[j].Category + " - "
@@ -284,8 +377,10 @@ namespace AppPlaces.View.Panels
                             if (String.Compare(_firstName, _secondName) > 0)
                             {
                                 Place temp = places[j];
-                                places[j] = places[i];
-                                places[i] = temp;
+                                places.RemoveAt(j);
+                                places.Insert(j, places[i]);
+                                places.RemoveAt(i);
+                                places.Insert(i,temp);
                                 PlacesListBox.Items[i] = (places[i].Category + " - "
                                  + places[i].Name);
                                 PlacesListBox.Items[j] = (places[j].Category + " - "
@@ -296,5 +391,31 @@ namespace AppPlaces.View.Panels
                 }
             }   
         }
+
+        /// <summary>
+        /// Задает свойство видимости для кнопок.
+        /// </summary>
+        /// <param name="flag">Значение свойства видимости. Равно true или false.</param>
+        private void UnhideButtons(bool flag)
+        {
+            AddButton.Visible = flag;
+            EditButton.Visible = flag;
+            DeleteButton.Visible = flag;
+            ApplyButton.Visible = !flag;
+            CancelButton.Visible = !flag;
+        }
+
+        /// <summary>
+        /// Задает свойство доступа для текстбоков. 
+        /// </summary>
+        /// <param name="flag">Значение свойства доступа. Равно true или false.</param>
+        private void AccessTextBox(bool flag)
+        {
+            NameTextBox.Enabled = flag;
+            AddressTextBox.Enabled = flag;
+            CategoryComboBox.Enabled = flag;
+            RatingTextBox.Enabled = flag;
+        }
+        
     }
 }

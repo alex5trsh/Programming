@@ -93,6 +93,16 @@ namespace AppPlaces.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap place_cancel_button_100_png {
+            get {
+                object obj = ResourceManager.GetObject("place_cancel_button_100.png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap place_delete_button_100_png {
             get {
                 object obj = ResourceManager.GetObject("place_delete_button_100.png", resourceCulture);
