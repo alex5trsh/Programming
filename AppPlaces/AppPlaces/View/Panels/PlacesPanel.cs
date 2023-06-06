@@ -19,28 +19,28 @@ namespace AppPlaces.View.Panels
     /// </summary>
     public partial class PlacesPanel : UserControl
     {
-	    // TODO: модификаторы доступа
+	    // TODO: модификаторы доступа(+)
         /// <summary>
         /// Коллекция элементов класс <see cref="Place"/>.
         /// </summary>
-        List<Place> _places = new List<Place>();
+        private List<Place> _places = new List<Place>();
 
         /// <summary>
         /// Текущий элемент класса <see cref="Place"/>.
         /// </summary>
-        Place _currentPlace= new Place();
+        private Place _currentPlace= new Place();
 
-		// TODO: _currentIndex
+		// TODO: _currentIndex(+)
 		/// <summary>
 		/// Индекс текущего элемента.
 		/// </summary>
-		int _index;
+		private int _currentIndex;
 
         /// <summary>
         /// Флаг нажатия на кнопку <see cref="AddButton"/> или <see cref="EditButton"/>.
         /// True если одна из кнопок нажата, false если ни одна из кнопок не нажата.
         /// </summary>
-        bool _isButtonClicked = false;
+        private bool _isButtonClicked = false;
 
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace AppPlaces.View.Panels
         /// <summary>
         /// Копия текущего элемента класса <see cref="Place"/>.
         /// </summary>
-        Place _copyPlace = new Place();
+        private Place _copyPlace = new Place();
 
 
         public PlacesPanel()
@@ -92,7 +92,7 @@ namespace AppPlaces.View.Panels
             AddressTextBox.Text = "New Address";
             CategoryComboBox.SelectedIndex = 0;
             RatingTextBox.Text = "0";
-            _index = -1;
+            _currentIndex = -1;
             _isButtonClicked = true;
 
             PlacesListBox.Enabled = false;
@@ -100,45 +100,33 @@ namespace AppPlaces.View.Panels
             UnhideButtons(false);
         }
 
-
         private void EditButton_Click(object sender, EventArgs e)
         {
             if (PlacesListBox.Items.Count!=0 && PlacesListBox.SelectedIndex>=0)
             {
-                _copyPlace.Name=_currentPlace.Name;
-                _copyPlace.Address = _currentPlace.Address;
-                _copyPlace.Category = _currentPlace.Category;
-                _copyPlace.Rating = _currentPlace.Rating;
-
                 _isButtonClicked = true;
                 PlacesListBox.Enabled = false;
                 AccessTextBox(true);
                 UnhideButtons(false);
             }
-
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            if (_index == -1)
+            if (_currentIndex == -1)
             {
-                _places.Add(_currentPlace);
-                PlacesListBox.Items.Add(_currentPlace.Category + " - " + _currentPlace.Name);
+                _places.Add(_copyPlace);
+                PlacesListBox.Items.Add(_copyPlace.Category + " - " + _copyPlace.Name);
             }
 
-            if (_index >= 0 && _currentPlace != _copyPlace)
+            if (_currentIndex >= 0 && _copyPlace != _currentPlace)
             {
-                _places[_index] = _currentPlace;
-                PlacesListBox.Items[_index] = (_currentPlace.Category + " - "
-                + _currentPlace.Name);
+                _places[_currentIndex] = _copyPlace;
+                PlacesListBox.Items[_currentIndex] = (_copyPlace.Category + " - "
+                + _copyPlace.Name);
             }
-            _copyPlace.Name = _currentPlace.Name;
-            _copyPlace.Address = _currentPlace.Address;
-            _copyPlace.Category = _currentPlace.Category;
-            _copyPlace.Rating = _currentPlace.Rating;
-
             SortPlaces(_places);
-            //TODO: в листбоксе должен выделяться созданный/измененный объект
+            //в листбоксе должен быть выделен созданный/измененный объект
             for (int i = 0; i < _places.Count; i++)
             {
                 if (_places[i] == _copyPlace)
@@ -157,10 +145,10 @@ namespace AppPlaces.View.Panels
         {
             if (PlacesListBox.SelectedIndex >= 0 && PlacesListBox != null)
             {
-                // TODO: грамматическая ошибка
-                int choosenIndex = PlacesListBox.SelectedIndex;
-                PlacesListBox.Items.RemoveAt(choosenIndex);
-                _places.RemoveAt(choosenIndex);
+                // TODO: грамматическая ошибка(+)
+                int chosenIndex = PlacesListBox.SelectedIndex;
+                PlacesListBox.Items.RemoveAt(chosenIndex);
+                _places.RemoveAt(chosenIndex);
                 ClearPlacesInfo();
                 ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
             }
@@ -172,18 +160,15 @@ namespace AppPlaces.View.Panels
             PlacesListBox.Enabled = true;
             UnhideButtons(true);
             AccessTextBox(false);
-            if (_index>=0)
+            if (_currentIndex >= 0)
             {
-                _currentPlace.Name = _copyPlace.Name;
-                _currentPlace.Address = _copyPlace.Address;
-                _currentPlace.Category = _copyPlace.Category;
-                _currentPlace.Rating = _copyPlace.Rating;
                 PlacesListBox.SelectedIndex = _places.IndexOf(_currentPlace);
                 UpdatePlaceInfo(_currentPlace);
             }
             else
             {
                 ClearPlacesInfo();
+                PlacesListBox.SelectedIndex = -1;
                 NameTextBox.BackColor = Color.White;
                 AddressTextBox.BackColor = Color.White;
                 CategoryComboBox.BackColor = Color.White;
@@ -192,7 +177,7 @@ namespace AppPlaces.View.Panels
                 AddressErrorLabel.Visible = false;
                 CategoryErrorLabel.Visible = false;
                 RatingErrorLabel.Visible = false;
-            } 
+            }
         }
 
 
@@ -200,9 +185,15 @@ namespace AppPlaces.View.Panels
         {
             if (PlacesListBox.SelectedIndex >= 0)
             {
-                _index = PlacesListBox.SelectedIndex;
-                _currentPlace = _places[_index];
-                UpdatePlaceInfo(_currentPlace);
+                _currentIndex = PlacesListBox.SelectedIndex;
+                _currentPlace = _places[_currentIndex];
+                _copyPlace.Name = _currentPlace.Name;
+                _copyPlace.Address = _currentPlace.Address;
+                _copyPlace.Category = _currentPlace.Category;
+                _copyPlace.Rating = _currentPlace.Rating;
+                //после метода появляется копия
+                UpdatePlaceInfo(_copyPlace);
+
             }
         }
 
@@ -210,9 +201,9 @@ namespace AppPlaces.View.Panels
         { 
             try
             {
-                if (_currentPlace.Name != NameTextBox.Text)
+                if (_copyPlace.Name != NameTextBox.Text)
                 {
-                    _currentPlace.Name = NameTextBox.Text;
+                    _copyPlace.Name = NameTextBox.Text;
                 }
 
                 if (_isButtonClicked == true)
@@ -239,9 +230,9 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                if (_currentPlace.Address != AddressTextBox.Text)
+                if (_copyPlace.Address != AddressTextBox.Text)
                 {
-                    _currentPlace.Address = AddressTextBox.Text;
+                    _copyPlace.Address = AddressTextBox.Text;
                 }
 
                 if (_isButtonClicked == true)
@@ -267,10 +258,10 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                if (_currentPlace.Category != (Category)Enum.Parse(typeof(Category),
+                if (_copyPlace.Category != (Category)Enum.Parse(typeof(Category),
                         CategoryComboBox.Text))
                 {
-                    _currentPlace.Category = (Category)Enum.Parse(typeof(Category),
+                    _copyPlace.Category = (Category)Enum.Parse(typeof(Category),
                         CategoryComboBox.Text);
                 }
 
@@ -296,9 +287,9 @@ namespace AppPlaces.View.Panels
        {
             try
             {
-                if (_currentPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
+                if (_copyPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
                 {
-                    _currentPlace.Rating = Convert.ToDouble(RatingTextBox.Text);
+                    _copyPlace.Rating = Convert.ToDouble(RatingTextBox.Text);
                 }
 
                 if (_isButtonClicked == true)
@@ -371,25 +362,22 @@ namespace AppPlaces.View.Panels
                         PlacesListBox.Items[j] = (places[j].Category + " - "
                          + places[j].Name);
                     }
-					// TODO: else if {ваш код}
-					else
-					{
-                        if (String.Compare(_firstCategory, _secondCategory) == 0)
+                    // TODO: else if {ваш код} (+)
+                    else if (String.Compare(_firstCategory, _secondCategory) == 0)
+                    {
+                        string _firstName = places[i].Name;
+                        string _secondName = places[j].Name;
+                        if (String.Compare(_firstName, _secondName) > 0)
                         {
-                            string _firstName =places[i].Name;
-                            string _secondName = places[j].Name;
-                            if (String.Compare(_firstName, _secondName) > 0)
-                            {
-                                Place temp = places[j];
-                                places.RemoveAt(j);
-                                places.Insert(j, places[i]);
-                                places.RemoveAt(i);
-                                places.Insert(i,temp);
-                                PlacesListBox.Items[i] = (places[i].Category + " - "
-                                 + places[i].Name);
-                                PlacesListBox.Items[j] = (places[j].Category + " - "
-                                 + places[j].Name);
-                            }
+                            Place temp = places[j];
+                            places.RemoveAt(j);
+                            places.Insert(j, places[i]);
+                            places.RemoveAt(i);
+                            places.Insert(i, temp);
+                            PlacesListBox.Items[i] = (places[i].Category + " - "
+                             + places[i].Name);
+                            PlacesListBox.Items[j] = (places[j].Category + " - "
+                             + places[j].Name);
                         }
                     }
                 }

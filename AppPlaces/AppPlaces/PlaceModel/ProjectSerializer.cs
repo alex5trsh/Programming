@@ -26,10 +26,9 @@ namespace AppPlaces.PlaceModel
                 Directory.CreateDirectory(directoryPath);
             }
 
-            // TODO: лишние табы
-                string _placesString = JsonSerializer.Serialize(places);
-                File.WriteAllText($"{directoryPath}/{fileName}", _placesString);
-
+            // TODO: лишние табы(+)
+            string _placesString = JsonSerializer.Serialize(places);
+            File.WriteAllText($"{directoryPath}/{fileName}", _placesString);
         }
 
         /// <summary>
