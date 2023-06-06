@@ -12,10 +12,12 @@ namespace AppPlaces.PlaceModel
     /// </summary>
     public enum Category
     {
+        // TODO: расстояние между элементами перечисления 1 строка.
         /// <summary>
         /// Кафе.
         /// </summary>
         Cafe,
+
         /// <summary>
         /// Клуб.
         /// </summary>

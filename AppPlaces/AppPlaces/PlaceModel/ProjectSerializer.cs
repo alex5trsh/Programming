@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace AppPlaces.PlaceModel
 {
     /// <summary>
-    ///Хранит методы по сериализации и десериализации данных. 
+    /// Хранит методы по сериализации и десериализации данных. 
     /// </summary>
     public static class ProjectSerializer
     {
@@ -26,6 +26,7 @@ namespace AppPlaces.PlaceModel
                 Directory.CreateDirectory(directoryPath);
             }
 
+            // TODO: лишние табы
                 string _placesString = JsonSerializer.Serialize(places);
                 File.WriteAllText($"{directoryPath}/{fileName}", _placesString);
 
