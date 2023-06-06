@@ -113,27 +113,29 @@ namespace AppPlaces.View.Panels
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
+            Place _changedPlace = _copyPlace.Clone();
             if (_currentIndex == -1)
             {
-                _places.Add(_copyPlace);
-                PlacesListBox.Items.Add(_copyPlace.Category + " - " + _copyPlace.Name);
+                _places.Add(_changedPlace) ;
+                PlacesListBox.Items.Add(_changedPlace.Category + " - " + _changedPlace.Name);
             }
 
-            if (_currentIndex >= 0 && _copyPlace != _currentPlace)
+            if (_currentIndex >= 0 && _changedPlace != _currentPlace)
             {
-                _places[_currentIndex] = _copyPlace;
-                PlacesListBox.Items[_currentIndex] = (_copyPlace.Category + " - "
-                + _copyPlace.Name);
+                _places[_currentIndex] = _changedPlace;
+                PlacesListBox.Items[_currentIndex] = (_changedPlace.Category + " - "
+                + _changedPlace.Name);
             }
             SortPlaces(_places);
-            //в листбоксе должен быть выделен созданный/измененный объект
+
             for (int i = 0; i < _places.Count; i++)
             {
-                if (_places[i] == _copyPlace)
+                if (_places[i] == _changedPlace)
                 {
                     PlacesListBox.SelectedIndex = i;
                 }
             }
+
             ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
             _isButtonClicked = false;
             PlacesListBox.Enabled = true;
@@ -183,7 +185,7 @@ namespace AppPlaces.View.Panels
 
         private void PlacesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (PlacesListBox.SelectedIndex >= 0)
+            if (PlacesListBox.SelectedIndex >= 0 && _isButtonClicked==false)
             {
                 _currentIndex = PlacesListBox.SelectedIndex;
                 _currentPlace = _places[_currentIndex];
@@ -191,9 +193,8 @@ namespace AppPlaces.View.Panels
                 _copyPlace.Address = _currentPlace.Address;
                 _copyPlace.Category = _currentPlace.Category;
                 _copyPlace.Rating = _currentPlace.Rating;
-                //после метода появляется копия
-                UpdatePlaceInfo(_copyPlace);
 
+                UpdatePlaceInfo(_copyPlace);
             }
         }
 
@@ -212,8 +213,7 @@ namespace AppPlaces.View.Panels
                 }
                 
                 NameTextBox.BackColor = Color.White;
-                NameErrorLabel.Visible = false;
-                
+                NameErrorLabel.Visible = false; 
             }
             catch
             {
@@ -307,8 +307,7 @@ namespace AppPlaces.View.Panels
                 {
                     RatingTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     RatingErrorLabel.Visible = true;
-                }
-                
+                }   
             }
         }
 

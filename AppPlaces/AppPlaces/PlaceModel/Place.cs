@@ -98,6 +98,16 @@ namespace AppPlaces.PlaceModel
         {
 
         }
+
+        /// <summary>
+        /// Создает копию объекта.
+        /// </summary>
+        /// <returns>Возвращает копию объекта.</returns>
+        public Place Clone()
+        {
+            Place copyPlace = new Place(Name, Address, Category, Rating);
+            return copyPlace;
+        }
     }
 }
 
