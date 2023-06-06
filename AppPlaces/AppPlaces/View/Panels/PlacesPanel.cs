@@ -185,7 +185,7 @@ namespace AppPlaces.View.Panels
 
         private void PlacesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (PlacesListBox.SelectedIndex >= 0 && _isButtonClicked==false)
+            if (PlacesListBox.SelectedIndex >= 0)
             {
                 _currentIndex = PlacesListBox.SelectedIndex;
                 _currentPlace = _places[_currentIndex];
