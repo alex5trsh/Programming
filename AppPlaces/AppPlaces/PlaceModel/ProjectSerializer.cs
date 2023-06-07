@@ -26,7 +26,7 @@ namespace AppPlaces.PlaceModel
                 Directory.CreateDirectory(directoryPath);
             }
 
-            // TODO: лишние табы(+)
+            // TODO: RSDN (название переменной)
             string _placesString = JsonSerializer.Serialize(places);
             File.WriteAllText($"{directoryPath}/{fileName}", _placesString);
         }
@@ -42,6 +42,7 @@ namespace AppPlaces.PlaceModel
             List<Place> places = new List<Place>();
             if (File.Exists($"{directoryPath}/{fileName}"))
             {
+                // TODO: RSDN (название переменной)
                 var _placesString = File.ReadAllText($"{directoryPath}/{fileName}");
                 places = JsonSerializer.Deserialize<List<Place>>(_placesString);
             }

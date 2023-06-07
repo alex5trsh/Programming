@@ -19,7 +19,6 @@ namespace AppPlaces.View.Panels
     /// </summary>
     public partial class PlacesPanel : UserControl
     {
-	    // TODO: модификаторы доступа(+)
         /// <summary>
         /// Коллекция элементов класс <see cref="Place"/>.
         /// </summary>
@@ -30,8 +29,7 @@ namespace AppPlaces.View.Panels
         /// </summary>
         private Place _currentPlace= new Place();
 
-		// TODO: _currentIndex(+)
-		/// <summary>
+        /// <summary>
 		/// Индекс текущего элемента.
 		/// </summary>
 		private int _currentIndex;
@@ -68,7 +66,7 @@ namespace AppPlaces.View.Panels
             foreach (var value in _places)
             {
                 PlacesListBox.Items.Add(value.Category + " - " + value.Name);
-            } 
+            }
 
             var categories = Enum.GetValues(typeof(Category));
             foreach (var value in categories)
@@ -85,7 +83,7 @@ namespace AppPlaces.View.Panels
 
             AccessTextBox(false);
         }
-        
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             NameTextBox.Text = "New Name";
@@ -126,8 +124,8 @@ namespace AppPlaces.View.Panels
                 PlacesListBox.Items[_currentIndex] = (_changedPlace.Category + " - "
                 + _changedPlace.Name);
             }
-            SortPlaces(_places);
 
+            SortPlaces(_places);
             for (int i = 0; i < _places.Count; i++)
             {
                 if (_places[i] == _changedPlace)
@@ -147,7 +145,6 @@ namespace AppPlaces.View.Panels
         {
             if (PlacesListBox.SelectedIndex >= 0 && PlacesListBox != null)
             {
-                // TODO: грамматическая ошибка(+)
                 int chosenIndex = PlacesListBox.SelectedIndex;
                 PlacesListBox.Items.RemoveAt(chosenIndex);
                 _places.RemoveAt(chosenIndex);
@@ -211,15 +208,16 @@ namespace AppPlaces.View.Panels
                 {
                     ApplyButton.Visible = true;
                 }
-                
+
                 NameTextBox.BackColor = Color.White;
-                NameErrorLabel.Visible = false; 
+                NameErrorLabel.Visible = false;
             }
             catch
             {
                 ApplyButton.Visible = false;
+                // TODO: Можно убрать true – if (NameTextBox.Enabled) и так везде
                 if (NameTextBox.Enabled == true)
-                { 
+                {
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameErrorLabel.Visible = true;
                 }
@@ -258,6 +256,7 @@ namespace AppPlaces.View.Panels
         {
             try
             {
+                // TODO: вынести в переменную парс и так везде
                 if (_copyPlace.Category != (Category)Enum.Parse(typeof(Category),
                         CategoryComboBox.Text))
                 {
@@ -269,6 +268,7 @@ namespace AppPlaces.View.Panels
                 {
                     ApplyButton.Visible = true;
                 }
+
                 CategoryComboBox.BackColor = Color.White;
                 CategoryErrorLabel.Visible = false;
             }
@@ -284,7 +284,7 @@ namespace AppPlaces.View.Panels
         }
 
         private void RatingTextBox_TextChanged(object sender, EventArgs e)
-       {
+        {
             try
             {
                 if (_copyPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
@@ -307,7 +307,7 @@ namespace AppPlaces.View.Panels
                 {
                     RatingTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     RatingErrorLabel.Visible = true;
-                }   
+                }
             }
         }
 
@@ -330,7 +330,7 @@ namespace AppPlaces.View.Panels
         {
             NameTextBox.Clear();
             AddressTextBox.Clear();
-            CategoryComboBox.Text=null;
+            CategoryComboBox.Text = null;
             RatingTextBox.Clear();
         }
 
@@ -341,52 +341,60 @@ namespace AppPlaces.View.Panels
         /// <param name="places">Коллекция, содержащая объекты, которые необходимо 
         /// отсортировать. </param>
         private void SortPlaces(List<Place> places)
-        { 
+        {
             for (int i = 0; i < places.Count; i++)
             {
-                for (int j = i+1; j < places.Count; j++)
+                for (int j = i + 1; j < places.Count; j++)
                 {
+                    // TODO: RSDN naming
                     string _firstCategory = Convert.ToString(places[i].Category);
                     string _secondCategory = Convert.ToString(places[j].Category);
-
+                    // TODO: string.Compare и так везде
                     if (String.Compare(_firstCategory, _secondCategory) > 0)
                     {
+                        // TODO: дубль
                         Place temp = places[j];
                         places.RemoveAt(j);
                         places.Insert(j, places[i]);
                         places.RemoveAt(i);
                         places.Insert(i, temp);
-                        PlacesListBox.Items[i] = (places[i].Category + " - "
-                         + places[i].Name);
-                        PlacesListBox.Items[j] = (places[j].Category + " - "
-                         + places[j].Name);
+                        // TODO: переопределить метод ToString в Place и использовать его
+                        PlacesListBox.Items[i] = (places[i].Category
+                                                  + " - "
+                                                  + places[i].Name);
+                        PlacesListBox.Items[j] = (places[j].Category
+                                                  + " - "
+                                                  + places[j].Name);
                     }
-                    // TODO: else if {ваш код} (+)
                     else if (String.Compare(_firstCategory, _secondCategory) == 0)
                     {
                         string _firstName = places[i].Name;
                         string _secondName = places[j].Name;
                         if (String.Compare(_firstName, _secondName) > 0)
                         {
+                            // TODO: дубль
                             Place temp = places[j];
                             places.RemoveAt(j);
                             places.Insert(j, places[i]);
                             places.RemoveAt(i);
                             places.Insert(i, temp);
-                            PlacesListBox.Items[i] = (places[i].Category + " - "
-                             + places[i].Name);
-                            PlacesListBox.Items[j] = (places[j].Category + " - "
-                             + places[j].Name);
+                            PlacesListBox.Items[i] = (places[i].Category
+                                                      + " - "
+                                                      + places[i].Name);
+                            PlacesListBox.Items[j] = (places[j].Category
+                                                      + " - "
+                                                      + places[j].Name);
                         }
                     }
                 }
-            }   
+            }
         }
 
         /// <summary>
         /// Задает свойство видимости для кнопок.
         /// </summary>
         /// <param name="flag">Значение свойства видимости. Равно true или false.</param>
+        // TODO: SwitchVisibleButtons(bool flag)
         private void UnhideButtons(bool flag)
         {
             AddButton.Visible = flag;
@@ -397,9 +405,10 @@ namespace AppPlaces.View.Panels
         }
 
         /// <summary>
-        /// Задает свойство доступа для текстбоков. 
+        /// Задает свойство доступа для текстбоков.
         /// </summary>
         /// <param name="flag">Значение свойства доступа. Равно true или false.</param>
+        // TODO: SwitchAccessTextBox
         private void AccessTextBox(bool flag)
         {
             NameTextBox.Enabled = flag;
@@ -407,6 +416,5 @@ namespace AppPlaces.View.Panels
             CategoryComboBox.Enabled = flag;
             RatingTextBox.Enabled = flag;
         }
-        
     }
 }
