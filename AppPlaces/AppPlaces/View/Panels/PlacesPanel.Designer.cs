@@ -36,13 +36,13 @@ namespace AppPlaces.View.Panels
             this.RatingLabel = new System.Windows.Forms.Label();
             this.AddressTextBox = new System.Windows.Forms.TextBox();
             this.SelectecPlaceGroupBox = new System.Windows.Forms.GroupBox();
+            this.RatingErrorLabel = new System.Windows.Forms.Label();
+            this.CategoryErrorLabel = new System.Windows.Forms.Label();
+            this.AddressErrorLabel = new System.Windows.Forms.Label();
+            this.NameErrorLabel = new System.Windows.Forms.Label();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.RatingTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.NameErrorLabel = new System.Windows.Forms.Label();
-            this.AddressErrorLabel = new System.Windows.Forms.Label();
-            this.CategoryErrorLabel = new System.Windows.Forms.Label();
-            this.RatingErrorLabel = new System.Windows.Forms.Label();
             this.CancelButton = new System.Windows.Forms.Button();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -53,6 +53,8 @@ namespace AppPlaces.View.Panels
             // 
             // PlacesListBox
             // 
+            this.PlacesListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.PlacesListBox.FormattingEnabled = true;
             this.PlacesListBox.Location = new System.Drawing.Point(3, 3);
             this.PlacesListBox.Name = "PlacesListBox";
@@ -129,6 +131,42 @@ namespace AppPlaces.View.Panels
             this.SelectecPlaceGroupBox.TabStop = false;
             this.SelectecPlaceGroupBox.Text = "Selected Place";
             // 
+            // RatingErrorLabel
+            // 
+            this.RatingErrorLabel.AutoSize = true;
+            this.RatingErrorLabel.Location = new System.Drawing.Point(61, 164);
+            this.RatingErrorLabel.Name = "RatingErrorLabel";
+            this.RatingErrorLabel.Size = new System.Drawing.Size(214, 13);
+            this.RatingErrorLabel.TabIndex = 18;
+            this.RatingErrorLabel.Text = "The field should contain number from 0 to 5.";
+            // 
+            // CategoryErrorLabel
+            // 
+            this.CategoryErrorLabel.AutoSize = true;
+            this.CategoryErrorLabel.Location = new System.Drawing.Point(61, 125);
+            this.CategoryErrorLabel.Name = "CategoryErrorLabel";
+            this.CategoryErrorLabel.Size = new System.Drawing.Size(201, 13);
+            this.CategoryErrorLabel.TabIndex = 17;
+            this.CategoryErrorLabel.Text = "The field should contain item from the list.";
+            // 
+            // AddressErrorLabel
+            // 
+            this.AddressErrorLabel.AutoSize = true;
+            this.AddressErrorLabel.Location = new System.Drawing.Point(61, 81);
+            this.AddressErrorLabel.Name = "AddressErrorLabel";
+            this.AddressErrorLabel.Size = new System.Drawing.Size(228, 13);
+            this.AddressErrorLabel.TabIndex = 16;
+            this.AddressErrorLabel.Text = "The field should contain symbols from 1 to 100.";
+            // 
+            // NameErrorLabel
+            // 
+            this.NameErrorLabel.AutoSize = true;
+            this.NameErrorLabel.Location = new System.Drawing.Point(61, 42);
+            this.NameErrorLabel.Name = "NameErrorLabel";
+            this.NameErrorLabel.Size = new System.Drawing.Size(228, 13);
+            this.NameErrorLabel.TabIndex = 15;
+            this.NameErrorLabel.Text = "The field should contain symbols from 1 to 200.";
+            // 
             // CategoryComboBox
             // 
             this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -157,44 +195,9 @@ namespace AppPlaces.View.Panels
             this.NameTextBox.TabIndex = 12;
             this.NameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
-            // NameErrorLabel
-            // 
-            this.NameErrorLabel.AutoSize = true;
-            this.NameErrorLabel.Location = new System.Drawing.Point(61, 42);
-            this.NameErrorLabel.Name = "NameErrorLabel";
-            this.NameErrorLabel.Size = new System.Drawing.Size(247, 13);
-            this.NameErrorLabel.TabIndex = 15;
-            this.NameErrorLabel.Text = "Поле должно содержать от 1 до 200 символов.";
-            // 
-            // AddressErrorLabel
-            // 
-            this.AddressErrorLabel.AutoSize = true;
-            this.AddressErrorLabel.Location = new System.Drawing.Point(61, 81);
-            this.AddressErrorLabel.Name = "AddressErrorLabel";
-            this.AddressErrorLabel.Size = new System.Drawing.Size(247, 13);
-            this.AddressErrorLabel.TabIndex = 16;
-            this.AddressErrorLabel.Text = "Поле должно содержать от 1 до 100 символов.";
-            // 
-            // CategoryErrorLabel
-            // 
-            this.CategoryErrorLabel.AutoSize = true;
-            this.CategoryErrorLabel.Location = new System.Drawing.Point(61, 125);
-            this.CategoryErrorLabel.Name = "CategoryErrorLabel";
-            this.CategoryErrorLabel.Size = new System.Drawing.Size(47, 13);
-            this.CategoryErrorLabel.TabIndex = 17;
-            this.CategoryErrorLabel.Text = "Ошибка";
-            // 
-            // RatingErrorLabel
-            // 
-            this.RatingErrorLabel.AutoSize = true;
-            this.RatingErrorLabel.Location = new System.Drawing.Point(61, 164);
-            this.RatingErrorLabel.Name = "RatingErrorLabel";
-            this.RatingErrorLabel.Size = new System.Drawing.Size(214, 13);
-            this.RatingErrorLabel.TabIndex = 18;
-            this.RatingErrorLabel.Text = "Поле должно содержать числа от 0 до 5.";
-            // 
             // CancelButton
             // 
+            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CancelButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_cancel_button_100_png;
             this.CancelButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CancelButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -209,6 +212,7 @@ namespace AppPlaces.View.Panels
             // 
             // ApplyButton
             // 
+            this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ApplyButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_apply_button_100_png;
             this.ApplyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ApplyButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -223,6 +227,7 @@ namespace AppPlaces.View.Panels
             // 
             // DeleteButton
             // 
+            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DeleteButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_delete_button_100_png;
             this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DeleteButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -237,6 +242,7 @@ namespace AppPlaces.View.Panels
             // 
             // EditButton
             // 
+            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.EditButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_edit_button_100_png;
             this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -251,6 +257,7 @@ namespace AppPlaces.View.Panels
             // 
             // AddButton
             // 
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.AddButton.BackgroundImage = global::AppPlaces.Properties.Resources.place_add_button_100_png;
             this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AddButton.FlatAppearance.BorderColor = System.Drawing.Color.White;

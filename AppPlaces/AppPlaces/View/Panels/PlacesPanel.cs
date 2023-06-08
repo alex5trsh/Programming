@@ -65,7 +65,7 @@ namespace AppPlaces.View.Panels
             _places =ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
             foreach (var value in _places)
             {
-                PlacesListBox.Items.Add(value.Category + " - " + value.Name);
+                PlacesListBox.Items.Add(ToString(value));
             }
 
             var categories = Enum.GetValues(typeof(Category));
@@ -81,7 +81,7 @@ namespace AppPlaces.View.Panels
             CategoryErrorLabel.Visible = false;
             RatingErrorLabel.Visible = false;
 
-            AccessTextBox(false);
+            SwitchAccessTextBox(false);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -94,8 +94,8 @@ namespace AppPlaces.View.Panels
             _isButtonClicked = true;
 
             PlacesListBox.Enabled = false;
-            AccessTextBox(true);
-            UnhideButtons(false);
+            SwitchAccessTextBox(true);
+            SwitchVisibleButtons(false);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
@@ -104,8 +104,8 @@ namespace AppPlaces.View.Panels
             {
                 _isButtonClicked = true;
                 PlacesListBox.Enabled = false;
-                AccessTextBox(true);
-                UnhideButtons(false);
+                SwitchAccessTextBox(true);
+                SwitchVisibleButtons(false);
             }
         }
 
@@ -115,14 +115,13 @@ namespace AppPlaces.View.Panels
             if (_currentIndex == -1)
             {
                 _places.Add(_changedPlace) ;
-                PlacesListBox.Items.Add(_changedPlace.Category + " - " + _changedPlace.Name);
+                PlacesListBox.Items.Add(ToString(_changedPlace));
             }
 
             if (_currentIndex >= 0 && _changedPlace != _currentPlace)
             {
                 _places[_currentIndex] = _changedPlace;
-                PlacesListBox.Items[_currentIndex] = (_changedPlace.Category + " - "
-                + _changedPlace.Name);
+                PlacesListBox.Items[_currentIndex] = ToString(_changedPlace);
             }
 
             SortPlaces(_places);
@@ -137,8 +136,8 @@ namespace AppPlaces.View.Panels
             ProjectSerializer.SaveToFile(_places, _directoryPath, _fileName);
             _isButtonClicked = false;
             PlacesListBox.Enabled = true;
-            AccessTextBox(false);
-            UnhideButtons(true);
+            SwitchAccessTextBox(false);
+            SwitchVisibleButtons(true);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -157,8 +156,8 @@ namespace AppPlaces.View.Panels
         {
             _isButtonClicked = false;
             PlacesListBox.Enabled = true;
-            UnhideButtons(true);
-            AccessTextBox(false);
+            SwitchVisibleButtons(true);
+            SwitchAccessTextBox(false);
             if (_currentIndex >= 0)
             {
                 PlacesListBox.SelectedIndex = _places.IndexOf(_currentPlace);
@@ -199,14 +198,18 @@ namespace AppPlaces.View.Panels
         { 
             try
             {
-                if (_copyPlace.Name != NameTextBox.Text)
+                string newName = NameTextBox.Text;
+                if (_copyPlace.Name != newName)
                 {
-                    _copyPlace.Name = NameTextBox.Text;
+                    _copyPlace.Name = newName;
                 }
 
                 if (_isButtonClicked == true)
                 {
                     ApplyButton.Visible = true;
+                    AddressTextBox.Enabled = true;
+                    CategoryComboBox.Enabled = true;
+                    RatingTextBox.Enabled = true;
                 }
 
                 NameTextBox.BackColor = Color.White;
@@ -215,11 +218,14 @@ namespace AppPlaces.View.Panels
             catch
             {
                 ApplyButton.Visible = false;
-                // TODO: Можно убрать true – if (NameTextBox.Enabled) и так везде
-                if (NameTextBox.Enabled == true)
+                // TODO: Можно убрать true – if (NameTextBox.Enabled) и так везде(+)
+                if (NameTextBox.Enabled)
                 {
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameErrorLabel.Visible = true;
+                    AddressTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
+                    RatingTextBox.Enabled = false;
                 }
             }
         }
@@ -228,14 +234,18 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                if (_copyPlace.Address != AddressTextBox.Text)
+                string newAddress = AddressTextBox.Text;
+                if (_copyPlace.Address != newAddress)
                 {
-                    _copyPlace.Address = AddressTextBox.Text;
+                    _copyPlace.Address = newAddress;
                 }
 
                 if (_isButtonClicked == true)
                 {
                     ApplyButton.Visible = true;
+                    NameTextBox.Enabled = true;
+                    CategoryComboBox.Enabled = true;
+                    RatingTextBox.Enabled = true;
                 }
 
                 AddressTextBox.BackColor = Color.White;
@@ -244,10 +254,13 @@ namespace AppPlaces.View.Panels
             catch
             {
                 ApplyButton.Visible = false;
-                if (AddressTextBox.Enabled == true)
+                if (AddressTextBox.Enabled)
                 {
                     AddressTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     AddressErrorLabel.Visible = true;
+                    NameTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
+                    RatingTextBox.Enabled = false;
                 }
             }
         }
@@ -256,17 +269,20 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                // TODO: вынести в переменную парс и так везде
-                if (_copyPlace.Category != (Category)Enum.Parse(typeof(Category),
-                        CategoryComboBox.Text))
-                {
-                    _copyPlace.Category = (Category)Enum.Parse(typeof(Category),
+                // TODO: вынести в переменную парс и так везде(+)
+                Category newCategory = (Category)Enum.Parse(typeof(Category),
                         CategoryComboBox.Text);
+                if (_copyPlace.Category != newCategory)
+                {
+                    _copyPlace.Category = newCategory;
                 }
 
                 if (_isButtonClicked == true)
                 {
                     ApplyButton.Visible = true;
+                    NameTextBox.Enabled = true;
+                    AddressTextBox.Enabled = true;
+                    RatingTextBox.Enabled = true;
                 }
 
                 CategoryComboBox.BackColor = Color.White;
@@ -275,10 +291,13 @@ namespace AppPlaces.View.Panels
             catch
             {
                 ApplyButton.Visible = false;
-                if (CategoryComboBox.Enabled == true)
+                if (CategoryComboBox.Enabled)
                 {
                     CategoryComboBox.BackColor = Color.FromArgb(205, 92, 92);
                     CategoryErrorLabel.Visible = true;
+                    NameTextBox.Enabled = false;
+                    AddressTextBox.Enabled = false;
+                    RatingTextBox.Enabled = false;
                 }
             }
         }
@@ -287,14 +306,18 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                if (_copyPlace.Rating != Convert.ToDouble(RatingTextBox.Text))
+                double newRating = Convert.ToDouble(RatingTextBox.Text);
+                if (_copyPlace.Rating != newRating)
                 {
-                    _copyPlace.Rating = Convert.ToDouble(RatingTextBox.Text);
+                    _copyPlace.Rating = newRating;
                 }
 
                 if (_isButtonClicked == true)
                 {
                     ApplyButton.Visible = true;
+                    NameTextBox.Enabled = true;
+                    AddressTextBox.Enabled = true;
+                    CategoryComboBox.Enabled = true;
                 }
 
                 RatingTextBox.BackColor = Color.White;
@@ -303,10 +326,13 @@ namespace AppPlaces.View.Panels
             catch
             {
                 ApplyButton.Visible = false;
-                if (RatingTextBox.Enabled == true)
+                if (RatingTextBox.Enabled)
                 {
                     RatingTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     RatingErrorLabel.Visible = true;
+                    NameTextBox.Enabled = false;
+                    AddressTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
                 }
             }
         }
@@ -335,8 +361,8 @@ namespace AppPlaces.View.Panels
         }
 
         /// <summary>
-        /// Сортирует все объекты в <see cref="PlacesListBox"/> по <see cref="Place.Category"/>,
-        /// а внутри <see cref="Place.Category"/> сортирует по <see cref="Place.Name"/>.
+        /// Сортирует все объекты в PlacesListBox по <see Category,
+        /// а внутри Category сортирует по Name.
         /// </summary>
         /// <param name="places">Коллекция, содержащая объекты, которые необходимо 
         /// отсортировать. </param>
@@ -346,44 +372,28 @@ namespace AppPlaces.View.Panels
             {
                 for (int j = i + 1; j < places.Count; j++)
                 {
-                    // TODO: RSDN naming
-                    string _firstCategory = Convert.ToString(places[i].Category);
-                    string _secondCategory = Convert.ToString(places[j].Category);
-                    // TODO: string.Compare и так везде
-                    if (String.Compare(_firstCategory, _secondCategory) > 0)
+                    // TODO: RSDN naming(+)
+                    string firstCategory = Convert.ToString(places[i].Category);
+                    string secondCategory = Convert.ToString(places[j].Category);
+                    // TODO: string.Compare и так везде(+)
+                    if (string.Compare(firstCategory, secondCategory) > 0)
                     {
-                        // TODO: дубль
-                        Place temp = places[j];
-                        places.RemoveAt(j);
-                        places.Insert(j, places[i]);
-                        places.RemoveAt(i);
-                        places.Insert(i, temp);
-                        // TODO: переопределить метод ToString в Place и использовать его
-                        PlacesListBox.Items[i] = (places[i].Category
-                                                  + " - "
-                                                  + places[i].Name);
-                        PlacesListBox.Items[j] = (places[j].Category
-                                                  + " - "
-                                                  + places[j].Name);
+                        // TODO: дубль(+)
+                        SwapPlaces(places, i, j);
+                        // TODO: переопределить метод ToString в Place и использовать его(+)
+                        PlacesListBox.Items[i] = ToString(places[i]);
+                        PlacesListBox.Items[j] = ToString(places[j]);
                     }
-                    else if (String.Compare(_firstCategory, _secondCategory) == 0)
+                    else if (string.Compare(firstCategory, secondCategory) == 0)
                     {
-                        string _firstName = places[i].Name;
-                        string _secondName = places[j].Name;
-                        if (String.Compare(_firstName, _secondName) > 0)
+                        string firstName = places[i].Name;
+                        string secondName = places[j].Name;
+                        if (string.Compare(firstName, secondName) > 0)
                         {
-                            // TODO: дубль
-                            Place temp = places[j];
-                            places.RemoveAt(j);
-                            places.Insert(j, places[i]);
-                            places.RemoveAt(i);
-                            places.Insert(i, temp);
-                            PlacesListBox.Items[i] = (places[i].Category
-                                                      + " - "
-                                                      + places[i].Name);
-                            PlacesListBox.Items[j] = (places[j].Category
-                                                      + " - "
-                                                      + places[j].Name);
+                            // TODO: дубль(+)
+                            SwapPlaces(places, i, j);
+                            PlacesListBox.Items[i] = ToString(places[i]);
+                            PlacesListBox.Items[j] = ToString(places[j]);
                         }
                     }
                 }
@@ -394,8 +404,8 @@ namespace AppPlaces.View.Panels
         /// Задает свойство видимости для кнопок.
         /// </summary>
         /// <param name="flag">Значение свойства видимости. Равно true или false.</param>
-        // TODO: SwitchVisibleButtons(bool flag)
-        private void UnhideButtons(bool flag)
+        // TODO: SwitchVisibleButtons(bool flag)(+)
+        private void SwitchVisibleButtons(bool flag)
         {
             AddButton.Visible = flag;
             EditButton.Visible = flag;
@@ -408,13 +418,45 @@ namespace AppPlaces.View.Panels
         /// Задает свойство доступа для текстбоков.
         /// </summary>
         /// <param name="flag">Значение свойства доступа. Равно true или false.</param>
-        // TODO: SwitchAccessTextBox
-        private void AccessTextBox(bool flag)
+        // TODO: SwitchAccessTextBox(+)
+        private void SwitchAccessTextBox(bool flag)
         {
             NameTextBox.Enabled = flag;
             AddressTextBox.Enabled = flag;
             CategoryComboBox.Enabled = flag;
             RatingTextBox.Enabled = flag;
+        }
+
+        /// <summary>
+        /// Меняет местами 2 элемента в коллекции.
+        /// </summary>
+        /// <param name="places">Коллекция, в которой нужно поменять 2 элемента 
+        /// местами.</param>
+        /// <param name="firstIndex">Первый элемент.</param>
+        /// <param name="secondIndex">Второй элемент.</param>
+        private void SwapPlaces(List<Place> places, int firstIndex, int secondIndex )
+        {
+            Place temp = places[secondIndex];
+            places.RemoveAt(secondIndex);
+            places.Insert(secondIndex, places[firstIndex]);
+            places.RemoveAt(firstIndex);
+            places.Insert(firstIndex, temp);
+
+        }
+
+
+        /// <summary>
+        /// Создает строку для PlacesListBox.
+        /// </summary>
+        /// <param name="place">Элемент класса <see cref="Place"/>, по которой нужно
+        /// создать строку.</param>
+        /// <returns>Возвращает строку со значениями Category и Name указанного 
+        /// элемента. </returns>
+        private string ToString(Place place)
+        {
+            string line= place.Category + " - "+ place.Name;
+
+            return line;
         }
     }
 }
