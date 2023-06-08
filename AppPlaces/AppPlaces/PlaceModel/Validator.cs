@@ -22,7 +22,6 @@ namespace AppPlaces.PlaceModel
         {
             if (value < min || value > max)
             {
-                // TODO: Длинная строка(+)
                 throw new ArgumentException("Длина переменной свойства " + nameOfFeature +
                     " не входит в диапазон");
             }
@@ -39,7 +38,6 @@ namespace AppPlaces.PlaceModel
         {
             if (value < min || value > max)
             {
-                // TODO: Длинная строка(+)
                 throw new ArgumentException("Переменная свойства " + nameOfFeature 
                     + " не входит в диапазон");
             }

@@ -204,7 +204,7 @@ namespace AppPlaces.View.Panels
                     _copyPlace.Name = newName;
                 }
 
-                if (_isButtonClicked == true)
+                if (_isButtonClicked)
                 {
                     ApplyButton.Visible = true;
                     AddressTextBox.Enabled = true;
@@ -218,7 +218,6 @@ namespace AppPlaces.View.Panels
             catch
             {
                 ApplyButton.Visible = false;
-                // TODO: Можно убрать true – if (NameTextBox.Enabled) и так везде(+)
                 if (NameTextBox.Enabled)
                 {
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
@@ -240,7 +239,7 @@ namespace AppPlaces.View.Panels
                     _copyPlace.Address = newAddress;
                 }
 
-                if (_isButtonClicked == true)
+                if (_isButtonClicked)
                 {
                     ApplyButton.Visible = true;
                     NameTextBox.Enabled = true;
@@ -269,7 +268,6 @@ namespace AppPlaces.View.Panels
         {
             try
             {
-                // TODO: вынести в переменную парс и так везде(+)
                 Category newCategory = (Category)Enum.Parse(typeof(Category),
                         CategoryComboBox.Text);
                 if (_copyPlace.Category != newCategory)
@@ -277,7 +275,7 @@ namespace AppPlaces.View.Panels
                     _copyPlace.Category = newCategory;
                 }
 
-                if (_isButtonClicked == true)
+                if (_isButtonClicked)
                 {
                     ApplyButton.Visible = true;
                     NameTextBox.Enabled = true;
@@ -312,7 +310,7 @@ namespace AppPlaces.View.Panels
                     _copyPlace.Rating = newRating;
                 }
 
-                if (_isButtonClicked == true)
+                if (_isButtonClicked)
                 {
                     ApplyButton.Visible = true;
                     NameTextBox.Enabled = true;
@@ -372,15 +370,11 @@ namespace AppPlaces.View.Panels
             {
                 for (int j = i + 1; j < places.Count; j++)
                 {
-                    // TODO: RSDN naming(+)
                     string firstCategory = Convert.ToString(places[i].Category);
                     string secondCategory = Convert.ToString(places[j].Category);
-                    // TODO: string.Compare и так везде(+)
                     if (string.Compare(firstCategory, secondCategory) > 0)
                     {
-                        // TODO: дубль(+)
                         SwapPlaces(places, i, j);
-                        // TODO: переопределить метод ToString в Place и использовать его(+)
                         PlacesListBox.Items[i] = ToString(places[i]);
                         PlacesListBox.Items[j] = ToString(places[j]);
                     }
@@ -390,7 +384,6 @@ namespace AppPlaces.View.Panels
                         string secondName = places[j].Name;
                         if (string.Compare(firstName, secondName) > 0)
                         {
-                            // TODO: дубль(+)
                             SwapPlaces(places, i, j);
                             PlacesListBox.Items[i] = ToString(places[i]);
                             PlacesListBox.Items[j] = ToString(places[j]);
@@ -404,7 +397,6 @@ namespace AppPlaces.View.Panels
         /// Задает свойство видимости для кнопок.
         /// </summary>
         /// <param name="flag">Значение свойства видимости. Равно true или false.</param>
-        // TODO: SwitchVisibleButtons(bool flag)(+)
         private void SwitchVisibleButtons(bool flag)
         {
             AddButton.Visible = flag;
@@ -418,7 +410,6 @@ namespace AppPlaces.View.Panels
         /// Задает свойство доступа для текстбоков.
         /// </summary>
         /// <param name="flag">Значение свойства доступа. Равно true или false.</param>
-        // TODO: SwitchAccessTextBox(+)
         private void SwitchAccessTextBox(bool flag)
         {
             NameTextBox.Enabled = flag;
