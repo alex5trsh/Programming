@@ -34,12 +34,14 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает название. Длина должна быть меньше 200.
         /// </summary>
+        
         public string Name
         {
             get => _name;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 200, "Name");
+                ValueValidator.AssertLengthInRange(value.Length, 1, 200, "Name");
+
                 _name = value;
             }
         }
@@ -52,7 +54,8 @@ namespace ObjectOrientedPractics.Model
             get => _info;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 1000, "Info");
+                ValueValidator.AssertLengthInRange(value.Length, 1, 1000, "Info");
+
                 _info = value;
             }
         }
@@ -66,6 +69,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertValueInRange(value, 0, 100000, "Cost");
+
                 _cost = value;
             }
         }
@@ -109,6 +113,17 @@ namespace ObjectOrientedPractics.Model
         {
             AllItemsCount++;
             Id = AllItemsCount;
+        }
+
+        /// <summary>
+        /// Создает копию объекта.
+        /// </summary>
+        /// <returns>Возвращает копию объекта.</returns>
+        public Item Clone()
+        {
+            
+            Item copyPlace = new Item(Name, Info, Cost);
+            return copyPlace;
         }
 
     }

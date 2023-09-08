@@ -20,11 +20,27 @@ namespace ObjectOrientedPractics.Model
         /// <param name="propertyName">Имя свойства, которое подлежит проверке.</param>
         public static void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if(value.Length>maxLength)
+            if (value.Length > maxLength)
             {
-                throw new ArgumentException(propertyName+" должен быть меньше "+maxLength+" символов.");
+                throw new ArgumentException(propertyName + " должен быть меньше " + maxLength + " символов.");
             }
 
+        }
+
+        /// <summary>
+        /// Проверяет, что длина переменной входит в диапазон.
+        /// </summary>
+        /// <param name="value">Проверяемая длина.</param>
+        /// <param name="min">Начало диапазона.</param>
+        /// <param name="max">Конец диапазона.</param>
+        /// <param name="nameOfFeature">Имя свойства, которое подлежит проверке.</param>
+        public static void AssertLengthInRange(int value, int min, int max, string nameOfFeature)
+        {
+            if (value < min || value > max)
+            {
+                throw new ArgumentException("Длина переменной свойства " + nameOfFeature +
+                    " не входит в диапазон");
+            }
         }
 
         /// <summary>
