@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Text.Json;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -21,7 +24,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Текущий элемент класса <see cref="Item"/>.
         /// </summary>
-        private Item _currentItem = new Item();
+        private Item _currentItem;
 
         /// <summary>
         /// Индекс текущего элемента.
@@ -29,23 +32,24 @@ namespace ObjectOrientedPractics.View.Tabs
         private int _currentIndex;
 
         /// <summary>
-        /// Копия текущего элемента класса <see cref="Place"/>.
+        /// Путь к файлу <see cref="_fileName"/>.
         /// </summary>
-        private Item _copyItem = new Item();
+        private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
+            ApplicationData) + "\\AppItems";
 
         /// <summary>
-        /// Флаг нажатия на кнопку <see cref="AddButton"/>.
-        /// True если кнопка нажата, false если не нажата.
+        /// Файл, хранящий объекты класса <see cref="Place"/>.
         /// </summary>
-        private bool _isButtonClicked = false;
+        private string _fileName = "Items.json";
 
         public ItemsTab()
         {
             InitializeComponent();
 
+            _items = ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
+            FillItemsListBox();
             SwitchAccessTextBox(false);
             SwitchVisibleButtons(true);
-
         }
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,30 +58,27 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentIndex = ItemsListBox.SelectedIndex;
                 _currentItem = _items[_currentIndex];
-                //TODO:изменять счетчик
-                //_copyItem.Id = _currentItem.Id;
-                _copyItem.Cost = _currentItem.Cost;
-                _copyItem.Name = _currentItem.Name;
-                _copyItem.Info = _currentItem.Info;
 
-                UpdateItemInfo(_copyItem);
+                UpdateItemInfo(_currentItem);
+                SwitchAccessTextBox(true);
             }
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            IdTextBox.Text = "0";
-            CostTextBox.Text = "0";
-            NameTextBox.Text = "New Name";
-            InfoTextBox.Text = "New Description";
-            _currentIndex = -1;
+            Item _newItem = new Item("New Name", "New Description", 1);
+            _items.Add(_newItem);
+            FillItemsListBox();
 
-            SwitchAccessTextBox(true);
-            SwitchVisibleButtons(false);
-            _isButtonClicked = true;
-            ApplyButton.Visible = true;
-            CancelButton.Visible = true;
-            ItemsListBox.Enabled = false;
+            for (int i = 0; i < _items.Count; i++)
+            {
+                if (_items[i] == _newItem)
+                {
+                    ItemsListBox.SelectedIndex = i;
+                }
+            }
+
+            SwitchAccessTextBox(true);     
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -86,65 +87,10 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 ItemsListBox.Items.RemoveAt(_currentIndex);
                 _items.RemoveAt(_currentIndex);
-                ClearItemsInfo();
+                ItemsListBox.SelectedIndex = -1;
+                SwitchAccessTextBox(false);
+                ClearItemsInfo(); 
             }
-        }
-
-        private void ApplyButton_Click(object sender, EventArgs e)
-        {
-            Item _changedItem = _copyItem.Clone();
-            if (_currentIndex == -1)
-            {
-                _items.Add(_changedItem);
-                ItemsListBox.Items.Add(_changedItem);
-            }
-
-            if (_currentIndex >= 0 && _changedItem != _currentItem)
-            {
-                _items[_currentIndex] = _changedItem;
-                //ItemsListBox.Items[_currentIndex] = ToString(_copyItem);
-                ItemsListBox.Items[_currentIndex] = _changedItem;
-            }
-
-            for (int i = 0; i < _items.Count; i++)
-            {
-                if (_items[i] == _changedItem)
-                {
-                    ItemsListBox.SelectedIndex = i;
-                }
-            }
-
-            _isButtonClicked = false;
-            ItemsListBox.Enabled = true;
-            SwitchAccessTextBox(false);
-            SwitchVisibleButtons(true);
-
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
-            _isButtonClicked = false;
-            ItemsListBox.Enabled = true;
-            SwitchVisibleButtons(true);
-            SwitchAccessTextBox(false);
-            ClearItemsInfo();
-            ItemsListBox.SelectedIndex = -1;
-            CostTextBox.BackColor = Color.White;
-            NameTextBox.BackColor = Color.White;
-            InfoTextBox.BackColor = Color.White;
-            
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            if (ItemsListBox.Items.Count != 0 && ItemsListBox.SelectedIndex >= 0)
-            {
-                _isButtonClicked = true;
-                ItemsListBox.Enabled = false;
-                SwitchAccessTextBox(true);
-                SwitchVisibleButtons(false);
-            }
-
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
@@ -152,31 +98,28 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 double newCost = Convert.ToDouble(CostTextBox.Text);
-                if (_copyItem.Cost != newCost)
+                if (_currentItem.Cost != newCost)
                 {
-                    _copyItem.Cost = newCost;
-                }
-
-                if (_isButtonClicked == true)
-                {
-                    ApplyButton.Visible = true;
-                    NameTextBox.Enabled = true;
-                    InfoTextBox.Enabled = true;
+                    _currentItem.Cost = newCost;
                 }
 
                 CostTextBox.BackColor = Color.White;
+                NameTextBox.Enabled = true;
+                InfoTextBox.Enabled = true;
+                ItemsListBox.Enabled = true;
+                SwitchVisibleButtons(true);
             }
             catch
             {
-                ApplyButton.Visible = false;
                 if (CostTextBox.Enabled)
                 {
                     CostTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameTextBox.Enabled = false;
                     InfoTextBox.Enabled = false;
+                    ItemsListBox.Enabled = false;
+                    SwitchVisibleButtons(false);
                 }
             }
-
         }
 
         private void NameTextBox_TextChanged(object sender, EventArgs e)
@@ -184,31 +127,29 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 string newName = NameTextBox.Text;
-                if (_copyItem.Name != newName)
+                if (_currentItem.Name != newName)
                 {
-                    _copyItem.Name = newName;
-                }
-
-                if (_isButtonClicked == true)
-                {
-                    ApplyButton.Visible = true;
-                    CostTextBox.Enabled = true;
-                    InfoTextBox.Enabled = true;
+                    _currentItem.Name = newName;
                 }
 
                 NameTextBox.BackColor = Color.White;
+                CostTextBox.Enabled = true;
+                InfoTextBox.Enabled = true;
+                ItemsListBox.Enabled = true;
+                SwitchVisibleButtons(true);
+                FillItemsListBox();
             }
             catch
             {
-                ApplyButton.Visible = false;
                 if (NameTextBox.Enabled)
                 {
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     CostTextBox.Enabled = false;
                     InfoTextBox.Enabled = false;
+                    ItemsListBox.Enabled = false;
+                    SwitchVisibleButtons(false);
                 }
             }
-
         }
 
         private void InfoTextBox_TextChanged(object sender, EventArgs e)
@@ -216,32 +157,28 @@ namespace ObjectOrientedPractics.View.Tabs
             try
             {
                 string newInfo = InfoTextBox.Text;
-                if (_copyItem.Info != newInfo)
+                if (_currentItem.Info != newInfo)
                 {
-                    _copyItem.Info = newInfo;
-                }
-
-                if (_isButtonClicked == true)
-                {
-                    ApplyButton.Visible = true;
-                    NameTextBox.Enabled = true;
-                    CostTextBox.Enabled = true;
-                    
+                    _currentItem.Info = newInfo;
                 }
 
                 InfoTextBox.BackColor = Color.White;
+                NameTextBox.Enabled = true;
+                CostTextBox.Enabled = true;
+                ItemsListBox.Enabled = true;
+                SwitchVisibleButtons(true);
             }
             catch
             {
-                ApplyButton.Visible = false;
                 if (InfoTextBox.Enabled)
                 {
                     InfoTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameTextBox.Enabled = false;
                     CostTextBox.Enabled = false;
+                    ItemsListBox.Enabled = false;
+                    SwitchVisibleButtons(false);
                 }
             }
-
         }
 
         /// <summary>
@@ -285,12 +222,14 @@ namespace ObjectOrientedPractics.View.Tabs
         private void SwitchVisibleButtons(bool flag)
         {
             AddButton.Visible = flag;
-            EditButton.Visible = flag;
             RemoveButton.Visible = flag;
-            ApplyButton.Visible = !flag;
-            CancelButton.Visible = !flag;
         }
 
-
+        private void FillItemsListBox()
+        {
+            ItemsListBox.DataSource = null;
+            ItemsListBox.DataSource = _items;
+            ItemsListBox.DisplayMember = nameof(Item.Name);
+        }
     }
 }

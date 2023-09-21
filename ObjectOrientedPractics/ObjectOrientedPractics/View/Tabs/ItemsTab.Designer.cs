@@ -31,8 +31,6 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             this.SelectedItemTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemsGroupBox = new System.Windows.Forms.GroupBox();
-            this.ApplyButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
             this.NameLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.CostLabel = new System.Windows.Forms.Label();
@@ -45,7 +43,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.ItemsGroupBox = new System.Windows.Forms.GroupBox();
             this.ItemsListBox = new System.Windows.Forms.ListBox();
             this.ButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.EditButton = new System.Windows.Forms.Button();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.SelectedItemTableLayoutPanel.SuspendLayout();
@@ -74,8 +71,6 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // SelectedItemsGroupBox
             // 
-            this.SelectedItemsGroupBox.Controls.Add(this.ApplyButton);
-            this.SelectedItemsGroupBox.Controls.Add(this.CancelButton);
             this.SelectedItemsGroupBox.Controls.Add(this.NameLabel);
             this.SelectedItemsGroupBox.Controls.Add(this.DescriptionLabel);
             this.SelectedItemsGroupBox.Controls.Add(this.CostLabel);
@@ -91,28 +86,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedItemsGroupBox.TabIndex = 0;
             this.SelectedItemsGroupBox.TabStop = false;
             this.SelectedItemsGroupBox.Text = "Selected Item";
-            // 
-            // ApplyButton
-            // 
-            this.ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ApplyButton.Location = new System.Drawing.Point(356, 390);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(84, 37);
-            this.ApplyButton.TabIndex = 9;
-            this.ApplyButton.Text = "Apply";
-            this.ApplyButton.UseVisualStyleBackColor = true;
-            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
-            // 
-            // CancelButton
-            // 
-            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(446, 390);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(84, 37);
-            this.CancelButton.TabIndex = 8;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // NameLabel
             // 
@@ -237,7 +210,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.ButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.ButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.ButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.ButtonsTableLayoutPanel.Controls.Add(this.EditButton, 2, 0);
             this.ButtonsTableLayoutPanel.Controls.Add(this.RemoveButton, 1, 0);
             this.ButtonsTableLayoutPanel.Controls.Add(this.AddButton, 0, 0);
             this.ButtonsTableLayoutPanel.Location = new System.Drawing.Point(0, 445);
@@ -246,16 +218,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.ButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.ButtonsTableLayoutPanel.Size = new System.Drawing.Size(268, 43);
             this.ButtonsTableLayoutPanel.TabIndex = 0;
-            // 
-            // EditButton
-            // 
-            this.EditButton.Location = new System.Drawing.Point(181, 3);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(84, 37);
-            this.EditButton.TabIndex = 10;
-            this.EditButton.Text = "Edit";
-            this.EditButton.UseVisualStyleBackColor = true;
-            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // RemoveButton
             // 
@@ -313,8 +275,5 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.ListBox ItemsListBox;
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button ApplyButton;
-        private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.Button EditButton;
     }
 }

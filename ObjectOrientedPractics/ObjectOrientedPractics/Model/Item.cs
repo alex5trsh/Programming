@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Services;
+
 
 namespace ObjectOrientedPractics.Model
 {
     /// <summary>
     /// Хранит данные о товарах.
     /// </summary>
-    class Item
+    public class Item
     {
         /// <summary>
         /// Счетчик товаров.
@@ -114,17 +116,5 @@ namespace ObjectOrientedPractics.Model
             AllItemsCount++;
             Id = AllItemsCount;
         }
-
-        /// <summary>
-        /// Создает копию объекта.
-        /// </summary>
-        /// <returns>Возвращает копию объекта.</returns>
-        public Item Clone()
-        {
-            
-            Item copyPlace = new Item(Name, Info, Cost);
-            return copyPlace;
-        }
-
     }
 }
