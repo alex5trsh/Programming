@@ -24,7 +24,6 @@ namespace ObjectOrientedPractics.Services
             {
                 throw new ArgumentException(propertyName + " должен быть меньше " + maxLength + " символов.");
             }
-
         }
 
         /// <summary>
@@ -80,6 +79,5 @@ namespace ObjectOrientedPractics.Services
                     "Фамилия Имя Отчество.");
             }
         }
-
     }
 }

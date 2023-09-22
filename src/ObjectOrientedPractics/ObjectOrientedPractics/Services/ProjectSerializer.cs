@@ -17,7 +17,7 @@ namespace ObjectOrientedPractics.Services
         /// <summary>
         /// Сохраняет данные в файл.
         /// </summary>
-        /// <param name="places">Данные, которые необходимо сохранить.</param>
+        /// <param name="items">Данные, которые необходимо сохранить.</param>
         /// <param name="directoryPath">Путь к файлу <see cref="fileName"/>. </param>
         /// <param name="fileName">Файл, в котором будут сохранены данные.</param>
         public static void SaveToFile(List<Item> items, string directoryPath, string fileName)

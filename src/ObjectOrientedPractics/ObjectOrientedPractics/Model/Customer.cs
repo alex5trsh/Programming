@@ -20,7 +20,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Полное имя.
         /// </summary>
-        private string _fullname;
+        private string _fullName;
 
         /// <summary>
         /// Адрес.
@@ -33,12 +33,12 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public string FullName
         {
-            get => _fullname;
+            get => _fullName;
             set
             {
                 ValueValidator.AssertStringOnFullName(value, "FullName");
                 ValueValidator.AssertStringOnLength(value, 200, "FullName");
-                _fullname = value;
+                _fullName = value;
             }
         }
 

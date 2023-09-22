@@ -14,6 +14,9 @@ using System.Text.Json;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
+    /// <summary>
+    /// Предоставляет методы вывода даных текущего элемента, его изменения, удаления, добавления.
+    /// </summary>
     public partial class ItemsTab : UserControl
     {
         /// <summary>
@@ -38,7 +41,7 @@ namespace ObjectOrientedPractics.View.Tabs
             ApplicationData) + "\\AppItems";
 
         /// <summary>
-        /// Файл, хранящий объекты класса <see cref="Place"/>.
+        /// Файл, хранящий объекты класса <see cref="Item"/>.
         /// </summary>
         private string _fileName = "Items.json";
 
@@ -225,6 +228,9 @@ namespace ObjectOrientedPractics.View.Tabs
             RemoveButton.Visible = flag;
         }
 
+        /// <summary>
+        /// Заполняет ItemsListBox значениями из _items.
+        /// </summary>
         private void FillItemsListBox()
         {
             ItemsListBox.DataSource = null;
