@@ -99,6 +99,7 @@ namespace ObjectOrientedPractics
             this.MinimumSize = new System.Drawing.Size(857, 570);
             this.Name = "MainForm";
             this.Text = "Object Oriented Practics";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.CustomersTabPage.ResumeLayout(false);
             this.ItemsTabPage.ResumeLayout(false);
             this.MainTabControl.ResumeLayout(false);

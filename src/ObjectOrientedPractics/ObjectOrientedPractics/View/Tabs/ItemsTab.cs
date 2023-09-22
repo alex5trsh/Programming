@@ -237,5 +237,13 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemsListBox.DataSource = _items;
             ItemsListBox.DisplayMember = nameof(Item.Name);
         }
+
+        /// <summary>
+        /// Сохраняет все изменения при закрытии программы.
+        /// </summary>
+        public  void SaveAllChanges()
+        {
+            ProjectSerializer.SaveToFile(_items, _directoryPath, _fileName);
+        }
     }
 }

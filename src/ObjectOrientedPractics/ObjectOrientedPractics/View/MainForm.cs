@@ -16,5 +16,10 @@ namespace ObjectOrientedPractics
         {
             InitializeComponent();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ItemsTab.SaveAllChanges();
+        }
     }
 }
