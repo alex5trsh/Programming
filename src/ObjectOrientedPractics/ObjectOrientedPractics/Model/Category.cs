@@ -8,25 +8,39 @@ namespace ObjectOrientedPractics.Model
 {
     public enum Category
     {
-        //Продукты.
+        /// <summary>
+        /// Продукты.
+        /// </summary>
         Product,
 
-        //Одежда.
+        /// <summary>
+        /// Одежда.
+        /// </summary>
         Clothes,
 
-        //Игрушки.
+        /// <summary>
+        /// Игрушки.
+        /// </summary>
         Toys,
 
-        //Косметика.
+        /// <summary>
+        /// Косметика.
+        /// </summary>
         Cosmetic,
 
-        //Обувь.
+        /// <summary>
+        /// Обувь.
+        /// </summary>
         Shoes,
 
-        //Парфюмерия.
+        /// <summary>
+        /// Парфюмерия.
+        /// </summary>
         Perfumery,
 
-        //Посуда.
+        /// <summary>
+        /// Посуда.
+        /// </summary>
         Dishes
     }
 }
