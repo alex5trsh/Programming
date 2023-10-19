@@ -25,7 +25,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес.
         /// </summary>
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Возвращает и задает полное имя в формате Фамилия Имя Отчество. 
@@ -37,20 +37,19 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertStringOnFullName(value, "FullName");
-                ValueValidator.AssertStringOnLength(value, 200, "FullName");
+                ValueValidator.AssertStringOnLength(value, 0, 200, "FullName");
                 _fullName = value;
             }
         }
 
         /// <summary>
-        /// Возвращает и задает адрес. Длина должна быть меньше 500 символов.
+        /// Возвращает и задает адрес.
         /// </summary>
-        public string Address
+        public Address Address
         {
             get => _address;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, "Address");
                 _address = value;
             }
         }
@@ -77,11 +76,11 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество. 
         /// Длина должна быть меньше 200 символов. </param>
-        /// <param name="address">Адрес. Длина должна быть меньше 500 символов.</param>
-        public Customer(string fullName, string address)
+        /// <param name="address">Адрес</param>
+        public Customer(string fullName)
         {
             FullName = fullName;
-            Address = address;
+            Address =new Address(100000, "Country","City","Street","Building","Apartment") ;
             AllItemsCount++;
             Id = AllItemsCount;
         }
@@ -94,5 +93,6 @@ namespace ObjectOrientedPractics.Model
             AllItemsCount++;
             Id = AllItemsCount;
         }
+
     }
 }

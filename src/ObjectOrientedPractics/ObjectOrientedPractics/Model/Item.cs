@@ -42,7 +42,7 @@ namespace ObjectOrientedPractics.Model
             get => _name;
             set
             {
-                ValueValidator.AssertLengthInRange(value.Length, 1, 200, "Name");
+                ValueValidator.AssertStringOnLength(value, 1, 200, "Name");
 
                 _name = value;
             }
@@ -56,7 +56,7 @@ namespace ObjectOrientedPractics.Model
             get => _info;
             set
             {
-                ValueValidator.AssertLengthInRange(value.Length, 1, 1000, "Info");
+                ValueValidator.AssertStringOnLength(value, 1, 1000, "Info");
 
                 _info = value;
             }
@@ -86,6 +86,7 @@ namespace ObjectOrientedPractics.Model
             {
                 _allItemsCount = value;
             }
+            
         }
 
         /// <summary>
@@ -94,16 +95,23 @@ namespace ObjectOrientedPractics.Model
         public int Id { get; }
 
         /// <summary>
+        /// Возвращает и задает категорию товара.
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="Item"/>.
         /// </summary>
         /// <param name="name">Название. Длина должна быть меньше 200.</param>
         /// <param name="info">Описание. Длина должна быть меньше 1000.</param>
         /// <param name="cost">Стоимость. Должна состоять из чисел от 0 до 100 000.</param>
-        public Item(string name, string info, double cost)
+        /// <param name="category">Категория.</param>
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
             AllItemsCount++;
             Id = AllItemsCount;
         }

@@ -18,11 +18,18 @@ namespace ObjectOrientedPractics.Services
         /// <param name="value">Проверяемая строка</param>
         /// <param name="maxLength">Максимальная длина строки.</param>
         /// <param name="propertyName">Имя свойства, которое подлежит проверке.</param>
-        public static void AssertStringOnLength(string value, int maxLength, string propertyName)
+        public static void AssertStringOnLength(string value, int minLength,int maxLength, 
+            string propertyName)
         {
-            if (value.Length > maxLength)
+            if (value == null)
             {
-                throw new ArgumentException(propertyName + " должен быть меньше " + maxLength + " символов.");
+                return;
+            }
+
+            if ( value.Length<minLength||value.Length > maxLength)
+            {
+                throw new ArgumentException("Длина переменной свойства " + propertyName +
+                    " не входит в диапазон");
             }
         }
 
@@ -35,6 +42,11 @@ namespace ObjectOrientedPractics.Services
         /// <param name="nameOfFeature">Имя свойства, которое подлежит проверке.</param>
         public static void AssertLengthInRange(int value, int min, int max, string nameOfFeature)
         {
+            if (value == 0)
+            {
+                return;
+            }
+
             if (value < min || value > max)
             {
                 throw new ArgumentException("Длина переменной свойства " + nameOfFeature +
@@ -51,6 +63,11 @@ namespace ObjectOrientedPractics.Services
         /// <param name="propertyName">Имя свойства, которое подлежит проверке.</param>
         public static void AssertValueInRange(double value, double min, double max, string propertyName)
         {
+            if(value==0)
+            {
+                return;
+            }  
+            
             if (value < min || value > max)
             {
                 throw new ArgumentException("Переменная свойства" + propertyName + "не входит в диапазон");
