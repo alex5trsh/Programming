@@ -24,10 +24,14 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         List<Item> _items = new List<Item>();
 
+
+
         /// <summary>
         /// Текущий элемент класса <see cref="Item"/>.
         /// </summary>
         private Item _currentItem;
+
+        
 
         /// <summary>
         /// Индекс текущего элемента.
@@ -49,6 +53,11 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             InitializeComponent();
 
+            var categories = Enum.GetValues(typeof(Category));
+            foreach (var value in categories)
+            {
+                CategoryComboBox.Items.Add(value);
+            }
             _items = ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
             FillItemsListBox();
             SwitchAccessTextBox(false);
@@ -57,6 +66,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             if (ItemsListBox.SelectedIndex >= 0)
             {
                 _currentIndex = ItemsListBox.SelectedIndex;
@@ -69,7 +79,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Item _newItem = new Item("New Name", "New Description", 1);
+            Item _newItem = new Item("New Name", "New Description", 1, Category.Clothes);
             _items.Add(_newItem);
             FillItemsListBox();
 
@@ -88,8 +98,9 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox != null)
             {
-                ItemsListBox.Items.RemoveAt(_currentIndex);
+                //ItemsListBox.Items.RemoveAt(_currentIndex);
                 _items.RemoveAt(_currentIndex);
+                FillItemsListBox();
                 ItemsListBox.SelectedIndex = -1;
                 SwitchAccessTextBox(false);
                 ClearItemsInfo(); 
@@ -109,6 +120,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CostTextBox.BackColor = Color.White;
                 NameTextBox.Enabled = true;
                 InfoTextBox.Enabled = true;
+                CategoryComboBox.Enabled = true;
                 ItemsListBox.Enabled = true;
                 SwitchVisibleButtons(true);
             }
@@ -119,6 +131,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     CostTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameTextBox.Enabled = false;
                     InfoTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
                     ItemsListBox.Enabled = false;
                     SwitchVisibleButtons(false);
                 }
@@ -138,6 +151,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 NameTextBox.BackColor = Color.White;
                 CostTextBox.Enabled = true;
                 InfoTextBox.Enabled = true;
+                CategoryComboBox.Enabled = true;
                 ItemsListBox.Enabled = true;
                 SwitchVisibleButtons(true);
                 FillItemsListBox();
@@ -149,6 +163,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     CostTextBox.Enabled = false;
                     InfoTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
                     ItemsListBox.Enabled = false;
                     SwitchVisibleButtons(false);
                 }
@@ -168,6 +183,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 InfoTextBox.BackColor = Color.White;
                 NameTextBox.Enabled = true;
                 CostTextBox.Enabled = true;
+                CategoryComboBox.Enabled = true;
                 ItemsListBox.Enabled = true;
                 SwitchVisibleButtons(true);
             }
@@ -178,9 +194,20 @@ namespace ObjectOrientedPractics.View.Tabs
                     InfoTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     NameTextBox.Enabled = false;
                     CostTextBox.Enabled = false;
+                    CategoryComboBox.Enabled = false;
                     ItemsListBox.Enabled = false;
                     SwitchVisibleButtons(false);
                 }
+            }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Category newCategory = (Category)Enum.Parse(typeof(Category),
+                        CategoryComboBox.Text);
+            if (_currentItem.Category != newCategory)
+            {
+                _currentItem.Category = newCategory;
             }
         }
 
@@ -194,6 +221,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Text = Convert.ToString(item.Cost);
             NameTextBox.Text =item.Name;
             InfoTextBox.Text =item.Info;
+            CategoryComboBox.Text = Convert.ToString(item.Category);
         }
 
         /// <summary>
@@ -205,6 +233,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Clear();
             NameTextBox.Clear();
             InfoTextBox.Clear();
+            CategoryComboBox.SelectedIndex = -1;
         }
 
         /// <summary>
@@ -216,6 +245,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Enabled = flag;
             NameTextBox.Enabled = flag;
             InfoTextBox.Enabled = flag;
+            CategoryComboBox.Enabled = flag;
         }
 
         /// <summary>

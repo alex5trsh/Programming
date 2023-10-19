@@ -31,6 +31,8 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             this.SelectedItemTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedItemsGroupBox = new System.Windows.Forms.GroupBox();
+            this.CategoryLabel = new System.Windows.Forms.Label();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.CostLabel = new System.Windows.Forms.Label();
@@ -71,6 +73,8 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // SelectedItemsGroupBox
             // 
+            this.SelectedItemsGroupBox.Controls.Add(this.CategoryLabel);
+            this.SelectedItemsGroupBox.Controls.Add(this.CategoryComboBox);
             this.SelectedItemsGroupBox.Controls.Add(this.NameLabel);
             this.SelectedItemsGroupBox.Controls.Add(this.DescriptionLabel);
             this.SelectedItemsGroupBox.Controls.Add(this.CostLabel);
@@ -87,10 +91,30 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedItemsGroupBox.TabStop = false;
             this.SelectedItemsGroupBox.Text = "Selected Item";
             // 
+            // CategoryLabel
+            // 
+            this.CategoryLabel.AutoSize = true;
+            this.CategoryLabel.Location = new System.Drawing.Point(6, 80);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(52, 13);
+            this.CategoryLabel.TabIndex = 9;
+            this.CategoryLabel.Text = "Category:";
+            // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(61, 77);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(149, 21);
+            this.CategoryComboBox.TabIndex = 8;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
+            // 
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(6, 77);
+            this.NameLabel.Location = new System.Drawing.Point(6, 111);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(38, 13);
             this.NameLabel.TabIndex = 7;
@@ -99,7 +123,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // DescriptionLabel
             // 
             this.DescriptionLabel.AutoSize = true;
-            this.DescriptionLabel.Location = new System.Drawing.Point(6, 202);
+            this.DescriptionLabel.Location = new System.Drawing.Point(6, 238);
             this.DescriptionLabel.Name = "DescriptionLabel";
             this.DescriptionLabel.Size = new System.Drawing.Size(63, 13);
             this.DescriptionLabel.TabIndex = 6;
@@ -127,7 +151,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.CostTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CostTextBox.Location = new System.Drawing.Point(51, 49);
+            this.CostTextBox.Location = new System.Drawing.Point(61, 49);
             this.CostTextBox.Name = "CostTextBox";
             this.CostTextBox.Size = new System.Drawing.Size(149, 20);
             this.CostTextBox.TabIndex = 3;
@@ -137,7 +161,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTextBox.Location = new System.Drawing.Point(6, 93);
+            this.NameTextBox.Location = new System.Drawing.Point(9, 127);
             this.NameTextBox.Multiline = true;
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(524, 95);
@@ -148,7 +172,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.InfoTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InfoTextBox.Location = new System.Drawing.Point(6, 218);
+            this.InfoTextBox.Location = new System.Drawing.Point(9, 254);
             this.InfoTextBox.Multiline = true;
             this.InfoTextBox.Name = "InfoTextBox";
             this.InfoTextBox.Size = new System.Drawing.Size(524, 166);
@@ -159,7 +183,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.IdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.IdTextBox.Location = new System.Drawing.Point(51, 23);
+            this.IdTextBox.Location = new System.Drawing.Point(61, 23);
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.ReadOnly = true;
             this.IdTextBox.Size = new System.Drawing.Size(149, 20);
@@ -275,5 +299,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.ListBox ItemsListBox;
         private System.Windows.Forms.Button RemoveButton;
         private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Label CategoryLabel;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
     }
 }
