@@ -7,10 +7,7 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model
 {
-    /// <summary>
-    /// Хранит данные об адресе.
-    /// </summary>
-    public class Address
+    class Address
     {
         /// <summary>
         /// Почтовый индекс.
@@ -64,7 +61,7 @@ namespace ObjectOrientedPractics.Model
             get => _country;
             set
             {
-                ValueValidator.AssertStringOnLength(value,0, 50, "Country");
+                ValueValidator.AssertStringOnLength(value, 0, 50, "Country");
 
                 _country = value;
             }
@@ -92,7 +89,7 @@ namespace ObjectOrientedPractics.Model
             get => _street;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 0,100, "Street");
+                ValueValidator.AssertStringOnLength(value, 0, 100, "Street");
 
                 _street = value;
             }
@@ -120,7 +117,7 @@ namespace ObjectOrientedPractics.Model
             get => _apartment;
             set
             {
-                ValueValidator.AssertStringOnLength(value, 0,10, "Apartment");
+                ValueValidator.AssertStringOnLength(value, 0, 10, "Apartment");
 
                 _apartment = value;
             }
@@ -135,7 +132,7 @@ namespace ObjectOrientedPractics.Model
         /// <param name="street">Улица. Длина должна быть меньше 100.</param>
         /// <param name="building">Дом. Длина должна быть меньше 10.</param>
         /// <param name="apartment">Номер квартиры. Длина должна быть меньше 10.</param>
-        public Address(int index, string country, string city, string street, string building, 
+        public Address(int index, string country, string city, string street, string building,
             string apartment)
         {
             Index = index;
@@ -151,7 +148,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public Address()
         {
-            
+
         }
 
     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    //Хранит категории товаров.
     public enum Category
     {
         //Продукты.

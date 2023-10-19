@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Services\ProjectSerializer.cs" />
@@ -133,6 +135,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
