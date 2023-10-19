@@ -7,6 +7,9 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Хранит данные об адресах.
+    /// </summary>
     public class Address
     {
         /// <summary>

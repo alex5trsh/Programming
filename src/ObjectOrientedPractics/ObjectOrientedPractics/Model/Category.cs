@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Предоставляет шаблоны товаров.
+    /// </summary>
     public enum Category
     {
         /// <summary>

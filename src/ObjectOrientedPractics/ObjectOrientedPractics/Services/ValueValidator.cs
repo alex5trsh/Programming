@@ -42,10 +42,10 @@ namespace ObjectOrientedPractics.Services
         /// <param name="nameOfFeature">Имя свойства, которое подлежит проверке.</param>
         public static void AssertLengthInRange(int value, int min, int max, string nameOfFeature)
         {
-            if (value == 0)
-            {
-                return;
-            }
+            //if (value == 0)
+            //{
+            //    return;
+            //}
 
             if (value < min || value > max)
             {
@@ -63,10 +63,10 @@ namespace ObjectOrientedPractics.Services
         /// <param name="propertyName">Имя свойства, которое подлежит проверке.</param>
         public static void AssertValueInRange(double value, double min, double max, string propertyName)
         {
-            if(value==0)
-            {
-                return;
-            }  
+            //if(value==0)
+            //{
+            //    return;
+            //}  
             
             if (value < min || value > max)
             {

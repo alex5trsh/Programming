@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о покупателях.
     /// </summary>
-    class Customer
+    public class Customer
     {
         /// <summary>
         /// Счетчик товаров.

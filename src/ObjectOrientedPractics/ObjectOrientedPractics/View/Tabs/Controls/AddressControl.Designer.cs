@@ -107,9 +107,8 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.ErrorLabel.Location = new System.Drawing.Point(387, 103);
             this.ErrorLabel.MaximumSize = new System.Drawing.Size(200, 0);
             this.ErrorLabel.Name = "ErrorLabel";
-            this.ErrorLabel.Size = new System.Drawing.Size(28, 13);
+            this.ErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.ErrorLabel.TabIndex = 6;
-            this.ErrorLabel.Text = "error";
             // 
             // PostIndexTextBox
             // 

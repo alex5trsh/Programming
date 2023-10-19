@@ -12,17 +12,17 @@ using ObjectOrientedPractics.Model;
 namespace ObjectOrientedPractics.View.Tabs.Controls
 {
     /// <summary>
-    /// 
+    /// Предоставляет методы вывода даных текущего элемента класса <see cref="Address"/> и его изменения.
     /// </summary>
     public partial class AddressControl : UserControl
     {
         /// <summary>
-        /// 
+        /// Адрес.
         /// </summary>
         private Address _address;
 
         /// <summary>
-        /// 
+        /// Возвращает и задает адрес. Выводит адрес на текстбоксах.
         /// </summary>
         public Address Address
         {
@@ -40,7 +40,6 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             ErrorLabel.Visible = false;
         }
 
-        //не проходит валидацию 0
         private void PostIndexTextBox_TextChanged(object sender, EventArgs e)
         {
             try
@@ -268,5 +267,33 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             BuildingTextBox.Text = Address.Building;
             ApartmentTextBox.Text = Address.Apartment;
         }
+         
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ClearAddressTextBox()
+        {
+            PostIndexTextBox.Clear();
+            CountryTextBox.Clear();
+            CityTextBox.Clear();
+            StreetTextBox.Clear();
+            BuildingTextBox.Clear();
+            ApartmentTextBox.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="flag"></param>
+        public void SwitchAccessTextBox(bool flag)
+        {
+            PostIndexTextBox.Enabled = flag;
+            CountryTextBox.Enabled = flag;
+            CityTextBox.Enabled = flag;
+            StreetTextBox.Enabled = flag;
+            BuildingTextBox.Enabled = flag;
+            ApartmentTextBox.Enabled = flag;
+        }
     }
+
 }

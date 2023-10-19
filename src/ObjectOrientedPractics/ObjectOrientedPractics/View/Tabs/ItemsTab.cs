@@ -15,7 +15,8 @@ using System.Text.Json;
 namespace ObjectOrientedPractics.View.Tabs
 {
     /// <summary>
-    /// Предоставляет методы вывода даных текущего элемента, его изменения, удаления, добавления.
+    /// Предоставляет методы вывода даных текущего элемента класса <see cref="Item"/>,
+    /// его изменения, удаления, добавления.
     /// </summary>
     public partial class ItemsTab : UserControl
     {
@@ -24,14 +25,10 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         List<Item> _items = new List<Item>();
 
-
-
         /// <summary>
         /// Текущий элемент класса <see cref="Item"/>.
         /// </summary>
         private Item _currentItem;
-
-        
 
         /// <summary>
         /// Индекс текущего элемента.
@@ -58,7 +55,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CategoryComboBox.Items.Add(value);
             }
-            _items = ProjectSerializer.LoadFromFile(_directoryPath, _fileName);
+            _items = ProjectSerializer.LoadItemFromFile(_directoryPath, _fileName);
             FillItemsListBox();
             SwitchAccessTextBox(false);
             SwitchVisibleButtons(true);
@@ -98,7 +95,6 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox != null)
             {
-                //ItemsListBox.Items.RemoveAt(_currentIndex);
                 _items.RemoveAt(_currentIndex);
                 FillItemsListBox();
                 ItemsListBox.SelectedIndex = -1;
@@ -273,7 +269,7 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         public  void SaveAllChanges()
         {
-            ProjectSerializer.SaveToFile(_items, _directoryPath, _fileName);
+            ProjectSerializer.SaveItemToFile(_items, _directoryPath, _fileName);
         }
     }
 }

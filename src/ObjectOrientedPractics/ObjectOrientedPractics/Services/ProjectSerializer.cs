@@ -15,12 +15,12 @@ namespace ObjectOrientedPractics.Services
     public static class ProjectSerializer
     {
         /// <summary>
-        /// Сохраняет данные в файл.
+        /// Сохраняет данные класса <see cref="Item"/> в файл.
         /// </summary>
         /// <param name="items">Данные, которые необходимо сохранить.</param>
         /// <param name="directoryPath">Путь к файлу <see cref="fileName"/>. </param>
         /// <param name="fileName">Файл, в котором будут сохранены данные.</param>
-        public static void SaveToFile(List<Item> items, string directoryPath, string fileName)
+        public static void SaveItemToFile(List<Item> items, string directoryPath, string fileName)
         {
             if (!Directory.Exists(directoryPath))
             {
@@ -32,12 +32,12 @@ namespace ObjectOrientedPractics.Services
         }
 
         /// <summary>
-        /// Загружает данные из файла.
+        /// Загружает данные класса <see cref="Item"/> из файла.
         /// </summary>
         /// <param name="directoryPath">Путь к файлу <see cref="fileName"/>.</param>
         /// <param name="fileName">Файл, из которого будут загружены данные.</param>
         /// <returns>Возвращает коллекцию загруженных данных.</returns>
-        public static List<Item> LoadFromFile(string directoryPath, string fileName)
+        public static List<Item> LoadItemFromFile(string directoryPath, string fileName)
         {
             List<Item> items = new List<Item>();
             if (File.Exists($"{directoryPath}/{fileName}"))
@@ -47,6 +47,42 @@ namespace ObjectOrientedPractics.Services
             }
 
             return items;
+        }
+
+        /// <summary>
+        /// Сохраняет данные класса <see cref="Customer"/> в файл.
+        /// </summary>
+        /// <param name="customers">Данные, которые необходимо сохранить.</param>
+        /// <param name="directoryPath">Путь к файлу <see cref="fileName"/>. </param>
+        /// <param name="fileName">Файл, в котором будут сохранены данные.</param>
+        public static void SaveCustomerToFile(List<Customer> customers, string directoryPath, 
+            string fileName)
+        {
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string customersString = JsonSerializer.Serialize(customers);
+            File.WriteAllText($"{directoryPath}/{fileName}", customersString);
+        }
+
+        /// <summary>
+        /// Загружает данные класса <see cref="Customer"/> из файла.
+        /// </summary>
+        /// <param name="directoryPath">Путь к файлу <see cref="fileName"/>.</param>
+        /// <param name="fileName">Файл, из которого будут загружены данные.</param>
+        /// <returns>Возвращает коллекцию загруженных данных.</returns>
+        public static List<Customer> LoadCustomerFromFile(string directoryPath, string fileName)
+        {
+            List<Customer> customers = new List<Customer>();
+            if (File.Exists($"{directoryPath}/{fileName}"))
+            {
+                var customersString = File.ReadAllText($"{directoryPath}/{fileName}");
+                customers = JsonSerializer.Deserialize<List<Customer>>(customersString);
+            }
+
+            return customers;
         }
     }
 }

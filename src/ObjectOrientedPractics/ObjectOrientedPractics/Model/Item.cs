@@ -36,7 +36,6 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает название. Длина должна быть меньше 200.
         /// </summary>
-        
         public string Name
         {
             get => _name;
