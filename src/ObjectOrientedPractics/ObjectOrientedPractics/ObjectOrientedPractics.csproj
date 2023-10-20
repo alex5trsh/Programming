@@ -92,10 +92,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\NewFolder1\AddressControl.cs">
+    <Compile Include="View\OOPControls\AddressControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\NewFolder1\AddressControl.Designer.cs">
+    <Compile Include="View\OOPControls\AddressControl.Designer.cs">
       <DependentUpon>AddressControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Tabs\CustomersTab.cs">
@@ -122,7 +122,7 @@
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\NewFolder1\AddressControl.resx">
+    <EmbeddedResource Include="View\OOPControls\AddressControl.resx">
       <DependentUpon>AddressControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Tabs\CustomersTab.resx">
