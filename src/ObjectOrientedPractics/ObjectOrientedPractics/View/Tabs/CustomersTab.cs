@@ -19,12 +19,12 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class CustomersTab : UserControl
     {
         /// <summary>
-        /// Коллекция элементов класса <see cref="Item"/>.
+        /// Коллекция элементов класса <see cref="Customer"/>.
         /// </summary>
         List<Customer> _customers = new List<Customer>();
 
         /// <summary>
-        /// Текущий элемент класса <see cref="Item"/>.
+        /// Текущий элемент класса <see cref="Customer"/>.
         /// </summary>
         private Customer _currentCustomer;
 
@@ -80,7 +80,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 }
             }
 
-            SwitchAccessTextBox(true);
+            SwitchAccessTextBox(true);  
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)

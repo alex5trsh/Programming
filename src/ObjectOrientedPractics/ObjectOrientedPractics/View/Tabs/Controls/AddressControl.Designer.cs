@@ -104,8 +104,8 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.ErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Location = new System.Drawing.Point(387, 103);
-            this.ErrorLabel.MaximumSize = new System.Drawing.Size(200, 0);
+            this.ErrorLabel.Location = new System.Drawing.Point(382, 104);
+            this.ErrorLabel.MaximumSize = new System.Drawing.Size(150, 0);
             this.ErrorLabel.Name = "ErrorLabel";
             this.ErrorLabel.Size = new System.Drawing.Size(0, 13);
             this.ErrorLabel.TabIndex = 6;
@@ -118,6 +118,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.PostIndexTextBox.Name = "PostIndexTextBox";
             this.PostIndexTextBox.Size = new System.Drawing.Size(135, 20);
             this.PostIndexTextBox.TabIndex = 7;
+            this.PostIndexTextBox.TextChanged += new System.EventHandler(this.PostIndexTextBox_TextChanged);
             // 
             // ApartmentTextBox
             // 
@@ -127,6 +128,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.ApartmentTextBox.Name = "ApartmentTextBox";
             this.ApartmentTextBox.Size = new System.Drawing.Size(100, 20);
             this.ApartmentTextBox.TabIndex = 8;
+            this.ApartmentTextBox.TextChanged += new System.EventHandler(this.ApartmentTextBox_TextChanged);
             // 
             // BuildingTextBox
             // 
@@ -134,6 +136,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.BuildingTextBox.Name = "BuildingTextBox";
             this.BuildingTextBox.Size = new System.Drawing.Size(100, 20);
             this.BuildingTextBox.TabIndex = 9;
+            this.BuildingTextBox.TextChanged += new System.EventHandler(this.BuildingTextBox_TextChanged);
             // 
             // StreetTextBox
             // 
@@ -143,6 +146,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.StreetTextBox.Name = "StreetTextBox";
             this.StreetTextBox.Size = new System.Drawing.Size(460, 20);
             this.StreetTextBox.TabIndex = 10;
+            this.StreetTextBox.TextChanged += new System.EventHandler(this.StreetTextBox_TextChanged);
             // 
             // CityTextBox
             // 
@@ -152,6 +156,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.CityTextBox.Name = "CityTextBox";
             this.CityTextBox.Size = new System.Drawing.Size(197, 20);
             this.CityTextBox.TabIndex = 11;
+            this.CityTextBox.TextChanged += new System.EventHandler(this.CityTextBox_TextChanged);
             // 
             // CountryTextBox
             // 
@@ -159,6 +164,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.CountryTextBox.Name = "CountryTextBox";
             this.CountryTextBox.Size = new System.Drawing.Size(173, 20);
             this.CountryTextBox.TabIndex = 12;
+            this.CountryTextBox.TextChanged += new System.EventHandler(this.CountryTextBox_TextChanged);
             // 
             // CityLabel
             // 

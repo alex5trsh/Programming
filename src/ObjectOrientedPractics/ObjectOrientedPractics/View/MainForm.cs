@@ -20,6 +20,7 @@ namespace ObjectOrientedPractics
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             ItemsTab.SaveAllChanges();
+            CustomersTab.SaveAllChanges();
         }
     }
 }

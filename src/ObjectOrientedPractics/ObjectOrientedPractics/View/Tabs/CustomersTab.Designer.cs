@@ -37,13 +37,13 @@ namespace ObjectOrientedPractics.View.Tabs
             this.AddButton = new System.Windows.Forms.Button();
             this.SelectedCustomerTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.SelectedCustomerGroupBox = new System.Windows.Forms.GroupBox();
+            this.AddressControl = new ObjectOrientedPractics.View.Tabs.Controls.AddressControl();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.IdTextBox = new System.Windows.Forms.TextBox();
             this.FullNameLabel = new System.Windows.Forms.Label();
             this.IdLabel = new System.Windows.Forms.Label();
             this.Panel = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.AddressControl = new ObjectOrientedPractics.View.Tabs.Controls.AddressControl();
             this.CustomersTableLayoutPanel.SuspendLayout();
             this.CustomersGroupBox.SuspendLayout();
             this.ButtonsTableLayoutPanel.SuspendLayout();
@@ -157,6 +157,15 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedCustomerGroupBox.TabStop = false;
             this.SelectedCustomerGroupBox.Text = "Selected Customer";
             // 
+            // AddressControl
+            // 
+            this.AddressControl.Address = null;
+            this.AddressControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.AddressControl.Location = new System.Drawing.Point(3, 77);
+            this.AddressControl.Name = "AddressControl";
+            this.AddressControl.Size = new System.Drawing.Size(533, 152);
+            this.AddressControl.TabIndex = 13;
+            // 
             // NameTextBox
             // 
             this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -202,15 +211,6 @@ namespace ObjectOrientedPractics.View.Tabs
             this.Panel.Name = "Panel";
             this.Panel.Size = new System.Drawing.Size(545, 251);
             this.Panel.TabIndex = 2;
-            // 
-            // AddressControl
-            // 
-            this.AddressControl.Address = null;
-            this.AddressControl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.AddressControl.Location = new System.Drawing.Point(3, 77);
-            this.AddressControl.Name = "AddressControl";
-            this.AddressControl.Size = new System.Drawing.Size(533, 152);
-            this.AddressControl.TabIndex = 13;
             // 
             // CustomersTab
             // 

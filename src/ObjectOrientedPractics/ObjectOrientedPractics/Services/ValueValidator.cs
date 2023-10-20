@@ -21,10 +21,10 @@ namespace ObjectOrientedPractics.Services
         public static void AssertStringOnLength(string value, int minLength,int maxLength, 
             string propertyName)
         {
-            if (value == null)
-            {
-                return;
-            }
+            //if (value == null)
+            //{
+            //    return;
+            //}
 
             if ( value.Length<minLength||value.Length > maxLength)
             {
