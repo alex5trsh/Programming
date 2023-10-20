@@ -23,7 +23,20 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Коллекция элементов класса <see cref="Item"/>.
         /// </summary>
-        List<Item> _items = new List<Item>();
+        private List<Item> _items;
+
+        /// <summary>
+        /// Возвращает и задает товары.
+        /// </summary>
+        public List<Item> Items
+        {
+            get => _items;
+            set
+            {
+                _items = value;
+                FillItemsListBox();
+            }
+        }
 
         /// <summary>
         /// Текущий элемент класса <see cref="Item"/>.
@@ -35,17 +48,6 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private int _currentIndex;
 
-        /// <summary>
-        /// Путь к файлу <see cref="_fileName"/>.
-        /// </summary>
-        private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
-            ApplicationData) + "\\AppItems";
-
-        /// <summary>
-        /// Файл, хранящий объекты класса <see cref="Item"/>.
-        /// </summary>
-        private string _fileName = "Items.json";
-
         public ItemsTab()
         {
             InitializeComponent();
@@ -55,7 +57,6 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 CategoryComboBox.Items.Add(value);
             }
-            _items = ProjectSerializer.LoadItemFromFile(_directoryPath, _fileName);
             FillItemsListBox();
             SwitchAccessTextBox(false);
             SwitchVisibleButtons(true);
@@ -199,12 +200,19 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Category newCategory = (Category)Enum.Parse(typeof(Category),
-                        CategoryComboBox.Text);
-            if (_currentItem.Category != newCategory)
+            try
             {
-                _currentItem.Category = newCategory;
+                Category newCategory = (Category)Enum.Parse(typeof(Category),
+                            CategoryComboBox.Text);
+                if (_currentItem.Category != newCategory)
+                {
+                    _currentItem.Category = newCategory;
+                }
             }
+            catch 
+            { 
+
+            }              
         }
 
         /// <summary>
@@ -229,7 +237,7 @@ namespace ObjectOrientedPractics.View.Tabs
             CostTextBox.Clear();
             NameTextBox.Clear();
             InfoTextBox.Clear();
-            CategoryComboBox.SelectedIndex = -1;
+            CategoryComboBox.Text = null;
         }
 
         /// <summary>
@@ -262,14 +270,6 @@ namespace ObjectOrientedPractics.View.Tabs
             ItemsListBox.DataSource = null;
             ItemsListBox.DataSource = _items;
             ItemsListBox.DisplayMember = nameof(Item.Name);
-        }
-
-        /// <summary>
-        /// Сохраняет все изменения при закрытии программы.
-        /// </summary>
-        public  void SaveAllChanges()
-        {
-            ProjectSerializer.SaveItemToFile(_items, _directoryPath, _fileName);
         }
     }
 }

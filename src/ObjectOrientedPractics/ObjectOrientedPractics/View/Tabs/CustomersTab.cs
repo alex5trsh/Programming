@@ -21,7 +21,20 @@ namespace ObjectOrientedPractics.View.Tabs
         /// <summary>
         /// Коллекция элементов класса <see cref="Customer"/>.
         /// </summary>
-        List<Customer> _customers = new List<Customer>();
+        private List<Customer> _customers;
+
+        /// <summary>
+        /// Возвращает и задает покупателей.
+        /// </summary>
+        public List<Customer> Customers
+        {
+            get => _customers;
+            set
+            {
+                _customers = value;
+                FillCustomersListBox();
+            }
+        }
 
         /// <summary>
         /// Текущий элемент класса <see cref="Customer"/>.
@@ -33,21 +46,10 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private int _currentIndex;
 
-        /// <summary>
-        /// Путь к файлу <see cref="_fileName"/>.
-        /// </summary>
-        private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
-            ApplicationData) + "\\AppCustomers";
-
-        /// <summary>
-        /// Файл, хранящий объекты класса <see cref="Customer"/>.
-        /// </summary>
-        private string _fileName = "Customers.json";
         public CustomersTab()
         {
             InitializeComponent();
 
-            _customers = ProjectSerializer.LoadCustomerFromFile(_directoryPath, _fileName);
             FillCustomersListBox();
             SwitchAccessTextBox(false);
             SwitchVisibleButtons(true);
@@ -172,14 +174,6 @@ namespace ObjectOrientedPractics.View.Tabs
             CustomersListBox.DataSource = null;
             CustomersListBox.DataSource = _customers;
             CustomersListBox.DisplayMember = nameof(Customer.FullName);
-        }
-
-        /// <summary>
-        /// Сохраняет все изменения при закрытии программы.
-        /// </summary>
-        public void SaveAllChanges()
-        {
-            ProjectSerializer.SaveCustomerToFile(_customers, _directoryPath, _fileName);
         }
     }
 }

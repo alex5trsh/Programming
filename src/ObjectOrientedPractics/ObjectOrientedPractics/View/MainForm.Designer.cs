@@ -69,6 +69,7 @@ namespace ObjectOrientedPractics
             this.ItemsTab.Name = "ItemsTab";
             this.ItemsTab.Size = new System.Drawing.Size(827, 499);
             this.ItemsTab.TabIndex = 0;
+            this.ItemsTab.Load += new System.EventHandler(this.ItemsTab_Load);
             // 
             // CustomersTabPage
             // 
@@ -88,6 +89,7 @@ namespace ObjectOrientedPractics
             this.CustomersTab.Name = "CustomersTab";
             this.CustomersTab.Size = new System.Drawing.Size(827, 499);
             this.CustomersTab.TabIndex = 0;
+            this.CustomersTab.Load += new System.EventHandler(this.CustomersTab_Load);
             // 
             // MainForm
             // 

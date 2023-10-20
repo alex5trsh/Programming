@@ -21,11 +21,6 @@ namespace ObjectOrientedPractics.Services
         public static void AssertStringOnLength(string value, int minLength,int maxLength, 
             string propertyName)
         {
-            //if (value == null)
-            //{
-            //    return;
-            //}
-
             if ( value.Length<minLength||value.Length > maxLength)
             {
                 throw new ArgumentException("Длина переменной свойства " + propertyName +
@@ -42,11 +37,6 @@ namespace ObjectOrientedPractics.Services
         /// <param name="nameOfFeature">Имя свойства, которое подлежит проверке.</param>
         public static void AssertLengthInRange(int value, int min, int max, string nameOfFeature)
         {
-            //if (value == 0)
-            //{
-            //    return;
-            //}
-
             if (value < min || value > max)
             {
                 throw new ArgumentException("Длина переменной свойства " + nameOfFeature +
@@ -62,12 +52,7 @@ namespace ObjectOrientedPractics.Services
         /// <param name="max">Конец диапазона.</param>
         /// <param name="propertyName">Имя свойства, которое подлежит проверке.</param>
         public static void AssertValueInRange(double value, double min, double max, string propertyName)
-        {
-            //if(value==0)
-            //{
-            //    return;
-            //}  
-            
+        {         
             if (value < min || value > max)
             {
                 throw new ArgumentException("Переменная свойства" + propertyName + "не входит в диапазон");
@@ -82,15 +67,15 @@ namespace ObjectOrientedPractics.Services
         public static void AssertStringOnFullName(string value, string propertyName)
         {
             int count = 0;
-            foreach(var s in value)
+            foreach (var s in value)
             {
-                if(s==' ')
-                { 
+                if (s == ' ')
+                {
                     count++;
                 }
-            }  
-            
-            if(count!=2)
+            }
+
+            if (count != 2)
             {
                 throw new ArgumentException(propertyName + "должно быть написано в формате " +
                     "Фамилия Имя Отчество.");
