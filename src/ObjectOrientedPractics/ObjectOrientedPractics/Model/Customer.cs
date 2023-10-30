@@ -28,6 +28,11 @@ namespace ObjectOrientedPractics.Model
         private Address _address;
 
         /// <summary>
+        /// Корзина.
+        /// </summary>
+        private Cart _cart;
+
+        /// <summary>
         /// Возвращает и задает полное имя в формате Фамилия Имя Отчество. 
         /// Длина должна быть меньше 200 символов. 
         /// </summary>
@@ -71,18 +76,27 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public int Id { get; }
 
+        public Cart Cart
+        {
+            get => _cart;
+            set
+            {
+                _cart = value;
+            }
+        }
+
         /// <summary>
         /// Создает экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество. 
         /// Длина должна быть меньше 200 символов. </param>
-        /// <param name="address">Адрес</param>
         public Customer(string fullName)
         {
             FullName = fullName;
             Address =new Address(100000, "Country","City","Street","Building","Apartment") ;
             AllItemsCount++;
             Id = AllItemsCount;
+            Cart = new Cart();
         }
 
         /// <summary>
@@ -92,6 +106,7 @@ namespace ObjectOrientedPractics.Model
         {
             AllItemsCount++;
             Id = AllItemsCount;
+            //Cart = new Cart();
         }
 
     }
