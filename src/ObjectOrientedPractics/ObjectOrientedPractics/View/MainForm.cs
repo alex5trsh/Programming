@@ -58,5 +58,11 @@ namespace ObjectOrientedPractics
             _store.Customers= ProjectSerializer.LoadCustomerFromFile(_directoryPath, _customersFileName);
             CustomersTab.Customers = _store.Customers;
         }
+
+        private void CartsTab_Load(object sender, EventArgs e)
+        {
+            CartsTab.Items = _store.Items;
+            CartsTab.Customers = _store.Customers;
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace ObjectOrientedPractics.Model
         {
             get
             {
-                if (Items.Count == 0 || Items.Count==null)
+                if (Items.Count == 0 || Items==null)
                 {
                     return 0.0;
                 }
@@ -64,13 +64,13 @@ namespace ObjectOrientedPractics.Model
             Items = items;
         }
 
-        /// <summary>
-        /// Создает пустой экземпляр класса <see cref="Cart"/>.
-        /// </summary>
-        public Cart()
-        {
+        ///// <summary>
+        ///// Создает пустой экземпляр класса <see cref="Cart"/>.
+        ///// </summary>
+        //public Cart()
+        //{
 
-        }
+        //}
 
     }
 }

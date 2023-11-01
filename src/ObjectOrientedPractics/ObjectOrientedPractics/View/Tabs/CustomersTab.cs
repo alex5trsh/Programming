@@ -167,7 +167,7 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Заполняет ItemsListBox значениями из _items.
+        /// Заполняет CustomersListBox значениями из _customers.
         /// </summary>
         private void FillCustomersListBox()
         {
