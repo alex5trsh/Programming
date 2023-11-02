@@ -35,7 +35,6 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Заказы.
         /// </summary>
-        //TODO: список???
         private List<Order> _order;
 
         /// <summary>
@@ -82,6 +81,9 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public int Id { get; }
 
+        /// <summary>
+        /// Возвращает и задает корзину.
+        /// </summary>
         public Cart Cart
         {
             get => _cart;
@@ -91,6 +93,9 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Возвращает и задает заказы.
+        /// </summary>
         public List<Order> Order
         {
             get => _order;
@@ -103,17 +108,16 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Создает экземпляр класса <see cref="Customer"/>.
         /// </summary>
-        /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество. 
-        /// Длина должна быть меньше 200 символов. </param>
-        public Customer(string fullName)
+        /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество.</param>
+        /// <param name="orders">Заказы.</param>
+        public Customer(string fullName,List<Order> orders)
         {
             FullName = fullName;
             Address =new Address(100000, "Country","City","Street","Building","Apartment") ;
             AllItemsCount++;
             Id = AllItemsCount;
             Cart = new Cart(new List<Item>());
-            //TODO:композиция или агреграция?...
-            Order = new List<Order>();
+            Order =orders;
         }
 
         /// <summary>
@@ -123,7 +127,6 @@ namespace ObjectOrientedPractics.Model
         {
             AllItemsCount++;
             Id = AllItemsCount;
-            //Cart = new Cart();
         }
 
     }

@@ -19,7 +19,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес доставки.
         /// </summary>
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Товары.
@@ -31,11 +31,6 @@ namespace ObjectOrientedPractics.Model
        /// </summary>
        private double _cost;
         
-        //дату создания заказа, только на чтение
-        //адрес доставки,
-        //список товаров,
-        //об-щую стоимость.  Общая стоимость должна быть аналогична общей стоимости из корзины.
-
         /// <summary>
         /// Возвращает и задает счетчик заказов.
         /// </summary>
@@ -49,19 +44,9 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
-        /// Возвращает уникальный номер заказа.
-        /// </summary>
-        public int Id { get; }
-
-        /// <summary>
-        /// Возвращает дату заказа.
-        /// </summary>
-        public string Date { get; }
-
-        /// <summary>
         /// Возвращает и задает адрес.
         /// </summary>
-        public string Address
+        public Address Address
         {
             get => _address;
             set
@@ -85,7 +70,6 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает общую стоимость. Должна быть идентична <see cref="Cart.Amount"/>.
         /// </summary>
-        //TODO:сделать проверку???
         public double Cost
         {
             get => _cost;
@@ -96,9 +80,23 @@ namespace ObjectOrientedPractics.Model
                 {
                     _cost = value;
                 }
-                
+
             }
         }
+        /// <summary>
+        /// Возвращает уникальный номер заказа.
+        /// </summary>
+        public int Id { get; }
+
+        /// <summary>
+        /// Возвращает дату заказа.
+        /// </summary>
+        public string Date { get; }
+        
+        /// <summary>
+        /// Возвращает и задает состояние заказа.
+        /// </summary>
+        public OrderStatus OrderStatus { get; set; }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="Order"/>.
@@ -106,16 +104,16 @@ namespace ObjectOrientedPractics.Model
         /// <param name="address">Адрес.</param>
         /// <param name="items">Товары.</param>
         /// <param name="cost">Общая стоимость.</param>
-        public Order(string address, List<Item> items, double cost)
+        /// <param name="orderStatus">Состояние заказа.</param>
+        public Order(Address address, List<Item> items, double cost, OrderStatus orderStatus)
         {
             Address = address;
             Items = items;
             Cost = cost;
+            OrderStatus = orderStatus;
             AllOrdersCount++;
             Id = AllOrdersCount;
-            //TODO:решить проблему.
-            //Date = DateTime.Now.ToLongDateString;
-            Date = "string";
+            Date = DateTime.Now.ToLongDateString();       
         }
 
         /// <summary>
@@ -125,6 +123,7 @@ namespace ObjectOrientedPractics.Model
         {
             AllOrdersCount++;
             Id = AllOrdersCount;
+            Date = DateTime.Now.ToLongDateString();
         }
     }
 }

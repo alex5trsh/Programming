@@ -46,6 +46,7 @@ namespace ObjectOrientedPractics.Model
                 }
                 else
                 {
+                    _amount = 0;
                     for (int i = 0; i < Items.Count; i++)
                     {
                         _amount += Items[i].Cost;
@@ -63,14 +64,6 @@ namespace ObjectOrientedPractics.Model
         {
             Items = items;
         }
-
-        ///// <summary>
-        ///// Создает пустой экземпляр класса <see cref="Cart"/>.
-        ///// </summary>
-        //public Cart()
-        //{
-
-        //}
 
     }
 }

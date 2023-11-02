@@ -12,7 +12,7 @@ using ObjectOrientedPractics.Model;
 namespace ObjectOrientedPractics.View.Tabs.Controls
 {
     /// <summary>
-    /// Предоставляет методы вывода даных текущего элемента класса <see cref="Address"/> и его изменения.
+    /// Предоставляет методы вывода данных текущего элемента класса <see cref="Address"/> и его изменения.
     /// </summary>
     public partial class AddressControl : UserControl
     {
@@ -267,9 +267,9 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             BuildingTextBox.Text = Address.Building;
             ApartmentTextBox.Text = Address.Apartment;
         }
-         
+
         /// <summary>
-        /// 
+        /// Очищает все текстовые поля со значениями объекта.
         /// </summary>
         public void ClearAddressTextBox()
         {
@@ -282,7 +282,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
         }
 
         /// <summary>
-        /// 
+        /// Задает свойство доступа для текстбоков.
         /// </summary>
         /// <param name="flag"></param>
         public void SwitchAccessTextBox(bool flag)

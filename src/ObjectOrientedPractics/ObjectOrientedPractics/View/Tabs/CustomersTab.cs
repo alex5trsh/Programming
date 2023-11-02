@@ -13,7 +13,7 @@ using ObjectOrientedPractics.Services;
 namespace ObjectOrientedPractics.View.Tabs
 {
     /// <summary>
-    /// Предоставляет методы вывода даных текущего элемента класса <see cref="Customer"/>,
+    /// Предоставляет методы вывода данных текущего элемента класса <see cref="Customer"/>,
     /// его изменения, удаления, добавления.
     /// </summary>
     public partial class CustomersTab : UserControl
@@ -61,7 +61,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (CustomersListBox.SelectedIndex >= 0)
             {
                 _currentIndex = CustomersListBox.SelectedIndex;
-                _currentCustomer = _customers[_currentIndex];
+                _currentCustomer = Customers[_currentIndex];
 
                 UpdateCustomerInfo(_currentCustomer);
                 SwitchAccessTextBox(true);
@@ -70,13 +70,13 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Customer _newCustomer = new Customer("FullName Name MiddleName");
-            _customers.Add(_newCustomer);
+            Customer _newCustomer = new Customer("FullName Name MiddleName", new List<Order>());
+            Customers.Add(_newCustomer);
             FillCustomersListBox();
 
-            for (int i = 0; i < _customers.Count; i++)
+            for (int i = 0; i < Customers.Count; i++)
             {
-                if (_customers[i] == _newCustomer)
+                if (Customers[i] == _newCustomer)
                 {
                     CustomersListBox.SelectedIndex = i;
                 }
@@ -89,7 +89,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (CustomersListBox.SelectedIndex >= 0 && CustomersListBox != null)
             {
-                _customers.RemoveAt(_currentIndex);
+                Customers.RemoveAt(_currentIndex);
                 FillCustomersListBox();
                 CustomersListBox.SelectedIndex = -1;
                 SwitchAccessTextBox(false);
@@ -167,12 +167,12 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Заполняет CustomersListBox значениями из _customers.
+        /// Заполняет CustomersListBox значениями из Customers.
         /// </summary>
         private void FillCustomersListBox()
         {
             CustomersListBox.DataSource = null;
-            CustomersListBox.DataSource = _customers;
+            CustomersListBox.DataSource = Customers;
             CustomersListBox.DisplayMember = nameof(Customer.FullName);
         }
     }

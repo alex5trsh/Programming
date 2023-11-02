@@ -15,7 +15,7 @@ using System.Text.Json;
 namespace ObjectOrientedPractics.View.Tabs
 {
     /// <summary>
-    /// Предоставляет методы вывода даных текущего элемента класса <see cref="Item"/>,
+    /// Предоставляет методы вывода данных текущего элемента класса <see cref="Item"/>,
     /// его изменения, удаления, добавления.
     /// </summary>
     public partial class ItemsTab : UserControl
@@ -68,7 +68,7 @@ namespace ObjectOrientedPractics.View.Tabs
             if (ItemsListBox.SelectedIndex >= 0)
             {
                 _currentIndex = ItemsListBox.SelectedIndex;
-                _currentItem = _items[_currentIndex];
+                _currentItem = Items[_currentIndex];
 
                 UpdateItemInfo(_currentItem);
                 SwitchAccessTextBox(true);
@@ -78,12 +78,12 @@ namespace ObjectOrientedPractics.View.Tabs
         private void AddButton_Click(object sender, EventArgs e)
         {
             Item _newItem = new Item("New Name", "New Description", 1, Category.Clothes);
-            _items.Add(_newItem);
+            Items.Add(_newItem);
             FillItemsListBox();
 
-            for (int i = 0; i < _items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
-                if (_items[i] == _newItem)
+                if (Items[i] == _newItem)
                 {
                     ItemsListBox.SelectedIndex = i;
                 }
@@ -96,7 +96,7 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             if (ItemsListBox.SelectedIndex >= 0 && ItemsListBox != null)
             {
-                _items.RemoveAt(_currentIndex);
+                Items.RemoveAt(_currentIndex);
                 FillItemsListBox();
                 ItemsListBox.SelectedIndex = -1;
                 SwitchAccessTextBox(false);
@@ -263,12 +263,12 @@ namespace ObjectOrientedPractics.View.Tabs
         }
 
         /// <summary>
-        /// Заполняет ItemsListBox значениями из _items.
+        /// Заполняет ItemsListBox значениями из Items.
         /// </summary>
         private void FillItemsListBox()
         {
             ItemsListBox.DataSource = null;
-            ItemsListBox.DataSource = _items;
+            ItemsListBox.DataSource = Items;
             ItemsListBox.DisplayMember = nameof(Item.Name);
         }
     }

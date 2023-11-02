@@ -38,6 +38,8 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
+            _store.Customers = ProjectSerializer.LoadCustomerFromFile(_directoryPath, _customersFileName);
+            _store.Items = ProjectSerializer.LoadItemFromFile(_directoryPath, _itemsFileName);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -49,13 +51,13 @@ namespace ObjectOrientedPractics
 
         private void ItemsTab_Load(object sender, EventArgs e)
         {
-            _store.Items= ProjectSerializer.LoadItemFromFile(_directoryPath, _itemsFileName);
+            
             ItemsTab.Items = _store.Items;
         }
 
         private void CustomersTab_Load(object sender, EventArgs e)
         {
-            _store.Customers= ProjectSerializer.LoadCustomerFromFile(_directoryPath, _customersFileName);
+            
             CustomersTab.Customers = _store.Customers;
         }
 
@@ -63,6 +65,14 @@ namespace ObjectOrientedPractics
         {
             CartsTab.Items = _store.Items;
             CartsTab.Customers = _store.Customers;
+        }
+
+        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(MainTabControl.SelectedIndex==2)
+            {
+                CartsTab.RefreshData();
+            }    
         }
     }
 }

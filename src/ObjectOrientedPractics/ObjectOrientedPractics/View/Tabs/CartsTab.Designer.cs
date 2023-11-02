@@ -38,9 +38,9 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CreateOrderButton = new System.Windows.Forms.Button();
             this.RemoveItemButton = new System.Windows.Forms.Button();
             this.CustomerComboBox = new System.Windows.Forms.ComboBox();
-            this.CartTextBox = new System.Windows.Forms.TextBox();
             this.AmountLabel = new System.Windows.Forms.Label();
             this.AmountNumberLabel = new System.Windows.Forms.Label();
+            this.CartListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // ItemsListBox
@@ -94,7 +94,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // ClearCartButton
             // 
             this.ClearCartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClearCartButton.Location = new System.Drawing.Point(742, 273);
+            this.ClearCartButton.Location = new System.Drawing.Point(742, 290);
             this.ClearCartButton.Name = "ClearCartButton";
             this.ClearCartButton.Size = new System.Drawing.Size(85, 30);
             this.ClearCartButton.TabIndex = 5;
@@ -104,8 +104,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // CreateOrderButton
             // 
-            this.CreateOrderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreateOrderButton.Location = new System.Drawing.Point(291, 273);
+            this.CreateOrderButton.Location = new System.Drawing.Point(291, 290);
             this.CreateOrderButton.Name = "CreateOrderButton";
             this.CreateOrderButton.Size = new System.Drawing.Size(85, 30);
             this.CreateOrderButton.TabIndex = 6;
@@ -116,7 +115,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // RemoveItemButton
             // 
             this.RemoveItemButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveItemButton.Location = new System.Drawing.Point(633, 273);
+            this.RemoveItemButton.Location = new System.Drawing.Point(651, 290);
             this.RemoveItemButton.Name = "RemoveItemButton";
             this.RemoveItemButton.Size = new System.Drawing.Size(85, 30);
             this.RemoveItemButton.TabIndex = 7;
@@ -135,47 +134,45 @@ namespace ObjectOrientedPractics.View.Tabs
             this.CustomerComboBox.TabIndex = 8;
             this.CustomerComboBox.SelectedIndexChanged += new System.EventHandler(this.CustomerComboBox_SelectedIndexChanged);
             // 
-            // CartTextBox
-            // 
-            this.CartTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CartTextBox.Location = new System.Drawing.Point(291, 91);
-            this.CartTextBox.Multiline = true;
-            this.CartTextBox.Name = "CartTextBox";
-            this.CartTextBox.Size = new System.Drawing.Size(536, 150);
-            this.CartTextBox.TabIndex = 9;
-            // 
             // AmountLabel
             // 
-            this.AmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AmountLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.AmountLabel.AutoSize = true;
-            this.AmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AmountLabel.Location = new System.Drawing.Point(774, 244);
+            this.AmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AmountLabel.Location = new System.Drawing.Point(763, 241);
             this.AmountLabel.Name = "AmountLabel";
-            this.AmountLabel.Size = new System.Drawing.Size(53, 13);
+            this.AmountLabel.Size = new System.Drawing.Size(67, 17);
             this.AmountLabel.TabIndex = 10;
             this.AmountLabel.Text = "Amount:";
             // 
             // AmountNumberLabel
             // 
-            this.AmountNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AmountNumberLabel.AutoSize = true;
-            this.AmountNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AmountNumberLabel.Location = new System.Drawing.Point(802, 257);
+            this.AmountNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AmountNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AmountNumberLabel.Location = new System.Drawing.Point(716, 258);
             this.AmountNumberLabel.Name = "AmountNumberLabel";
-            this.AmountNumberLabel.Size = new System.Drawing.Size(25, 13);
+            this.AmountNumberLabel.Size = new System.Drawing.Size(111, 29);
             this.AmountNumberLabel.TabIndex = 11;
             this.AmountNumberLabel.Text = "0,0";
+            this.AmountNumberLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // CartListBox
+            // 
+            this.CartListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CartListBox.FormattingEnabled = true;
+            this.CartListBox.Location = new System.Drawing.Point(291, 91);
+            this.CartListBox.Name = "CartListBox";
+            this.CartListBox.Size = new System.Drawing.Size(536, 147);
+            this.CartListBox.TabIndex = 12;
             // 
             // CartsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.CartListBox);
             this.Controls.Add(this.AmountNumberLabel);
             this.Controls.Add(this.AmountLabel);
-            this.Controls.Add(this.CartTextBox);
             this.Controls.Add(this.CustomerComboBox);
             this.Controls.Add(this.RemoveItemButton);
             this.Controls.Add(this.CreateOrderButton);
@@ -203,8 +200,8 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Button CreateOrderButton;
         private System.Windows.Forms.Button RemoveItemButton;
         private System.Windows.Forms.ComboBox CustomerComboBox;
-        private System.Windows.Forms.TextBox CartTextBox;
         private System.Windows.Forms.Label AmountLabel;
         private System.Windows.Forms.Label AmountNumberLabel;
+        private System.Windows.Forms.ListBox CartListBox;
     }
 }
