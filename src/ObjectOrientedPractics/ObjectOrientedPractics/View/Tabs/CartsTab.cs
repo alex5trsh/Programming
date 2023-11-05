@@ -111,6 +111,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 FillCartListBox();
             }
         }
+
         private void RemoveItemButton_Click(object sender, EventArgs e)
         {
             if (CartListBox.SelectedIndex >= 0 && CartListBox.Items.Count>1)
@@ -124,17 +125,23 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            if (CartListBox != null)
+            if (CartListBox.Items.Count != 0&&CustomerComboBox.SelectedIndex>=0)
             {
-                Order newOrder = new Order();
-                newOrder.Items = CurrentCustomer.Cart.Items;
-                newOrder.Address = CurrentCustomer.Address;
-                newOrder.Cost = CurrentCustomer.Cart.Amount;
-                newOrder.OrderStatus = OrderStatus.New;
+                List<Item> newItems = new List<Item>();
+                for (int i = 0; i < CurrentCustomer.Cart.Items.Count; i++)
+                {
+                    newItems.Add(CurrentCustomer.Cart.Items[i]);
+
+                }
+                Order newOrder = new Order(CurrentCustomer.Address, newItems, 
+                    CurrentCustomer.Cart.Amount,OrderStatus.New);
+                Customers.Remove(CurrentCustomer);
                 CurrentCustomer.Order.Add(newOrder);
                 CurrentCustomer.Cart.Items.Clear();
-                ItemsListBox.SelectedIndex = -1;
+                Customers.Insert(_currenCustomertIndex, CurrentCustomer);
                 FillCartListBox();
+                CustomerComboBox.SelectedIndex = -1;
+                ItemsListBox.SelectedIndex = -1;
             }
         }
 

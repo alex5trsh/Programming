@@ -126,6 +126,11 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        public override string ToString()
+        {
+            return $"{Country},{City},{Street},{Building},{Apartment}";
+        }
+
         /// <summary>
         /// Создает экзмепляр класса <see cref="Address"/>.
         /// </summary>

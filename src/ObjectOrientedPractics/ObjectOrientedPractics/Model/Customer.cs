@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Заказы.
         /// </summary>
-        private List<Order> _order;
+        private BindingList<Order> _order;
 
         /// <summary>
         /// Возвращает и задает полное имя в формате Фамилия Имя Отчество. 
@@ -96,7 +97,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает заказы.
         /// </summary>
-        public List<Order> Order
+        public BindingList<Order> Order
         {
             get => _order;
             set
@@ -110,7 +111,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество.</param>
         /// <param name="orders">Заказы.</param>
-        public Customer(string fullName,List<Order> orders)
+        public Customer(string fullName, BindingList<Order> orders)
         {
             FullName = fullName;
             Address =new Address(100000, "Country","City","Street","Building","Apartment") ;

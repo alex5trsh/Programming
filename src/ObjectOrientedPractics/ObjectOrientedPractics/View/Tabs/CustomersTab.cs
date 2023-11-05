@@ -70,7 +70,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Customer _newCustomer = new Customer("FullName Name MiddleName", new List<Order>());
+            Customer _newCustomer = new Customer("FullName Name MiddleName", new BindingList<Order>());
             Customers.Add(_newCustomer);
             FillCustomersListBox();
 

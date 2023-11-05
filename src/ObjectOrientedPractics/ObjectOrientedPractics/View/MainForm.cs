@@ -38,26 +38,24 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
-            _store.Customers = ProjectSerializer.LoadCustomerFromFile(_directoryPath, _customersFileName);
-            _store.Items = ProjectSerializer.LoadItemFromFile(_directoryPath, _itemsFileName);
+            //_store.Customers = ProjectSerializer.LoadCustomerFromFile(_directoryPath, _customersFileName);
+            //_store.Items = ProjectSerializer.LoadItemFromFile(_directoryPath, _itemsFileName);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ProjectSerializer.SaveItemToFile(ItemsTab.Items, _directoryPath, _itemsFileName);
-            ProjectSerializer.SaveCustomerToFile(CustomersTab.Customers, _directoryPath,
-                _customersFileName);
+            //ProjectSerializer.SaveItemToFile(ItemsTab.Items, _directoryPath, _itemsFileName);
+            //ProjectSerializer.SaveCustomerToFile(CustomersTab.Customers, _directoryPath,
+                //_customersFileName);
         }
 
         private void ItemsTab_Load(object sender, EventArgs e)
-        {
-            
+        {       
             ItemsTab.Items = _store.Items;
         }
 
         private void CustomersTab_Load(object sender, EventArgs e)
-        {
-            
+        {        
             CustomersTab.Customers = _store.Customers;
         }
 
@@ -72,7 +70,17 @@ namespace ObjectOrientedPractics
             if(MainTabControl.SelectedIndex==2)
             {
                 CartsTab.RefreshData();
-            }    
+            }
+
+            if (MainTabControl.SelectedIndex == 3)
+            {
+                OrdersTab.RefreshData();
+            }
+        }
+
+        private void OrdersTab_Load(object sender, EventArgs e)
+        {
+            OrdersTab.Customers= _store.Customers;
         }
     }
 }

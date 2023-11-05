@@ -44,6 +44,16 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает уникальный номер заказа.
+        /// </summary>
+        public int Id { get; }
+
+        /// <summary>
+        /// Возвращает дату заказа.
+        /// </summary>
+        public string Date { get; }
+
+        /// <summary>
         /// Возвращает и задает адрес.
         /// </summary>
         public Address Address
@@ -83,15 +93,7 @@ namespace ObjectOrientedPractics.Model
 
             }
         }
-        /// <summary>
-        /// Возвращает уникальный номер заказа.
-        /// </summary>
-        public int Id { get; }
 
-        /// <summary>
-        /// Возвращает дату заказа.
-        /// </summary>
-        public string Date { get; }
         
         /// <summary>
         /// Возвращает и задает состояние заказа.
