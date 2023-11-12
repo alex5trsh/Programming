@@ -126,7 +126,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ApartmentTextBox.Location = new System.Drawing.Point(265, 100);
             this.ApartmentTextBox.Name = "ApartmentTextBox";
-            this.ApartmentTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ApartmentTextBox.Size = new System.Drawing.Size(117, 20);
             this.ApartmentTextBox.TabIndex = 8;
             this.ApartmentTextBox.TextChanged += new System.EventHandler(this.ApartmentTextBox_TextChanged);
             // 

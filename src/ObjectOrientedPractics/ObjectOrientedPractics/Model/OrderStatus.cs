@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     public enum OrderStatus
     {
         /// <summary>
-        /// Новый заказ/
+        /// Новый заказ.
         /// </summary>
         New,
 
