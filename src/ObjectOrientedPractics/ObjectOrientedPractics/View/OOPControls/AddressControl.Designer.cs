@@ -104,7 +104,7 @@ namespace ObjectOrientedPractics.View.Tabs.Controls
             this.ErrorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ErrorLabel.AutoSize = true;
-            this.ErrorLabel.Location = new System.Drawing.Point(382, 104);
+            this.ErrorLabel.Location = new System.Drawing.Point(408, 104);
             this.ErrorLabel.MaximumSize = new System.Drawing.Size(150, 0);
             this.ErrorLabel.Name = "ErrorLabel";
             this.ErrorLabel.Size = new System.Drawing.Size(0, 13);

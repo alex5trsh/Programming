@@ -109,6 +109,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 NameTextBox.BackColor = Color.White;
                 CustomersListBox.Enabled = true;
+                IsPriorityCheckBox.Enabled = true;
                 AddressControl.SwitchAccessTextBox(true);
                 SwitchVisibleButtons(true);   
                 FillCustomersListBox();
@@ -119,10 +120,24 @@ namespace ObjectOrientedPractics.View.Tabs
                 {
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     CustomersListBox.Enabled = false;
+                    IsPriorityCheckBox.Enabled = false;
                     AddressControl.SwitchAccessTextBox(false);
                     SwitchVisibleButtons(false);
                 }
             }
+        }
+
+        private void IsPriorityCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsPriorityCheckBox.Checked == true)
+            {
+                _currentCustomer.IsPriority = true;
+            }
+            else
+            {
+                _currentCustomer.IsPriority = false;
+            }
+
         }
 
         /// <summary>
@@ -134,6 +149,7 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Text = Convert.ToString(customer.Id);
             NameTextBox.Text = customer.FullName;
             AddressControl.Address = customer.Address;
+            IsPriorityCheckBox.Checked = customer.IsPriority;
         }
 
         /// <summary>
@@ -144,6 +160,7 @@ namespace ObjectOrientedPractics.View.Tabs
             IdTextBox.Clear();
             NameTextBox.Clear();
             AddressControl.ClearAddressTextBox();
+            IsPriorityCheckBox.Checked = false;
         }
 
         /// <summary>
@@ -174,6 +191,6 @@ namespace ObjectOrientedPractics.View.Tabs
             CustomersListBox.DataSource = null;
             CustomersListBox.DataSource = Customers;
             CustomersListBox.DisplayMember = nameof(Customer.FullName);
-        }
+        }     
     }
 }

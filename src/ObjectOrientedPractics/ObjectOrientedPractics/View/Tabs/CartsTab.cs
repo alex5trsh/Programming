@@ -86,6 +86,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
 
             SwitchVisibleButtons(false);
+            ItemsListBox.Enabled = false;
         }
 
 
@@ -96,6 +97,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currenCustomertIndex = CustomerComboBox.SelectedIndex;
                 CurrentCustomer =Customers[_currenCustomertIndex];
                 ItemsListBox.SelectedIndex = -1;
+                ItemsListBox.Enabled = true;
                 FillCartListBox();
                 SwitchVisibleButtons(true);
             }
@@ -125,7 +127,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
         private void CreateOrderButton_Click(object sender, EventArgs e)
         {
-            if (CartListBox.Items.Count != 0&&CustomerComboBox.SelectedIndex>=0)
+            if (CartListBox.Items.Count != 0 && CustomerComboBox.SelectedIndex >= 0)
             {
                 List<Item> newItems = new List<Item>();
                 for (int i = 0; i < CurrentCustomer.Cart.Items.Count; i++)
@@ -133,15 +135,34 @@ namespace ObjectOrientedPractics.View.Tabs
                     newItems.Add(CurrentCustomer.Cart.Items[i]);
 
                 }
-                Order newOrder = new Order(CurrentCustomer.Address, newItems, 
-                    CurrentCustomer.Cart.Amount,OrderStatus.New);
-                Customers.Remove(CurrentCustomer);
-                CurrentCustomer.Order.Add(newOrder);
-                CurrentCustomer.Cart.Items.Clear();
-                Customers.Insert(_currenCustomertIndex, CurrentCustomer);
+
+                if (CurrentCustomer.IsPriority == true)
+                {
+                    PriorityOrder newOrder = new PriorityOrder();
+                    newOrder.Address = CurrentCustomer.Address;
+                    newOrder.Items = newItems;
+                    newOrder.Cost = CurrentCustomer.Cart.Amount;
+                    newOrder.OrderStatus = OrderStatus.New;
+
+                    Customers.Remove(CurrentCustomer);
+                    CurrentCustomer.Order.Add(newOrder);
+                    CurrentCustomer.Cart.Items.Clear();
+                    Customers.Insert(_currenCustomertIndex, CurrentCustomer);
+                }
+                else
+                {
+                    Order newOrder = new Order(CurrentCustomer.Address, newItems,
+                              CurrentCustomer.Cart.Amount, OrderStatus.New);
+                    Customers.Remove(CurrentCustomer);
+                    CurrentCustomer.Order.Add(newOrder);
+                    CurrentCustomer.Cart.Items.Clear();
+                    Customers.Insert(_currenCustomertIndex, CurrentCustomer);
+                }
+
                 FillCartListBox();
                 CustomerComboBox.SelectedIndex = -1;
                 ItemsListBox.SelectedIndex = -1;
+                ItemsListBox.Enabled = false;
             }
         }
 
@@ -199,6 +220,7 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             UpdateCartListBox();
             CustomerComboBox.Text = null;
+            ItemsListBox.Enabled = false;
 
         }
 

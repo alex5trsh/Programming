@@ -19,21 +19,21 @@ namespace ObjectOrientedPractics
         /// </summary>
         private Store _store=new Store();
 
-        /// <summary>
-        /// Путь к файлам <see cref="_itemsFileName"/> и <see cref="_customersFileName"/>.
-        /// </summary>
-        private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
-            ApplicationData) + "\\AppStore";
+        ///// <summary>
+        ///// Путь к файлам <see cref="_itemsFileName"/> и <see cref="_customersFileName"/>.
+        ///// </summary>
+        //private string _directoryPath = Environment.GetFolderPath(Environment.SpecialFolder.
+        //    ApplicationData) + "\\AppStore";
 
-        /// <summary>
-        ///  Файл, хранящий объекты класса <see cref="Item"/>.
-        /// </summary>
-        private string _itemsFileName = "Items.json";
+        ///// <summary>
+        /////  Файл, хранящий объекты класса <see cref="Item"/>.
+        ///// </summary>
+        //private string _itemsFileName = "Items.json";
 
-        /// <summary>
-        /// Файл, хранящий объекты класса <see cref="Customer"/>.
-        /// </summary>
-        private string _customersFileName = "Customers.json";
+        ///// <summary>
+        ///// Файл, хранящий объекты класса <see cref="Customer"/>.
+        ///// </summary>
+        //private string _customersFileName = "Customers.json";
 
         public MainForm()
         {
@@ -76,11 +76,21 @@ namespace ObjectOrientedPractics
             {
                 OrdersTab.RefreshData();
             }
+
+            if (MainTabControl.SelectedIndex == 4)
+            {
+                priorityOrdersTab.Items = _store.Items;
+            }
         }
 
         private void OrdersTab_Load(object sender, EventArgs e)
         {
             OrdersTab.Customers= _store.Customers;
+        }
+
+        private void priorityOrdersTab_Load(object sender, EventArgs e)
+        {
+            priorityOrdersTab.Items = _store.Items;
         }
     }
 }

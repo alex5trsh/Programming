@@ -45,8 +45,13 @@ namespace ObjectOrientedPractics.View.Tabs
             this.AmountNumberLabel = new System.Windows.Forms.Label();
             this.AddressControl = new ObjectOrientedPractics.View.Tabs.Controls.AddressControl();
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.Panel = new System.Windows.Forms.Panel();
+            this.DeliveryTimeComboBox = new System.Windows.Forms.ComboBox();
+            this.DeliveryTimeLabel = new System.Windows.Forms.Label();
+            this.PriorityOptionsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
+            this.Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // OrdersDataGridView
@@ -142,6 +147,8 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // OrderItemsListBox
             // 
+            this.OrderItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OrderItemsListBox.Enabled = false;
             this.OrderItemsListBox.FormattingEnabled = true;
             this.OrderItemsListBox.Location = new System.Drawing.Point(392, 279);
@@ -174,6 +181,8 @@ namespace ObjectOrientedPractics.View.Tabs
             // AddressControl
             // 
             this.AddressControl.Address = null;
+            this.AddressControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddressControl.Location = new System.Drawing.Point(392, 114);
             this.AddressControl.Name = "AddressControl";
             this.AddressControl.Size = new System.Drawing.Size(435, 136);
@@ -183,10 +192,50 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.orderBindingSource.DataSource = typeof(ObjectOrientedPractics.Model.Order);
             // 
+            // Panel
+            // 
+            this.Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel.Controls.Add(this.DeliveryTimeComboBox);
+            this.Panel.Controls.Add(this.DeliveryTimeLabel);
+            this.Panel.Controls.Add(this.PriorityOptionsLabel);
+            this.Panel.Location = new System.Drawing.Point(582, 0);
+            this.Panel.Name = "Panel";
+            this.Panel.Size = new System.Drawing.Size(248, 103);
+            this.Panel.TabIndex = 14;
+            // 
+            // DeliveryTimeComboBox
+            // 
+            this.DeliveryTimeComboBox.FormattingEnabled = true;
+            this.DeliveryTimeComboBox.Location = new System.Drawing.Point(86, 21);
+            this.DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
+            this.DeliveryTimeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.DeliveryTimeComboBox.TabIndex = 11;
+            this.DeliveryTimeComboBox.SelectedIndexChanged += new System.EventHandler(this.DeliveryTimeComboBox_SelectedIndexChanged);
+            // 
+            // DeliveryTimeLabel
+            // 
+            this.DeliveryTimeLabel.AutoSize = true;
+            this.DeliveryTimeLabel.Location = new System.Drawing.Point(3, 24);
+            this.DeliveryTimeLabel.Name = "DeliveryTimeLabel";
+            this.DeliveryTimeLabel.Size = new System.Drawing.Size(77, 13);
+            this.DeliveryTimeLabel.TabIndex = 10;
+            this.DeliveryTimeLabel.Text = "Delivery Time::";
+            // 
+            // PriorityOptionsLabel
+            // 
+            this.PriorityOptionsLabel.AutoSize = true;
+            this.PriorityOptionsLabel.Location = new System.Drawing.Point(3, 0);
+            this.PriorityOptionsLabel.Name = "PriorityOptionsLabel";
+            this.PriorityOptionsLabel.Size = new System.Drawing.Size(77, 13);
+            this.PriorityOptionsLabel.TabIndex = 3;
+            this.PriorityOptionsLabel.Text = "Priority Options";
+            // 
             // OrdersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Panel);
             this.Controls.Add(this.AmountNumberLabel);
             this.Controls.Add(this.AmountLabel);
             this.Controls.Add(this.AddressControl);
@@ -205,6 +254,8 @@ namespace ObjectOrientedPractics.View.Tabs
             this.Size = new System.Drawing.Size(830, 501);
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
+            this.Panel.ResumeLayout(false);
+            this.Panel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +278,9 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Label AmountLabel;
         private System.Windows.Forms.Label AmountNumberLabel;
         private System.Windows.Forms.BindingSource orderBindingSource;
+        private System.Windows.Forms.Panel Panel;
+        private System.Windows.Forms.Label PriorityOptionsLabel;
+        private System.Windows.Forms.ComboBox DeliveryTimeComboBox;
+        private System.Windows.Forms.Label DeliveryTimeLabel;
     }
 }
