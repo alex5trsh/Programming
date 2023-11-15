@@ -39,6 +39,11 @@ namespace ObjectOrientedPractics.Model
         private BindingList<Order> _order;
 
         /// <summary>
+        /// Приоритетность.
+        /// </summary>
+        private bool _isPriority;
+
+        /// <summary>
         /// Возвращает и задает полное имя в формате Фамилия Имя Отчество. 
         /// Длина должна быть меньше 200 символов. 
         /// </summary>
@@ -107,6 +112,18 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает и задает приоритетность.
+        /// </summary>
+        public bool IsPriority
+        {
+            get => _isPriority;
+            set
+            {
+                _isPriority = value;
+            }
+        }
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество.</param>
@@ -114,7 +131,8 @@ namespace ObjectOrientedPractics.Model
         public Customer(string fullName, BindingList<Order> orders)
         {
             FullName = fullName;
-            Address =new Address(100000, "Country","City","Street","Building","Apartment") ;
+            Address =new Address(100000, "Country","City","Street","Building","Apartment");
+            IsPriority = false;
             AllItemsCount++;
             Id = AllItemsCount;
             Cart = new Cart(new List<Item>());
