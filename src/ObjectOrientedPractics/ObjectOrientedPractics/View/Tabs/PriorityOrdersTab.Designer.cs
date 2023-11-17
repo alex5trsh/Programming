@@ -112,7 +112,6 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.OrderItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.OrderItemsListBox.Enabled = false;
             this.OrderItemsListBox.FormattingEnabled = true;
             this.OrderItemsListBox.Location = new System.Drawing.Point(6, 268);
             this.OrderItemsListBox.Name = "OrderItemsListBox";
