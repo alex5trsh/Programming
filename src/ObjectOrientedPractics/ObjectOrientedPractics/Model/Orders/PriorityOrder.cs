@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enums;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о приоритетных заказах.
@@ -57,7 +58,8 @@ namespace ObjectOrientedPractics.Model
         /// <param name="dateDelivery">Желаемая дата доставки.</param>
         /// <param name="timeDelivery">Желаемое время доставки.</param>
         public PriorityOrder(Address address, List<Item> items, double cost, OrderStatus orderStatus,
-            DateTime dateDelivery, string timeDelivery) : base(address, items, cost, orderStatus)
+            /*double discountAmount,*/DateTime dateDelivery, string timeDelivery) :
+            base(address, items, cost, orderStatus /*, discountAmount*/)
         {
             DateDelivery = dateDelivery;
             TimeDelivery = timeDelivery;

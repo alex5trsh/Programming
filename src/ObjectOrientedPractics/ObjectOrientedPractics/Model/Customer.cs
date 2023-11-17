@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectOrientedPractics.Services;
+using ObjectOrientedPractics.Model.Discounts;
+using ObjectOrientedPractics.Model.Orders;
 
 namespace ObjectOrientedPractics.Model
 {
@@ -124,6 +126,11 @@ namespace ObjectOrientedPractics.Model
         }
 
         /// <summary>
+        /// Возвращает и задает скидки.
+        /// </summary>
+        List<IDiscount> Discounts { get; set; }
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="Customer"/>.
         /// </summary>
         /// <param name="fullName">Полное имя в формате Фамилия Имя Отчество.</param>
@@ -137,6 +144,7 @@ namespace ObjectOrientedPractics.Model
             Id = AllItemsCount;
             Cart = new Cart(new List<Item>());
             Order =orders;
+            Discounts = new List<IDiscount>() { new PointsDiscount() };
         }
 
         /// <summary>
@@ -146,6 +154,7 @@ namespace ObjectOrientedPractics.Model
         {
             AllItemsCount++;
             Id = AllItemsCount;
+            Discounts = new List<IDiscount>() { new PointsDiscount() };
         }
 
     }

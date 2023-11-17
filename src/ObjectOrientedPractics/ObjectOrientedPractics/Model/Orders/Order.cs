@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ObjectOrientedPractics.Model.Enums;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
     /// <summary>
     /// Хранит данные о заказах.
@@ -30,7 +31,11 @@ namespace ObjectOrientedPractics.Model
        /// Общая стоимость.
        /// </summary>
        private double _cost;
-        
+
+        private double _discountAmount;
+
+        private double _total;
+
         /// <summary>
         /// Возвращает и задает счетчик заказов.
         /// </summary>
@@ -101,18 +106,43 @@ namespace ObjectOrientedPractics.Model
         public OrderStatus OrderStatus { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public double DiscountAmount 
+        {
+            get=>_discountAmount;
+            set
+            {
+                _discountAmount = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double Total 
+        { 
+            get => _total;
+            private set
+            {
+                _total = Cost-DiscountAmount;
+            }
+        }
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="Order"/>.
         /// </summary>
         /// <param name="address">Адрес.</param>
         /// <param name="items">Товары.</param>
         /// <param name="cost">Общая стоимость.</param>
         /// <param name="orderStatus">Состояние заказа.</param>
-        public Order(Address address, List<Item> items, double cost, OrderStatus orderStatus)
+        public Order(Address address, List<Item> items, double cost, OrderStatus orderStatus/*, double discountAmount*/)
         {
             Address = address;
             Items = items;
             Cost = cost;
             OrderStatus = orderStatus;
+            //DiscountAmount = discountAmount;
             AllOrdersCount++;
             Id = AllOrdersCount;
             Date = DateTime.Now.ToLongDateString();       

@@ -190,7 +190,7 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             // orderBindingSource
             // 
-            this.orderBindingSource.DataSource = typeof(ObjectOrientedPractics.Model.Order);
+            this.orderBindingSource.DataSource = typeof(ObjectOrientedPractics.Model.Orders.Order);
             // 
             // Panel
             // 
