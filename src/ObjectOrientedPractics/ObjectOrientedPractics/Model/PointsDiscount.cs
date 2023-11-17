@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о скидке накопительных баллов.
     /// </summary>
-    class PointsDiscount
+    public class PointsDiscount: IDiscount
     {
         /// <summary>
         /// Баллы.
@@ -30,19 +30,11 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
-        /// <summary>
-        /// Возвращает название скидки.
-        /// </summary>
         public string Info
         {
             get => $"Накопительная - {Points} баллов";
         }
 
-        /// <summary>
-        /// Рассчитывает доступную скидку для списка продуктов.
-        /// </summary>
-        /// <param name="items">Спиоск товаров.</param>
-        /// <returns>Возвращает размер скидки.</returns>
         public double Calculate(List<Item> items)
         {
             double amount = 0;
@@ -61,11 +53,6 @@ namespace ObjectOrientedPractics.Model
             return Points;
         }
 
-        /// <summary>
-        /// Применяет доступную скидку к товарам.
-        /// </summary>
-        /// <param name="items">Список товаров.</param>
-        /// <returns>Возвращает размер скидки.</returns>
         public double Apply(List<Item> items)
         {
             int discount = Convert.ToInt32(Calculate(items));
@@ -74,10 +61,6 @@ namespace ObjectOrientedPractics.Model
             return Points;
         }
 
-        /// <summary>
-        /// Добавляет новые баллы на основе списка товаров.
-        /// </summary>
-        /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
         {
             double amount = 0;

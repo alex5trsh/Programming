@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о процентной скидке.
     /// </summary>
-    class PercentDiscount
+    public class PercentDiscount : IDiscount
     {
         /// <summary>
         /// Текущий процент.
@@ -50,19 +50,11 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
-        /// <summary>
-        /// Возвращает название скидки.
-        /// </summary>
         public string Info
         {
             get => $"Процентная {Category} - {CurrentPercent}%";
         }
 
-        /// <summary>
-        /// Рассчитывает доступную скидку для списка продуктов.
-        /// </summary>
-        /// <param name="items">Спиоск товаров.</param>
-        /// <returns>Возвращает размер скидки.</returns>
         public double Calculate(List<Item> items)
         {
             double amount = 0;
@@ -83,11 +75,6 @@ namespace ObjectOrientedPractics.Model
             return discount;
         }
 
-        /// <summary>
-        /// Применяет доступную скидку к товарам.
-        /// </summary>
-        /// <param name="items">Список товаров.</param>
-        /// <returns>Возвращает размер скидки.</returns>
         public double Apply(List<Item> items)
         {
             double amount = 0;
@@ -108,10 +95,6 @@ namespace ObjectOrientedPractics.Model
             return discount;
         }
 
-        /// <summary>
-        /// Добавляет новые проценты на основе списка товаров.
-        /// </summary>
-        /// <param name="items">Список товаров.</param>
         public void Update(List<Item> items)
         {
             double amount = 0;
