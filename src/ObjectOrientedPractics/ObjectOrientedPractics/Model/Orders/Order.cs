@@ -38,11 +38,6 @@ namespace ObjectOrientedPractics.Model.Orders
         private double _discountAmount;
 
         /// <summary>
-        /// Конечная стоимость.
-        /// </summary>
-        private double _total;
-
-        /// <summary>
         /// Возвращает и задает счетчик заказов.
         /// </summary>
         public static int AllOrdersCount
@@ -127,7 +122,7 @@ namespace ObjectOrientedPractics.Model.Orders
         /// </summary>
         public double Total 
         { 
-            get => _total= Cost - DiscountAmount;
+            get => Cost - DiscountAmount;
         }
 
         /// <summary>
