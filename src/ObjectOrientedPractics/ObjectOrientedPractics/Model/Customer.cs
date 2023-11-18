@@ -128,7 +128,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Возвращает и задает скидки.
         /// </summary>
-        List<IDiscount> Discounts { get; set; }
+        public List<IDiscount> Discounts { get; set; }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="Customer"/>.

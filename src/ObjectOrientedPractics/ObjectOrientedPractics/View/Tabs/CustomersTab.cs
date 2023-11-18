@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Services;
 using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Model.Discounts;
+using ObjectOrientedPractics.Model.Enums;
 
 namespace ObjectOrientedPractics.View.Tabs
 {
@@ -47,6 +49,11 @@ namespace ObjectOrientedPractics.View.Tabs
         /// </summary>
         private int _currentIndex;
 
+        /// <summary>
+        /// Категории на которые есть скидки.
+        /// </summary>
+        private List<Category> _existingCategories=new List<Category>();
+
         public CustomersTab()
         {
             InitializeComponent();
@@ -82,7 +89,8 @@ namespace ObjectOrientedPractics.View.Tabs
                     CustomersListBox.SelectedIndex = i;
                 }
             }
-
+            
+            FillDiscountsListBox();
             SwitchAccessTextBox(true);  
         }
 
@@ -111,6 +119,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 NameTextBox.BackColor = Color.White;
                 CustomersListBox.Enabled = true;
                 IsPriorityCheckBox.Enabled = true;
+                DiscountsListBox.Enabled = true;
                 AddressControl.SwitchAccessTextBox(true);
                 SwitchVisibleButtons(true);   
                 FillCustomersListBox();
@@ -122,6 +131,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     NameTextBox.BackColor = Color.FromArgb(205, 92, 92);
                     CustomersListBox.Enabled = false;
                     IsPriorityCheckBox.Enabled = false;
+                    DiscountsListBox.Enabled = false;
                     AddressControl.SwitchAccessTextBox(false);
                     SwitchVisibleButtons(false);
                 }
@@ -140,6 +150,39 @@ namespace ObjectOrientedPractics.View.Tabs
             }
 
         }
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex >= 0)
+            {
+                _existingCategories.Clear();
+                for (int i = 1; i < _currentCustomer.Discounts.Count; i++)
+                {
+                    if (_currentCustomer.Discounts[i] is PercentDiscount percentDiscount)
+                    {
+                        _existingCategories.Add(percentDiscount.Category);
+                    }
+
+                }
+                AddDiscountForm addDiscountForm = new AddDiscountForm(this._existingCategories);
+                addDiscountForm.ShowDialog();
+                if (addDiscountForm.isCategorySelect)
+                {
+                    PercentDiscount newDiscount = new PercentDiscount(addDiscountForm.category);
+                    _currentCustomer.Discounts.Add(newDiscount);
+                    FillDiscountsListBox();
+                }
+            }
+        }
+
+        private void RemoveDiscountButton_Click(object sender, EventArgs e)
+        {
+            if(CustomersListBox.SelectedIndex >= 0 && DiscountsListBox.SelectedIndex>0)
+            {
+                _currentCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
+                FillDiscountsListBox();
+            }
+
+        }
 
         /// <summary>
         /// Обновляет данные по указанному объекту в текстовых полях.
@@ -151,6 +194,7 @@ namespace ObjectOrientedPractics.View.Tabs
             NameTextBox.Text = customer.FullName;
             AddressControl.Address = customer.Address;
             IsPriorityCheckBox.Checked = customer.IsPriority;
+            FillDiscountsListBox();
         }
 
         /// <summary>
@@ -162,6 +206,8 @@ namespace ObjectOrientedPractics.View.Tabs
             NameTextBox.Clear();
             AddressControl.ClearAddressTextBox();
             IsPriorityCheckBox.Checked = false;
+            DiscountsListBox.DataSource = null;
+            DiscountsListBox.DisplayMember = " ";
         }
 
         /// <summary>
@@ -182,6 +228,8 @@ namespace ObjectOrientedPractics.View.Tabs
         {
             AddButton.Visible = flag;
             RemoveButton.Visible = flag;
+            AddDiscountButton.Visible = flag;
+            RemoveDiscountButton.Visible = flag;
         }
 
         /// <summary>
@@ -192,6 +240,18 @@ namespace ObjectOrientedPractics.View.Tabs
             CustomersListBox.DataSource = null;
             CustomersListBox.DataSource = Customers;
             CustomersListBox.DisplayMember = nameof(Customer.FullName);
-        }     
+        }
+
+        /// <summary>
+        /// Заполняет FillDiscountsListBox значениями из Customers.Discounts.
+        /// </summary>
+        private void FillDiscountsListBox()
+        {
+            DiscountsListBox.DataSource = null;
+            DiscountsListBox.DataSource = _currentCustomer.Discounts;
+            DiscountsListBox.DisplayMember = nameof(IDiscount.Info);
+        }
+
+        
     }
 }

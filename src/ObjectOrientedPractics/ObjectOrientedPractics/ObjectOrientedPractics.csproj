@@ -91,6 +91,12 @@
     <Compile Include="Model\Store.cs" />
     <Compile Include="Services\ProjectSerializer.cs" />
     <Compile Include="Services\ValueValidator.cs" />
+    <Compile Include="View\AddDiscountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AddDiscountForm.Designer.cs">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\AddDiscountForm.resx">
+      <DependentUpon>AddDiscountForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
