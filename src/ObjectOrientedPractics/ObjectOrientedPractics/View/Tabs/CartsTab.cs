@@ -46,6 +46,16 @@ namespace ObjectOrientedPractics.View.Tabs
         private int _currentItemIndex;
 
         /// <summary>
+        /// Текущие скидки, которые применяются к корзине.
+        /// </summary>
+        private List<IDiscount> _currentDiscounts = new List<IDiscount>();
+
+        /// <summary>
+        /// Текущий размер примененных скидок.
+        /// </summary>
+        private double _amountCurrentDiscounts;
+
+        /// <summary>
         /// Возвращает и задает товары.
         /// </summary>
         public List<Item> Items
@@ -100,7 +110,10 @@ namespace ObjectOrientedPractics.View.Tabs
                 CurrentCustomer =Customers[_currenCustomertIndex];
                 ItemsListBox.SelectedIndex = -1;
                 ItemsListBox.Enabled = true;
+                _currentDiscounts.Clear();
                 FillCartListBox();
+                FillDiscountsCheckedListBox();
+                CalculateTheDiscount();
                 SwitchVisibleButtons(true);
             }
         }
@@ -113,6 +126,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentItem = Items[_currentItemIndex];
                 CurrentCustomer.Cart.Items.Add(_currentItem);
                 FillCartListBox();
+                CalculateTheDiscount();
             }
         }
 
@@ -123,7 +137,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 _currentItemIndex = ItemsListBox.SelectedIndex;
                 CurrentCustomer.Cart.Items.RemoveAt(_currenCustomertIndex);
                 ItemsListBox.SelectedIndex = -1;
-                FillCartListBox();               
+                FillCartListBox();
+                CalculateTheDiscount();
             }
         }
 
@@ -137,6 +152,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     newItems.Add(CurrentCustomer.Cart.Items[i]);
 
                 }
+                ApplyTheDiscounts();
 
                 if (CurrentCustomer.IsPriority == true)
                 {
@@ -145,6 +161,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     newOrder.Items = newItems;
                     newOrder.Cost = CurrentCustomer.Cart.Amount;
                     newOrder.OrderStatus = OrderStatus.New;
+                    newOrder.DiscountAmount = _amountCurrentDiscounts;
 
                     Customers.Remove(CurrentCustomer);
                     CurrentCustomer.Order.Add(newOrder);
@@ -154,13 +171,15 @@ namespace ObjectOrientedPractics.View.Tabs
                 else
                 {
                     Order newOrder = new Order(CurrentCustomer.Address, newItems,
-                              CurrentCustomer.Cart.Amount, OrderStatus.New);
+                              CurrentCustomer.Cart.Amount, OrderStatus.New,_amountCurrentDiscounts);
                     Customers.Remove(CurrentCustomer);
                     CurrentCustomer.Order.Add(newOrder);
                     CurrentCustomer.Cart.Items.Clear();
                     Customers.Insert(_currenCustomertIndex, CurrentCustomer);
                 }
-
+                FillDiscountsCheckedListBox();
+                DiscountAmountNumberLabel.Text = "0.0";
+                TotalNumberLabel.Text = "0.0";
                 FillCartListBox();
                 CustomerComboBox.SelectedIndex = -1;
                 ItemsListBox.SelectedIndex = -1;
@@ -173,9 +192,30 @@ namespace ObjectOrientedPractics.View.Tabs
             if (CartListBox != null)
             {
                 CurrentCustomer.Cart.Items.Clear();
+                CalculateTheDiscount();
                 ItemsListBox.SelectedIndex = -1;
                 FillCartListBox();
             }
+        }
+        private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_currentDiscounts.Count != 0)
+            {
+                for (int i = 1; i < CurrentCustomer.Discounts.Count; i++)
+                {
+                    if (DiscountsCheckedListBox.GetItemChecked(i) == false)
+                    {
+                        _currentDiscounts.Remove(CurrentCustomer.Discounts[i]);
+                    }
+                    else if (_currentDiscounts.Contains(CurrentCustomer.Discounts[i]) == false)
+                    {
+                        _currentDiscounts.Add(CurrentCustomer.Discounts[i]);
+
+                    }
+                }
+                CalculateTheDiscount();
+            }
+
         }
 
         /// <summary>
@@ -221,6 +261,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CustomerComboBox.Items.Add(value.FullName);
             }
             UpdateCartListBox();
+            FillDiscountsCheckedListBox();
             CustomerComboBox.Text = null;
             ItemsListBox.Enabled = false;
 
@@ -284,6 +325,66 @@ namespace ObjectOrientedPractics.View.Tabs
             CreateOrderButton.Visible = flag;
         }
 
+        /// <summary>
+        /// Заполняет DiscountsCheckedListBox значениями из CurrentCustomer.Discounts,
+        /// присваивает всем элементам из DiscountsCheckedListBox значение Checked 
+        /// и заполняет _currentDiscounts.
+        /// </summary>
+        private void FillDiscountsCheckedListBox()
+        {
+            if (CustomerComboBox.SelectedIndex >= 0)
+            {
+                DiscountsCheckedListBox.DataSource = null;
+                DiscountsCheckedListBox.DataSource = CurrentCustomer.Discounts; ;
+                DiscountsCheckedListBox.DisplayMember = nameof(IDiscount.Info);
+                for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+                {
+                    DiscountsCheckedListBox.SetItemCheckState(i, CheckState.Checked);
+                    _currentDiscounts.Add(CurrentCustomer.Discounts[i]);
+                }
+            }
+            else
+            {
+                DiscountsCheckedListBox.DataSource = null;
+                DiscountsCheckedListBox.DisplayMember = " ";
+                DiscountAmountNumberLabel.Text = "0,0";
+                TotalNumberLabel.Text = "0,0";
+            }
+        }
 
+        /// <summary>
+        /// Рассчитывает предварительный размер скидки.
+        /// </summary>
+        private void CalculateTheDiscount()
+        {
+            if(CurrentCustomer.Cart!=null&&CustomerComboBox.SelectedIndex>=0)
+            {
+                _amountCurrentDiscounts = 0;
+                for(int i=0;i<_currentDiscounts.Count;i++)
+                {
+                    _amountCurrentDiscounts += _currentDiscounts[i].Calculate(CurrentCustomer.Cart.Items);        
+                }
+                DiscountAmountNumberLabel.Text = Convert.ToString(_amountCurrentDiscounts);
+                TotalNumberLabel.Text = Convert.ToString(CurrentCustomer.Cart.Amount - _amountCurrentDiscounts);
+
+            }
+        }
+        
+        /// <summary>
+        /// Рассчитывает размер скидки и обновляет баллы/проценты.
+        /// </summary>
+        private void ApplyTheDiscounts()
+        {
+            _amountCurrentDiscounts = 0;
+            for(int i=0; i<CurrentCustomer.Discounts.Count;i++)
+            {
+                if(DiscountsCheckedListBox.GetItemChecked(i))
+                {
+                    _amountCurrentDiscounts += CurrentCustomer.Discounts[i].Apply(CurrentCustomer.Cart.Items);
+                }
+                CurrentCustomer.Discounts[i].Update(CurrentCustomer.Cart.Items);
+            }
+            
+        }
     }
 }

@@ -123,6 +123,7 @@ namespace ObjectOrientedPractics.View.Tabs
             AddressControl.Address = (Address)(OrdersDataGridView.Rows[selectedRow].Cells[2].Value);
             AmountNumberLabel.Text = Convert.ToString(OrdersDataGridView.Rows[selectedRow].Cells[3].Value);
             StatusComboBox.Text = Convert.ToString(OrdersDataGridView.Rows[selectedRow].Cells[4].Value);
+            TotalNumberLabel.Text = Convert.ToString(OrdersDataGridView.Rows[selectedRow].Cells[6].Value);
             OrderItemsListBox.DataSource = null;
             OrderItemsListBox.DataSource = SelectedOrder.Items;
             OrderItemsListBox.DisplayMember = nameof(Name);
@@ -227,6 +228,7 @@ namespace ObjectOrientedPractics.View.Tabs
             OrderItemsListBox.DisplayMember = " ";
             AmountNumberLabel.Text = "0,0";
             DeliveryTimeComboBox.Text = null;
+            TotalNumberLabel.Text = "0,0";
         }
     }
 }

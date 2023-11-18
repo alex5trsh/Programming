@@ -34,8 +34,10 @@ namespace ObjectOrientedPractics.View
         public AddDiscountForm(List<Category> categoriesFromKeyForm)
         {
             InitializeComponent();
+
             var categories = Enum.GetValues(typeof(Category));
             existingCategories = categoriesFromKeyForm;
+
             if (existingCategories!= null)
             {
                 foreach (var value in categories)

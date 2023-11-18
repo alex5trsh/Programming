@@ -27,13 +27,19 @@ namespace ObjectOrientedPractics.Model.Orders
         /// </summary>
         private List<Item> _items;
 
-       /// <summary>
-       /// Общая стоимость.
-       /// </summary>
-       private double _cost;
+        /// <summary>
+        /// Общая стоимость.
+        /// </summary>
+        private double _cost;
 
+        /// <summary>
+        /// Размер примененной скидки.
+        /// </summary>
         private double _discountAmount;
 
+        /// <summary>
+        /// Конечная стоимость.
+        /// </summary>
         private double _total;
 
         /// <summary>
@@ -99,14 +105,13 @@ namespace ObjectOrientedPractics.Model.Orders
             }
         }
 
-        
         /// <summary>
         /// Возвращает и задает состояние заказа.
         /// </summary>
         public OrderStatus OrderStatus { get; set; }
 
         /// <summary>
-        /// 
+        /// Возвращает и задает размер примененной скидки.
         /// </summary>
         public double DiscountAmount 
         {
@@ -118,15 +123,11 @@ namespace ObjectOrientedPractics.Model.Orders
         }
 
         /// <summary>
-        /// 
+        /// Задает конечную стоимость.
         /// </summary>
         public double Total 
         { 
-            get => _total;
-            private set
-            {
-                _total = Cost-DiscountAmount;
-            }
+            get => _total= Cost - DiscountAmount;
         }
 
         /// <summary>
@@ -136,13 +137,14 @@ namespace ObjectOrientedPractics.Model.Orders
         /// <param name="items">Товары.</param>
         /// <param name="cost">Общая стоимость.</param>
         /// <param name="orderStatus">Состояние заказа.</param>
-        public Order(Address address, List<Item> items, double cost, OrderStatus orderStatus/*, double discountAmount*/)
+        /// <param name="discountAmount">Размер примененной скидки.</param>
+        public Order(Address address, List<Item> items, double cost, OrderStatus orderStatus, double discountAmount)
         {
             Address = address;
             Items = items;
             Cost = cost;
             OrderStatus = orderStatus;
-            //DiscountAmount = discountAmount;
+            DiscountAmount = discountAmount;
             AllOrdersCount++;
             Id = AllOrdersCount;
             Date = DateTime.Now.ToLongDateString();       

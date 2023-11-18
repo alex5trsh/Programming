@@ -49,6 +49,8 @@ namespace ObjectOrientedPractics.View.Tabs
             this.DeliveryTimeComboBox = new System.Windows.Forms.ComboBox();
             this.DeliveryTimeLabel = new System.Windows.Forms.Label();
             this.PriorityOptionsLabel = new System.Windows.Forms.Label();
+            this.TotalNumberLabel = new System.Windows.Forms.Label();
+            this.TotalLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.Panel.SuspendLayout();
@@ -231,10 +233,34 @@ namespace ObjectOrientedPractics.View.Tabs
             this.PriorityOptionsLabel.TabIndex = 3;
             this.PriorityOptionsLabel.Text = "Priority Options";
             // 
+            // TotalNumberLabel
+            // 
+            this.TotalNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TotalNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TotalNumberLabel.Location = new System.Drawing.Point(713, 473);
+            this.TotalNumberLabel.Name = "TotalNumberLabel";
+            this.TotalNumberLabel.Size = new System.Drawing.Size(111, 29);
+            this.TotalNumberLabel.TabIndex = 20;
+            this.TotalNumberLabel.Text = "0,0";
+            this.TotalNumberLabel.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TotalLabel.AutoSize = true;
+            this.TotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TotalLabel.Location = new System.Drawing.Point(763, 456);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(64, 17);
+            this.TotalLabel.TabIndex = 19;
+            this.TotalLabel.Text = "TOTAL:";
+            // 
             // OrdersTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TotalNumberLabel);
+            this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.Panel);
             this.Controls.Add(this.AmountNumberLabel);
             this.Controls.Add(this.AmountLabel);
@@ -282,5 +308,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Label PriorityOptionsLabel;
         private System.Windows.Forms.ComboBox DeliveryTimeComboBox;
         private System.Windows.Forms.Label DeliveryTimeLabel;
+        private System.Windows.Forms.Label TotalNumberLabel;
+        private System.Windows.Forms.Label TotalLabel;
     }
 }

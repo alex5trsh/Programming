@@ -89,12 +89,11 @@
     <Compile Include="Model\Discounts\PointsDiscount.cs" />
     <Compile Include="Model\Orders\PriorityOrder.cs" />
     <Compile Include="Model\Store.cs" />
-    <Compile Include="Services\ProjectSerializer.cs" />
     <Compile Include="Services\ValueValidator.cs" />
-    <Compile Include="View\AddDiscountForm.cs">
+    <Compile Include="View\Forms\AddDiscountForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\AddDiscountForm.Designer.cs">
+    <Compile Include="View\Forms\AddDiscountForm.Designer.cs">
       <DependentUpon>AddDiscountForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainForm.cs">
@@ -162,7 +161,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\AddDiscountForm.resx">
+    <EmbeddedResource Include="View\Forms\AddDiscountForm.resx">
       <DependentUpon>AddDiscountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm.resx">

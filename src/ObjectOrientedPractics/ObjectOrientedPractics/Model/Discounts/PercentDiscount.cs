@@ -73,6 +73,7 @@ namespace ObjectOrientedPractics.Model.Discounts
             }
             double percent = Convert.ToDouble(CurrentPercent) / 100;
             double discount = amount *percent ;
+
             return discount;
         }
 
@@ -91,7 +92,8 @@ namespace ObjectOrientedPractics.Model.Discounts
             {
                 return 0;
             }
-            double discount = amount * CurrentPercent;
+            double percent = Convert.ToDouble(CurrentPercent) / 100;
+            double discount = amount * percent;
 
             return discount;
         }
@@ -108,7 +110,7 @@ namespace ObjectOrientedPractics.Model.Discounts
             }
             PurchaseAmount += amount;
 
-            while (amount - 1000 > 0)
+            while (amount - 1000 >=0)
             {
                 if (CurrentPercent < 10)
                 {

@@ -251,7 +251,6 @@ namespace ObjectOrientedPractics.View.Tabs
             DiscountsListBox.DataSource = _currentCustomer.Discounts;
             DiscountsListBox.DisplayMember = nameof(IDiscount.Info);
         }
-
         
     }
 }
