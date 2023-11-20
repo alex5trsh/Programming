@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Хранит данные о товарах.
     /// </summary>
-    public class Item
+    public class Item : ICloneable,IEquatable<Item>,IComparable
     {
         /// <summary>
         /// Счетчик товаров.
@@ -123,6 +123,55 @@ namespace ObjectOrientedPractics.Model
         {
             AllItemsCount++;
             Id = AllItemsCount;
+        }
+
+        /// <inheritdoc />
+        /// <remarks>В копии экземпляра будет новый Id.</remarks>
+        public object Clone() 
+        { 
+            return new Item(this.Name, this.Info, this.Cost, this.Category);
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+
+            if (other is Item == false)
+                return false;
+
+            if (object.ReferenceEquals(this, other))
+                return true;
+
+            var otherItem = (Item)other;
+            return (this.Name == otherItem.Name && this.Category == otherItem.Category);
+        }
+
+        /// <inheritdoc />
+        public bool Equals(Item otherItem)
+        {
+            if (otherItem == null)
+                return false;
+
+            if (object.ReferenceEquals(this, otherItem))
+                return true;
+
+            return (this.Name == otherItem.Name && this.Category == otherItem.Category);
+        }
+
+        /// <inheritdoc/>
+        public int CompareTo(object other)
+        {
+            if (other == null) 
+                return 1;
+
+            if (other is Item == false)
+                throw new ArgumentException("Object is not a Item");
+
+            var otherItem = (Item)other;
+            return this.Cost.CompareTo(otherItem.Cost);
+
         }
     }
 }

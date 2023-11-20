@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Enums; 
 
 namespace ObjectOrientedPractics.Model.Discounts
 {
     /// <summary>
     /// Хранит данные о процентной скидке.
     /// </summary>
-    public class PercentDiscount : IDiscount
+    public class PercentDiscount : IDiscount,IComparable
     {
         /// <summary>
         /// Текущий процент.
@@ -132,6 +132,20 @@ namespace ObjectOrientedPractics.Model.Discounts
         public PercentDiscount(Category category)
         {
             Category = category;
+        }
+
+        /// <inheritdoc />
+        public int CompareTo(object other)
+        {
+            if (other == null)
+                return 1;
+
+            if (other is PercentDiscount == false)
+                throw new ArgumentException("Object is not a PercentDiscount");
+
+            var otherPercentDiscount = (PercentDiscount)other;
+            return this.CurrentPercent.CompareTo(otherPercentDiscount.CurrentPercent);
+
         }
     }
 }

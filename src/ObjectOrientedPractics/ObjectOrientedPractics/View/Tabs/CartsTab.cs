@@ -177,13 +177,11 @@ namespace ObjectOrientedPractics.View.Tabs
                     CurrentCustomer.Cart.Items.Clear();
                     Customers.Insert(_currenCustomertIndex, CurrentCustomer);
                 }
-                FillDiscountsCheckedListBox();
-                DiscountAmountNumberLabel.Text = "0.0";
-                TotalNumberLabel.Text = "0.0";
                 FillCartListBox();
                 CustomerComboBox.SelectedIndex = -1;
                 ItemsListBox.SelectedIndex = -1;
                 ItemsListBox.Enabled = false;
+                FillDiscountsCheckedListBox();
             }
         }
 

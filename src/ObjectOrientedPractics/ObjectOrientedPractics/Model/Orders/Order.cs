@@ -154,5 +154,33 @@ namespace ObjectOrientedPractics.Model.Orders
             Id = AllOrdersCount;
             Date = DateTime.Now.ToLongDateString();
         }
+
+        /// <inheritdoc />
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+
+            if (other is Order == false)
+                return false;
+
+            if (object.ReferenceEquals(this, other))
+                return true;
+
+            var otherOrder = (Order)other;
+            return (this.Items == otherOrder.Items && this.DiscountAmount == otherOrder.DiscountAmount);
+        }
+
+        /// <inheritdoc />
+        public bool Equals(Order otherOrder)
+        {
+            if (otherOrder == null)
+                return false;
+
+            if (object.ReferenceEquals(this, otherOrder))
+                return true;
+
+            return (this.Items == otherOrder.Items && this.DiscountAmount == otherOrder.DiscountAmount);
+        }
     }
 }

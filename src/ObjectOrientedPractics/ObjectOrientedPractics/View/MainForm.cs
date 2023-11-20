@@ -51,21 +51,11 @@ namespace ObjectOrientedPractics
             {
                 OrdersTab.RefreshData();
             }
-
-            if (MainTabControl.SelectedIndex == 4)
-            {
-                priorityOrdersTab.Items = _store.Items;
-            }
         }
 
         private void OrdersTab_Load(object sender, EventArgs e)
         {
             OrdersTab.Customers= _store.Customers;
-        }
-
-        private void priorityOrdersTab_Load(object sender, EventArgs e)
-        {
-            priorityOrdersTab.Items = _store.Items;
         }
     }
 }
