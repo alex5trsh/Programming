@@ -155,7 +155,7 @@ namespace ObjectOrientedPractics
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(857, 570);
             this.Name = "MainForm";
-            this.Text = "Object Oriented Practics";
+            this.Text = "`";
             this.OrdersTabPage.ResumeLayout(false);
             this.CartsTabPage.ResumeLayout(false);
             this.CustomersTabPage.ResumeLayout(false);

@@ -145,7 +145,7 @@ namespace ObjectOrientedPractics.Model
                 return true;
 
             var otherItem = (Item)other;
-            return (this.Name == otherItem.Name && this.Category == otherItem.Category);
+            return (this.Name == otherItem.Name && this.Category == otherItem.Category && this.Id == otherItem.Id);
         }
 
         /// <inheritdoc />
@@ -157,7 +157,7 @@ namespace ObjectOrientedPractics.Model
             if (object.ReferenceEquals(this, otherItem))
                 return true;
 
-            return (this.Name == otherItem.Name && this.Category == otherItem.Category);
+            return (this.Name == otherItem.Name && this.Category == otherItem.Category&&this.Id==otherItem.Id);
         }
 
         /// <inheritdoc/>

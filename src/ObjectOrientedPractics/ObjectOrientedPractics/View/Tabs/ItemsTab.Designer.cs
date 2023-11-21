@@ -43,10 +43,14 @@ namespace ObjectOrientedPractics.View.Tabs
             this.IdTextBox = new System.Windows.Forms.TextBox();
             this.ItemsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.ItemsGroupBox = new System.Windows.Forms.GroupBox();
+            this.FindTextBox = new System.Windows.Forms.TextBox();
+            this.FindLabel = new System.Windows.Forms.Label();
             this.ItemsListBox = new System.Windows.Forms.ListBox();
             this.ButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.RemoveButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
+            this.OrderByLabel = new System.Windows.Forms.Label();
+            this.OrderByComboBox = new System.Windows.Forms.ComboBox();
             this.SelectedItemTableLayoutPanel.SuspendLayout();
             this.SelectedItemsGroupBox.SuspendLayout();
             this.ItemsTableLayoutPanel.SuspendLayout();
@@ -207,6 +211,10 @@ namespace ObjectOrientedPractics.View.Tabs
             // 
             this.ItemsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.ItemsGroupBox.Controls.Add(this.OrderByComboBox);
+            this.ItemsGroupBox.Controls.Add(this.OrderByLabel);
+            this.ItemsGroupBox.Controls.Add(this.FindTextBox);
+            this.ItemsGroupBox.Controls.Add(this.FindLabel);
             this.ItemsGroupBox.Controls.Add(this.ItemsListBox);
             this.ItemsGroupBox.Controls.Add(this.ButtonsTableLayoutPanel);
             this.ItemsGroupBox.Location = new System.Drawing.Point(3, 3);
@@ -216,14 +224,33 @@ namespace ObjectOrientedPractics.View.Tabs
             this.ItemsGroupBox.TabStop = false;
             this.ItemsGroupBox.Text = "Items";
             // 
+            // FindTextBox
+            // 
+            this.FindTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindTextBox.Location = new System.Drawing.Point(42, 20);
+            this.FindTextBox.Name = "FindTextBox";
+            this.FindTextBox.Size = new System.Drawing.Size(220, 20);
+            this.FindTextBox.TabIndex = 4;
+            this.FindTextBox.TextChanged += new System.EventHandler(this.FindTextBox_TextChanged);
+            // 
+            // FindLabel
+            // 
+            this.FindLabel.AutoSize = true;
+            this.FindLabel.Location = new System.Drawing.Point(6, 23);
+            this.FindLabel.Name = "FindLabel";
+            this.FindLabel.Size = new System.Drawing.Size(30, 13);
+            this.FindLabel.TabIndex = 2;
+            this.FindLabel.Text = "Find:";
+            // 
             // ItemsListBox
             // 
             this.ItemsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ItemsListBox.FormattingEnabled = true;
-            this.ItemsListBox.Location = new System.Drawing.Point(6, 21);
+            this.ItemsListBox.Location = new System.Drawing.Point(6, 47);
             this.ItemsListBox.Name = "ItemsListBox";
-            this.ItemsListBox.Size = new System.Drawing.Size(256, 420);
+            this.ItemsListBox.Size = new System.Drawing.Size(256, 368);
             this.ItemsListBox.TabIndex = 1;
             this.ItemsListBox.SelectedIndexChanged += new System.EventHandler(this.ItemsListBox_SelectedIndexChanged);
             // 
@@ -263,6 +290,26 @@ namespace ObjectOrientedPractics.View.Tabs
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
+            // OrderByLabel
+            // 
+            this.OrderByLabel.AutoSize = true;
+            this.OrderByLabel.Location = new System.Drawing.Point(11, 421);
+            this.OrderByLabel.Name = "OrderByLabel";
+            this.OrderByLabel.Size = new System.Drawing.Size(51, 13);
+            this.OrderByLabel.TabIndex = 5;
+            this.OrderByLabel.Text = "Order By:";
+            // 
+            // OrderByComboBox
+            // 
+            this.OrderByComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.OrderByComboBox.FormattingEnabled = true;
+            this.OrderByComboBox.Location = new System.Drawing.Point(68, 418);
+            this.OrderByComboBox.Name = "OrderByComboBox";
+            this.OrderByComboBox.Size = new System.Drawing.Size(194, 21);
+            this.OrderByComboBox.TabIndex = 9;
+            this.OrderByComboBox.SelectedIndexChanged += new System.EventHandler(this.OrderByComboBox_SelectedIndexChanged);
+            // 
             // ItemsTab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,6 +323,7 @@ namespace ObjectOrientedPractics.View.Tabs
             this.SelectedItemsGroupBox.PerformLayout();
             this.ItemsTableLayoutPanel.ResumeLayout(false);
             this.ItemsGroupBox.ResumeLayout(false);
+            this.ItemsGroupBox.PerformLayout();
             this.ButtonsTableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -301,5 +349,9 @@ namespace ObjectOrientedPractics.View.Tabs
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.ComboBox CategoryComboBox;
+        private System.Windows.Forms.TextBox FindTextBox;
+        private System.Windows.Forms.Label FindLabel;
+        private System.Windows.Forms.ComboBox OrderByComboBox;
+        private System.Windows.Forms.Label OrderByLabel;
     }
 }
