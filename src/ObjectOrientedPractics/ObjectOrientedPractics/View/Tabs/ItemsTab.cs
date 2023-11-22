@@ -22,6 +22,11 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class ItemsTab : UserControl
     {
         /// <summary>
+        /// Событие на изменение, добавление, удаление элементов класса <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> ItemsChanged;
+
+        /// <summary>
         /// Коллекция элементов класса <see cref="Item"/>.
         /// </summary>
         private List<Item> _items;
@@ -94,6 +99,9 @@ namespace ObjectOrientedPractics.View.Tabs
             if (FindTextBox.Text == "")
             {
                 Item _newItem = new Item("New Name", "New Description", 1, Category.Clothes);
+                _newItem.NameChanged += Item_NameChanged;
+                _newItem.CostChanged += Item_CostChanged;
+                _newItem.InfoChanged += Item_InfoChanged;
                 Items.Add(_newItem);
                 FillItemsListBox();
 
@@ -107,6 +115,7 @@ namespace ObjectOrientedPractics.View.Tabs
 
                 SwitchAccessTextBox(true);
                 SortItems();
+                ItemsChanged?.Invoke(sender, EventArgs.Empty);
             }   
         }
 
@@ -119,7 +128,8 @@ namespace ObjectOrientedPractics.View.Tabs
                 FillItemsListBox();
                 ItemsListBox.SelectedIndex = -1;
                 SwitchAccessTextBox(false);
-                ClearItemsInfo(); 
+                ClearItemsInfo();
+                ItemsChanged?.Invoke(sender, EventArgs.Empty);
             }
         }
 
@@ -143,6 +153,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 SortItems();
                 FillItemsListBox();
                 ItemsListBox.SelectedIndex = _currentIndex;
+                ItemsChanged?.Invoke(sender, EventArgs.Empty);
             }
             catch
             {
@@ -178,6 +189,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 SortItems();
                 FillItemsListBox();
                 ItemsListBox.SelectedIndex = _currentIndex;
+                ItemsChanged?.Invoke(sender, EventArgs.Empty);
             }
             catch
             {
@@ -209,6 +221,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CategoryComboBox.Enabled = true;
                 ItemsListBox.Enabled = true;
                 SwitchVisibleButtons(true);
+                ItemsChanged?.Invoke(sender, EventArgs.Empty);
             }
             catch
             {
@@ -233,6 +246,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 if (_currentItem.Category != newCategory)
                 {
                     _currentItem.Category = newCategory;
+                    ItemsChanged?.Invoke(sender, EventArgs.Empty);
                 }
             }
             catch 
@@ -379,6 +393,40 @@ namespace ObjectOrientedPractics.View.Tabs
                 ItemsListBox.SelectedIndex = _displayedItems.IndexOf(selectedItem);
             }
 
+        }
+
+        private void Item_NameChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        "Название товара изменено.",
+        "Сообщение",
+        MessageBoxButtons.OK,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1
+        );
+
+        }
+
+        private void Item_CostChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        "Стоимость товара изменена.",
+        "Сообщение",
+        MessageBoxButtons.OK,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1
+        );
+        }
+
+        private void Item_InfoChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        "Информация о товаре изменена.",
+        "Сообщение",
+        MessageBoxButtons.OK,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1
+        );
         }
     }
 }

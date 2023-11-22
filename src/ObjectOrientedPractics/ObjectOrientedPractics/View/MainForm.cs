@@ -22,40 +22,22 @@ namespace ObjectOrientedPractics
         public MainForm()
         {
             InitializeComponent();
-        }
 
-        private void ItemsTab_Load(object sender, EventArgs e)
-        {       
             ItemsTab.Items = _store.Items;
-        }
-
-        private void CustomersTab_Load(object sender, EventArgs e)
-        {        
             CustomersTab.Customers = _store.Customers;
-        }
-
-        private void CartsTab_Load(object sender, EventArgs e)
-        {
             CartsTab.Items = _store.Items;
             CartsTab.Customers = _store.Customers;
+            OrdersTab.Customers = _store.Customers;
+
+            ItemsTab.ItemsChanged += Tabs_RefreshData;
+            CustomersTab.CustomersChanged += Tabs_RefreshData;
+            CartsTab.OrderChanged += Tabs_RefreshData;
         }
 
-        private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void Tabs_RefreshData(object sender, EventArgs e)
         {
-            if (MainTabControl.SelectedIndex==2)
-            {
-                CartsTab.RefreshData();
-            }
-
-            if (MainTabControl.SelectedIndex == 3)
-            {
-                OrdersTab.RefreshData();
-            }
-        }
-
-        private void OrdersTab_Load(object sender, EventArgs e)
-        {
-            OrdersTab.Customers= _store.Customers;
+            CartsTab.RefreshData();
+            OrdersTab.RefreshData();
         }
     }
 }

@@ -21,6 +21,11 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class CartsTab : UserControl
     {
         /// <summary>
+        /// Событие на создание элемента класса <see cref="Order"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> OrderChanged;
+
+        /// <summary>
         /// Товары.
         /// </summary>
         private List<Item> _items;
@@ -177,11 +182,13 @@ namespace ObjectOrientedPractics.View.Tabs
                     CurrentCustomer.Cart.Items.Clear();
                     Customers.Insert(_currenCustomertIndex, CurrentCustomer);
                 }
+                OrderChanged?.Invoke(sender, EventArgs.Empty);
                 FillCartListBox();
                 CustomerComboBox.SelectedIndex = -1;
                 ItemsListBox.SelectedIndex = -1;
                 ItemsListBox.Enabled = false;
                 FillDiscountsCheckedListBox();
+                
             }
         }
 
@@ -262,7 +269,6 @@ namespace ObjectOrientedPractics.View.Tabs
             FillDiscountsCheckedListBox();
             CustomerComboBox.Text = null;
             ItemsListBox.Enabled = false;
-
         }
 
         /// <summary>

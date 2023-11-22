@@ -22,6 +22,11 @@ namespace ObjectOrientedPractics.View.Tabs
     public partial class CustomersTab : UserControl
     {
         /// <summary>
+        /// Событие на изменение, добавление, удаление элементов класса <see cref="Customer"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> CustomersChanged;
+
+        /// <summary>
         /// Коллекция элементов класса <see cref="Customer"/>.
         /// </summary>
         private List<Customer> _customers;
@@ -79,6 +84,7 @@ namespace ObjectOrientedPractics.View.Tabs
         private void AddButton_Click(object sender, EventArgs e)
         {
             Customer _newCustomer = new Customer("FullName Name MiddleName", new BindingList<Order>());
+            _newCustomer.Address.AddressChanged += Address_Changed;
             Customers.Add(_newCustomer);
             FillCustomersListBox();
 
@@ -91,7 +97,8 @@ namespace ObjectOrientedPractics.View.Tabs
             }
             
             FillDiscountsListBox();
-            SwitchAccessTextBox(true);  
+            SwitchAccessTextBox(true);
+            CustomersChanged?.Invoke(sender, EventArgs.Empty);
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -103,6 +110,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 CustomersListBox.SelectedIndex = -1;
                 SwitchAccessTextBox(false);
                 ClearCustomersInfo();
+                CustomersChanged?.Invoke(sender, EventArgs.Empty);
             }
         }
 
@@ -123,6 +131,7 @@ namespace ObjectOrientedPractics.View.Tabs
                 AddressControl.SwitchAccessTextBox(true);
                 SwitchVisibleButtons(true);   
                 FillCustomersListBox();
+                CustomersChanged?.Invoke(sender, EventArgs.Empty);
             }
             catch
             {
@@ -148,6 +157,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentCustomer.IsPriority = false;
             }
+            CustomersChanged?.Invoke(sender, EventArgs.Empty);
 
         }
         private void AddDiscountButton_Click(object sender, EventArgs e)
@@ -170,6 +180,7 @@ namespace ObjectOrientedPractics.View.Tabs
                     PercentDiscount newDiscount = new PercentDiscount(addDiscountForm.category);
                     _currentCustomer.Discounts.Add(newDiscount);
                     FillDiscountsListBox();
+                    CustomersChanged?.Invoke(sender, EventArgs.Empty);
                 }
             }
         }
@@ -180,6 +191,7 @@ namespace ObjectOrientedPractics.View.Tabs
             {
                 _currentCustomer.Discounts.RemoveAt(DiscountsListBox.SelectedIndex);
                 FillDiscountsListBox();
+                CustomersChanged?.Invoke(sender, EventArgs.Empty);
             }
 
         }
@@ -251,6 +263,17 @@ namespace ObjectOrientedPractics.View.Tabs
             DiscountsListBox.DataSource = _currentCustomer.Discounts;
             DiscountsListBox.DisplayMember = nameof(IDiscount.Info);
         }
-        
+
+        private void Address_Changed(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+        "Адрес изменен.",
+        "Сообщение",
+        MessageBoxButtons.OK,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1
+        );
+        }
+
     }
 }
