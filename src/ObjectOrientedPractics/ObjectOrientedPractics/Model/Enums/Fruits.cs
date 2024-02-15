@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Enums
 {
+    /// <summary>
+    /// Предоставляет шаблоны фруктов.
+    /// </summary>
     public enum Fruits
     {
         /// <summary>
@@ -26,6 +29,26 @@ namespace ObjectOrientedPractics.Model.Enums
         /// <summary>
         /// Банан.
         /// </summary>
-        Banana
+        Banana,
+
+        /// <summary>
+        /// Лимон.
+        /// </summary>
+        Lemon,
+
+        /// <summary>
+        /// Слива.
+        /// </summary>
+        Plum,
+
+        /// <summary>
+        /// Манго.
+        /// </summary>
+        Mango,
+
+        /// <summary>
+        /// Груша.
+        /// </summary>
+        Pear
     }
 }
