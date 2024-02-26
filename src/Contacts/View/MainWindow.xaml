@@ -5,14 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Contacts" Height="450" Width="800">
-    <Grid>
-        <Grid Margin="0,10,0,-11">
-            <GroupBox Header="EditContact" Margin="12,19,374,164"/>
-            <GroupBox Header="ReadContact" Margin="484,37,3,146"/>
-            <Button Content="Save" HorizontalAlignment="Left" Margin="232,329,0,0" VerticalAlignment="Top" Width="75" Height="25"/>
-            <Button Content="Load" HorizontalAlignment="Center" Margin="0,337,0,0" VerticalAlignment="Top" Width="76" Height="25"/>
-        </Grid>
-
+        Title="Contacts" Height="450" Width="569" MaxWidth="569" MaxHeight="450">
+    <Grid x:Name="MainGrid">
+        <GroupBox x:Name="EditContactGroupBox" Header="EditContact" Margin="15,18,283,60">
+            <StackPanel x:Name="EditContactStackPanel">
+                <Label x:Name="EditNameLabel" Content="Name:" Height="29" Width="66" HorizontalAlignment="Left"/>
+                <TextBox x:Name="NameTextBox" TextWrapping="Wrap" Width="230" HorizontalAlignment="Left"/>
+                <Label x:Name="EditPhoneNumberLabel" Content="Phone Number:" Height="29" Width="101" HorizontalAlignment="Left"/>
+                <TextBox x:Name="PhoneNumberTextBox"  TextWrapping="Wrap" Width="230" HorizontalAlignment="Left"/>
+                <Label x:Name="EditEmailLabel" Content="Email:" Height="29"/>
+                <TextBox x:Name="EmailTextBox" TextWrapping="Wrap" Width="230" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="ReadContactGroupBox" Header="ReadContact" Margin="283,18,15,60">
+            <StackPanel x:Name="ReadContactStackPanel">
+                <Label x:Name="ReadNameLabel" Content="Name:" Height="23" HorizontalAlignment="Left"/>
+                <Label x:Name="NameLabel" Content="1" Height="24" FontWeight="Bold"/>
+                <Label x:Name="ReadPhoneNumberLabel" Content="Phone Number:" Height="23"/>
+                <Label x:Name="PhoneNumberLabel" Content="2" Height="23" FontWeight="Bold"/>
+                <Label x:Name="ReadEmailLabel" Content="Email:" Height="23"/>
+                <Label x:Name="EmailLabel" Content="3" Height="23" FontWeight="Bold" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="SaveButton" Content="Save" Margin="0,0,91,26" RenderTransformOrigin="0.537,-0.058" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom"/>
+        <Button x:Name="LoadButton" Content="Load" Margin="0,0,11,26" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
