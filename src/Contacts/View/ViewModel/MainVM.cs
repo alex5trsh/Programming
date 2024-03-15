@@ -2,81 +2,118 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using View.Model;
 
 namespace View.ViewModel
 {
-    class MainVM:INotifyPropertyChanged
+    /// <summary>
+    /// Хранит текущие свойства класса <see cref="Contact"/>, команды сохранения и выгрузки объекта.
+    /// </summary>
+    class MainVM: INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public Contact currentContact;
-
-        private string _name;
+        /// <summary>
+        /// Текущий объект класса <see cref="Contact"/>.
+        /// </summary>
+        private Contact _contact;
 
         /// <summary>
-        /// Номер телефона.
+        /// Команда сохранения объекта.
         /// </summary>
-        private string _numberPhone;
+        private ICommand _saveCommand;
 
         /// <summary>
-        /// Почта.
+        /// Команда выгрузки объекта.
         /// </summary>
-        private string _email;
+        private ICommand _loadCommand;
 
+        /// <summary>
+        /// Возвращает команду сохранения объекта.
+        /// </summary>
+        public ICommand SaveCommand
+        {
+            get => _saveCommand;
+        }
+
+        /// <summary>
+        /// Возвращает команду выгрузки объекта.
+        /// </summary>
+        public ICommand LoadCommand
+        {
+            get => _loadCommand;
+        }
+
+        /// <summary>
+        /// Возвращает и задает имя.
+        /// </summary>
         public string Name
         {
-            get => _name;
+            get => _contact.Name;
             set
             {
-                if (_name != value)
+                if (_contact.Name != value)
                 {
-                    _name = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
+                    _contact.Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
 
-
         /// <summary>
-        /// Возвращает и задает номер. Должен состоять только из 11 положительных чисел.
+        /// Возвращает и задает номер.
         /// </summary>
         public string NumberPhone
         {
-            get => _numberPhone;
+            get => _contact.NumberPhone;
             set
             {
-                if (value.Length != 11)
+                if (_contact.NumberPhone != value)
                 {
-                    throw new ArgumentException("Номер не больше 11 знаков");
-                }
-
-                if (_numberPhone != value)
-                {
-                    _numberPhone = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NumberPhone));
+                    _contact.NumberPhone = value;
+                    OnPropertyChanged("NumberPhone");
                 }
             }
         }
 
         /// <summary>
-        /// Возвращает и задает почту. Должна состоять только из букв.
+        /// Возвращает и задает почту.
         /// </summary>
         public string Email
         {
-            get => _email;
+            get => _contact.Email;
             set
             {
-                if (_email != value)
+                if (_contact.Email != value)
                 {
-                    _email = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Email));
+                    _contact.Email = value;
+                    OnPropertyChanged("Email");
                 }
             }
         }
 
+        /// <summary>
+        /// Событие на изменение какого-либо свойства класса <see cref="MainVM"/>.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <summary>
+        /// Создает экземпляр класса <see cref="MainVM"/>.
+        /// </summary>
+        public MainVM()
+        {
+            _contact = new Contact();
+            _saveCommand = new SaveCommand(this);
+            _loadCommand = new LoadCommand(this);
+        }
     }
 
 }
