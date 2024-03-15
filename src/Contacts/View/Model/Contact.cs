@@ -29,38 +29,17 @@ namespace View.Model
         /// <summary>
         /// Возвращает и задает имя. 
         /// </summary>
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-            }
-        }
+        public string Name {get;set;}
 
         /// <summary>
         /// Возвращает и задает номер.
         /// </summary>
-        public string NumberPhone
-        {
-            get => _numberPhone;
-            set
-            {
-                _numberPhone = value;
-            }
-        }
+        public string NumberPhone { get; set; }
 
         /// <summary>
         /// Возвращает и задает почту. 
         /// </summary>
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-            }
-        }
+        public string Email { get; set; }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="Contact"/>.

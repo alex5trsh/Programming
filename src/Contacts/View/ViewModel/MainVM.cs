@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using View.Model;
+using View.Model.Services;
 
 namespace View.ViewModel
 {
@@ -21,30 +22,14 @@ namespace View.ViewModel
         private Contact _contact;
 
         /// <summary>
-        /// Команда сохранения объекта.
-        /// </summary>
-        private ICommand _saveCommand;
-
-        /// <summary>
-        /// Команда выгрузки объекта.
-        /// </summary>
-        private ICommand _loadCommand;
-
-        /// <summary>
         /// Возвращает команду сохранения объекта.
         /// </summary>
-        public ICommand SaveCommand
-        {
-            get => _saveCommand;
-        }
+        public ICommand SaveCommand { get; }
 
         /// <summary>
         /// Возвращает команду выгрузки объекта.
         /// </summary>
-        public ICommand LoadCommand
-        {
-            get => _loadCommand;
-        }
+        public ICommand LoadCommand { get; }
 
         /// <summary>
         /// Возвращает и задает имя.
@@ -93,6 +78,29 @@ namespace View.ViewModel
                 }
             }
         }
+         
+        /// <summary>
+        /// Сохранение текущего контакта.
+        /// </summary>
+        private void Save()
+        {
+            string name = this.Name;
+            string numberPhone = this.NumberPhone;
+            string email = this.Email;
+            Contact contact = new Contact(name, numberPhone, email);
+            ContactSerializer.SaveToFile(contact);
+        }
+
+        /// <summary>
+        /// Выгрузка контакта из файла.
+        /// </summary>
+        private void Load()
+        {
+            Contact contact = ContactSerializer.LoadFromFile();
+            this.Name = contact.Name;
+            this.NumberPhone = contact.NumberPhone;
+            this.Email = contact.Email;
+        }
 
         /// <summary>
         /// Событие на изменение какого-либо свойства класса <see cref="MainVM"/>.
@@ -111,8 +119,8 @@ namespace View.ViewModel
         public MainVM()
         {
             _contact = new Contact();
-            _saveCommand = new SaveCommand(this);
-            _loadCommand = new LoadCommand(this);
+            SaveCommand = new RelayCommand((param)=>Save());
+            LoadCommand = new RelayCommand((param) => Load());
         }
     }
 

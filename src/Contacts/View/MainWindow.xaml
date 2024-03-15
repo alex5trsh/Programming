@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="569" MaxWidth="569" MaxHeight="450">
     <Grid x:Name="MainGrid">
-        <GroupBox x:Name="EditContactGroupBox" Header="EditContact" Margin="15,18,283,60">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="370"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="EditContactGroupBox" Header="EditContact" Grid.Column="0" Grid.Row="0">
             <StackPanel x:Name="EditContactStackPanel">
                 <Label x:Name="EditNameLabel" Content="Name:" Height="29" Width="66" HorizontalAlignment="Left"/>
                 <TextBox x:Name="NameTextBox"  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"  Width="230" HorizontalAlignment="Left"/>
@@ -17,17 +25,18 @@
                 <TextBox x:Name="EmailTextBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="230" HorizontalAlignment="Left"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="ReadContactGroupBox" Header="ReadContact" Margin="283,18,15,60">
+        <GroupBox x:Name="ReadContactGroupBox" Header="ReadContact" Grid.Row="0" Grid.ColumnSpan="2" Margin="284,0,0,0">
             <StackPanel x:Name="ReadContactStackPanel">
                 <Label x:Name="ReadNameLabel" Content="Name:" Height="23" HorizontalAlignment="Left"/>
                 <Label x:Name="NameLabel" Content="{Binding Name}" Height="24" FontWeight="Bold"/>
                 <Label x:Name="ReadPhoneNumberLabel" Content="Phone Number:" Height="23"/>
-                <Label x:Name="PhoneNumberLabel" Content="{Binding NumberPhone}" Height="23" FontWeight="Bold"/>
+                <Label x:Name="PhoneNumberLabel" Content="{Binding NumberPhone}" Height="24" FontWeight="Bold"/>
                 <Label x:Name="ReadEmailLabel" Content="Email:" Height="23"/>
-                <Label x:Name="EmailLabel" Content="{Binding Email}" Height="23" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <Label x:Name="EmailLabel" Content="{Binding Email}" Height="25" FontWeight="Bold" HorizontalAlignment="Left"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="SaveButton"  Command="{Binding SaveCommand}" Content="Save" Margin="0,0,91,26" RenderTransformOrigin="0.537,-0.058" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom"/>
-        <Button x:Name="LoadButton" Command="{Binding LoadCommand}" Content="Load" Margin="0,0,11,26" HorizontalAlignment="Right" Width="75" Height="25" VerticalAlignment="Bottom"/>
+        <Button x:Name="SaveButton"  Command="{Binding SaveCommand}" Content="Save" Margin="118,0,0,0" HorizontalAlignment="Left" Width="76" Height="25" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="LoadButton" Command="{Binding LoadCommand}" Content="Load" Margin="198,0,0,0" HorizontalAlignment="Left" Width="76" Height="25" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
+ 
