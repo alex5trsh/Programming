@@ -5,38 +5,99 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="Contacts" Height="450" Width="569" MaxWidth="569" MaxHeight="450">
+                Title="Contacts" Height="450" Width="569" >
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="370"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="EditContactGroupBox" Header="EditContact" Grid.Column="0" Grid.Row="0">
-            <StackPanel x:Name="EditContactStackPanel">
-                <Label x:Name="EditNameLabel" Content="Name:" Height="29" Width="66" HorizontalAlignment="Left"/>
-                <TextBox x:Name="NameTextBox"  Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"  Width="230" HorizontalAlignment="Left"/>
-                <Label x:Name="EditPhoneNumberLabel" Content="Phone Number:" Height="29" Width="101" HorizontalAlignment="Left"/>
-                <TextBox x:Name="PhoneNumberTextBox"  Text="{Binding Path=NumberPhone, UpdateSourceTrigger=PropertyChanged}" Width="230" HorizontalAlignment="Left"/>
-                <Label x:Name="EditEmailLabel" Content="Email:" Height="29"/>
-                <TextBox x:Name="EmailTextBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Width="230" HorizontalAlignment="Left"/>
+        <GroupBox
+            x:Name="EditContactGroupBox" 
+            Header="EditContact"
+            Grid.Column="0" 
+            Grid.Row="0">
+            <StackPanel 
+                x:Name="EditContactStackPanel">
+                <Label 
+                    x:Name="EditNameLabel"
+                    Content="Name:"/>
+                <TextBox
+                    x:Name="NameTextBox" 
+                    Text="{Binding Path=Name, 
+                    UpdateSourceTrigger=PropertyChanged}"  />
+                <Label 
+                    x:Name="EditPhoneNumberLabel"
+                    Content="Phone Number:"/>
+                <TextBox 
+                    x:Name="PhoneNumberTextBox"  
+                    Text="{Binding Path=NumberPhone, 
+                    UpdateSourceTrigger=PropertyChanged}" />
+                <Label 
+                    x:Name="EditEmailLabel" 
+                    Content="Email:"/>
+                <TextBox
+                    x:Name="EmailTextBox" 
+                    Text="{Binding Email, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="ReadContactGroupBox" Header="ReadContact" Grid.Row="0" Grid.ColumnSpan="2" Margin="284,0,0,0">
-            <StackPanel x:Name="ReadContactStackPanel">
-                <Label x:Name="ReadNameLabel" Content="Name:" Height="23" HorizontalAlignment="Left"/>
-                <Label x:Name="NameLabel" Content="{Binding Name}" Height="24" FontWeight="Bold"/>
-                <Label x:Name="ReadPhoneNumberLabel" Content="Phone Number:" Height="23"/>
-                <Label x:Name="PhoneNumberLabel" Content="{Binding NumberPhone}" Height="24" FontWeight="Bold"/>
-                <Label x:Name="ReadEmailLabel" Content="Email:" Height="23"/>
-                <Label x:Name="EmailLabel" Content="{Binding Email}" Height="25" FontWeight="Bold" HorizontalAlignment="Left"/>
+        <GroupBox 
+            x:Name="ReadContactGroupBox"
+            Header="ReadContact"
+            Grid.Column="1" 
+            Grid.Row="0" >
+            <StackPanel 
+                x:Name="ReadContactStackPanel">
+                <Label 
+                    x:Name="ReadNameLabel" 
+                    Content="Name:" />
+                <Label 
+                    x:Name="NameLabel" 
+                    Content="{Binding Name}" 
+                    FontWeight="Bold"/>
+                <Label 
+                    x:Name="ReadPhoneNumberLabel" 
+                    Content="Phone Number:" />
+                <Label 
+                    x:Name="PhoneNumberLabel"
+                    Content="{Binding NumberPhone}" 
+                    FontWeight="Bold"/>
+                <Label 
+                    x:Name="ReadEmailLabel" 
+                    Content="Email:"/>
+                <Label 
+                    x:Name="EmailLabel" 
+                    Content="{Binding Email}" 
+                    FontWeight="Bold"/>
             </StackPanel>
         </GroupBox>
-        <Button x:Name="SaveButton"  Command="{Binding SaveCommand}" Content="Save" Margin="118,0,0,0" HorizontalAlignment="Left" Width="76" Height="25" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
-        <Button x:Name="LoadButton" Command="{Binding LoadCommand}" Content="Load" Margin="198,0,0,0" HorizontalAlignment="Left" Width="76" Height="25" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+        <StackPanel 
+            x:Name="ButtonsStackPanel"
+            Grid.Row="1"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Margin="5">
+            <Button 
+                x:Name="SaveButton"  
+                Command="{Binding SaveCommand}" 
+                Content="Save" 
+                Width="76" 
+                Height="25" 
+                VerticalAlignment="Center"/>
+            <Button 
+                x:Name="LoadButton" 
+                Command="{Binding LoadCommand}"
+                Content="Load"
+                Margin="5,0,0,0"  
+                Width="76" 
+                Height="25" 
+                VerticalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Window>
  

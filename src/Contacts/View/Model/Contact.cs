@@ -12,21 +12,6 @@ namespace View.Model
     public class Contact
     {
         /// <summary>
-        /// Имя.
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// Номер телефона.
-        /// </summary>
-        private string _numberPhone;
-
-        /// <summary>
-        /// Почта.
-        /// </summary>
-        private string _email;
-
-        /// <summary>
         /// Возвращает и задает имя. 
         /// </summary>
         public string Name {get;set;}

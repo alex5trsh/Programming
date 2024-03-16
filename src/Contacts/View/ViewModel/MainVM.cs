@@ -42,7 +42,7 @@ namespace View.ViewModel
                 if (_contact.Name != value)
                 {
                     _contact.Name = value;
-                    OnPropertyChanged("Name");
+                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace View.ViewModel
                 if (_contact.NumberPhone != value)
                 {
                     _contact.NumberPhone = value;
-                    OnPropertyChanged("NumberPhone");
+                    OnPropertyChanged(nameof(NumberPhone));
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace View.ViewModel
                 if (_contact.Email != value)
                 {
                     _contact.Email = value;
-                    OnPropertyChanged("Email");
+                    OnPropertyChanged(nameof(Email));
                 }
             }
         }
