@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,22 +11,61 @@ namespace View.Model
     /// <summary>
     /// Хранит контактные данные человека.
     /// </summary>
-    public class Contact
+    public class Contact : INotifyPropertyChanged
     {
+        private string _name;
+
+        private string _numberPhone;
+
+        private string _email;
+
         /// <summary>
         /// Возвращает и задает имя. 
         /// </summary>
-        public string Name {get;set;}
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает номер.
         /// </summary>
-        public string NumberPhone { get; set; }
+        public string NumberPhone
+        {
+            get => _numberPhone;
+            set
+            {
+                if (_numberPhone != value)
+                {
+                    _numberPhone = value;
+                    OnPropertyChanged(nameof(NumberPhone));
+                }
+            }
+        }
 
         /// <summary>
         /// Возвращает и задает почту. 
         /// </summary>
-        public string Email { get; set; }
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
+                }
+            }
+        }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="Contact"/>.
@@ -45,6 +86,14 @@ namespace View.Model
         public Contact()
         {
 
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
