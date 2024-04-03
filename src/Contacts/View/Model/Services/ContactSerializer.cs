@@ -50,19 +50,25 @@ namespace View.Model.Services
         public static ObservableCollection<Contact> LoadFromFile()
         {
             ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
-            if (File.Exists($"{_directoryPath}/{_fileName}"))
+            try
             {
-                using (StreamReader file = File.OpenText($"{_directoryPath}/{_fileName}"))
+                if (File.Exists($"{_directoryPath}/{_fileName}"))
                 {
-                    JsonSerializer serializer = new JsonSerializer();
-                    contacts = (ObservableCollection<Contact>)serializer.Deserialize(file, 
-                        typeof(ObservableCollection<Contact>));
+                    using (StreamReader file = File.OpenText($"{_directoryPath}/{_fileName}"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        contacts = (ObservableCollection<Contact>)serializer.Deserialize(file,
+                            typeof(ObservableCollection<Contact>));
+                    }
+                    if (contacts == null)
+                    {
+                        contacts = new ObservableCollection<Contact>();
+                    }
                 }
-
-                if (contacts == null)
-                {
-                    contacts = new ObservableCollection<Contact>();
-                }
+            }
+            catch
+            {
+                SaveToFile(contacts);
             }
 
             return contacts;

@@ -23,12 +23,12 @@ namespace View.ViewModel
         private Contact _contact;
 
         /// <summary>
-        /// Видимость кнопок.
+        /// Видимость кнопки Apply.
         /// </summary>
-        private bool _visibility;
+        private bool _isApplyVisible;
 
         /// <summary>
-        /// Доступ к текстбоксам.
+        /// Режим чтения для текстбоксов.
         /// </summary>
         private bool _isReadOnly;
 
@@ -90,23 +90,23 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Возвращает и задает видимость кнопок.
+        /// Возвращает и задает видимость кнопки Apply.
         /// </summary>
-        public bool Visibility
+        public bool IsApplyVisible
         {
-            get => _visibility;
+            get => _isApplyVisible;
             set
             {
-                if (_visibility != value)
+                if (_isApplyVisible != value)
                 {
-                    _visibility = value;
-                    OnPropertyChanged(nameof(Visibility));
+                    _isApplyVisible = value;
+                    OnPropertyChanged(nameof(IsApplyVisible));
                 }
             }
         }
 
         /// <summary>
-        /// Возвращает и задает доступ к текстбоксам.
+        /// Возвращает и задает режим чтения для текстбоксов.
         /// </summary>
         public bool IsReadOnly 
         {
@@ -143,7 +143,7 @@ namespace View.ViewModel
         private void Add()
         {
             Contact = new Contact();
-            Visibility = true;
+            IsApplyVisible = true;
             IsReadOnly = false;
             IsEnabled = false;
             _isAddMode = true;
@@ -159,7 +159,7 @@ namespace View.ViewModel
             {            
                 _currentIndex = Contacts.IndexOf(Contact);
                 Contact= (Contact)Contact.Clone();
-                Visibility = true;
+                IsApplyVisible = true;
                 IsReadOnly = false;
                 IsEnabled = false;
                 _isAddMode = false;
@@ -209,7 +209,7 @@ namespace View.ViewModel
                     Contacts.RemoveAt(_currentIndex+1);
                 }
                 IsEnabled = true;
-                Visibility = false;
+                IsApplyVisible = false;
                 IsReadOnly = true;
                 ContactSerializer.SaveToFile(Contacts);
             }          
@@ -221,7 +221,7 @@ namespace View.ViewModel
         private void Reset()
         {
             IsEnabled = true;
-            Visibility = false;
+            IsApplyVisible = false;
             IsReadOnly = true;
         }
 
@@ -230,6 +230,10 @@ namespace View.ViewModel
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="prop">Название свойства, которое было изменено.</param>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
@@ -243,7 +247,7 @@ namespace View.ViewModel
         {
             _contact = new Contact();
             Contacts = ContactSerializer.LoadFromFile();
-            Visibility = false;
+            IsApplyVisible = false;
             IsReadOnly = true;
             IsEnabled = true;
             AddCommand = new RelayCommand((param) => Add());

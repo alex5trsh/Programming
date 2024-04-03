@@ -102,6 +102,10 @@ namespace View.Model
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="prop">Название свойства, которое было изменено.</param>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)

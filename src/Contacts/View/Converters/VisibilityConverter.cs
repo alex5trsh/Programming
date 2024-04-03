@@ -25,7 +25,7 @@ namespace View.Converters
         /// <returns>Значение типа <see cref="Visibility"/>.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value==true)
+            if ((bool)value)
             {
                 return Visibility.Visible;
             }
