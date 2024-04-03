@@ -38,9 +38,14 @@ namespace View.ViewModel
         private bool _isEnabled;
 
         /// <summary>
-        /// Добавление нового контакта.
+        /// Режим добавления нового контакта.
         /// </summary>
-        private bool _isNewContact;
+        private bool _isAddMode;
+
+        /// <summary>
+        /// Индекс текущего контакта.
+        /// </summary>
+        private int _currentIndex;
 
         /// <summary>
         /// Возвращает команду добавления нового объекта.
@@ -79,54 +84,7 @@ namespace View.ViewModel
                 {
                     _contact = value;
                     OnPropertyChanged(nameof(Contact));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает имя.
-        /// </summary>
-        public string Name
-        {
-            get => _contact.Name;
-            set
-            {
-                if (_contact.Name != value)
-                {
-                    _contact.Name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает номер.
-        /// </summary>
-        public string NumberPhone
-        {
-            get => _contact.NumberPhone;
-            set
-            {
-                if (_contact.NumberPhone != value)
-                {
-                    _contact.NumberPhone = value;
-                    OnPropertyChanged(nameof(NumberPhone));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает почту.
-        /// </summary>
-        public string Email
-        {
-            get => _contact.Email;
-            set
-            {
-                if (_contact.Email != value)
-                {
-                    _contact.Email = value;
-                    OnPropertyChanged(nameof(Email));
+                    Reset();
                 }
             }
         }
@@ -180,7 +138,7 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Добавление нового контакта.
+        /// Дает возможность добавления нового контакта.
         /// </summary>
         private void Add()
         {
@@ -188,61 +146,83 @@ namespace View.ViewModel
             Visibility = true;
             IsReadOnly = false;
             IsEnabled = false;
-            _isNewContact = true;
+            _isAddMode = true;
         }
 
         /// <summary>
-        /// Редактирование текущего контакта.
+        /// Предоставляет доступ к редактированию текущего контакта. 
         /// </summary>
         private void Edit()
         {
-            if (this.Name != null && this.Email != null && this.NumberPhone != null)
-            {
+            if (this.Contact.Name != null && this.Contact.Email != null && 
+                this.Contact.NumberPhone != null)
+            {            
+                _currentIndex = Contacts.IndexOf(Contact);
+                Contact= (Contact)Contact.Clone();
                 Visibility = true;
                 IsReadOnly = false;
                 IsEnabled = false;
-                _isNewContact = false;    
+                _isAddMode = false;
             }
         }
 
         /// <summary>
-        /// Удаление текущего контакта.
+        /// Удаляет текущего контакта.
         /// </summary>
         private void Remove()
         {
-            if (this.Name != null && this.Email != null && this.NumberPhone != null)
+            if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
             {
-                int index = Contacts.IndexOf(Contact);
+                _currentIndex = Contacts.IndexOf(Contact);
                 Contacts.Remove(Contact);
                 int count = Contacts.Count;
                 if (count == 0)
                 {
                     Contact = new Contact();
                 }
+                else if(count==_currentIndex)
+                {
+                    Contact = Contacts[_currentIndex - 1];
+                }
                 else
                 {
-                    Contact = Contacts[index];
+                    Contact = Contacts[_currentIndex];
                 }
-            }
-            ContactSerializer.SaveToFile(Contacts);
+                ContactSerializer.SaveToFile(Contacts);
+            }         
         }
 
         /// <summary>
-        /// Сохранение текущего контакта в списке.
+        /// Сохраняет текущий контакт в списке.
         /// </summary>
         private void Apply()
         {
-            if (this.Name != null && this.Email != null && this.NumberPhone != null)
+            if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
             {
-                if (_isNewContact)
+                if (_isAddMode)
                 {
                     Contacts.Add(Contact);
+                }
+                else
+                {             
+                    Contacts.Insert(_currentIndex, Contact);
+                    Contacts.RemoveAt(_currentIndex+1);
                 }
                 IsEnabled = true;
                 Visibility = false;
                 IsReadOnly = true;
-            }
-            ContactSerializer.SaveToFile(Contacts);
+                ContactSerializer.SaveToFile(Contacts);
+            }          
+        }
+
+        /// <summary>
+        /// Сбрасывает редактирование/добавление контакта.
+        /// </summary>
+        private void Reset()
+        {
+            IsEnabled = true;
+            Visibility = false;
+            IsReadOnly = true;
         }
 
         /// <summary>

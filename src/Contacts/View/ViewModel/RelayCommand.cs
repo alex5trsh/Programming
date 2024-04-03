@@ -10,7 +10,7 @@ using View.Model;
 namespace View.ViewModel
 {
     /// <summary>
-    /// Выгружает  и сохраняет объект <see cref="Contact"></see> из/в файла.
+    /// Добавляет, изменяет, удаляет объекты <see cref="Contact"></see> из/в списка.
     /// </summary>
     internal class RelayCommand: ICommand
     {

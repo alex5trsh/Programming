@@ -11,12 +11,21 @@ namespace View.Model
     /// <summary>
     /// Хранит контактные данные человека.
     /// </summary>
-    public class Contact : INotifyPropertyChanged
+    public class Contact : INotifyPropertyChanged, ICloneable
     {
+        /// <summary>
+        /// Имя.
+        /// </summary>
         private string _name;
 
+        /// <summary>
+        /// Номер телефона.
+        /// </summary>
         private string _numberPhone;
 
+        /// <summary>
+        /// Почта.
+        /// </summary>
         private string _email;
 
         /// <summary>
@@ -88,12 +97,21 @@ namespace View.Model
 
         }
 
+        /// <summary>
+        /// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
+        /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        /// <inheritdoc />
+        public object Clone()
+        {
+            return new Contact(this.Name, this.NumberPhone, this.Email);
         }
     }
 }

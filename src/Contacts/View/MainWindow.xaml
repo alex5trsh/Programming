@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View" 
+        xmlns:converters="clr-namespace:View.Converters"
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="569" 
         >
+    <Window.Resources>
+        <converters:VisibilityConverter x:Key="VisibilityConverter"/>
+    </Window.Resources>
 
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
@@ -47,7 +51,6 @@
                 HorizontalAlignment="Stretch"/>
             <ListBox 
                 x:Name="ContactsListBox"
-                Background="#f8f8f8"
                 Grid.Column="0" 
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
@@ -82,7 +85,7 @@
                 Height="25" 
                 HorizontalAlignment="Stretch"
                 IsEnabled="{Binding IsEnabled}"/>
-                <Button 
+                     <Button 
                 x:Name="RemoveButton" 
                 Command="{Binding RemoveCommand}"
                 Content="Remove"
@@ -150,7 +153,7 @@
                 Width="76" 
                 Height="25" 
                 HorizontalAlignment="Left"
-                Visibility="{Binding Visibility}"/>
+                Visibility="{Binding Visibility, Converter={StaticResource VisibilityConverter}}"/>
             </StackPanel>
         </Grid>
     </Grid>
