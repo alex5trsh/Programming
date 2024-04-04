@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Shapes;
 
 namespace View.Model.Services
@@ -27,40 +29,49 @@ namespace View.Model.Services
         /// <summary>
         /// Сохраняет данные в файл.
         /// </summary>
-        /// <param name="contact">Объект контакта, который необходимо сохранить.</param>
-        public static void SaveToFile(Contact contact)
+        /// <param name="contacts">Список контактов, которые необходимо сохранить.</param>
+        public static void SaveToFile(ObservableCollection<Contact> contacts)
         {
             if (!Directory.Exists(_directoryPath))
             {
                 Directory.CreateDirectory(_directoryPath);
             }
-            using (StreamWriter writer = new StreamWriter($"{_directoryPath}/{_fileName}"))
+            using (StreamWriter file = File.CreateText($"{_directoryPath}/{_fileName}"))
             {
-                writer.Write(JsonConvert.SerializeObject(contact));
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Serialize(file, contacts);
             }
         }
 
         /// <summary>
         /// Загружает данные из файла.
         /// </summary>
-        /// <returns>Возвращает объект контакта.</returns>
-        public static Contact LoadFromFile()
+        /// <returns>Возвращает список контактов.</returns>
+        public static ObservableCollection<Contact> LoadFromFile()
         {
-            Contact contact = new Contact();
-            if (File.Exists($"{_directoryPath}/{_fileName}"))
+            ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
+            try
             {
-                using (StreamReader reader = new StreamReader($"{_directoryPath}/{_fileName}"))
+                if (File.Exists($"{_directoryPath}/{_fileName}"))
                 {
-                    contact = JsonConvert.DeserializeObject<Contact>(reader.ReadToEnd());
-                }
-
-                if (contact == null)
-                {
-                    contact = new Contact();
+                    using (StreamReader file = File.OpenText($"{_directoryPath}/{_fileName}"))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        contacts = (ObservableCollection<Contact>)serializer.Deserialize(file,
+                            typeof(ObservableCollection<Contact>));
+                    }
+                    if (contacts == null)
+                    {
+                        contacts = new ObservableCollection<Contact>();
+                    }
                 }
             }
+            catch
+            {
+                SaveToFile(contacts);
+            }
 
-            return contact;
+            return contacts;
         }
     }
 }

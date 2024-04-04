@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,9 +13,9 @@ using View.Model.Services;
 namespace View.ViewModel
 {
     /// <summary>
-    /// Хранит текущие свойства класса <see cref="Contact"/>, команды сохранения и выгрузки объекта.
+    /// Хранит текущие свойства класса <see cref="Contact"/>, команды добавления, изменения и удаления объектов.
     /// </summary>
-    class MainVM: INotifyPropertyChanged
+    class MainVM : INotifyPropertyChanged
     {
         /// <summary>
         /// Текущий объект класса <see cref="Contact"/>.
@@ -22,84 +23,206 @@ namespace View.ViewModel
         private Contact _contact;
 
         /// <summary>
-        /// Возвращает команду сохранения объекта.
+        /// Видимость кнопки Apply.
         /// </summary>
-        public ICommand SaveCommand { get; }
+        private bool _isApplyVisible;
 
         /// <summary>
-        /// Возвращает команду выгрузки объекта.
+        /// Режим чтения для текстбоксов.
         /// </summary>
-        public ICommand LoadCommand { get; }
+        private bool _isReadOnly;
 
         /// <summary>
-        /// Возвращает и задает имя.
+        /// Доступ к кнопкам.
         /// </summary>
-        public string Name
+        private bool _isEnabled;
+
+        /// <summary>
+        /// Режим добавления нового контакта.
+        /// </summary>
+        private bool _isAddMode;
+
+        /// <summary>
+        /// Индекс текущего контакта.
+        /// </summary>
+        private int _currentIndex;
+
+        /// <summary>
+        /// Возвращает команду добавления нового объекта.
+        /// </summary>
+        public ICommand AddCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду редактирования текущего объекта.
+        /// </summary>
+        public ICommand EditCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду удаления текущего объекта.
+        /// </summary>
+        public ICommand RemoveCommand { get; }
+
+        /// <summary>
+        /// Возвращает команду сохранения измененного/нового объекта в списке.
+        /// </summary>
+        public ICommand ApplyCommand { get; }
+
+        /// <summary>
+        /// Возвращает и задает коллекцию объектов класса <see cref="Contact"/>.
+        /// </summary>
+        public ObservableCollection<Contact> Contacts { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает текущий объект класса <see cref="Contact"/>.
+        /// </summary>
+        public Contact Contact
         {
-            get => _contact.Name;
+            get => _contact;
             set
             {
-                if (_contact.Name != value)
+                if (_contact != value)
                 {
-                    _contact.Name = value;
-                    OnPropertyChanged(nameof(Name));
+                    _contact = value;
+                    OnPropertyChanged(nameof(Contact));
+                    Reset();
                 }
             }
         }
 
         /// <summary>
-        /// Возвращает и задает номер.
+        /// Возвращает и задает видимость кнопки Apply.
         /// </summary>
-        public string NumberPhone
+        public bool IsApplyVisible
         {
-            get => _contact.NumberPhone;
+            get => _isApplyVisible;
             set
             {
-                if (_contact.NumberPhone != value)
+                if (_isApplyVisible != value)
                 {
-                    _contact.NumberPhone = value;
-                    OnPropertyChanged(nameof(NumberPhone));
+                    _isApplyVisible = value;
+                    OnPropertyChanged(nameof(IsApplyVisible));
                 }
             }
         }
 
         /// <summary>
-        /// Возвращает и задает почту.
+        /// Возвращает и задает режим чтения для текстбоксов.
         /// </summary>
-        public string Email
+        public bool IsReadOnly 
         {
-            get => _contact.Email;
+            get => _isReadOnly;
             set
             {
-                if (_contact.Email != value)
+                if (_isReadOnly != value)
                 {
-                    _contact.Email = value;
-                    OnPropertyChanged(nameof(Email));
+                    _isReadOnly = value;
+                    OnPropertyChanged(nameof(IsReadOnly));
                 }
             }
         }
-         
+
         /// <summary>
-        /// Сохранение текущего контакта.
+        /// Возвращает и задает доступ к кнопкам.
         /// </summary>
-        private void Save()
+        public bool IsEnabled 
         {
-            string name = this.Name;
-            string numberPhone = this.NumberPhone;
-            string email = this.Email;
-            Contact contact = new Contact(name, numberPhone, email);
-            ContactSerializer.SaveToFile(contact);
+            get => _isEnabled;
+            set
+            {
+                if (_isEnabled != value)
+                {
+                    _isEnabled = value;
+                    OnPropertyChanged(nameof(IsEnabled));
+                }
+            }
         }
 
         /// <summary>
-        /// Выгрузка контакта из файла.
+        /// Дает возможность добавления нового контакта.
         /// </summary>
-        private void Load()
+        private void Add()
         {
-            Contact contact = ContactSerializer.LoadFromFile();
-            this.Name = contact.Name;
-            this.NumberPhone = contact.NumberPhone;
-            this.Email = contact.Email;
+            Contact = new Contact();
+            IsApplyVisible = true;
+            IsReadOnly = false;
+            IsEnabled = false;
+            _isAddMode = true;
+        }
+
+        /// <summary>
+        /// Предоставляет доступ к редактированию текущего контакта. 
+        /// </summary>
+        private void Edit()
+        {
+            if (this.Contact.Name != null && this.Contact.Email != null && 
+                this.Contact.NumberPhone != null)
+            {            
+                _currentIndex = Contacts.IndexOf(Contact);
+                Contact= (Contact)Contact.Clone();
+                IsApplyVisible = true;
+                IsReadOnly = false;
+                IsEnabled = false;
+                _isAddMode = false;
+            }
+        }
+
+        /// <summary>
+        /// Удаляет текущего контакта.
+        /// </summary>
+        private void Remove()
+        {
+            if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
+            {
+                _currentIndex = Contacts.IndexOf(Contact);
+                Contacts.Remove(Contact);
+                int count = Contacts.Count;
+                if (count == 0)
+                {
+                    Contact = new Contact();
+                }
+                else if(count==_currentIndex)
+                {
+                    Contact = Contacts[_currentIndex - 1];
+                }
+                else
+                {
+                    Contact = Contacts[_currentIndex];
+                }
+                ContactSerializer.SaveToFile(Contacts);
+            }         
+        }
+
+        /// <summary>
+        /// Сохраняет текущий контакт в списке.
+        /// </summary>
+        private void Apply()
+        {
+            if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
+            {
+                if (_isAddMode)
+                {
+                    Contacts.Add(Contact);
+                }
+                else
+                {             
+                    Contacts.Insert(_currentIndex, Contact);
+                    Contacts.RemoveAt(_currentIndex+1);
+                }
+                IsEnabled = true;
+                IsApplyVisible = false;
+                IsReadOnly = true;
+                ContactSerializer.SaveToFile(Contacts);
+            }          
+        }
+
+        /// <summary>
+        /// Сбрасывает редактирование/добавление контакта.
+        /// </summary>
+        private void Reset()
+        {
+            IsEnabled = true;
+            IsApplyVisible = false;
+            IsReadOnly = true;
         }
 
         /// <summary>
@@ -107,6 +230,10 @@ namespace View.ViewModel
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Вызывает событие <see cref="PropertyChanged"/>.
+        /// </summary>
+        /// <param name="prop">Название свойства, которое было изменено.</param>
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
@@ -119,9 +246,14 @@ namespace View.ViewModel
         public MainVM()
         {
             _contact = new Contact();
-            SaveCommand = new RelayCommand((param)=>Save());
-            LoadCommand = new RelayCommand((param) => Load());
+            Contacts = ContactSerializer.LoadFromFile();
+            IsApplyVisible = false;
+            IsReadOnly = true;
+            IsEnabled = true;
+            AddCommand = new RelayCommand((param) => Add());
+            EditCommand = new RelayCommand((param) => Edit());
+            RemoveCommand = new RelayCommand((param) => Remove());
+            ApplyCommand = new RelayCommand((param) => Apply());
         }
     }
-
 }
