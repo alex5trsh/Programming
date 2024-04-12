@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using View.ViewModel;
 
 namespace View.Model.Services
 {
@@ -30,7 +31,7 @@ namespace View.Model.Services
         /// Сохраняет данные в файл.
         /// </summary>
         /// <param name="contacts">Список контактов, которые необходимо сохранить.</param>
-        public static void SaveToFile(ObservableCollection<Contact> contacts)
+        public static void SaveToFile(ObservableCollection<ContactVM> contacts)
         {
             if (!Directory.Exists(_directoryPath))
             {
@@ -47,9 +48,9 @@ namespace View.Model.Services
         /// Загружает данные из файла.
         /// </summary>
         /// <returns>Возвращает список контактов.</returns>
-        public static ObservableCollection<Contact> LoadFromFile()
+        public static ObservableCollection<ContactVM> LoadFromFile()
         {
-            ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
+            ObservableCollection<ContactVM> contacts = new ObservableCollection<ContactVM>();
             try
             {
                 if (File.Exists($"{_directoryPath}/{_fileName}"))
@@ -57,12 +58,12 @@ namespace View.Model.Services
                     using (StreamReader file = File.OpenText($"{_directoryPath}/{_fileName}"))
                     {
                         JsonSerializer serializer = new JsonSerializer();
-                        contacts = (ObservableCollection<Contact>)serializer.Deserialize(file,
-                            typeof(ObservableCollection<Contact>));
+                        contacts = (ObservableCollection<ContactVM>)serializer.Deserialize(file,
+                            typeof(ObservableCollection<ContactVM>));
                     }
                     if (contacts == null)
                     {
-                        contacts = new ObservableCollection<Contact>();
+                        contacts = new ObservableCollection<ContactVM>();
                     }
                 }
             }

@@ -20,7 +20,7 @@ namespace View.ViewModel
         /// <summary>
         /// Текущий объект класса <see cref="Contact"/>.
         /// </summary>
-        private Contact _contact;
+        private ContactVM _contact;
 
         /// <summary>
         /// Видимость кнопки Apply.
@@ -30,7 +30,7 @@ namespace View.ViewModel
         /// <summary>
         /// Режим чтения для текстбоксов.
         /// </summary>
-        private bool _isReadOnly;
+        //private bool _isReadOnly;
 
         /// <summary>
         /// Доступ к кнопкам.
@@ -70,12 +70,12 @@ namespace View.ViewModel
         /// <summary>
         /// Возвращает и задает коллекцию объектов класса <see cref="Contact"/>.
         /// </summary>
-        public ObservableCollection<Contact> Contacts { get; set; }
+        public ObservableCollection<ContactVM> Contacts { get; set; }
 
         /// <summary>
         /// Возвращает и задает текущий объект класса <see cref="Contact"/>.
         /// </summary>
-        public Contact Contact
+        public ContactVM Contact
         {
             get => _contact;
             set
@@ -108,18 +108,18 @@ namespace View.ViewModel
         /// <summary>
         /// Возвращает и задает режим чтения для текстбоксов.
         /// </summary>
-        public bool IsReadOnly 
-        {
-            get => _isReadOnly;
-            set
-            {
-                if (_isReadOnly != value)
-                {
-                    _isReadOnly = value;
-                    OnPropertyChanged(nameof(IsReadOnly));
-                }
-            }
-        }
+        //public bool IsReadOnly 
+        //{
+        //    get => _isReadOnly;
+        //    set
+        //    {
+        //        if (_isReadOnly != value)
+        //        {
+        //            _isReadOnly = value;
+        //            OnPropertyChanged(nameof(IsReadOnly));
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Возвращает и задает доступ к кнопкам.
@@ -142,9 +142,9 @@ namespace View.ViewModel
         /// </summary>
         private void Add()
         {
-            Contact = new Contact();
+            Contact = new ContactVM();
             IsApplyVisible = true;
-            IsReadOnly = false;
+            Contact.IsReadOnly = false;
             IsEnabled = false;
             _isAddMode = true;
         }
@@ -158,9 +158,9 @@ namespace View.ViewModel
                 this.Contact.NumberPhone != null)
             {            
                 _currentIndex = Contacts.IndexOf(Contact);
-                Contact= (Contact)Contact.Clone();
+                Contact= (ContactVM)Contact.Clone();
                 IsApplyVisible = true;
-                IsReadOnly = false;
+                Contact.IsReadOnly = false;
                 IsEnabled = false;
                 _isAddMode = false;
             }
@@ -178,7 +178,7 @@ namespace View.ViewModel
                 int count = Contacts.Count;
                 if (count == 0)
                 {
-                    Contact = new Contact();
+                    Contact = new ContactVM();
                 }
                 else if(count==_currentIndex)
                 {
@@ -210,7 +210,7 @@ namespace View.ViewModel
                 }
                 IsEnabled = true;
                 IsApplyVisible = false;
-                IsReadOnly = true;
+                Contact.IsReadOnly = true;
                 ContactSerializer.SaveToFile(Contacts);
             }          
         }
@@ -222,7 +222,7 @@ namespace View.ViewModel
         {
             IsEnabled = true;
             IsApplyVisible = false;
-            IsReadOnly = true;
+            Contact.IsReadOnly = true;
         }
 
         /// <summary>
@@ -245,10 +245,10 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            _contact = new Contact();
+            _contact = new ContactVM();
             Contacts = ContactSerializer.LoadFromFile();
             IsApplyVisible = false;
-            IsReadOnly = true;
+            Contact.IsReadOnly = true;
             IsEnabled = true;
             AddCommand = new RelayCommand((param) => Add());
             EditCommand = new RelayCommand((param) => Edit());
