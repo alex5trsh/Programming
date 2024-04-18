@@ -12,10 +12,24 @@
     <Window.Resources>
         <converters:VisibilityConverter x:Key="VisibilityConverter"/>
         <DataTemplate x:Key="contactTemplate">
-            <StackPanel Margin="3">
-                <TextBlock FontSize="12" FontWeight="SemiBold" Text="{Binding Name}"/>
-                <TextBlock FontSize="10" Text="{Binding NumberPhone}"/>
-            </StackPanel>
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image 
+                     Height="35" 
+                     Width="35"
+                     HorizontalAlignment="Center"
+                     Grid.Column="0"
+                     Source="/Resources/Person_icon_100png.png"
+                     />
+                <StackPanel Grid.Column="1">
+                    <TextBlock FontSize="12" FontWeight="SemiBold" Text="{Binding Name}"/>
+                    <TextBlock FontSize="10" Text="{Binding NumberPhone}"/>
+                </StackPanel>
+            </Grid>
+            
         </DataTemplate>
         <UserControl:ContactControl x:Key="ContactControl"/>
     </Window.Resources>
@@ -105,8 +119,10 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="ContactGrid" Grid.Column="2">
-            <UserControl:ContactControl DataContext="{Binding Contact}"/>
+        <StackPanel x:Name="ContactStackPanek" Grid.Column="2">
+            <UserControl:ContactControl 
+                DataContext="{Binding Contact}"
+                VerticalAlignment="Top"/>
 
             <Button 
                 x:Name="ApplyButton" 
@@ -115,9 +131,9 @@
                 Margin="10 10 10 0"
                 Width="76" 
                 Height="25" 
-                HorizontalAlignment="Center"
-                Visibility="{Binding IsApplyVisible, Converter={StaticResource VisibilityConverter}}"/>
-        </Grid>
+                HorizontalAlignment="Right"
+                Visibility="{Binding Contact.IsApplyVisible, Converter={StaticResource VisibilityConverter}}"/>
+        </StackPanel>
     </Grid>
     </Window>
  

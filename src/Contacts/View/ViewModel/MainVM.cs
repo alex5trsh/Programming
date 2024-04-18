@@ -13,7 +13,7 @@ using View.Model.Services;
 namespace View.ViewModel
 {
     /// <summary>
-    /// Хранит текущие свойства класса <see cref="Contact"/>, команды добавления, изменения и удаления объектов.
+    /// Хранит текущие свойства класса <see cref="ContactVM"/>, команды добавления, изменения и удаления объектов.
     /// </summary>
     class MainVM : INotifyPropertyChanged
     {
@@ -21,16 +21,6 @@ namespace View.ViewModel
         /// Текущий объект класса <see cref="Contact"/>.
         /// </summary>
         private ContactVM _contact;
-
-        /// <summary>
-        /// Видимость кнопки Apply.
-        /// </summary>
-        private bool _isApplyVisible;
-
-        /// <summary>
-        /// Режим чтения для текстбоксов.
-        /// </summary>
-        //private bool _isReadOnly;
 
         /// <summary>
         /// Доступ к кнопкам.
@@ -90,38 +80,6 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// Возвращает и задает видимость кнопки Apply.
-        /// </summary>
-        public bool IsApplyVisible
-        {
-            get => _isApplyVisible;
-            set
-            {
-                if (_isApplyVisible != value)
-                {
-                    _isApplyVisible = value;
-                    OnPropertyChanged(nameof(IsApplyVisible));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает режим чтения для текстбоксов.
-        /// </summary>
-        //public bool IsReadOnly 
-        //{
-        //    get => _isReadOnly;
-        //    set
-        //    {
-        //        if (_isReadOnly != value)
-        //        {
-        //            _isReadOnly = value;
-        //            OnPropertyChanged(nameof(IsReadOnly));
-        //        }
-        //    }
-        //}
-
-        /// <summary>
         /// Возвращает и задает доступ к кнопкам.
         /// </summary>
         public bool IsEnabled 
@@ -143,7 +101,7 @@ namespace View.ViewModel
         private void Add()
         {
             Contact = new ContactVM();
-            IsApplyVisible = true;
+            Contact.IsApplyVisible = true;
             Contact.IsReadOnly = false;
             IsEnabled = false;
             _isAddMode = true;
@@ -159,7 +117,7 @@ namespace View.ViewModel
             {            
                 _currentIndex = Contacts.IndexOf(Contact);
                 Contact= (ContactVM)Contact.Clone();
-                IsApplyVisible = true;
+                Contact.IsApplyVisible = true;
                 Contact.IsReadOnly = false;
                 IsEnabled = false;
                 _isAddMode = false;
@@ -209,7 +167,7 @@ namespace View.ViewModel
                     Contacts.RemoveAt(_currentIndex+1);
                 }
                 IsEnabled = true;
-                IsApplyVisible = false;
+                Contact.IsApplyVisible = false;
                 Contact.IsReadOnly = true;
                 ContactSerializer.SaveToFile(Contacts);
             }          
@@ -220,9 +178,12 @@ namespace View.ViewModel
         /// </summary>
         private void Reset()
         {
-            IsEnabled = true;
-            IsApplyVisible = false;
-            Contact.IsReadOnly = true;
+            if(Contact!= null)
+            {
+                IsEnabled = true;
+                Contact.IsApplyVisible = false;
+                Contact.IsReadOnly = true;
+            }    
         }
 
         /// <summary>
@@ -247,7 +208,7 @@ namespace View.ViewModel
         {
             _contact = new ContactVM();
             Contacts = ContactSerializer.LoadFromFile();
-            IsApplyVisible = false;
+            Contact.IsApplyVisible = false;
             Contact.IsReadOnly = true;
             IsEnabled = true;
             AddCommand = new RelayCommand((param) => Add());

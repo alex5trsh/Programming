@@ -11,24 +11,29 @@ using View.Model;
 namespace View.ViewModel
 {
     /// <summary>
-    /// 
+    /// Хранит текущие свойства класса <see cref="Contact"/> и  их проверку на корректность.
     /// </summary>
-    public class ContactVM: INotifyPropertyChanged, ICloneable, IDataErrorInfo
+    public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
     {
         /// <summary>
-        /// 
+        /// Текущий контакт.
         /// </summary>
-        private Contact _contact=new Contact();
+        private Contact _contact = new Contact();
 
         /// <summary>
-        /// 
+        /// Сообщение об ошибке.
         /// </summary>
         private string _error;
 
         /// <summary>
-        /// 
+        /// Режим чтения для текстбоксов.
         /// </summary>
         private bool _isReadOnly;
+
+        /// <summary>
+        /// Видимость кнопки Apply.
+        /// </summary>
+        private bool _isApplyVisible;
 
         /// <summary>
         /// Возвращает и задает имя. 
@@ -95,10 +100,26 @@ namespace View.ViewModel
         }
 
         /// <summary>
-        /// 
+        /// Возвращает и задает видимость кнопки Apply.
         /// </summary>
-        /// <param name="columnName"></param>
-        /// <returns></returns>
+        public bool IsApplyVisible
+        {
+            get => _isApplyVisible;
+            set
+            {
+                if (_isApplyVisible != value)
+                {
+                    _isApplyVisible = value;
+                    OnPropertyChanged(nameof(IsApplyVisible));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Проверяет значение на наличие ошибок.
+        /// </summary>
+        /// <param name="columnName">Имя свойства значения, которое нужно проверить.</param>
+        /// <returns>Возвращает сообщение об ошибке.</returns>
         public string this[string columnName]
         {
             get
@@ -147,12 +168,22 @@ namespace View.ViewModel
                         }
                         break;
                 }
+
+                if (_error != String.Empty)
+                {
+                    IsApplyVisible = false;
+                }
+                else
+                {
+                    IsApplyVisible = true;
+                }
+
                 return _error;
             }
         }
 
         /// <summary>
-        /// 
+        /// Возвращает сообщение об ошибке.
         /// </summary>
         public string Error
         {

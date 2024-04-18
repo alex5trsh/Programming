@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:resources="clr-namespace:View.Resources;assembly=View"
-             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -13,7 +11,7 @@
                 <Trigger Property="Validation.HasError" Value="True">
                     <Setter Property="ToolTip"
                 Value="{Binding RelativeSource={RelativeSource Self},
-                    Path=(Validation.Errors)[0].ErrorContent}" />
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
                     <Setter Property="Background" Value="#ff9595" />
                 </Trigger>
             </Style.Triggers>
@@ -31,8 +29,9 @@
          VerticalAlignment="Top"
          HorizontalAlignment="Left"
          Grid.Column="0"
-         Source="{x:Static resources:Resource.Person_icon_100png}"
+         Source="/Resources/Person_icon_100png.png"
          />
+        
         <StackPanel 
         x:Name="ContactStackPanel"
         Grid.Column="1" >
@@ -63,7 +62,8 @@
         x:Name="PhoneNumberTextBox"
         Margin="10 0 10 0"
         HorizontalAlignment="Stretch"
-        IsReadOnly="{Binding IsReadOnly}">
+        IsReadOnly="{Binding IsReadOnly}"
+        PreviewTextInput="PhoneNumberTextBox_PreviewTextInput">
                 <TextBox.Text>
                     <Binding Path="NumberPhone" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
