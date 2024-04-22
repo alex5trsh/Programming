@@ -183,7 +183,8 @@ namespace View.ViewModel
                 IsEnabled = true;
                 Contact.IsApplyVisible = false;
                 Contact.IsReadOnly = true;
-            }    
+            } 
+         
         }
 
         /// <summary>
@@ -206,7 +207,7 @@ namespace View.ViewModel
         /// </summary>
         public MainVM()
         {
-            _contact = new ContactVM();
+            Contact = new ContactVM();
             Contacts = ContactSerializer.LoadFromFile();
             Contact.IsApplyVisible = false;
             Contact.IsReadOnly = true;

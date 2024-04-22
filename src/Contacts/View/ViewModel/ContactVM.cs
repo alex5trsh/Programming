@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using View.Model;
 
@@ -130,38 +132,34 @@ namespace View.ViewModel
                     case "Name":
                         if (Name != null)
                         {
-                            if (Name.Length > 10)
+                            if (!ValueValidator.AssertStringOnMaxLength(Name, 100))
                             {
                                 _error = "Length of name should be less 100 symbols.";
-                            }
+                            }     
                         }
                         break;
                     case "NumberPhone":
                         if (NumberPhone != null)
                         {
-                            if (NumberPhone.Length > 100)
+                            if (!ValueValidator.AssertStringOnMaxLength(NumberPhone, 100))
                             {
                                 _error = "Length of phone number should be less 100 symbols.";
                             }
-                            for (int i = 0; i < NumberPhone.Length; i++)
+
+                            if (!ValueValidator.AssertStringForRightFormat(NumberPhone))
                             {
-                                if (NumberPhone[i] != '+' && NumberPhone[i] != '-' && NumberPhone[i]
-                                    != '(' && NumberPhone[i] != ')' && NumberPhone[i] != ' ' &&
-                                    !(NumberPhone[i] >= '0' && NumberPhone[i] <= '9'))
-                                {
-                                    _error = "Phone number can contains only numbers and symbols '+()- '.";
-                                }
+                                _error = "Phone number can contains only numbers and symbols '+()- '.";
                             }
                         }
                         break;
                     case "Email":
                         if (Email != null)
                         {
-                            if (Email.Length > 100)
+                            if (!ValueValidator.AssertStringOnMaxLength(Email, 100))
                             {
                                 _error = "Length of email should be less 100 symbols.";
                             }
-                            if (!Email.Contains("@"))
+                            if (!ValueValidator.AssertStringForSignContent(Email, "@"))
                             {
                                 _error = "Email should contains symbol '@'.";
                             }
@@ -173,7 +171,7 @@ namespace View.ViewModel
                 {
                     IsApplyVisible = false;
                 }
-                else
+                else if(Name!=null && NumberPhone != null && Email != null)
                 {
                     IsApplyVisible = true;
                 }
