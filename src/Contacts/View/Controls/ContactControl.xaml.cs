@@ -37,7 +37,7 @@ namespace View.Controls
         /// <param name="e">Введенный текст.</param>
         private void PhoneNumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!ValueValidator.AssertStringForRightSimbols(e.Text))
+            if (!ValueValidator.CheckStringForRightSimbols(e.Text))
             {
                 e.Handled = true;
             }
@@ -53,7 +53,7 @@ namespace View.Controls
             if (e.DataObject.GetDataPresent(typeof(string)))
             {
                 string pasteText = e.DataObject.GetData(typeof(string)) as string;
-                if (!ValueValidator.AssertStringForRightFormat(pasteText))
+                if (!ValueValidator.CheckStringForRightFormat(pasteText))
                 {
                     e.CancelCommand();
                 }

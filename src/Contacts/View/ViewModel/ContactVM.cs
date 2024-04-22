@@ -132,7 +132,7 @@ namespace View.ViewModel
                     case "Name":
                         if (Name != null)
                         {
-                            if (!ValueValidator.AssertStringOnMaxLength(Name, 100))
+                            if (!ValueValidator.CheckStringForMaxLength(Name, 100))
                             {
                                 _error = "Length of name should be less 100 symbols.";
                             }     
@@ -141,12 +141,12 @@ namespace View.ViewModel
                     case "NumberPhone":
                         if (NumberPhone != null)
                         {
-                            if (!ValueValidator.AssertStringOnMaxLength(NumberPhone, 100))
+                            if (!ValueValidator.CheckStringForMaxLength(NumberPhone, 100))
                             {
                                 _error = "Length of phone number should be less 100 symbols.";
                             }
 
-                            if (!ValueValidator.AssertStringForRightFormat(NumberPhone))
+                            if (!ValueValidator.CheckStringForRightFormat(NumberPhone))
                             {
                                 _error = "Phone number can contains only numbers and symbols '+()- '.";
                             }
@@ -155,11 +155,11 @@ namespace View.ViewModel
                     case "Email":
                         if (Email != null)
                         {
-                            if (!ValueValidator.AssertStringOnMaxLength(Email, 100))
+                            if (!ValueValidator.CheckStringForMaxLength(Email, 100))
                             {
                                 _error = "Length of email should be less 100 symbols.";
                             }
-                            if (!ValueValidator.AssertStringForSignContent(Email, "@"))
+                            if (!ValueValidator.CheckStringForSignContent(Email, "@"))
                             {
                                 _error = "Email should contains symbol '@'.";
                             }

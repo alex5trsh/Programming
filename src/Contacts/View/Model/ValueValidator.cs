@@ -14,28 +14,12 @@ namespace View.Model
     class ValueValidator
     {
         /// <summary>
-        /// Проверяет, что длина переменной входит в диапазон.
-        /// </summary>
-        /// <param name="value">Проверяемая длина.</param>
-        /// <param name="min">Начало диапазона.</param>
-        /// <param name="max">Конец диапазона.</param>
-        /// <param name="nameOfFeature">Имя свойства, которое подлежит проверке.</param>
-        public static void AssertLengthInRange(int value, int min, int max, string nameOfFeature)
-        {
-            if (value < min || value > max)
-            {
-                throw new ArgumentException("Длина переменной свойства " + nameOfFeature +
-                    " не входит в диапазон");
-            }
-        }
-
-        /// <summary>
         /// Проверяет, что длина строки не превышает заданной длины.
         /// </summary>
         /// <param name="value">Проверяемая строка.</param>
         /// <param name="maxLength">Заданнная длина.</param>
         /// <returns>true, если длина строки не превышает заданную, в ином случае, false.</returns>
-        public static bool AssertStringOnMaxLength(string value,int maxLength)
+        public static bool CheckStringForMaxLength(string value,int maxLength)
         {
             if (value.Length > maxLength)
             {
@@ -53,7 +37,7 @@ namespace View.Model
         /// <param name="value">Проверяемая строка.</param>
         /// <param name="sign">Заданный символ.</param>
         /// <returns>true, если строка содержит символ, в ином случае, false.</returns>
-        public static bool AssertStringForSignContent(string value, string sign)
+        public static bool CheckStringForSignContent(string value, string sign)
         {
             if (value.Contains(sign))
             {
@@ -70,7 +54,7 @@ namespace View.Model
         /// </summary>
         /// <param name="value">Проверяемая строка.</param>
         /// <returns>true, если строка соответствует формату номера телефона, в ином случае, false.</returns>
-        public static bool AssertStringForRightFormat(string value)
+        public static bool CheckStringForRightFormat(string value)
         {
             Regex pattern = new Regex(@"^(\+7)(\s)(\()([0-9]){3}(\))(\s)([0-9]){3}(\-)([0-9]){2}(\-)([0-9]){2}$");
 
@@ -82,7 +66,7 @@ namespace View.Model
         /// </summary>
         /// <param name="value">Проверяемая строка.</param>
         /// <returns>true, если строка содержит определенные символы, в ином случае, false.</returns>
-        public static bool AssertStringForRightSimbols(string value)
+        public static bool CheckStringForRightSimbols(string value)
         {
             int val;
             if (value != "+" && value != "-" && value != "(" && value != ")" && value != " "
