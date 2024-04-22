@@ -5,13 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace View.Model
 {
     /// <summary>
     /// Хранит контактные данные человека.
     /// </summary>
-    public class Contact : INotifyPropertyChanged, ICloneable
+    public class Contact
     {
         /// <summary>
         /// Имя.
@@ -39,7 +40,6 @@ namespace View.Model
                 if (_name != value)
                 {
                     _name = value;
-                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -55,7 +55,6 @@ namespace View.Model
                 if (_numberPhone != value)
                 {
                     _numberPhone = value;
-                    OnPropertyChanged(nameof(NumberPhone));
                 }
             }
         }
@@ -71,7 +70,6 @@ namespace View.Model
                 if (_email != value)
                 {
                     _email = value;
-                    OnPropertyChanged(nameof(Email));
                 }
             }
         }
@@ -95,27 +93,6 @@ namespace View.Model
         public Contact()
         {
 
-        }
-
-        /// <summary>
-        /// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Вызывает событие <see cref="PropertyChanged"/>.
-        /// </summary>
-        /// <param name="prop">Название свойства, которое было изменено.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
-        /// <inheritdoc />
-        public object Clone()
-        {
-            return new Contact(this.Name, this.NumberPhone, this.Email);
         }
     }
 }
