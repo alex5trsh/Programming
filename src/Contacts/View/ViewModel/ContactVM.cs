@@ -8,14 +8,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using View.Model;
+using CommunityToolkit.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Reflection.Metadata;
 
 namespace View.ViewModel
 {
     /// <summary>
     /// Хранит текущие свойства класса <see cref="Contact"/> и  их проверку на корректность.
     /// </summary>
-    public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
+    public class ContactVM : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Текущий контакт.
@@ -37,20 +41,23 @@ namespace View.ViewModel
         /// </summary>
         private bool _isApplyVisible;
 
+        //public ContactVM(Contact contact) => this._contact = contact;
+
         /// <summary>
         /// Возвращает и задает имя. 
         /// </summary>
         public string Name
         {
             get => _contact.Name;
-            set
-            {
-                if (_contact.Name != value)
-                {
-                    _contact.Name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
+            set => SetProperty(_contact.Name, value, _contact, (u, n) => u.Name = n);
+            //set
+            //{
+            //    if (_contact.Name != value)
+            //    {
+            //        _contact.Name = value;
+            //        OnPropertyChanged(nameof(Name));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -59,14 +66,16 @@ namespace View.ViewModel
         public string NumberPhone
         {
             get => _contact.NumberPhone;
-            set
-            {
-                if (_contact.NumberPhone != value)
-                {
-                    _contact.NumberPhone = value;
-                    OnPropertyChanged(nameof(NumberPhone));
-                }
-            }
+            set => SetProperty(_contact.NumberPhone, value, _contact, (u, n) => u.NumberPhone = n);
+            //set => SetProperty(ref _contact.NumberPhone, value);
+            //set
+            //{
+            //    if (_contact.NumberPhone != value)
+            //    {
+            //        _contact.NumberPhone = value;
+            //        OnPropertyChanged(nameof(NumberPhone));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -75,14 +84,16 @@ namespace View.ViewModel
         public string Email
         {
             get => _contact.Email;
-            set
-            {
-                if (_contact.Email != value)
-                {
-                    _contact.Email = value;
-                    OnPropertyChanged(nameof(Email));
-                }
-            }
+            set => SetProperty(_contact.Email, value, _contact, (u, n) => u.Email = n);
+            //set => SetProperty(ref _contact.Email, value);
+            //set
+            //{
+            //    if (_contact.Email != value)
+            //    {
+            //        _contact.Email = value;
+            //        OnPropertyChanged(nameof(Email));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -91,14 +102,15 @@ namespace View.ViewModel
         public bool IsReadOnly
         {
             get => _isReadOnly;
-            set
-            {
-                if (_isReadOnly != value)
-                {
-                    _isReadOnly = value;
-                    OnPropertyChanged(nameof(IsReadOnly));
-                }
-            }
+            set => SetProperty(ref _isReadOnly, value);
+            //set
+            //{
+            //    if (_isReadOnly != value)
+            //    {
+            //        _isReadOnly = value;
+            //        OnPropertyChanged(nameof(IsReadOnly));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -107,14 +119,15 @@ namespace View.ViewModel
         public bool IsApplyVisible
         {
             get => _isApplyVisible;
-            set
-            {
-                if (_isApplyVisible != value)
-                {
-                    _isApplyVisible = value;
-                    OnPropertyChanged(nameof(IsApplyVisible));
-                }
-            }
+            set => SetProperty(ref _isApplyVisible, value);
+            //set
+            //{
+            //    if (_isApplyVisible != value)
+            //    {
+            //        _isApplyVisible = value;
+            //        OnPropertyChanged(nameof(IsApplyVisible));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -209,20 +222,20 @@ namespace View.ViewModel
 
         }
 
-        /// <summary>
-        /// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
+        ///// <summary>
+        ///// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
+        ///// </summary>
+        //public event PropertyChangedEventHandler? PropertyChanged;
 
-        /// <summary>
-        /// Вызывает событие <see cref="PropertyChanged"/>.
-        /// </summary>
-        /// <param name="prop">Название свойства, которое было изменено.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        ///// <summary>
+        ///// Вызывает событие <see cref="PropertyChanged"/>.
+        ///// </summary>
+        ///// <param name="prop">Название свойства, которое было изменено.</param>
+        //public void OnPropertyChanged([CallerMemberName] string prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
 
         /// <inheritdoc />
         public object Clone()

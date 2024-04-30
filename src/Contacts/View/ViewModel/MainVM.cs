@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace View.ViewModel
     /// <summary>
     /// Хранит текущие свойства класса <see cref="ContactVM"/>, команды добавления, изменения и удаления объектов.
     /// </summary>
-    class MainVM : INotifyPropertyChanged
+    class MainVM : ObservableObject
     {
         /// <summary>
         /// Текущий объект класса <see cref="Contact"/>.
@@ -70,13 +71,20 @@ namespace View.ViewModel
             get => _contact;
             set
             {
-                if (_contact != value)
+                if (SetProperty(ref _contact, value))
                 {
-                    _contact = value;
-                    OnPropertyChanged(nameof(Contact));
                     Reset();
                 }
             }
+            //set
+            //{
+            //    if (_contact != value)
+            //    {
+            //        _contact = value;
+            //        OnPropertyChanged(nameof(Contact));
+            //        Reset();
+            //    }
+            //}
         }
 
         /// <summary>
@@ -85,14 +93,15 @@ namespace View.ViewModel
         public bool IsEnabled 
         {
             get => _isEnabled;
-            set
-            {
-                if (_isEnabled != value)
-                {
-                    _isEnabled = value;
-                    OnPropertyChanged(nameof(IsEnabled));
-                }
-            }
+            set => SetProperty(ref _isEnabled, value);
+            //set
+            //{
+            //    if (_isEnabled != value)
+            //    {
+            //        _isEnabled = value;
+            //        OnPropertyChanged(nameof(IsEnabled));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -187,20 +196,20 @@ namespace View.ViewModel
          
         }
 
-        /// <summary>
-        /// Событие на изменение какого-либо свойства класса <see cref="MainVM"/>.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        ///// <summary>
+        ///// Событие на изменение какого-либо свойства класса <see cref="MainVM"/>.
+        ///// </summary>
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        /// <summary>
-        /// Вызывает событие <see cref="PropertyChanged"/>.
-        /// </summary>
-        /// <param name="prop">Название свойства, которое было изменено.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        ///// <summary>
+        ///// Вызывает событие <see cref="PropertyChanged"/>.
+        ///// </summary>
+        ///// <param name="prop">Название свойства, которое было изменено.</param>
+        //public void OnPropertyChanged([CallerMemberName] string prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
 
         /// <summary>
         /// Создает экземпляр класса <see cref="MainVM"/>.
