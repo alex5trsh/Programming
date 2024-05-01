@@ -19,7 +19,7 @@ namespace View.ViewModel
     /// <summary>
     /// Хранит текущие свойства класса <see cref="Contact"/> и  их проверку на корректность.
     /// </summary>
-    public class ContactVM : ObservableObject, ICloneable, IDataErrorInfo
+    public partial class ContactVM : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Текущий контакт.
@@ -31,14 +31,17 @@ namespace View.ViewModel
         /// </summary>
         private string _error;
 
+
         /// <summary>
         /// Режим чтения для текстбоксов.
         /// </summary>
+        [ObservableProperty]
         private bool _isReadOnly;
 
         /// <summary>
         /// Видимость кнопки Apply.
         /// </summary>
+        [ObservableProperty]
         private bool _isApplyVisible;
 
         //public ContactVM(Contact contact) => this._contact = contact;
@@ -50,14 +53,7 @@ namespace View.ViewModel
         {
             get => _contact.Name;
             set => SetProperty(_contact.Name, value, _contact, (u, n) => u.Name = n);
-            //set
-            //{
-            //    if (_contact.Name != value)
-            //    {
-            //        _contact.Name = value;
-            //        OnPropertyChanged(nameof(Name));
-            //    }
-            //}
+
         }
 
         /// <summary>
@@ -67,15 +63,6 @@ namespace View.ViewModel
         {
             get => _contact.NumberPhone;
             set => SetProperty(_contact.NumberPhone, value, _contact, (u, n) => u.NumberPhone = n);
-            //set => SetProperty(ref _contact.NumberPhone, value);
-            //set
-            //{
-            //    if (_contact.NumberPhone != value)
-            //    {
-            //        _contact.NumberPhone = value;
-            //        OnPropertyChanged(nameof(NumberPhone));
-            //    }
-            //}
         }
 
         /// <summary>
@@ -85,50 +72,25 @@ namespace View.ViewModel
         {
             get => _contact.Email;
             set => SetProperty(_contact.Email, value, _contact, (u, n) => u.Email = n);
-            //set => SetProperty(ref _contact.Email, value);
-            //set
-            //{
-            //    if (_contact.Email != value)
-            //    {
-            //        _contact.Email = value;
-            //        OnPropertyChanged(nameof(Email));
-            //    }
-            //}
         }
 
         /// <summary>
         /// Возвращает и задает режим чтения для текстбоксов.
         /// </summary>
-        public bool IsReadOnly
-        {
-            get => _isReadOnly;
-            set => SetProperty(ref _isReadOnly, value);
-            //set
-            //{
-            //    if (_isReadOnly != value)
-            //    {
-            //        _isReadOnly = value;
-            //        OnPropertyChanged(nameof(IsReadOnly));
-            //    }
-            //}
-        }
+        //public bool IsReadOnly
+        //{
+        //    get => _isReadOnly;
+        //    set => SetProperty(ref _isReadOnly, value);
+        //}
 
         /// <summary>
         /// Возвращает и задает видимость кнопки Apply.
         /// </summary>
-        public bool IsApplyVisible
-        {
-            get => _isApplyVisible;
-            set => SetProperty(ref _isApplyVisible, value);
-            //set
-            //{
-            //    if (_isApplyVisible != value)
-            //    {
-            //        _isApplyVisible = value;
-            //        OnPropertyChanged(nameof(IsApplyVisible));
-            //    }
-            //}
-        }
+        //public bool IsApplyVisible
+        //{
+        //    get => _isApplyVisible;
+        //    set => SetProperty(ref _isApplyVisible, value);
+        //}
 
         /// <summary>
         /// Проверяет значение на наличие ошибок.
@@ -221,21 +183,6 @@ namespace View.ViewModel
         {
 
         }
-
-        ///// <summary>
-        ///// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
-        ///// </summary>
-        //public event PropertyChangedEventHandler? PropertyChanged;
-
-        ///// <summary>
-        ///// Вызывает событие <see cref="PropertyChanged"/>.
-        ///// </summary>
-        ///// <param name="prop">Название свойства, которое было изменено.</param>
-        //public void OnPropertyChanged([CallerMemberName] string prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
 
         /// <inheritdoc />
         public object Clone()

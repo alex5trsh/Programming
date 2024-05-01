@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,16 +17,18 @@ namespace View.ViewModel
     /// <summary>
     /// Хранит текущие свойства класса <see cref="ContactVM"/>, команды добавления, изменения и удаления объектов.
     /// </summary>
-    class MainVM : ObservableObject
+    partial class MainVM : ObservableObject
     {
         /// <summary>
         /// Текущий объект класса <see cref="Contact"/>.
         /// </summary>
+        [ObservableProperty]
         private ContactVM _contact;
 
         /// <summary>
         /// Доступ к кнопкам.
         /// </summary>
+        [ObservableProperty]
         private bool _isEnabled;
 
         /// <summary>
@@ -41,22 +44,22 @@ namespace View.ViewModel
         /// <summary>
         /// Возвращает команду добавления нового объекта.
         /// </summary>
-        public ICommand AddCommand { get; }
+        //public ICommand AddCommand { get; }
 
         /// <summary>
         /// Возвращает команду редактирования текущего объекта.
         /// </summary>
-        public ICommand EditCommand { get; }
+        //public ICommand EditCommand { get; }
 
         /// <summary>
         /// Возвращает команду удаления текущего объекта.
         /// </summary>
-        public ICommand RemoveCommand { get; }
+        //public ICommand RemoveCommand { get; }
 
         /// <summary>
         /// Возвращает команду сохранения измененного/нового объекта в списке.
         /// </summary>
-        public ICommand ApplyCommand { get; }
+        //public ICommand ApplyCommand { get; }
 
         /// <summary>
         /// Возвращает и задает коллекцию объектов класса <see cref="Contact"/>.
@@ -66,47 +69,40 @@ namespace View.ViewModel
         /// <summary>
         /// Возвращает и задает текущий объект класса <see cref="Contact"/>.
         /// </summary>
-        public ContactVM Contact
+        //public ContactVM Contact
+        //{
+        //    get => _contact;
+        //    set
+        //    {
+        //        if (SetProperty(ref _contact, value))
+        //        {
+        //            Reset();
+        //        }
+        //    }
+        //}
+
+        //не работает applyVisible
+        partial void OnContactChanged(ContactVM oldValue, ContactVM newValue)
         {
-            get => _contact;
-            set
+            if(oldValue!=newValue)
             {
-                if (SetProperty(ref _contact, value))
-                {
-                    Reset();
-                }
+                Reset();
             }
-            //set
-            //{
-            //    if (_contact != value)
-            //    {
-            //        _contact = value;
-            //        OnPropertyChanged(nameof(Contact));
-            //        Reset();
-            //    }
-            //}
         }
 
         /// <summary>
         /// Возвращает и задает доступ к кнопкам.
         /// </summary>
-        public bool IsEnabled 
-        {
-            get => _isEnabled;
-            set => SetProperty(ref _isEnabled, value);
-            //set
-            //{
-            //    if (_isEnabled != value)
-            //    {
-            //        _isEnabled = value;
-            //        OnPropertyChanged(nameof(IsEnabled));
-            //    }
-            //}
-        }
+        //public bool IsEnabled 
+        //{
+        //    get => _isEnabled;
+        //    set => SetProperty(ref _isEnabled, value);
+        //}
 
         /// <summary>
         /// Дает возможность добавления нового контакта.
         /// </summary>
+        [RelayCommand]
         private void Add()
         {
             Contact = new ContactVM();
@@ -119,6 +115,7 @@ namespace View.ViewModel
         /// <summary>
         /// Предоставляет доступ к редактированию текущего контакта. 
         /// </summary>
+        [RelayCommand]
         private void Edit()
         {
             if (this.Contact.Name != null && this.Contact.Email != null && 
@@ -136,6 +133,7 @@ namespace View.ViewModel
         /// <summary>
         /// Удаляет текущего контакта.
         /// </summary>
+        [RelayCommand]
         private void Remove()
         {
             if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
@@ -162,6 +160,7 @@ namespace View.ViewModel
         /// <summary>
         /// Сохраняет текущий контакт в списке.
         /// </summary>
+        [RelayCommand]
         private void Apply()
         {
             if (this.Contact.Name != null && this.Contact.Email != null && this.Contact.NumberPhone != null)
@@ -196,21 +195,6 @@ namespace View.ViewModel
          
         }
 
-        ///// <summary>
-        ///// Событие на изменение какого-либо свойства класса <see cref="MainVM"/>.
-        ///// </summary>
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        ///// <summary>
-        ///// Вызывает событие <see cref="PropertyChanged"/>.
-        ///// </summary>
-        ///// <param name="prop">Название свойства, которое было изменено.</param>
-        //public void OnPropertyChanged([CallerMemberName] string prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
-
         /// <summary>
         /// Создает экземпляр класса <see cref="MainVM"/>.
         /// </summary>
@@ -221,10 +205,10 @@ namespace View.ViewModel
             Contact.IsApplyVisible = false;
             Contact.IsReadOnly = true;
             IsEnabled = true;
-            AddCommand = new RelayCommand((param) => Add());
-            EditCommand = new RelayCommand((param) => Edit());
-            RemoveCommand = new RelayCommand((param) => Remove());
-            ApplyCommand = new RelayCommand((param) => Apply());
+            //AddCommand = new RelayCommand(Add);
+            //EditCommand = new RelayCommand(Edit);
+            //RemoveCommand = new RelayCommand(Remove);
+            //ApplyCommand = new RelayCommand(Apply);
         }
     }
 }
