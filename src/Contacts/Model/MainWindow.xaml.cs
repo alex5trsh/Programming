@@ -8,10 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.ViewModel;
 
-
-namespace View
+namespace Model
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,7 +19,6 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainVM();
         }
     }
 }

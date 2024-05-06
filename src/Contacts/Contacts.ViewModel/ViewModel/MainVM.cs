@@ -4,25 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using View.Model;
-using View.Model.Services;
+using Contacts.Model.Model;
+using Model.Model.Services;
+using Contacts.ViewModel.ViewModel;
 
-namespace View.ViewModel
+namespace ViewModel.ViewModel
 {
     /// <summary>
     /// Хранит текущие свойства класса <see cref="ContactVM"/>, команды добавления, изменения и удаления объектов.
     /// </summary>
-    partial class MainVM : ObservableObject
+    public partial class MainVM : ObservableObject
     {
         /// <summary>
         /// Текущий объект класса <see cref="Contact"/>.
-        /// </summary>
-        [ObservableProperty]
+        /// </summary>     
         private ContactVM _contact;
 
         /// <summary>
@@ -42,62 +43,24 @@ namespace View.ViewModel
         private int _currentIndex;
 
         /// <summary>
-        /// Возвращает команду добавления нового объекта.
-        /// </summary>
-        //public ICommand AddCommand { get; }
-
-        /// <summary>
-        /// Возвращает команду редактирования текущего объекта.
-        /// </summary>
-        //public ICommand EditCommand { get; }
-
-        /// <summary>
-        /// Возвращает команду удаления текущего объекта.
-        /// </summary>
-        //public ICommand RemoveCommand { get; }
-
-        /// <summary>
-        /// Возвращает команду сохранения измененного/нового объекта в списке.
-        /// </summary>
-        //public ICommand ApplyCommand { get; }
-
-        /// <summary>
-        /// Возвращает и задает коллекцию объектов класса <see cref="Contact"/>.
+        /// Возвращает и задает коллекцию объектов класса <see cref="ContactVM"/>.
         /// </summary>
         public ObservableCollection<ContactVM> Contacts { get; set; }
 
         /// <summary>
         /// Возвращает и задает текущий объект класса <see cref="Contact"/>.
         /// </summary>
-        //public ContactVM Contact
-        //{
-        //    get => _contact;
-        //    set
-        //    {
-        //        if (SetProperty(ref _contact, value))
-        //        {
-        //            Reset();
-        //        }
-        //    }
-        //}
-
-        //не работает applyVisible
-        partial void OnContactChanged(ContactVM oldValue, ContactVM newValue)
+        public ContactVM Contact
         {
-            if(oldValue!=newValue)
+            get => _contact;
+            set
             {
-                Reset();
+                if (SetProperty(ref _contact, value))
+                {
+                    Reset();
+                }
             }
         }
-
-        /// <summary>
-        /// Возвращает и задает доступ к кнопкам.
-        /// </summary>
-        //public bool IsEnabled 
-        //{
-        //    get => _isEnabled;
-        //    set => SetProperty(ref _isEnabled, value);
-        //}
 
         /// <summary>
         /// Дает возможность добавления нового контакта.
@@ -153,7 +116,7 @@ namespace View.ViewModel
                 {
                     Contact = Contacts[_currentIndex];
                 }
-                ContactSerializer.SaveToFile(Contacts);
+                Save();
             }         
         }
 
@@ -177,9 +140,26 @@ namespace View.ViewModel
                 IsEnabled = true;
                 Contact.IsApplyVisible = false;
                 Contact.IsReadOnly = true;
-                ContactSerializer.SaveToFile(Contacts);
+                Save();
             }          
         }
+
+        /// <summary>
+        /// Сохраняет элементы коллекции <see cref="ContactVM"/>.
+        /// </summary>
+        private void Save()
+        {
+            ObservableCollection<Contact> savedContacts = new ObservableCollection<Contact>();
+            for(int i=0; i<Contacts.Count; i++)
+            {
+                Contact currentContact = new Contact(Contacts[i].Name, Contacts[i].NumberPhone, 
+                    Contacts[i].Email);
+                savedContacts.Add(currentContact);
+            }
+            ContactSerializer.SaveToFile(savedContacts);
+        }
+
+
 
         /// <summary>
         /// Сбрасывает редактирование/добавление контакта.
@@ -191,8 +171,7 @@ namespace View.ViewModel
                 IsEnabled = true;
                 Contact.IsApplyVisible = false;
                 Contact.IsReadOnly = true;
-            } 
-         
+            }         
         }
 
         /// <summary>
@@ -201,14 +180,15 @@ namespace View.ViewModel
         public MainVM()
         {
             Contact = new ContactVM();
-            Contacts = ContactSerializer.LoadFromFile();
+            Contacts = new ObservableCollection<ContactVM>();
+            ObservableCollection<Contact> uploadedContacts = ContactSerializer.LoadFromFile();
+            for(int i=0;i< uploadedContacts.Count;i++)
+            {
+                Contacts.Add(new ContactVM(uploadedContacts[i]));
+            }
             Contact.IsApplyVisible = false;
             Contact.IsReadOnly = true;
             IsEnabled = true;
-            //AddCommand = new RelayCommand(Add);
-            //EditCommand = new RelayCommand(Edit);
-            //RemoveCommand = new RelayCommand(Remove);
-            //ApplyCommand = new RelayCommand(Apply);
         }
     }
 }

@@ -9,12 +9,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using View.Model;
+using Contacts.Model.Model;
 using CommunityToolkit.Mvvm;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Reflection.Metadata;
 
-namespace View.ViewModel
+namespace Contacts.ViewModel.ViewModel
 {
     /// <summary>
     /// Хранит текущие свойства класса <see cref="Contact"/> и  их проверку на корректность.
@@ -31,7 +31,6 @@ namespace View.ViewModel
         /// </summary>
         private string _error;
 
-
         /// <summary>
         /// Режим чтения для текстбоксов.
         /// </summary>
@@ -44,53 +43,53 @@ namespace View.ViewModel
         [ObservableProperty]
         private bool _isApplyVisible;
 
-        //public ContactVM(Contact contact) => this._contact = contact;
+        /// <summary>
+        /// Имя.
+        /// </summary>
+        [ObservableProperty]
+        private string _name;
 
         /// <summary>
-        /// Возвращает и задает имя. 
+        /// Номер телефона.
         /// </summary>
-        public string Name
-        {
-            get => _contact.Name;
-            set => SetProperty(_contact.Name, value, _contact, (u, n) => u.Name = n);
+        [ObservableProperty]
+        private string _numberPhone;
 
+        /// <summary>
+        /// Почта.
+        /// </summary>
+        [ObservableProperty]
+        private string _email;
+
+        /// <summary>
+        /// Меняет значение <see cref="Contact.Name"/> у элемента после изменения данного свойства.
+        /// </summary>
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnNameChanged(string? oldValue, string newValue)
+        {
+            _contact.Name = newValue;
         }
 
         /// <summary>
-        /// Возвращает и задает номер.
+        /// Меняет значение <see cref="Contact.NumberPhone"/> у элемента после изменения данного свойства.
         /// </summary>
-        public string NumberPhone
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnNumberPhoneChanged(string? oldValue, string newValue)
         {
-            get => _contact.NumberPhone;
-            set => SetProperty(_contact.NumberPhone, value, _contact, (u, n) => u.NumberPhone = n);
+            _contact.NumberPhone = newValue;
         }
 
         /// <summary>
-        /// Возвращает и задает почту. 
+        ///Меняет значение <see cref="Contact.Email"/> у элемента после изменения данного свойства.
         /// </summary>
-        public string Email
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnEmailChanged(string? oldValue, string newValue)
         {
-            get => _contact.Email;
-            set => SetProperty(_contact.Email, value, _contact, (u, n) => u.Email = n);
+            _contact.Email = newValue;
         }
-
-        /// <summary>
-        /// Возвращает и задает режим чтения для текстбоксов.
-        /// </summary>
-        //public bool IsReadOnly
-        //{
-        //    get => _isReadOnly;
-        //    set => SetProperty(ref _isReadOnly, value);
-        //}
-
-        /// <summary>
-        /// Возвращает и задает видимость кнопки Apply.
-        /// </summary>
-        //public bool IsApplyVisible
-        //{
-        //    get => _isApplyVisible;
-        //    set => SetProperty(ref _isApplyVisible, value);
-        //}
 
         /// <summary>
         /// Проверяет значение на наличие ошибок.
@@ -174,6 +173,12 @@ namespace View.ViewModel
             Name = name;
             NumberPhone = numberPhone;
             Email = email;
+        }
+        public ContactVM(Contact contact)
+        {
+            Name = contact.Name;
+            NumberPhone = contact.NumberPhone;
+            Email = contact.Email;
         }
 
         /// <summary>

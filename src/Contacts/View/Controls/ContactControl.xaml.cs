@@ -14,8 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using View.Model;
-using View.ViewModel;
+using Model.Model;
+using ViewModel.ViewModel;
+using Contacts.Model.Model;
 
 namespace View.Controls
 {
