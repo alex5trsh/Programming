@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace View.Model
+namespace Contacts.Model.Model
 {
     /// <summary>
     /// Хранит контактные данные человека.

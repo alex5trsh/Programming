@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace View.Model
+namespace Contacts.Model.Model
 {
     /// <summary>
     /// Хранит методы по проверке введенных данных.
     /// </summary>
-    class ValueValidator
+    public class ValueValidator
     {
         /// <summary>
         /// Проверяет, что длина строки не превышает заданной длины.

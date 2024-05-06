@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Contacts.Model.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,14 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using View.ViewModel;
 
-namespace View.Model.Services
+namespace Model.Model.Services
 {
     /// <summary>
     /// Хранит методы по сериализации и десериализации данных. 
     /// </summary>
-    class ContactSerializer
+    public class ContactSerializer
     {
         /// <summary>
         /// Путь до папки.
@@ -31,7 +31,7 @@ namespace View.Model.Services
         /// Сохраняет данные в файл.
         /// </summary>
         /// <param name="contacts">Список контактов, которые необходимо сохранить.</param>
-        public static void SaveToFile(ObservableCollection<ContactVM> contacts)
+        public static void SaveToFile(ObservableCollection<Contact> contacts)
         {
             if (!Directory.Exists(_directoryPath))
             {
@@ -48,9 +48,9 @@ namespace View.Model.Services
         /// Загружает данные из файла.
         /// </summary>
         /// <returns>Возвращает список контактов.</returns>
-        public static ObservableCollection<ContactVM> LoadFromFile()
+        public static ObservableCollection<Contact> LoadFromFile()
         {
-            ObservableCollection<ContactVM> contacts = new ObservableCollection<ContactVM>();
+            ObservableCollection<Contact> contacts = new ObservableCollection<Contact>();
             try
             {
                 if (File.Exists($"{_directoryPath}/{_fileName}"))
@@ -58,12 +58,12 @@ namespace View.Model.Services
                     using (StreamReader file = File.OpenText($"{_directoryPath}/{_fileName}"))
                     {
                         JsonSerializer serializer = new JsonSerializer();
-                        contacts = (ObservableCollection<ContactVM>)serializer.Deserialize(file,
-                            typeof(ObservableCollection<ContactVM>));
+                        contacts = (ObservableCollection<Contact>)serializer.Deserialize(file,
+                            typeof(ObservableCollection<Contact>));
                     }
                     if (contacts == null)
                     {
-                        contacts = new ObservableCollection<ContactVM>();
+                        contacts = new ObservableCollection<Contact>();
                     }
                 }
             }

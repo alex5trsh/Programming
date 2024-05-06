@@ -8,14 +8,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using View.Model;
+using System.Xml.Linq;
+using Contacts.Model.Model;
+using CommunityToolkit.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Reflection.Metadata;
 
-namespace View.ViewModel
+namespace Contacts.ViewModel.ViewModel
 {
     /// <summary>
     /// Хранит текущие свойства класса <see cref="Contact"/> и  их проверку на корректность.
     /// </summary>
-    public class ContactVM : INotifyPropertyChanged, ICloneable, IDataErrorInfo
+    public partial class ContactVM : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Текущий контакт.
@@ -30,91 +34,61 @@ namespace View.ViewModel
         /// <summary>
         /// Режим чтения для текстбоксов.
         /// </summary>
+        [ObservableProperty]
         private bool _isReadOnly;
 
         /// <summary>
         /// Видимость кнопки Apply.
         /// </summary>
+        [ObservableProperty]
         private bool _isApplyVisible;
 
         /// <summary>
-        /// Возвращает и задает имя. 
+        /// Имя.
         /// </summary>
-        public string Name
+        [ObservableProperty]
+        private string _name;
+
+        /// <summary>
+        /// Номер телефона.
+        /// </summary>
+        [ObservableProperty]
+        private string _numberPhone;
+
+        /// <summary>
+        /// Почта.
+        /// </summary>
+        [ObservableProperty]
+        private string _email;
+
+        /// <summary>
+        /// Меняет значение <see cref="Contact.Name"/> у элемента после изменения данного свойства.
+        /// </summary>
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnNameChanged(string? oldValue, string newValue)
         {
-            get => _contact.Name;
-            set
-            {
-                if (_contact.Name != value)
-                {
-                    _contact.Name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
+            _contact.Name = newValue;
         }
 
         /// <summary>
-        /// Возвращает и задает номер.
+        /// Меняет значение <see cref="Contact.NumberPhone"/> у элемента после изменения данного свойства.
         /// </summary>
-        public string NumberPhone
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnNumberPhoneChanged(string? oldValue, string newValue)
         {
-            get => _contact.NumberPhone;
-            set
-            {
-                if (_contact.NumberPhone != value)
-                {
-                    _contact.NumberPhone = value;
-                    OnPropertyChanged(nameof(NumberPhone));
-                }
-            }
+            _contact.NumberPhone = newValue;
         }
 
         /// <summary>
-        /// Возвращает и задает почту. 
+        ///Меняет значение <see cref="Contact.Email"/> у элемента после изменения данного свойства.
         /// </summary>
-        public string Email
+        /// <param name="oldValue">Старое значение.</param>
+        /// <param name="newValue">Новое значение.</param>
+        partial void OnEmailChanged(string? oldValue, string newValue)
         {
-            get => _contact.Email;
-            set
-            {
-                if (_contact.Email != value)
-                {
-                    _contact.Email = value;
-                    OnPropertyChanged(nameof(Email));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает режим чтения для текстбоксов.
-        /// </summary>
-        public bool IsReadOnly
-        {
-            get => _isReadOnly;
-            set
-            {
-                if (_isReadOnly != value)
-                {
-                    _isReadOnly = value;
-                    OnPropertyChanged(nameof(IsReadOnly));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Возвращает и задает видимость кнопки Apply.
-        /// </summary>
-        public bool IsApplyVisible
-        {
-            get => _isApplyVisible;
-            set
-            {
-                if (_isApplyVisible != value)
-                {
-                    _isApplyVisible = value;
-                    OnPropertyChanged(nameof(IsApplyVisible));
-                }
-            }
+            _contact.Email = newValue;
         }
 
         /// <summary>
@@ -200,6 +174,12 @@ namespace View.ViewModel
             NumberPhone = numberPhone;
             Email = email;
         }
+        public ContactVM(Contact contact)
+        {
+            Name = contact.Name;
+            NumberPhone = contact.NumberPhone;
+            Email = contact.Email;
+        }
 
         /// <summary>
         /// Создает пустой экземпляр класса <see cref="Contact"/>.
@@ -207,21 +187,6 @@ namespace View.ViewModel
         public ContactVM()
         {
 
-        }
-
-        /// <summary>
-        /// Событие на изменение какого-либо свойства класса <see cref="Contact"/>.
-        /// </summary>
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Вызывает событие <see cref="PropertyChanged"/>.
-        /// </summary>
-        /// <param name="prop">Название свойства, которое было изменено.</param>
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         /// <inheritdoc />
